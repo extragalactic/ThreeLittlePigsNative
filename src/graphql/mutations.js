@@ -226,7 +226,29 @@ const getSurveyPhotos = gql`
   }
 }`;
 
+const toggleSurveyReady = gql `
+  mutation toggleSurveyReady($custid: String, $userid: String){
+  toggleSurveyReady(custid: $custid, userid: $userid) {
+    id
+    firstName
+    lastName
+  }
+}`;
+
+const selectSurveyPhotos = gql `
+  mutation selectSurvey($custid: String, $index:String) {
+  selectSurveyPhoto(custid: $custid, index: $index) {
+    thumb
+    photo
+    caption
+    selected
+  }
+}`;
+
+
 export {
+  selectSurveyPhotos,
+  toggleSurveyReady,
   getCustomer,
   getSurveyPhotos,
   submitFollowup,

@@ -1,13 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
 import { Modal, View, StyleSheet } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import ImagePickerManager from 'react-native-image-picker';
 import { graphql, compose } from 'react-apollo';
-import PhotoBrowser from 'react-native-photo-browser';
-import { Router, Scene, Actions  } from 'react-native-router-flux';
 
-import surveyGallery from '../photoGallery/surveyGallery';
 import SurveyPicker from '../Surveys/surveyPicker';
 import PargingSelect from '../Surveys/pargingSelect';
 import ConcreteSelect from '../Surveys/concreteSelect';
@@ -21,7 +18,13 @@ import SurveyNotesModal from '../Surveys/surveyNotesModal';
 import SurveyGalleryModal from '../photoGallery/surveyGalleryModal';
 
 
-import { addSurveyNotes, addSurveyPhoto, getSurveyPhotos } from '../../graphql/mutations';
+import {
+   addSurveyNotes,
+   addSurveyPhoto,
+   getSurveyPhotos,
+   toggleSurveyReady,
+   selectSurveyPhotos, 
+  } from '../../graphql/mutations';
 
 const options = {
   title: 'Add Photo', // specify null or empty string to remove the title
@@ -33,7 +36,6 @@ const options = {
   videoQuality: 'high', // 'low', 'medium', or 'high'
   durationLimit: 10, // video recording max time in seconds
   quality: 1, // 0 to 1, photos only
-
   allowsEditing: false, // Built in functionality to resize/reposition the image after selection
   noData: false, // photos only - disables the base64 `data` field from being generated (greatly improves performance on large photos)
   storageOptions: { // if this key is provided, the image will get saved in the documents directory on ios, and the pictures directory on android (rather than a temporary directory)
@@ -57,14 +59,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 25,
     right: 75,
-
   },
   button: {
-    bottom: 2
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 80,
+    right: 173,
   },
   picker: {
-    top:10
-  }
+    top: 50,
+  },
 });
 
 class _SurveyMainModal extends React.Component {
@@ -78,11 +85,12 @@ class _SurveyMainModal extends React.Component {
       surveyPhotos: [],
       notesModal: false,
       photoModal: false,
+      ready: false,
       notesSelection: 'no header',
     };
   }
 
- viewPhotos = () => {
+  viewPhotos = () => {
      this.setState({
        photoModal: true,
      });
@@ -146,6 +154,26 @@ class _SurveyMainModal extends React.Component {
       this.state.selection.push(selection);
     }
   }
+  tooggleReady = () => {
+    this.setState({
+      ready: !this.state.ready,
+    });
+    this.props.toggleSurveyReady({
+      variables: {
+        custid: this.props.customer.id,
+        userid: this.props.user._id,
+      },
+    });
+  };
+  togglePhotoSelection = (index) => {
+    this.props.selectSurveyPhotos({
+      variables: {
+        custid: this.props.customer.id,
+        index,
+      },
+    });
+  };
+
   render() {
     return (
       <View style={{ marginTop: 0 }}>
@@ -196,19 +224,27 @@ class _SurveyMainModal extends React.Component {
               color="#517fa4"
               raised
               onPress={this.viewPhotos}
-           />
+            />
             <Icon
               name="help-outline"
               color="#517fa4"
               raised
               onPress={() => console.log(this)}
             />
-        </View>
-         <SurveyNotesModal
-            open={this.state.notesModal} 
+          </View>
+          <View style={styles.button}>
+            <Icon
+              name={this.state.ready ? 'thumb-up' : 'thumb-down'}
+              color="#517fa4"
+              raised
+              onPress={this.tooggleReady}
+            />
+          </View>
+          <SurveyNotesModal
+            open={this.state.notesModal}
             close={() => this.setState({ notesModal: false })}
             updateText={(text) => this.setState({ notes: text })}
-            updateSelection={(notesSelection) => this.setState({notesSelection})}
+            updateSelection={(notesSelection) => this.setState({ notesSelection })}
             submitNotes={this.submitNotes}
             notes={this.state.notes}
             notesSelection={this.state.notesSelection}
@@ -216,9 +252,10 @@ class _SurveyMainModal extends React.Component {
             selected={this.state.selected}
           />
           <SurveyGalleryModal
-           open={this.state.photoModal}
-           close={() => this.setState({ photoModal: false })}
-           photos={this.state.surveyPhotos}
+            open={this.state.photoModal}
+            close={() => this.setState({ photoModal: false })}
+            photos={this.state.surveyPhotos}
+            selectPhoto={this.togglePhotoSelection}
           />
         </Modal>
 
@@ -228,7 +265,9 @@ class _SurveyMainModal extends React.Component {
 }
 
 const SurveyMainModal = compose(
-  graphql(getSurveyPhotos, {name: 'getSurveyPhotos'}),
+  graphql(selectSurveyPhotos, { name: 'selectSurveyPhotos' }),
+  graphql(toggleSurveyReady, { name: 'toggleSurveyReady' }),
+  graphql(getSurveyPhotos, { name: 'getSurveyPhotos' }),
   graphql(addSurveyNotes, { name: 'addSurveyNotes' }),
   graphql(addSurveyPhoto, { name: 'addSurveyPhoto' }),
 )(_SurveyMainModal);

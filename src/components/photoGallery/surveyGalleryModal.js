@@ -43,6 +43,7 @@ const surveyGalleryModal = ({
    submitNotes,
    notes,
    photos,
+   selectPhoto,
   }) => (
     <Modal
       isOpen={open}
@@ -56,8 +57,9 @@ const surveyGalleryModal = ({
         displayNavArrows
         displaySelectionButtons
         onBack={close}
+        startOnGrid
         onSelectionChanged={(media, index, isSelected) => {
-          console.log(media, index, isSelected);
+          selectPhoto(index);
         }}
       />
     </Modal>

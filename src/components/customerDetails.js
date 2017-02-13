@@ -270,8 +270,7 @@ class CustomerDetails extends Component {
               customer={this.state.customer}
               startSurvey={this.openSurveyModal}
             />
-            <CustomerCardPricing customer={this.state.customer} />
-          </ScrollView>
+      </ScrollView>
           <CustomerNotesModal
             modal={this.state.notesModal}
             customer={this.state.customer}
@@ -315,3 +314,4 @@ class CustomerDetails extends Component {
 
 export default CustomerDetails;
 
+//<CustomerCardPricing customer={this.state.customer} />//
