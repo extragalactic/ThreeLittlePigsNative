@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Dimensions } from 'react-native';
 import Auth0Lock from 'react-native-lock';
 import store from 'react-native-simple-store';
 import Config from 'react-native-config';
 import { connect } from 'react-redux';
 import { graphql, compose } from 'react-apollo';
 import codePush from 'react-native-code-push';
+import OneSignal from 'react-native-onesignal';
 
 import { getUserQuery } from '../graphql/queries';
 import RNCalendarEvents from '../../node_modules/react-native-calendar-events/index.ios';
@@ -22,6 +24,8 @@ import {
 import Main from './Main';
 import { isTokenExpired } from '../Utils/jwtHelper';
 
+const window = Dimensions.get('window');
+
 class _Root extends Component {
   static defaultProps = {
     profile: React.PropTypes.object,
@@ -36,20 +40,24 @@ class _Root extends Component {
       followUp: [],
       onSite: [],
       surveyinProgress: [],
+      dimensions: window,
     };
   }
 
   componentDidMount() {
-   codePush.sync();
+
+  OneSignal.configure({});
+
+   //  codePush.sync();
     this.props.getUser({
       variables : {
         id: '5852eb3ec6e9650100965f2e',
       },
     }).then((data) => {
-      console.log('USER', data)
       this.setState({
         user: data.data.getUser
       });
+      
         const newCustomers = data.data.getUser.newCustomers.filter((customer) => {
           if(customer.status === 0){
             return customer;
@@ -117,7 +125,6 @@ class _Root extends Component {
     });
   };
   updateUser = (id) => {
-    console.log(id)
     this.props.getUser({variables: {
       id,
     } }).then((data) => {
@@ -131,7 +138,7 @@ class _Root extends Component {
     this.logIn();
   };
 
-  render() {  console.log(Config)
+  render() {
     return (
       <Main
         logout={this.logOut}
@@ -151,6 +158,7 @@ class _Root extends Component {
         followUp={this.state.followUp}
         onSite={this.state.onSite}
         surveyinProgress={this.state.surveyinProgress}
+        dimensions={this.state.dimensions}
       />
     );
   }
@@ -173,7 +181,7 @@ const Root = compose(
   graphql(updateCustomer, { name: 'updateCustomer' }),
   graphql(submitFollowup, { name: 'submitFollowup' }),
   graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
-  graphql(getUserQuery, { options: { pollInterval: 1000 } }),
+  graphql(getUserQuery),
   connect(mapStateToProps, mapActionsToProps),
 )(_Root);
 

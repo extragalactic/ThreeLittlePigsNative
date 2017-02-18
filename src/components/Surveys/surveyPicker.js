@@ -1,13 +1,13 @@
 import React from 'react';
-import { Modal, View, StyleSheet, PickerIOS } from 'react-native';
+import { View, PickerIOS } from 'react-native';
 
 const PickerItemIOS = PickerIOS.Item;
 
-const surveyPicker = ({changeSelection, selection, style}) => (
+const surveyPicker = ({ changeSelection, selection, style }) => (
   <View>
     <PickerIOS
       selectedValue={selection}
-      onValueChange={(selected) => changeSelection(selected)}
+      onValueChange={selected => changeSelection(selected)}
       style={style}
     >
       <PickerItemIOS

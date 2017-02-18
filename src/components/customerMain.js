@@ -3,67 +3,66 @@ import { View } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 
+import { MasterStyleSheet } from '../style/MainStyles';
+
 const selectNewCustomer = () => {
-    Actions.customerListNewCustomers()
+  Actions.customerListNewCustomers()
 };
 
 const selectFollowUp = () => {
-    Actions.customerListFollowUp()
+  Actions.customerListFollowUp();
 };
 
 const selectOnsite = () => {
-    Actions.customerListOnsite()
+  Actions.customerListOnsite();
 };
 
 const selectSurveyinProgress = () => {
-  console.log(Actions)
-  Actions.customerListsurveyinProgress()
-
- 
+  Actions.customerListsurveyinProgress();
 };
 
 const CustomerMain = ({ user, newCustomers, followUp, onSite, surveyinProgress }) => (
-  <View style={{top: 55}}>
+  <View style={MasterStyleSheet.mainListView}>
     <List>
       <ListItem
-        hideChevron	
-        title='New Customers'
-        badge={{ value: newCustomers.length , badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        hideChevron
+        title={'New Customers'}
+        badge={{ value: newCustomers.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
         onPress={selectNewCustomer}
-        containerStyle={{height: 80 }}      
+        containerStyle={MasterStyleSheet.mainList}
       />
       <ListItem
-        hideChevron	
+        hideChevron
         title='Customers to followup'
         badge={{ value: followUp.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
         onPress={selectFollowUp}
-        containerStyle={{height: 80  }}
+        containerStyle={MasterStyleSheet.mainList}     
       />
       <ListItem
         hideChevron	
         title='Onsite Appointments'
         badge={{ value: onSite.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
         onPress={selectOnsite}
-        containerStyle={{height: 80  }}
+        containerStyle={MasterStyleSheet.mainList}     
       />
-     <ListItem
+      <ListItem
         hideChevron	
         title='Survey in progress'
         badge={{ value: surveyinProgress.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
         onPress={selectSurveyinProgress}
-        containerStyle={{height: 80  }}
+        containerStyle={MasterStyleSheet.mainList}     
       />
       <ListItem
         hideChevron	
         title='Survey complete'
         badge={{ value: 0, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
-        containerStyle={{height: 80  }}
+        containerStyle={MasterStyleSheet.mainList}     
       />
       <ListItem
         hideChevron	
         title='Estimate Queue'
         badge={{ value: 0, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
-        containerStyle={{height: 80  }}
+        containerStyle={MasterStyleSheet.mainList}     
       />
     </List>
   </View>

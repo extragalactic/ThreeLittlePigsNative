@@ -20,6 +20,9 @@ const client = new ApolloClient({
     },
   ),
 });
+
+console.disableYellowBox = true;
+
 const apollo = client.middleware();
 
 const combinedReducers =

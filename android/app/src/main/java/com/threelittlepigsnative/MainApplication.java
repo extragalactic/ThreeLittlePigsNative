@@ -4,6 +4,8 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
@@ -14,7 +16,6 @@ import com.smixx.reactnativeicons.ReactNativeIcons;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.calendarevents.CalendarEventsPackage;
 import com.auth0.lock.react.LockReactPackage;
-import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -42,6 +43,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeOneSignalPackage(),
+            new RNDeviceInfo(),
             new CodePush(null, getApplicationContext(), BuildConfig.DEBUG),
             new VectorIconsPackage(),
             new RNSpinkitPackage(),
@@ -51,8 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactNativeIcons(),
             new ReactNativeConfigPackage(),
             new CalendarEventsPackage(),
-            new LockReactPackage(),
-            new ReactNativeOneSignalPackage()
+            new LockReactPackage()
       );
     }
   };

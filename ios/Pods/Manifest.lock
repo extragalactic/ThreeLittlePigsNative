@@ -36,7 +36,6 @@ PODS:
   - Lock/WebView (1.28.1):
     - Lock/CoreUI
   - Masonry (0.6.4)
-  - OneSignal (2.3.5)
   - SimpleKeychain (0.7.0)
   - TouchIDAuth (0.2.0):
     - SimpleKeychain (~> 0.3)
@@ -46,16 +45,14 @@ DEPENDENCIES:
   - Lock/Email
   - Lock/SMS
   - Lock/TouchID
-  - OneSignal
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Lock: 75874afed8380a46459dfb643cb93b3b6ffa59d9
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
-  OneSignal: 4cb42948ebc141bd5deb54d3fda25105db94f6d4
   SimpleKeychain: b50cef3b87939d480ea1143425c00f5b4b70fe21
   TouchIDAuth: 0cf861f58a2cacfc1c12cb02de4850729d943c81
 
-PODFILE CHECKSUM: 3b07d6ea27b4c9267faea9ce99c233457ea5c632
+PODFILE CHECKSUM: 06b7445d15b3589f7aec440ee62f32888ce577ef
 
 COCOAPODS: 1.2.0

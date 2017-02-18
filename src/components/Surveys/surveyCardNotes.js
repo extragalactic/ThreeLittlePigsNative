@@ -1,53 +1,9 @@
 import React from 'react';
 import { Card } from 'react-native-elements';
-import { TextInput, StyleSheet, Button, PickerIOS, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
-
+import { TextInput, Button, PickerIOS, ScrollView, KeyboardAvoidingView } from 'react-native';
+import { MasterStyleSheet } from '../../style/MainStyles';
 
 const PickerItemIOS = PickerIOS.Item;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 12,
-    paddingTop: 20,
-  },
-  textInput2: {
-    borderRadius: 5,
-    borderWidth: 1,
-    height: 55,
-    paddingHorizontal: 10,
-    bottom: 10,
-  },
-  card: {
-    flex: 1,
-  },
-  map: {
-    height: 200,
-  },
-  picker: {
-    bottom: -10,
-  },
-  pickerItem: {
-    fontSize: 15,
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 12,
-  },
-  textInput: {
-    left: 0,
-    right: 0,
-    height: 80,
-    width: 250,
-    borderColor: 'gray',
-    borderWidth: 2,
-
-  },
-  button: {
-    bottom: 100,
-  },
-});
 
 const SurveyCardNotes = ({
   updateText,
@@ -56,21 +12,21 @@ const SurveyCardNotes = ({
   notesSelection,
   selected,
   selection,
-  updateSelection 
+  updateSelection,
 }) => (
   <Card
     title={`${selected} Notes`}
-    containerStyle={styles.card}
+    containerStyle={MasterStyleSheet.surveyCardPhoto}
   >
     <ScrollView
       scrollEnabled={false}
     >
       <KeyboardAvoidingView
         behavior={'position'}
-        style={styles.container}
+        style={MasterStyleSheet.surveyNotesInputContainer}
       >
         <TextInput
-          style={styles.textInput2}
+          style={MasterStyleSheet.surveyNotesInputText}
           onChangeText={text => updateText(text)}
           value={notes}
           multiline
@@ -81,8 +37,8 @@ const SurveyCardNotes = ({
         />
       </KeyboardAvoidingView>
       <PickerIOS
-        style={styles.picker}
-        itemStyle={styles.pickerItem}
+        style={MasterStyleSheet.surveyCardPicker}
+        itemStyle={MasterStyleSheet.surveyCardPickerItem}
         selectedValue={notesSelection}
         onValueChange={slct => updateSelection(slct)}
       >

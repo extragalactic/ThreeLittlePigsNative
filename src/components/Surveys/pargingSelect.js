@@ -1,9 +1,10 @@
 import React from 'react';
 import MultipleChoice from 'react-native-multiple-choice';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
+import { MasterStyleSheet } from '../../style/MainStyles';
 
 const pargingSelect = ({ updateSelection }) => (
-  <View style={styles.container}>
+  <View style={MasterStyleSheet.surveyItemContainer}>
     <MultipleChoice
       options={[
         'Repair broken concrete corners with steel pins drilled and epoxied',
@@ -17,13 +18,5 @@ const pargingSelect = ({ updateSelection }) => (
     />
   </View>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    bottom: 20,
-    margin: 20,
-    height: 400,
-  },
-});
 
 export default pargingSelect;

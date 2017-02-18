@@ -1,10 +1,11 @@
 import React from 'react';
 import MultipleChoice from 'react-native-multiple-choice';
-import { StyleSheet, View, ScrollView, TextInput, Text } from 'react-native';
+import { View, ScrollView } from 'react-native';
+import { MasterStyleSheet } from '../../style/MainStyles';
 
-const ConcreteSelect = ({ count, updateCount, updateSelection }) => (
+const ConcreteSelect = ({ updateSelection }) => (
   <View>
-    <ScrollView style={styles.container}>
+    <ScrollView style={MasterStyleSheet.surveyItemContainer}>
       <MultipleChoice
         options={[
           'Landing treads or risers',
@@ -25,25 +26,7 @@ const ConcreteSelect = ({ count, updateCount, updateSelection }) => (
         onSelection={payload => updateSelection(payload)}
       />
     </ScrollView>
-   </View>
-
+  </View>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    bottom: 20,
-    margin: 20,
-    height: 450,
-  },
-  textinput: {
-
-    margin: 10,
-    borderColor: 'gray',
-    padding: 1,
-    borderWidth: 2,
-    height: 30,
-    bottom: 10,
-  },
-});
 
 export default ConcreteSelect;

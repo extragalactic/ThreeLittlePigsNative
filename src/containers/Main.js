@@ -23,7 +23,8 @@ class Main extends Component {
     this.state = {
       currentUser: {},
       loggedIn: false,
-      selectedTab: 'home'
+      selectedTab: 'home',
+      customerSelection: '',
     };
     this.changeTab = this.changeTab.bind(this)
   }
@@ -35,7 +36,6 @@ class Main extends Component {
     });
   }
   render() {
-    console.log('main!!', this);
     const { selectedTab } = this.state;
     const { toggleSideMenu } = this.props;
     return (
@@ -92,8 +92,8 @@ class Main extends Component {
           selectedTitleStyle={[styles.titleSelected, {marginTop: -3, marginBottom: 7}]}
           selected={selectedTab === 'logout'}
           title={selectedTab === 'logout' ? 'LOGOUT' : null}
-          renderIcon={() => <Icon style={{paddingBottom: 4}} type='octicon' name='sign-out' size={26} />}
-          renderSelectedIcon={() => <Icon type='octicon' name='sign-out' size={26} />}
+          renderIcon={() => <Icon style={{paddingBottom: 4}} name='exit-to-app' size={26} />}
+          renderSelectedIcon={() => <Icon name='exit-to-app' size={26} />}
           onPress={() => this.props.logout()}>
           Logout
         </Tab>

@@ -1,27 +1,18 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import Spinner from 'react-native-spinkit';
 import { Router, Scene } from 'react-native-router-flux';
-
 import CustomerMain from '../components/customerMain';
-import CustomerListNewCustomers from '../components/customerListNewCustomers';
-import CustomerListFollowUp from '../components/customerListFollowup';
-import CustomerListOnsite from '../components/customerListOnsite';
-import CustomerListsurveyinProgress from '../components/customerSurveyinProgress';
+import CustomerListNewCustomers from '../components/customerList/customerListNewCustomers';
+import CustomerListFollowUp from '../components/customerList/customerListFollowup';
+import CustomerListOnsite from '../components/customerList/customerListOnsite';
+import CustomerListsurveyinProgress from '../components/customerList/customerListSurveyinProgress';
+
 import CustomerDetails from '../components/customerDetails';
-import surveyGallery from '../components/photoGallery/surveyGallery';
-import Surveys from './Surveys';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-});
+import { MasterStyleSheet } from '../style/MainStyles';
 
-const Customers = ({ 
+const Customers = ({
   user,
   getCustomer,
   submitFollowup,
@@ -39,7 +30,7 @@ const Customers = ({
  }) => {
   if (user.newCustomers === null) {
     return (
-      <View style={styles.container}>
+      <View style={MasterStyleSheet.container}>
         <Spinner
           type={'9CubeGrid'}
         />
@@ -68,6 +59,14 @@ const Customers = ({
           user={user}
           getCustomer={getCustomer}
           newCustomers={newCustomers}
+          submitFollowup={submitFollowup}
+          getAppointmentsforDay={getAppointmentsforDay}
+          updateCustomer={updateCustomer}
+          addNotes={addNotes}
+          getUser={getUser}
+          updateUser={updateUser}
+          deleteAppointment={deleteAppointment}
+          data={data}
         />
         <Scene
           key={'customerListFollowUp'}
@@ -76,6 +75,14 @@ const Customers = ({
           user={user}
           getCustomer={getCustomer}
           followUp={followUp}
+          submitFollowup={submitFollowup}
+          getAppointmentsforDay={getAppointmentsforDay}
+          updateCustomer={updateCustomer}
+          addNotes={addNotes}
+          getUser={getUser}
+          updateUser={updateUser}
+          deleteAppointment={deleteAppointment}
+          data={data}
         />
         <Scene
           key={'customerListOnsite'}
@@ -87,11 +94,19 @@ const Customers = ({
         />
         <Scene
           key={'customerListsurveyinProgress'}
-          component={CustomerListsurveyinProgress }
+          component={CustomerListsurveyinProgress}
           passProps
           user={user}
           getCustomer={getCustomer}
           surveyinProgress={surveyinProgress}
+          newCustomers={newCustomers}
+          submitFollowup={submitFollowup}
+          getAppointmentsforDay={getAppointmentsforDay}
+          updateCustomer={updateCustomer}
+          addNotes={addNotes}
+          getUser={getUser}
+          updateUser={updateUser}
+          deleteAppointment={deleteAppointment}
         />
         <Scene
           key={'customerDetails'}
@@ -108,7 +123,7 @@ const Customers = ({
           deleteAppointment={deleteAppointment}
           data={data}
         />
-     </Scene>
+      </Scene>
     </Router>
   );
 };

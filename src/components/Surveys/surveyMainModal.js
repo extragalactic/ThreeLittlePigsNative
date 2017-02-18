@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Modal, View, StyleSheet } from 'react-native';
+import { Modal, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import ImagePickerManager from 'react-native-image-picker';
 import { graphql, compose } from 'react-apollo';
@@ -16,6 +16,7 @@ import WindowsillsSelect from '../Surveys/windowsillsSelect';
 import RefacingSelect from '../Surveys/refacingSelect';
 import SurveyNotesModal from '../Surveys/surveyNotesModal';
 import SurveyGalleryModal from '../photoGallery/surveyGalleryModal';
+import { MasterStyleSheet } from '../../style/MainStyles';
 
 
 import {
@@ -44,36 +45,6 @@ const options = {
   },
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 50,
-  },
-  container1: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    top: 25,
-    right: 75,
-  },
-  button: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    top: 80,
-    right: 173,
-  },
-  picker: {
-    top: 50,
-  },
-});
-
 class _SurveyMainModal extends React.Component {
   constructor() {
     super();
@@ -90,19 +61,8 @@ class _SurveyMainModal extends React.Component {
     };
   }
 
-  viewPhotos = () => {
-     this.setState({
-       photoModal: true,
-     });
-
-     this.props.getSurveyPhotos({
-       variables: { id: this.props.customer.id }
-     }).then(data => this.setState({surveyPhotos: data.data.getSurveyPhotos}));
- }; 
-
   getPhoto = () => {
     ImagePickerManager.showImagePicker(options, (data) => {
-      console.log('photo', data)
       this.props.addSurveyPhoto({
         variables: {
           heading: this.state.selected,
@@ -115,6 +75,15 @@ class _SurveyMainModal extends React.Component {
       });
     });
   };
+  viewPhotos = () => {
+    this.setState({
+      photoModal: true,
+    });
+    this.props.getSurveyPhotos({
+      variables: { id: this.props.customer.id }
+    }).then(data => this.setState({surveyPhotos: data.data.getSurveyPhotos}));
+  };
+
   changeSelection = (selection) => {
     this.setState({
       selected: selection,
@@ -176,7 +145,7 @@ class _SurveyMainModal extends React.Component {
 
   render() {
     return (
-      <View style={{ marginTop: 0 }}>
+      <View style={MasterStyleSheet.surveyMainView}>
         <Modal
           animationType={'slide'}
           transparent={false}
@@ -184,7 +153,7 @@ class _SurveyMainModal extends React.Component {
         >
           <Icon
             name={'chevron-left'}
-            iconStyle={{ marginRight: 360, marginTop: 25 }}
+            iconStyle={MasterStyleSheet.modalIcon}
             onPress={this.props.closeSurveyModal}
             size={40}
             color={'blue'}
@@ -192,7 +161,7 @@ class _SurveyMainModal extends React.Component {
           <SurveyPicker
             changeSelection={this.changeSelection}
             selection={this.state.selected}
-            style={styles.picker}
+            style={MasterStyleSheet.surveyMainPicker}
           />
           {this.state.selected === 'Parging' ? <PargingSelect updateSelection={this.updateSelection} /> : null }
           {this.state.selected === 'Concrete' ? <ConcreteSelect
@@ -206,7 +175,7 @@ class _SurveyMainModal extends React.Component {
           {this.state.selected === 'Waterproofing' ? <WaterproofingSelect updateSelection={this.updateSelection} /> : null }
           {this.state.selected === 'Windowsills' ? <WindowsillsSelect updateSelection={this.updateSelection} /> : null }
           {this.state.selected === 'Refacing' ? <RefacingSelect updateSelection={this.updateSelection} /> : null }
-          <View style={styles.container1}>
+          <View style={MasterStyleSheet.surveyMainContainer}>
             <Icon
               name="description"
               color="#517fa4"
@@ -232,7 +201,7 @@ class _SurveyMainModal extends React.Component {
               onPress={() => console.log(this)}
             />
           </View>
-          <View style={styles.button}>
+          <View style={MasterStyleSheet.surveyMainButton}>
             <Icon
               name={this.state.ready ? 'thumb-up' : 'thumb-down'}
               color="#517fa4"

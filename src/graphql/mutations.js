@@ -245,8 +245,29 @@ const selectSurveyPhotos = gql `
   }
 }`;
 
+const getFinishedSurvey = gql `
+  mutation getFinishedSurvey($id: String) {
+  getFinishedSurvey(id:$id) {
+    heading
+    notes {
+      description
+      text
+      timestamp
+      user
+    }
+    photos {
+      description
+      caption
+      timestamp
+      user
+      thumb
+      url
+    }
+  }
+}`;
 
 export {
+  getFinishedSurvey,
   selectSurveyPhotos,
   toggleSurveyReady,
   getCustomer,
@@ -258,5 +279,5 @@ export {
   deleteAppointment,
   getUser,
   addSurveyNotes,
-  addSurveyPhoto, 
+  addSurveyPhoto,
 };

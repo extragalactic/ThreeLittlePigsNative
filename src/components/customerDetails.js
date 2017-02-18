@@ -1,44 +1,35 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { graphql, compose } from 'react-apollo';
-
 import {
   ScrollView,
   View,
-  StyleSheet,
   AlertIOS,
   Linking,
 } from 'react-native';
-
-import _ from 'lodash';
-
 import Drawer from 'react-native-drawer';
+import { graphql, compose } from 'react-apollo';
+
 import RNCalendarEvents from '../../node_modules/react-native-calendar-events/index.ios';
 
-import CustomerCardConact from './customerCardConact';
-import CustomerCardChat from './/customerCardChat';
-import CustomerCardMaps from './customerCardMaps';
-import CustomerCardSurvey from './customerCardSurvey';
-import CustomerCardPricing from './customerCardPricing';
+import CustomerCardConact from './Cards/customerCardConact';
+import CustomerCardChat from './Cards/customerCardChat';
+import CustomerCardMaps from './Cards/customerCardMaps';
+import CustomerCardSurvey from './Cards/customerCardSurvey';
+import CustomerCardPricing from './Cards/customerCardPricing';
+import SurveyCompleteModal from './Modals/customerSurveyCompleteModal';
 import ContactCustomerMenu from './contactCustomerMenu';
-import CustomerFollowupModal from './customerFollowupModal';
-import CustomerFormModal from './customerFormModal';
-import CustomerNotesModal from './customerNotesModal';
+import CustomerFollowupModal from './Modals/customerFollowupModal';
+import CustomerFormModal from './Modals/customerFormModal';
+import CustomerNotesModal from './Modals/customerNotesModal';
 import SurveyMainModal from './Surveys/surveyMainModal';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    marginTop: 55,
-  },
-});
+import { MasterStyleSheet } from '../style/MainStyles';
+
+import { getCustomer, getFinishedSurvey } from '../graphql/queries';
+
 
 const addMinutes = (date, minutes) => new Date(date.getTime() + minutes * 60000);
 
-class CustomerDetails extends Component {
+class _CustomerDetails extends Component {
   constructor() {
     super();
     this.state = {
@@ -46,6 +37,7 @@ class CustomerDetails extends Component {
       drawer: false,
       followModal: false,
       formModal: false,
+      formCompleteModal: false,
       notesModal: false,
       surveyModal: false,
       date: new Date(),
@@ -59,26 +51,13 @@ class CustomerDetails extends Component {
     };
   }
   componentDidMount() {
+    console.log('details', this)
     this.props.getCustomer({ variables: {
       id: this.props.selection,
     } }).then((customer) => {
-      console.log('didmountcustomer', customer);
       this.setState({
         customer: customer.data.getCustomer,
       });
-    });
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'My message',
-          createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
-          user: {
-            _id: 2,
-            name: 'React Native',
-          },
-        },
-      ],
     });
   }
   onDateChange = (date) => {
@@ -87,15 +66,12 @@ class CustomerDetails extends Component {
       userid: this.props.user._id,
       date,
     } }).then((data) => {
-      console.log('DATA', data);
       this.setState({
         dateSelection: data.data.getAppointmentsforDay,
       });
     });
   };
   onSend = (message) => {
-     console.log(message);
-  console.log(this)
     this.props.addNotes({ variables: { 
       custid: this.state.customer.id,
       name: `${this.state.customer.firstName} ${this.state.customer.lastName}`,
@@ -104,7 +80,7 @@ class CustomerDetails extends Component {
       createdAt: message[0].createdAt,
     } });
   }
-  onCalSaveFollow = (meetingid, calid) => {
+  onCalSaveFollow = () => {
     const howlong = (type) => {
       if (type === 'Followup') {
         return { duration: 15, description: 'Followup' };
@@ -126,7 +102,6 @@ class CustomerDetails extends Component {
       endDate: endhour,
     })
       .then((id) => {
-        console.log('ID', id);
         AlertIOS.alert('Appointment Saved');
         that.props.submitFollowup({ variables: {
           description: selection ? selection.description : 'Followup',
@@ -192,6 +167,17 @@ class CustomerDetails extends Component {
       surveyModal: false,
     });
   };
+  openSurveyCompleteModal = () => {
+    this.setState({
+      surveyCompleteModal: true,
+    });
+  };
+  closeSurveyCompleteModal = () => {
+    this.setState({
+      surveyCompleteModal: false,
+    });
+  };
+
   closeFollowupModal = () => {
     this.setState({
       followModal: false,
@@ -204,7 +190,6 @@ class CustomerDetails extends Component {
     });
   };
   deleteAppointment = (meetingid, calid) => {
-    console.log('tesingmeeting', calid);
     this.props.deleteAppointment({
       variables: {
         meetingid,
@@ -256,7 +241,7 @@ class CustomerDetails extends Component {
         closedDrawerOffset={-4}
         onCloseStart={this.closeDrawer}
       >
-        <View style={styles.container}>
+        <View style={MasterStyleSheet.container}>
           <ScrollView>
             <CustomerCardConact
               customer={this.state.customer}
@@ -269,8 +254,9 @@ class CustomerDetails extends Component {
             <CustomerCardSurvey
               customer={this.state.customer}
               startSurvey={this.openSurveyModal}
+              surveyComplete={() => { this.setState({ formCompleteModal: true }); }}
             />
-      </ScrollView>
+          </ScrollView>
           <CustomerNotesModal
             modal={this.state.notesModal}
             customer={this.state.customer}
@@ -306,12 +292,24 @@ class CustomerDetails extends Component {
             user={this.props.user}
             closeSurveyModal={this.closeSurveyModal}
           />
+          <SurveyCompleteModal
+            modal={this.state.formCompleteModal}
+            close={() => { this.setState({ formCompleteModal: false }); }}
+            finishedSurvey={this.props.data.getFinishedSurvey}
+          />
         </View>
       </Drawer>
     );
   }
 }
 
+const CustomerDetails = compose(
+  graphql(getFinishedSurvey, {
+    options: ({ selection }) => ({ variables: { id: selection } }),
+  }),
+)(_CustomerDetails);
+
 export default CustomerDetails;
+
 
 //<CustomerCardPricing customer={this.state.customer} />//
