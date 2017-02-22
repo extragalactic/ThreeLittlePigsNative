@@ -4,6 +4,7 @@ import {
   Button,
   PickerIOS,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import { MasterStyleSheet } from '../../style/MainStyles';
 
@@ -14,34 +15,44 @@ const SurveyCardPhoto = ({
   selected,
   selection,
   updateSelection,
-  getPhoto, 
+  updateText,
+  getPhoto,
+  photoCaption,
+  updatePhotoCaption,
+  TakePhoto,
+  AddFromLibrary,
 }) => (
   <Card
     title={`${selected} Photos`}
-    containerStyle={MasterStyleSheet.surveyCardPhoto}
   >
-    <ScrollView
-      scrollEnabled={false}
+    <TextInput
+      style={MasterStyleSheet.surveyNotesInputText}
+      onChangeText={text => updatePhotoCaption(text)}
+      value={photoCaption}
+      multiline
+    />
+    <Button
+      title={'Take Photo'}
+      onPress={TakePhoto}
+     />
+    <Button
+      title={'Library'}
+      onPress={AddFromLibrary}
+   />
+    <PickerIOS
+      style={MasterStyleSheet.surveyCardPicker}
+      itemStyle={MasterStyleSheet.surveyCardPickerItem}
+      selectedValue={photoSelection}
+      onValueChange={slct => updateSelection(slct)}
     >
-      <Button
-        title={'Get Photo'}
-        onPress={getPhoto}
-      />
-      <PickerIOS
-        style={MasterStyleSheet.surveyCardPicker}
-        itemStyle={MasterStyleSheet.surveyCardPickerItem}
-        selectedValue={photoSelection}
-        onValueChange={slct => updateSelection(slct)}
-      >
-        {selection.map((sel, idx) => (
-          <PickerItemIOS
-            key={idx}
-            value={sel}
-            label={sel}
-          />
+      {selection.map((sel, idx) => (
+        <PickerItemIOS
+          key={idx}
+          value={sel}
+          label={sel}
+        />
      ))}
-      </PickerIOS>
-    </ScrollView>
+    </PickerIOS>
   </Card>
 );
 

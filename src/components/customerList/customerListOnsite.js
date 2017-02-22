@@ -33,7 +33,7 @@ class CustomerListonSite extends React.Component {
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
                 <List >
-                  {this.props.onSite.map((customer, idx) => (
+                  {this.props.myCustomers.onsite.map((customer, idx) => (
                     <ListItem
                       containerStyle={MasterStyleSheet.customersListItem}
                       key={idx}
@@ -46,6 +46,7 @@ class CustomerListonSite extends React.Component {
               </Col>
               <Col style={MasterStyleSheet.ipadViewRight}>
                 <CustomerDetailsIPadSurveyor
+                  myCustomers={this.props.myCustomers}
                   customerId={this.state.selection}
                   user={this.props.user}
                   updateCustomer={this.props.updateCustomer}
@@ -61,7 +62,9 @@ class CustomerListonSite extends React.Component {
       );
     }
     return (
-      <ScrollView>
+      <ScrollView
+        style={MasterStyleSheet.list}
+      >
         <List >
           {this.props.onSite.map((customer, idx) => (
             <ListItem

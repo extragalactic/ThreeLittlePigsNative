@@ -14,7 +14,7 @@ const selectCustomer = (selection) => {
 };
 
 
-class CustomerListNewCustomers extends React.Component {
+class CustomerListSurveyComplete extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -32,8 +32,8 @@ class CustomerListNewCustomers extends React.Component {
           <Content>
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
-                <List>
-                  {this.props.myCustomers.newcustomers.map((customer, idx) => (
+                <List >
+                  {this.props.myCustomers.surveycomplete.map((customer, idx) => (
                     <ListItem
                       containerStyle={MasterStyleSheet.customersListItem}
                       key={idx}
@@ -48,8 +48,8 @@ class CustomerListNewCustomers extends React.Component {
                 <CustomerDetailsIPadSurveyor
                   myCustomers={this.props.myCustomers}
                   customerId={this.state.selection}
+                  selection={this.state.selection}
                   user={this.props.user}
-                  submitFollowup={this.props.submitFollowup}
                   updateCustomer={this.props.updateCustomer}
                   getAppointmentsforDay={this.props.getAppointmentsforDay}
                   addNotes={this.props.addNotes}
@@ -67,7 +67,7 @@ class CustomerListNewCustomers extends React.Component {
         style={MasterStyleSheet.list}
       >
         <List >
-          {this.props.myCustomers.newcustomers.map((customer, idx) => (
+          {this.props.myCustomers.surveycomplete.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}
@@ -81,4 +81,5 @@ class CustomerListNewCustomers extends React.Component {
     );
   }
 }
-export default CustomerListNewCustomers;
+
+export default CustomerListSurveyComplete;

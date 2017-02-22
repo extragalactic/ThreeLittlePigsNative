@@ -46,6 +46,7 @@ class CustomerListSurvyeinProgress extends React.Component {
               </Col>
               <Col style={MasterStyleSheet.ipadViewRight}>
                 <CustomerDetailsIPadSurveyor
+                  myCustomers={this.props.myCustomers}
                   customerId={this.state.selection}
                   selection={this.state.selection}
                   user={this.props.user}
@@ -62,9 +63,11 @@ class CustomerListSurvyeinProgress extends React.Component {
       );
     }
     return (
-      <ScrollView>
+      <ScrollView
+        style={MasterStyleSheet.list}
+      >
         <List >
-          {this.props.surveyinProgress.map((customer, idx) => (
+          {this.props.myCustomers.inprogress.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}

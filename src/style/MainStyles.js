@@ -10,6 +10,9 @@ const MasterStyleSheet = StyleSheet.create({
     alignItems: 'center',
 
   },
+  modalTouch: {
+    backgroundColor: '#635DB7',
+  },
   detailsContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -54,6 +57,9 @@ const MasterStyleSheet = StyleSheet.create({
   list: {
     marginTop: 45,
   },
+  iPhoneListScroll: {
+    marginTop: 60,
+  },
   customersListItem: {
     height: 90,
     borderTopWidth: 0,
@@ -92,17 +98,6 @@ const MasterStyleSheet = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
   },
-  CustomerCardNotesTextInput: {
-    height: 80,
-    width: 260,
-    borderColor: 'gray',
-    padding: 1,
-    borderWidth: 2,
-  },
-  CustomerCardNotesButton: {
-    padding: 10,
-    margin: 4,
-  },
   customerCardMap: {
     backgroundColor: '#CFCFC4',
     height: 210,
@@ -117,7 +112,7 @@ const MasterStyleSheet = StyleSheet.create({
   },
   constacCustomerContainerTwo: {
     flex: 1,
-    flexDirection: 'row',   
+    flexDirection: 'row',
     marginTop: 70,
     justifyContent: 'center',
     alignItems: 'center',
@@ -125,17 +120,22 @@ const MasterStyleSheet = StyleSheet.create({
   surveyItemContainer: {
     marginTop: 5,
     margin: 20,
-    height: 200,
-  },
-  surveyNotesModal: {
-    height: 650,
-    top: 50,
+    height: DeviceInfo.isTablet() ? 660 : 300,
   },
   surveyMainView: {
     marginTop: 0,
   },
   surveyMainPicker: {
     top: 50,
+    marginTop: 20,
+  },
+  surveyResultsTitle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  surveyDetailsList: {
+    marginTop: 120,
   },
   surveyMainContainer: {
     flex: 1,
@@ -158,6 +158,9 @@ const MasterStyleSheet = StyleSheet.create({
     left: DeviceInfo.isTablet() ? 10 : null,
   },
   surveyCardTextInput: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: 80,
     width: 250,
     borderColor: 'gray',
@@ -173,20 +176,63 @@ const MasterStyleSheet = StyleSheet.create({
     fontSize: 15,
   },
   surveyNotesInputContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 12,
-    paddingTop: 20,
+    width: 300,
+
   },
   surveyNotesInputText: {
-    left: 0,
-    right: 0,
-    height: 80,
-    width: 250,
+    height: 90,
+    width: DeviceInfo.isTablet() ? 600 : 300,
     borderColor: 'gray',
     borderWidth: 2,
-  },
+    alignItems: 'center',
+    padding: 4,
 
+  },
+  surveyNotesModalCard: {
+    backgroundColor: '#FFFF66',
+    alignItems: 'center',
+    marginTop: 20,
+    height: DeviceInfo.isTablet() ? window.height / 3.25 : window.height / 1.56,
+    width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
+  },
+  surveyPhotoModalCard: {
+    backgroundColor: '#FFFF66',
+    alignItems: 'center',
+    marginTop: 20,
+    height: DeviceInfo.isTablet() ? window.height / 3.25 : window.height / 1.56,
+    width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
+  },
+  surveyNotesModal: {
+    alignItems: 'center',
+    height: DeviceInfo.isTablet() ? window.height / 2.3 : window.height / 1.60,
+    top: 50,
+    width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
+  },
+  surveyPhotoModal: {
+    alignItems: 'center',
+    height: DeviceInfo.isTablet() ? window.height / 2 : window.height / 1.50,
+    top: 50,
+    width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
+  },
+  surveyResultPhotosView: {
+    flex: 1,
+    alignItems: 'center',
+    fontSize: 32,
+  },
+  surveyResultInsideView: {
+  },
+  surveyResultsText: {
+    fontSize: 32,
+    fontWeight: 'bold',
+  },
+  surveyResultPhotos: {
+    width: DeviceInfo.isTablet() ? window.width / 1.4 : 300,
+    height: DeviceInfo.isTablet() ? window.height / 1.4 : 300,
+  },
+  CustomerCardNotesButton: {
+    padding: 10,
+    margin: 4,
+  },
 });
 
 export {

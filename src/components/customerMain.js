@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 import { MasterStyleSheet } from '../style/MainStyles';
 
 const selectNewCustomer = () => {
-  Actions.customerListNewCustomers()
+  Actions.customerListNewCustomers();
 };
 
 const selectFollowUp = () => {
@@ -21,48 +21,94 @@ const selectSurveyinProgress = () => {
   Actions.customerListsurveyinProgress();
 };
 
-const CustomerMain = ({ user, newCustomers, followUp, onSite, surveyinProgress }) => (
+const selectSurveyComplete = () => {
+  Actions.customerListsurveyComplete();
+};
+
+const selectEstimateQueue = () => {
+  Actions.customerListQueue();
+};
+
+const selectMyEstimates = () => {
+  Actions.customerListMyEstimates();
+};
+
+const CustomerMain = ({ user, newCustomers, followUp, onSite, surveyinProgress, surveyComplete, myEstimates, myCustomers }) => (
   <View style={MasterStyleSheet.mainListView}>
     <List>
       <ListItem
         hideChevron
         title={'New Customers'}
-        badge={{ value: newCustomers.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        badge={{ value: myCustomers.newcustomers.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
         onPress={selectNewCustomer}
         containerStyle={MasterStyleSheet.mainList}
       />
       <ListItem
         hideChevron
         title='Customers to followup'
-        badge={{ value: followUp.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        badge={{ value: myCustomers.followup.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
         onPress={selectFollowUp}
         containerStyle={MasterStyleSheet.mainList}     
       />
       <ListItem
         hideChevron	
         title='Onsite Appointments'
-        badge={{ value: onSite.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        badge={{ value: myCustomers.onsite.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
         onPress={selectOnsite}
         containerStyle={MasterStyleSheet.mainList}     
       />
       <ListItem
-        hideChevron	
+        hideChevron
         title='Survey in progress'
-        badge={{ value: surveyinProgress.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        badge={{ value: myCustomers.inprogress.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
         onPress={selectSurveyinProgress}
         containerStyle={MasterStyleSheet.mainList}     
       />
       <ListItem
         hideChevron	
         title='Survey complete'
-        badge={{ value: 0, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
-        containerStyle={MasterStyleSheet.mainList}     
+        badge={{ value: myCustomers.surveycomplete.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        containerStyle={MasterStyleSheet.mainList}
+        onPress={selectSurveyComplete}
       />
       <ListItem
         hideChevron	
         title='Estimate Queue'
         badge={{ value: 0, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
-        containerStyle={MasterStyleSheet.mainList}     
+        containerStyle={MasterStyleSheet.mainList}
+        onPress={selectEstimateQueue}
+      />
+      <ListItem
+        hideChevron
+        title='My Estimates'
+        badge={{ value: myCustomers.myestimates.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        containerStyle={MasterStyleSheet.mainList}
+        onPress={selectMyEstimates}
+      />
+      <ListItem
+        hideChevron
+        title='Sent Estimates'
+        badge={{ value: myEstimates.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        containerStyle={MasterStyleSheet.mainList}
+        onPress={selectMyEstimates}
+      />
+      <ListItem
+        hideChevron
+        title='Work Orders'
+        badge={{ value: 0, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        containerStyle={MasterStyleSheet.mainList}
+      />
+      <ListItem
+        hideChevron
+        title='Jobs in Progress'
+        badge={{ value: 0, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        containerStyle={MasterStyleSheet.mainList}
+      />
+      <ListItem
+        hideChevron
+        title='Billing'
+        badge={{ value: 0, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+        containerStyle={MasterStyleSheet.mainList}
       />
     </List>
   </View>

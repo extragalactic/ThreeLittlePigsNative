@@ -7,14 +7,14 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
-import CustomerDetailsIPadSurveyor from '../customerDetails/customerDetailsIPadSurveyor';
+import CustomerDetailsIPadQueue from '../customerDetails/customerDetailsIPadQueue';
 
 const selectCustomer = (selection) => {
   Actions.customerDetails({ selection });
 };
 
 
-class CustomerListNewCustomers extends React.Component {
+class CustomerListMyEstimates extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -32,8 +32,8 @@ class CustomerListNewCustomers extends React.Component {
           <Content>
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
-                <List>
-                  {this.props.myCustomers.newcustomers.map((customer, idx) => (
+                <List >
+                  {this.props.myCustomers.myestimates.map((customer, idx) => (
                     <ListItem
                       containerStyle={MasterStyleSheet.customersListItem}
                       key={idx}
@@ -45,11 +45,12 @@ class CustomerListNewCustomers extends React.Component {
                 </List>
               </Col>
               <Col style={MasterStyleSheet.ipadViewRight}>
-                <CustomerDetailsIPadSurveyor
+                <CustomerDetailsIPadQueue
                   myCustomers={this.props.myCustomers}
                   customerId={this.state.selection}
+                  selection={this.state.selection}
                   user={this.props.user}
-                  submitFollowup={this.props.submitFollowup}
+                  acceptEstimate={this.props.acceptEstimate}
                   updateCustomer={this.props.updateCustomer}
                   getAppointmentsforDay={this.props.getAppointmentsforDay}
                   addNotes={this.props.addNotes}
@@ -67,7 +68,7 @@ class CustomerListNewCustomers extends React.Component {
         style={MasterStyleSheet.list}
       >
         <List >
-          {this.props.myCustomers.newcustomers.map((customer, idx) => (
+          {this.props.myCustomers.myestimates.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}
@@ -81,4 +82,5 @@ class CustomerListNewCustomers extends React.Component {
     );
   }
 }
-export default CustomerListNewCustomers;
+
+export default CustomerListMyEstimates;

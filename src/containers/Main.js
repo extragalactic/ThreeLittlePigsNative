@@ -73,6 +73,10 @@ class Main extends Component {
             followUp={this.props.followUp}
             onSite={this.props.onSite}
             surveyinProgress={this.props.surveyinProgress}
+            surveyComplete={this.props.surveyComplete}
+            acceptEstimate={this.props.acceptEstimate}
+            myEstimates={this.props.myEstimates}
+            myCustomers={this.props.myCustomers}
           />
         </Tab>
         <Tab

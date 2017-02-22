@@ -3,6 +3,7 @@ import {
   Text,
   View,
   StyleSheet,
+  WebView,
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -16,9 +17,10 @@ const styles = StyleSheet.create({
 class Surveys extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text> Surveys </Text>
-      </View>
+      <WebView
+        source={{uri: 'https://tlpm.ca/photoedit'}}
+        style={{marginTop: 20}}
+      />
     );
   }
 }

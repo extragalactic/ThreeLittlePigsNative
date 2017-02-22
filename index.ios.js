@@ -41,8 +41,11 @@ const store = createStore(combinedReducers, composeEnhancers(
 
 const ThreeLittlePigsNative = () => (
   <ApolloProvider
-     client={client} store={store}>
-    <Root />
+    client={client} store={store}
+  >
+    <Root
+      userId={'5852eb3ec6e9650100965f2e'}
+    />
   </ApolloProvider>
 );
 

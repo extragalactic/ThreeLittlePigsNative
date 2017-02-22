@@ -7,11 +7,10 @@ import { connect } from 'react-redux';
 import { graphql, compose } from 'react-apollo';
 import codePush from 'react-native-code-push';
 import OneSignal from 'react-native-onesignal';
-
-import { getUserQuery } from '../graphql/queries';
-import RNCalendarEvents from '../../node_modules/react-native-calendar-events/index.ios';
-
+import RNCalendarEvents from 'react-native-calendar-events';
+import { getUserQuery, getMyCustomers } from '../graphql/queries';
 import {
+   acceptEstimate,
    getCustomer,
    submitFollowup,
    getAppointmentsforDay,
@@ -20,7 +19,6 @@ import {
    deleteAppointment,
    getUser,
   } from '../graphql/mutations';
-
 import Main from './Main';
 import { isTokenExpired } from '../Utils/jwtHelper';
 
@@ -40,49 +38,73 @@ class _Root extends Component {
       followUp: [],
       onSite: [],
       surveyinProgress: [],
+      surveyComplete: [],
+      myEstimates: [],
       dimensions: window,
     };
   }
 
   componentDidMount() {
-
-  OneSignal.configure({});
-
-   //  codePush.sync();
+    console.log(this)
+    this.props.data.refetch({
+      options: {
+        pollInterval: 1000,
+      },
+    });
+    OneSignal.configure({});
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('registered', this.onRegistered);
+    OneSignal.addEventListener('ids', this.onIds);
     this.props.getUser({
-      variables : {
+      variables: {
         id: '5852eb3ec6e9650100965f2e',
       },
     }).then((data) => {
+      if (data.data.getUser.estimator) {
+        OneSignal.sendTag('estimator', 'true');
+      }
       this.setState({
-        user: data.data.getUser
+        user: data.data.getUser,
       });
-      
-        const newCustomers = data.data.getUser.newCustomers.filter((customer) => {
-          if(customer.status === 0){
-            return customer;
-          }
-        })
-       const followUp = data.data.getUser.newCustomers.filter((customer) => {
-          if(customer.status === 1 ){
-            return customer;
-          }
-        })
-       const onSite = data.data.getUser.newCustomers.filter((customer) => {
-          if(customer.status === 2 ){
-            return customer;
-          }
-        })
-         const surveyinProgress = data.data.getUser.newCustomers.filter((customer) => {
-          if(customer.status === 3 ){
-            return customer;
-          }
-        })
-        this.setState({newCustomers})
-        this.setState({followUp})
-        this.setState({onSite})
-        this.setState({surveyinProgress})
 
+        const newCustomers = data.data.getUser.newCustomers.filter((customer) => {
+          if (customer.status === 0) {
+            return customer;
+          }
+        });
+        const followUp = data.data.getUser.newCustomers.filter((customer) => {
+          if (customer.status === 1) {
+            return customer;
+          }
+        });
+        const onSite = data.data.getUser.newCustomers.filter((customer) => {
+          if (customer.status === 2) {
+            return customer;
+          }
+        });
+        const surveyinProgress = data.data.getUser.newCustomers.filter((customer) => {
+          if (customer.status === 3) {
+            return customer;
+          }
+        });
+        const surveyComplete = data.data.getUser.newCustomers.filter((customer) => {
+          if (customer.status === 4) {
+            return customer;
+          }
+        });
+        const myEstimates = data.data.getUser.estimates.filter((customer) => {
+          if (customer.status === 6) {
+            return customer;
+          }
+        });
+        this.setState({ newCustomers });
+        this.setState({ followUp });
+        this.setState({ onSite });
+        this.setState({ surveyinProgress });
+        this.setState({ surveyComplete });
+        this.setState({ myEstimates });
+    
     });    /*
     this.loggedIn().then((result) => {
       if (result === false) {
@@ -91,14 +113,47 @@ class _Root extends Component {
     });
       */
     RNCalendarEvents.authorizeEventStore()
-     .then(status => {
+     .then((status) => {
        console.log(status);
      })
-     .catch(error => {
-      console.error(error);
+     .catch((error) => {
+       console.error(error);
      });
-
   }
+
+  componentWillUnmount() {
+    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('opened', this.onOpened);
+    OneSignal.removeEventListener('registered', this.onRegistered);
+    OneSignal.removeEventListener('ids', this.onIds);
+  }
+  onReceived = (notification) => {
+   // console.log("Notification received: ", notification);
+  }
+
+  onOpened = (openResult) => {
+    const customer = openResult.notification.payload.additionalData.customer;
+    const action = openResult.notification.payload.additionalData.actionSelected;
+    // console.log(customer, action);
+
+    if (action === 'id1') {
+      this.props.acceptEstimate({
+        variables: {
+          custid: customer,
+          userid: this.state.user._id,
+        },
+      });
+    }
+  }
+
+  onRegistered = (notifData) => {
+   // console.log("Device had been registered for push notifications!", notifData);
+  }
+
+  onIds = (device) => {
+   // console.log('Device info: ', device);
+  }
+
 
   loggedIn = () => (
     store.get('token')
@@ -120,17 +175,17 @@ class _Root extends Component {
         this.props.saveProfile(profile);
         this.props.data.refetch({
           id: profile.identities[0].userId,
-       });
+        });
       }
     });
   };
   updateUser = (id) => {
-    this.props.getUser({variables: {
+    this.props.getUser({ variables: {
       id,
     } }).then((data) => {
-        this.setState({
-          user: data.data.getUser,
-        });
+      this.setState({
+        user: data.data.getUser,
+      });
     });
   }
   logOut = () => {
@@ -139,10 +194,11 @@ class _Root extends Component {
   };
 
   render() {
+    console.log(this.props.data.getMyCustomers)
     return (
       <Main
         logout={this.logOut}
-        //profile={this.props.profile}
+        // profile={this.props.profile}
         updateUser={this.updateUser}
         getProfile={this.props.saveProfile}
         getCustomer={this.props.getCustomer}
@@ -152,13 +208,17 @@ class _Root extends Component {
         addNotes={this.props.addNotes}
         getAppointmentsforDay={this.props.getAppointmentsforDay}
         deleteAppointment={this.props.deleteAppointment}
+        acceptEstimate={this.props.acceptEstimate}
         data={this.props.data}
         user={this.state.user}
         newCustomers={this.state.newCustomers}
         followUp={this.state.followUp}
         onSite={this.state.onSite}
+        myEstimates={this.state.myEstimates}
         surveyinProgress={this.state.surveyinProgress}
+        surveyComplete={this.state.surveyComplete}
         dimensions={this.state.dimensions}
+        myCustomers={this.props.data.getMyCustomers}
       />
     );
   }
@@ -175,16 +235,24 @@ const mapStateToProps = state => ({
 
 const Root = compose(
   graphql(getUser, { name: 'getUser' }),
+  graphql(acceptEstimate, { name: 'acceptEstimate' }),
   graphql(deleteAppointment, { name: 'deleteAppointment' }),
   graphql(getCustomer, { name: 'getCustomer' }),
   graphql(addNotes, { name: 'addNotes' }),
   graphql(updateCustomer, { name: 'updateCustomer' }),
   graphql(submitFollowup, { name: 'submitFollowup' }),
   graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
-  graphql(getUserQuery),
+  graphql(getUserQuery, { options: { pollInterval: 1000 } }),
+  graphql(getMyCustomers, {
+    options: ({ userId }) => ({ variables: { id: userId }, pollInterval: 1000 }),
+  }),
   connect(mapStateToProps, mapActionsToProps),
 )(_Root);
 
 Root = codePush(Root);
 export default Root;
 
+/*
+getMyCustomers
+userId
+*/

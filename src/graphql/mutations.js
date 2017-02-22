@@ -151,6 +151,19 @@ mutation getUser($id: String) {
       address
       status   
    }
+     estimates {
+        id
+        firstName
+        lastName
+        email1
+        email2
+        hphone
+        cphone
+        wphone
+        address
+        status
+      }
+    
     followUp {
       name
       start
@@ -266,7 +279,37 @@ const getFinishedSurvey = gql `
   }
 }`;
 
+const acceptEstimate = gql `
+  mutation acceptEstimate($custid: String, $userid: String){
+  acceptEstimate(userid:$userid, custid: $custid) {
+    survey{
+      notes {
+        heading
+        description
+        text
+        timestamp
+        user
+      }
+      photos {
+        heading
+        description
+        timestamp
+        user
+        orginalBase64
+        editedlBase64
+        thumbURL
+        thumb
+        photo
+        caption
+        selected
+      }
+    }    
+  }
+}`;
+
+
 export {
+  acceptEstimate,
   getFinishedSurvey,
   selectSurveyPhotos,
   toggleSurveyReady,

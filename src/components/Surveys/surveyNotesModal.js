@@ -17,7 +17,6 @@ const SurveyNotesModal = ({
     <Modal
       isOpen={open}
       onClosed={close}
-      backdrop={false}
       style={MasterStyleSheet.surveyNotesModal}
       position={'center'}
     >

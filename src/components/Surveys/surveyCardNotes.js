@@ -16,41 +16,30 @@ const SurveyCardNotes = ({
 }) => (
   <Card
     title={`${selected} Notes`}
-    containerStyle={MasterStyleSheet.surveyCardPhoto}
+
   >
-    <ScrollView
-      scrollEnabled={false}
+    <TextInput
+      style={MasterStyleSheet.surveyNotesInputText}
+      onChangeText={text => updateText(text)}
+      value={notes}
+      multiline
+    />
+    <Button
+      title={'submit'}
+      onPress={submitNotes}
+    />
+    <PickerIOS
+      selectedValue={notesSelection}
+      onValueChange={slct => updateSelection(slct)}
     >
-      <KeyboardAvoidingView
-        behavior={'position'}
-        style={MasterStyleSheet.surveyNotesInputContainer}
-      >
-        <TextInput
-          style={MasterStyleSheet.surveyNotesInputText}
-          onChangeText={text => updateText(text)}
-          value={notes}
-          multiline
+      {selection.map((sel, idx) => (
+        <PickerItemIOS
+          key={idx}
+          value={sel}
+          label={sel}
         />
-        <Button
-          title={'submit'}
-          onPress={submitNotes}
-        />
-      </KeyboardAvoidingView>
-      <PickerIOS
-        style={MasterStyleSheet.surveyCardPicker}
-        itemStyle={MasterStyleSheet.surveyCardPickerItem}
-        selectedValue={notesSelection}
-        onValueChange={slct => updateSelection(slct)}
-      >
-        {selection.map((sel, idx) => (
-          <PickerItemIOS
-            key={idx}
-            value={sel}
-            label={sel}
-          />
      ))}
-      </PickerIOS>
-    </ScrollView>
+    </PickerIOS>
   </Card>
 );
 

@@ -33,7 +33,7 @@ class CustomerListFollowup extends React.Component {
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
                 <List >
-                  {this.props.followUp.map((customer, idx) => (
+                  {this.props.myCustomers.followup.map((customer, idx) => (
                     <ListItem
                       containerStyle={MasterStyleSheet.customersListItem}
                       key={idx}
@@ -46,8 +46,10 @@ class CustomerListFollowup extends React.Component {
               </Col>
               <Col style={MasterStyleSheet.ipadViewRight}>
                 <CustomerDetailsIPadSurveyor
+                  myCustomers={this.props.myCustomers}
                   customerId={this.state.selection}
                   user={this.props.user}
+                  submitFollowup={this.props.submitFollowup}
                   updateCustomer={this.props.updateCustomer}
                   getAppointmentsforDay={this.props.getAppointmentsforDay}
                   addNotes={this.props.addNotes}
@@ -61,9 +63,11 @@ class CustomerListFollowup extends React.Component {
       );
     }
     return (
-      <ScrollView>
+      <ScrollView
+        style={MasterStyleSheet.list}
+      >
         <List >
-          {this.props.newCustomers.map((customer, idx) => (
+          {this.props.myCustomers.followup.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}

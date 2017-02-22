@@ -14,7 +14,7 @@ const getMessages = gql `
   }`;
 
 const getUserQuery = gql `
-  query getUser($id: String){
+query getUser($id: String){
     user(id:$id){
       _id
       firstName
@@ -35,6 +35,18 @@ const getUserQuery = gql `
        wphone
        address   
    }
+      estimates {
+        id
+        firstName
+        lastName
+        email1
+        email2
+        hphone
+        cphone
+        wphone
+        address
+        status
+      }
       followUp {
         name
         start
@@ -124,5 +136,84 @@ const getFinishedSurvey = gql `
   }
 }`;
 
+const getMyCustomers = gql `
+  query getMyCustomers($id: String) {
+  getMyCustomers(id:$id ){
+     newcustomers {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+      
+    }
+     followup {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+     }
+    onsite {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+    }
+   inprogress {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+   }
+    surveycomplete {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+    }
+    myestimates {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+    }
+    
+  }
+}`;
 
-export { getUserQuery, getMessages, getCustomer, getFinishedSurvey };
+export { getUserQuery, getMessages, getCustomer, getFinishedSurvey, getMyCustomers };

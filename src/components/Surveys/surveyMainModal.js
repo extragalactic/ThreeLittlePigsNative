@@ -16,34 +16,18 @@ import WindowsillsSelect from '../Surveys/windowsillsSelect';
 import RefacingSelect from '../Surveys/refacingSelect';
 import SurveyNotesModal from '../Surveys/surveyNotesModal';
 import SurveyGalleryModal from '../photoGallery/surveyGalleryModal';
+import SurveyPhotosModal from '../Surveys/surveyPhotoModal';
 import { MasterStyleSheet } from '../../style/MainStyles';
 
+import photoOptions from './photoOptions';
 
 import {
    addSurveyNotes,
    addSurveyPhoto,
    getSurveyPhotos,
    toggleSurveyReady,
-   selectSurveyPhotos, 
+   selectSurveyPhotos,
   } from '../../graphql/mutations';
-
-const options = {
-  title: 'Add Photo', // specify null or empty string to remove the title
-  cancelButtonTitle: 'Cancel',
-  takePhotoButtonTitle: 'Take Photo.', // specify null or empty string to remove this button
-  chooseFromLibraryButtonTitle: 'Choose from Library.', // specify null or empty string to remove this button
-  cameraType: 'back', // 'front' or 'back'
-  mediaType: 'photo', // 'photo' or 'video'
-  videoQuality: 'high', // 'low', 'medium', or 'high'
-  durationLimit: 10, // video recording max time in seconds
-  quality: 1, // 0 to 1, photos only
-  allowsEditing: false, // Built in functionality to resize/reposition the image after selection
-  noData: false, // photos only - disables the base64 `data` field from being generated (greatly improves performance on large photos)
-  storageOptions: { // if this key is provided, the image will get saved in the documents directory on ios, and the pictures directory on android (rather than a temporary directory)
-    skipBackup: false, // ios only - image will NOT be backed up to icloud
-    path: 'images', // ios only - will save image at /Documents/images rather than the root
-  },
-};
 
 class _SurveyMainModal extends React.Component {
   constructor() {
@@ -53,16 +37,24 @@ class _SurveyMainModal extends React.Component {
       selection: ['no header'],
       count: '',
       notes: '',
+      photoCaption: '',
       surveyPhotos: [],
       notesModal: false,
+      photoGallery: false,
       photoModal: false,
       ready: false,
       notesSelection: 'no header',
+      photoSelection: 'no header',
     };
   }
-
   getPhoto = () => {
-    ImagePickerManager.showImagePicker(options, (data) => {
+    console.log('picker');
+
+    this.setState({
+      photoModal: true,
+    });
+    /*
+    ImagePickerManager.showImagePicker(photoOptions, (data) => {
       this.props.addSurveyPhoto({
         variables: {
           heading: this.state.selected,
@@ -74,10 +66,11 @@ class _SurveyMainModal extends React.Component {
         },
       });
     });
+    */
   };
   viewPhotos = () => {
     this.setState({
-      photoModal: true,
+      photoGallery: true,
     });
     this.props.getSurveyPhotos({
       variables: { id: this.props.customer.id }
@@ -85,6 +78,11 @@ class _SurveyMainModal extends React.Component {
   };
 
   changeSelection = (selection) => {
+    console.log(selection);
+    this.setState({
+      selection: ['no header'],
+    });
+
     this.setState({
       selected: selection,
     });
@@ -99,7 +97,40 @@ class _SurveyMainModal extends React.Component {
       notes,
     });
   };
-
+  TakePhoto = () => {
+    ImagePickerManager.launchCamera(photoOptions, (data)  => {
+      this.props.addSurveyPhoto({
+        variables: {
+          heading: this.state.selected,
+          description: this.state.photoCaption,
+          orginalBase64: data.data,
+          timestamp: new Date(),
+          custid: this.props.customer.id,
+          user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+        },
+      });
+    });
+    this.setState({
+      photoCaption: '',
+    });
+  };
+  AddFromLibrary = () => {
+    ImagePickerManager.launchImageLibrary(photoOptions, (data)  => {
+      this.props.addSurveyPhoto({
+        variables: {
+          heading: this.state.selected,
+          description: this.state.photoCaption,
+          orginalBase64: data.data,
+          timestamp: new Date(),
+          custid: this.props.customer.id,
+          user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+        },
+      });
+    });
+    this.setState({
+      photoCaption: '',
+    });
+  };
   submitNotes = () => {
     this.props.addSurveyNotes({
       variables: {
@@ -116,12 +147,14 @@ class _SurveyMainModal extends React.Component {
   };
 
   updateSelection = (selection) => {
+    console.log(selection)
     const doesExist = this.state.selection.indexOf(selection);
     if (doesExist !== -1) {
       _.pull(this.state.selection, selection);
     } else {
       this.state.selection.push(selection);
     }
+    console.log(this.state)
   }
   tooggleReady = () => {
     this.setState({
@@ -142,7 +175,11 @@ class _SurveyMainModal extends React.Component {
       },
     });
   };
-
+  updatePhotoCaption = (text) => {
+    this.setState({
+      photoCaption: text,
+    });
+  };
   render() {
     return (
       <View style={MasterStyleSheet.surveyMainView}>
@@ -151,30 +188,36 @@ class _SurveyMainModal extends React.Component {
           transparent={false}
           visible={this.props.modal}
         >
-          <Icon
-            name={'chevron-left'}
-            iconStyle={MasterStyleSheet.modalIcon}
-            onPress={this.props.closeSurveyModal}
-            size={40}
-            color={'blue'}
-          />
+          <View>
+            <Icon
+              onPress={this.props.closeSurveyModal}
+              name={'chevron-left'}
+              iconStyle={MasterStyleSheet.modalIcon}
+              size={45}
+              color={'blue'}
+            />
+          </View>
           <SurveyPicker
             changeSelection={this.changeSelection}
             selection={this.state.selected}
             style={MasterStyleSheet.surveyMainPicker}
           />
-          {this.state.selected === 'Parging' ? <PargingSelect updateSelection={this.updateSelection} /> : null }
-          {this.state.selected === 'Concrete' ? <ConcreteSelect
-            count={this.state.count}
-            updateCount={this.updateCount}
-            updateSelection={this.updateSelection}
-          /> : null }
-          {this.state.selected === 'Chimney' ? <ChimneySelect updateSelection={this.updateSelection} /> : null }
-          {this.state.selected === 'Brick' ? <BrickSelect updateSelection={this.updateSelection} /> : null }
-          {this.state.selected === 'Flashing' ? <FlashingSelect updateSelection={this.updateSelection} /> : null }
-          {this.state.selected === 'Waterproofing' ? <WaterproofingSelect updateSelection={this.updateSelection} /> : null }
-          {this.state.selected === 'Windowsills' ? <WindowsillsSelect updateSelection={this.updateSelection} /> : null }
-          {this.state.selected === 'Refacing' ? <RefacingSelect updateSelection={this.updateSelection} /> : null }
+          <View
+            style={MasterStyleSheet.surveyDetailsList}
+          >
+            {this.state.selected === 'Parging' ? <PargingSelect updateSelection={this.updateSelection} /> : null }
+            {this.state.selected === 'Concrete' ? <ConcreteSelect
+              count={this.state.count}
+              updateCount={this.updateCount}
+              updateSelection={this.updateSelection}
+            /> : null }
+            {this.state.selected === 'Chimney' ? <ChimneySelect updateSelection={this.updateSelection} /> : null }
+            {this.state.selected === 'Brick' ? <BrickSelect updateSelection={this.updateSelection} /> : null }
+            {this.state.selected === 'Flashing' ? <FlashingSelect updateSelection={this.updateSelection} /> : null }
+            {this.state.selected === 'Waterproofing' ? <WaterproofingSelect updateSelection={this.updateSelection} /> : null }
+            {this.state.selected === 'Windowsills' ? <WindowsillsSelect updateSelection={this.updateSelection} /> : null }
+            {this.state.selected === 'Refacing' ? <RefacingSelect updateSelection={this.updateSelection} /> : null }
+          </View>
           <View style={MasterStyleSheet.surveyMainContainer}>
             <Icon
               name="description"
@@ -220,9 +263,22 @@ class _SurveyMainModal extends React.Component {
             selection={this.state.selection}
             selected={this.state.selected}
           />
-          <SurveyGalleryModal
+          <SurveyPhotosModal
             open={this.state.photoModal}
+            updatePhotoCaption={this.updatePhotoCaption}
             close={() => this.setState({ photoModal: false })}
+            updateText={(text) => console.log(text)}
+            updateSelection={(photoSelection) => this.setState({ photoSelection })}
+            photoCaption={this.state.photoCaption}
+            photoSelection={this.state.photoSelection}
+            selection={this.state.selection}
+            selected={this.state.selected}
+            TakePhoto={this.TakePhoto}
+            AddFromLibrary={this.AddFromLibrary}
+          />
+          <SurveyGalleryModal
+            open={this.state.photoGallery}
+            close={() => this.setState({ photoGallery: false })}
             photos={this.state.surveyPhotos}
             selectPhoto={this.togglePhotoSelection}
           />

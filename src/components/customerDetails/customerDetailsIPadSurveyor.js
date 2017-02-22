@@ -309,7 +309,8 @@ class _CustomerDetailsIPadSurveyor extends Component {
           <SurveyCompleteModal
             modal={this.state.formCompleteModal}
             customer={this.props.data.customer}
-            completedSurvey={this.state.finishedSurvey}
+            finishedSurvey={this.state.finishedSurvey}
+            myCustomers={this.props.myCustomers}
             close={() => { this.setState({ formCompleteModal: false }); }}
           />
         </View>

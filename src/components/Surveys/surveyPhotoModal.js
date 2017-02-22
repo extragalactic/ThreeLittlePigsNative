@@ -8,15 +8,20 @@ const SurveyPhotoModal = ({
    close, 
    updateSelection,
    photoSelection,
+   updatePhotoCaption,
    selection,
+   photoCaption,
    selected,
    getPhoto,
+   notes,
+   TakePhoto,
+   AddFromLibrary,
   }) => (
     <Modal
       isOpen={open}
       onClosed={close}
-      backdrop={false}
-      style={MasterStyleSheet.surveyNotesModal}
+      backdrop
+      style={MasterStyleSheet.surveyPhotoModal}
       position={'center'}
     >
       <SurveyCardPhoto
@@ -25,6 +30,10 @@ const SurveyPhotoModal = ({
         selected={selected}
         updateSelection={updateSelection}
         getPhoto={getPhoto}
+        updatePhotoCaption={updatePhotoCaption}
+        photoCaption={photoCaption}
+        TakePhoto={TakePhoto}
+        AddFromLibrary={AddFromLibrary}
       />
     </Modal>
 );
