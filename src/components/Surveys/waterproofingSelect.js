@@ -17,4 +17,3 @@ const WaterproofingSelect = ({ updateSelection }) => (
 
 export default WaterproofingSelect;
 
-

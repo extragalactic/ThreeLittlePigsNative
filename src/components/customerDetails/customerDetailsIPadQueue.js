@@ -14,7 +14,6 @@ import { Actions } from 'react-native-router-flux';
 import CustomerCardConact from '../Cards/customerCardConact';
 import CustomerCardChat from '../Cards/customerCardChat';
 import CustomerCardMaps from '../Cards/customerCardMaps';
-import CustomerCardSurvey from '../Cards/customerCardSurvey';
 import CustomerCardQueue from '../Cards/customerCardQueue';
 import SurveyCompleteModal from '../Modals/customerSurveyCompleteModal';
 import ContactCustomerMenu from '../contactCustomerMenu';
@@ -196,8 +195,8 @@ class _CustomerDetailsIPadQueue extends Component {
       variables: {
         custid: this.props.data.customer.id,
         userid: this.props.user._id,
-      }
-    })
+      },
+    });
     Actions.customerMain();
   }
 
@@ -278,9 +277,9 @@ class _CustomerDetailsIPadQueue extends Component {
             />
             <CustomerCardQueue
               customer={this.props.data.customer}
-              acceptEstimate={this.acceptEstimate} 
+              acceptEstimate={this.acceptEstimate}
             />
-      
+
           </ScrollView>
           <CustomerNotesModal
             modal={this.state.notesModal}
@@ -317,12 +316,7 @@ class _CustomerDetailsIPadQueue extends Component {
             user={this.props.user}
             closeSurveyModal={this.closeSurveyModal}
           />
-          <SurveyCompleteModal
-            modal={this.state.formCompleteModal}
-            customer={this.props.data.customer}
-            completedSurvey={this.state.finishedSurvey}
-            close={() => { this.setState({ formCompleteModal: false }); }}
-          />
+
         </View>
       </Drawer>
     );
@@ -338,3 +332,12 @@ const CustomerDetailsIPadQueue = compose(
 
 export default CustomerDetailsIPadQueue;
 
+/*
+
+ <SurveyCompleteModal
+            modal={this.state.formCompleteModal}
+            customer={this.props.data.customer}
+            completedSurvey={this.state.finishedSurvey}
+            close={() => { this.setState({ formCompleteModal: false }); }}
+          />
+*/

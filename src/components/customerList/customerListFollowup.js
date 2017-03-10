@@ -5,16 +5,18 @@ import { ScrollView, Text } from 'react-native';
 import { Container, Content } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
+import { graphql, compose } from 'react-apollo';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 import CustomerDetailsIPadSurveyor from '../customerDetails/customerDetailsIPadSurveyor';
+import { getMyCustomers } from '../../graphql/queries';
 
 const selectCustomer = (selection) => {
   Actions.customerDetails({ selection });
 };
 
 
-class CustomerListFollowup extends React.Component {
+class _CustomerListFollowup extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -26,6 +28,7 @@ class CustomerListFollowup extends React.Component {
     this.setState({ selection });
   }
   render() {
+    console.log('followup', this.props);
     if (DeviceInfo.isTablet()) {
       return (
         <Container>
@@ -33,7 +36,7 @@ class CustomerListFollowup extends React.Component {
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
                 <List >
-                  {this.props.myCustomers.followup.map((customer, idx) => (
+                  {this.props.data.getMyCustomers.followup.map((customer, idx) => (
                     <ListItem
                       containerStyle={MasterStyleSheet.customersListItem}
                       key={idx}
@@ -46,7 +49,7 @@ class CustomerListFollowup extends React.Component {
               </Col>
               <Col style={MasterStyleSheet.ipadViewRight}>
                 <CustomerDetailsIPadSurveyor
-                  myCustomers={this.props.myCustomers}
+                  myCustomers={this.props.data.getMyCustomers}
                   customerId={this.state.selection}
                   user={this.props.user}
                   submitFollowup={this.props.submitFollowup}
@@ -67,7 +70,7 @@ class CustomerListFollowup extends React.Component {
         style={MasterStyleSheet.list}
       >
         <List >
-          {this.props.myCustomers.followup.map((customer, idx) => (
+          {this.props.data.getMyCustomers.followup.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}
@@ -81,5 +84,12 @@ class CustomerListFollowup extends React.Component {
     );
   }
 }
+
+const CustomerListFollowup = compose(
+  graphql(getMyCustomers, {
+    options: ({ user }) => ({ variables: { id: user._id }, pollInterval: 1000 }),
+  }),
+)(_CustomerListFollowup);
+
 
 export default CustomerListFollowup;

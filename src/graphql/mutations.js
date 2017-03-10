@@ -307,8 +307,47 @@ const acceptEstimate = gql `
   }
 }`;
 
+const addPrice = gql`
+  mutation($custid: String, $description :String, $price: Int){
+  addPricing(custid: $custid, description: $description, price: $price){
+    photos {
+      heading
+      description
+      timestamp
+      user
+      orginalBase64
+      editedlBase64
+      thumbURL
+      thumb
+      photo
+      caption
+      selected
+    }
+  }
+}`;
+
+const getEstimateResults = gql `
+  mutation getEstimateResult($custid: String){
+    getEstimateResults(custid: $custid) {
+      prices {
+        description
+        price
+      }
+      photos
+    }
+  }`;
+
+const sendEstimate = gql `
+    mutation sendEstimate($custid: String, $generics: generics){
+      generatePDFEstimate(custid: $custid, generics: $generics){
+        id
+      }
+    }`;
 
 export {
+  sendEstimate,
+  getEstimateResults,
+  addPrice,
   acceptEstimate,
   getFinishedSurvey,
   selectSurveyPhotos,

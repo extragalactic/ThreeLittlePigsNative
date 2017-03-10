@@ -11,7 +11,7 @@ const defaultMarker = {
 const CustomerCardMaps = ({ customer, getDirections }) => (
   <Card
     title={customer.address ? `${customer.address}` : 'Address'}
-      containerStyle={MasterStyleSheet.cardStyle}
+    containerStyle={MasterStyleSheet.cardStyle}
 
   >
     <MapView

@@ -18,7 +18,6 @@ const surveyGalleryModal = ({
         alwaysShowControls
         displayActionButton
         displayNavArrows
-        displaySelectionButtons
         onBack={close}
         startOnGrid
         onSelectionChanged={(media, index, isSelected) => {

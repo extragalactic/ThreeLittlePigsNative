@@ -14,7 +14,6 @@ import CustomerCardConact from './Cards/customerCardConact';
 import CustomerCardChat from './Cards/customerCardChat';
 import CustomerCardMaps from './Cards/customerCardMaps';
 import CustomerCardSurvey from './Cards/customerCardSurvey';
-import CustomerCardPricing from './Cards/customerCardPricing';
 import SurveyCompleteModal from './Modals/customerSurveyCompleteModal';
 import ContactCustomerMenu from './contactCustomerMenu';
 import CustomerFollowupModal from './Modals/customerFollowupModal';
@@ -24,7 +23,7 @@ import SurveyMainModal from './Surveys/surveyMainModal';
 
 import { MasterStyleSheet } from '../style/MainStyles';
 
-import { getCustomer, getFinishedSurvey } from '../graphql/queries';
+import { getFinishedSurvey, toggleSurveyReady } from '../graphql/mutations';
 
 
 const addMinutes = (date, minutes) => new Date(date.getTime() + minutes * 60000);
@@ -48,10 +47,12 @@ class _CustomerDetails extends Component {
       change: false,
       currentLocation: {},
       messages: [],
+      finishedSurvey: [],
+      ready: false,
     };
   }
   componentDidMount() {
-    console.log('details', this)
+   // console.log('details', this)
     this.props.getCustomer({ variables: {
       id: this.props.selection,
     } }).then((customer) => {
@@ -60,6 +61,7 @@ class _CustomerDetails extends Component {
       });
     });
   }
+
   onDateChange = (date) => {
     this.setState({ date });
     this.props.getAppointmentsforDay({ variables: {
@@ -72,7 +74,7 @@ class _CustomerDetails extends Component {
     });
   };
   onSend = (message) => {
-    this.props.addNotes({ variables: { 
+    this.props.addNotes({ variables: {
       custid: this.state.customer.id,
       name: `${this.state.customer.firstName} ${this.state.customer.lastName}`,
       userid: this.props.user._id,
@@ -122,6 +124,18 @@ class _CustomerDetails extends Component {
       change: false,
     });
   };
+
+  getFinishedSurvey = () => {
+    this.props.getFinishedSurvey({
+      variables: {
+        id: this.props.selection,
+      },
+    }).then((survey) => {
+      this.setState({ finishedSurvey: survey.data.getFinishedSurvey });
+    });
+    this.setState({ formCompleteModal: true });
+  };
+
   openDrawer = () => {
     this.setState({
       drawer: true,
@@ -202,7 +216,7 @@ class _CustomerDetails extends Component {
     });
   };
   changeAppointment = (meetingid, calid) => {
-    console.log(meetingid, calid);
+    // console.log(meetingid, calid);
     this.setState({
       change: true,
     });
@@ -228,6 +242,17 @@ class _CustomerDetails extends Component {
   };
   submitNotes = () => {
     this.setState({ notes: '' });
+  };
+  toggleReady = () => {
+    this.setState({
+      ready: !this.state.ready,
+    });
+    this.props.toggleSurveyReady({
+      variables: {
+        custid: this.state.customer.id,
+        userid: this.props.user._id,
+      },
+    });
   };
   render() {
     return (
@@ -256,7 +281,7 @@ class _CustomerDetails extends Component {
             <CustomerCardSurvey
               customer={this.state.customer}
               startSurvey={this.openSurveyModal}
-              surveyComplete={() => { this.setState({ formCompleteModal: true }); }}
+              surveyComplete={this.getFinishedSurvey}
             />
           </ScrollView>
           <CustomerNotesModal
@@ -297,8 +322,10 @@ class _CustomerDetails extends Component {
           <SurveyCompleteModal
             modal={this.state.formCompleteModal}
             close={() => { this.setState({ formCompleteModal: false }); }}
-            finishedSurvey={this.props.data.getFinishedSurvey}
+            finishedSurvey={this.state.finishedSurvey}
             myCustomers={this.props.myCustomers}
+            ready={this.state.ready}
+            toggleReady={this.toggleReady}
           />
         </View>
       </Drawer>
@@ -307,12 +334,11 @@ class _CustomerDetails extends Component {
 }
 
 const CustomerDetails = compose(
-  graphql(getFinishedSurvey, {
-    options: ({ selection }) => ({ variables: { id: selection } }),
-  }),
+graphql(getFinishedSurvey, { name: 'getFinishedSurvey' }),
+graphql(toggleSurveyReady, { name: 'toggleSurveyReady' }),
 )(_CustomerDetails);
 
 export default CustomerDetails;
 
 
-//<CustomerCardPricing customer={this.state.customer} />//
+// <CustomerCardPricing customer={this.state.customer} />//

@@ -5,7 +5,7 @@ import SurveyCardPhoto from './surveyCardPhoto';
 
 const SurveyPhotoModal = ({
    open,
-   close, 
+   close,
    updateSelection,
    photoSelection,
    updatePhotoCaption,

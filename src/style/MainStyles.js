@@ -8,6 +8,7 @@ const MasterStyleSheet = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#DCDCDC',
 
   },
   modalTouch: {
@@ -74,7 +75,7 @@ const MasterStyleSheet = StyleSheet.create({
   },
   modalIcon: {
     marginTop: 20,
-    right: DeviceInfo.isTablet() ? 660 : 180,
+    right: DeviceInfo.isTablet() ? 660 : window.width / 2.3,
   },
   modalView: {
     marginTop: 10,
@@ -90,7 +91,7 @@ const MasterStyleSheet = StyleSheet.create({
     marginLeft: 0,
     marginRight: 0,
     marginTop: 7,
-    backgroundColor: '#779ECB'
+    backgroundColor: '#779ECB',
 
   },
   pricingCardView: {
@@ -122,9 +123,6 @@ const MasterStyleSheet = StyleSheet.create({
     margin: 20,
     height: DeviceInfo.isTablet() ? 660 : 300,
   },
-  surveyMainView: {
-    marginTop: 0,
-  },
   surveyMainPicker: {
     top: 50,
     marginTop: 20,
@@ -137,15 +135,19 @@ const MasterStyleSheet = StyleSheet.create({
   surveyDetailsList: {
     marginTop: 120,
   },
-  surveyMainContainer: {
+  surveyMainView: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
+    justifyContent: 'center',
+
+  },
+  surveyMainContainer: {
     top: 25,
-    right: DeviceInfo.isTablet() ? 0 : 75,
-    left: DeviceInfo.isTablet() ? 10 : null,
+    position: 'absolute',
+    flexDirection: 'row',
+    marginLeft: window.width - window.width + 60,
+
   },
   surveyMainButton: {
     flex: 1,
@@ -217,7 +219,22 @@ const MasterStyleSheet = StyleSheet.create({
   surveyResultPhotosView: {
     flex: 1,
     alignItems: 'center',
-    fontSize: 32,
+    marginRight: 1,
+    marginBottom: 100,
+  },
+  surveyResultsButton: {
+    flex: 1,
+    position: 'absolute',
+    alignItems: 'center',
+    bottom: 56,
+    width: window.width,
+    right: 1,
+  },
+  surveyResultPricingView: {
+    flex: 1,
+    borderColor: 'black',
+    borderWidth: 4,
+    margin: 20,
   },
   surveyResultInsideView: {
   },
@@ -226,15 +243,70 @@ const MasterStyleSheet = StyleSheet.create({
     fontWeight: 'bold',
   },
   surveyResultPhotos: {
-    width: DeviceInfo.isTablet() ? window.width / 1.4 : 300,
-    height: DeviceInfo.isTablet() ? window.height / 1.4 : 300,
+    width: DeviceInfo.isTablet() ? window.width / 2 : window.width / 1.1,
+    height: DeviceInfo.isTablet() ? window.height / 2 : 300,
   },
+  surveyResultsNotes: {
+    width: DeviceInfo.isTablet() ? window.width / 3 : window.width / 1.1,
+    height: DeviceInfo.isTablet() ? window.height / 3 : window.height / 4,
+  },
+  surveyResultsNotesView: {},
   CustomerCardNotesButton: {
     padding: 10,
     margin: 4,
+  },
+
+  EstimatePriceModal: {
+    alignItems: 'center',
+    height: DeviceInfo.isTablet() ? window.height / 2.9 : window.height / 1.60,
+    width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
+  },
+  AutoComplete: {},
+  EstimateModalColLeft: {
+    height: window.height - 55,
+  },
+  EstimateModalColRight: {
+    height: window.height - 55,
+  },
+  EstimatePreviewCard: {
+    flex: 1,
+    bottom: 20,
+    marginTop: 40,
+  },
+  PricingCard: {
+    position: 'absolute',
+    width: window.width / 2.1,
+    alignSelf: 'center',
+  },
+  addEstimateButton: {
+    bottom: 20,
+    margin: 2,
+  },
+  EstimateMainSwipe: {
+    marginBottom: 119,
+  },
+  EstimateGenerics: {
+    flex: 1,
+    position: 'absolute',
+    top: 300,
+    height: 210,
+
   },
 });
 
 export {
   MasterStyleSheet,
-}
+};
+
+
+/*
+
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 25,
+    right: DeviceInfo.isTablet() ? 0 : null,
+    left: DeviceInfo.isTablet() ? 10 : null,
+*/

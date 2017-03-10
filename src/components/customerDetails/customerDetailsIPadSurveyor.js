@@ -185,6 +185,7 @@ class _CustomerDetailsIPadSurveyor extends Component {
         id: this.props.customerId,
       },
     }).then((survey) => {
+      // console.log('survey', survey)
       this.setState({ finishedSurvey: survey.data.getFinishedSurvey });
     });
     this.setState({ formCompleteModal: true });

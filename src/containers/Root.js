@@ -8,7 +8,7 @@ import { graphql, compose } from 'react-apollo';
 import codePush from 'react-native-code-push';
 import OneSignal from 'react-native-onesignal';
 import RNCalendarEvents from 'react-native-calendar-events';
-import { getUserQuery, getMyCustomers } from '../graphql/queries';
+import { getUserQuery, getMyCustomers, getUserandCustomers } from '../graphql/queries';
 import {
    acceptEstimate,
    getCustomer,
@@ -41,77 +41,30 @@ class _Root extends Component {
       surveyComplete: [],
       myEstimates: [],
       dimensions: window,
+      loggedIn: false,
+      userID: '5852eb3ec6e9650100965f2e',
+
     };
   }
 
   componentDidMount() {
-    console.log(this)
-    this.props.data.refetch({
-      options: {
-        pollInterval: 1000,
-      },
-    });
+    codePush.sync();
+
     OneSignal.configure({});
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('registered', this.onRegistered);
     OneSignal.addEventListener('ids', this.onIds);
-    this.props.getUser({
-      variables: {
-        id: '5852eb3ec6e9650100965f2e',
-      },
-    }).then((data) => {
-      if (data.data.getUser.estimator) {
-        OneSignal.sendTag('estimator', 'true');
-      }
-      this.setState({
-        user: data.data.getUser,
-      });
 
-        const newCustomers = data.data.getUser.newCustomers.filter((customer) => {
-          if (customer.status === 0) {
-            return customer;
-          }
-        });
-        const followUp = data.data.getUser.newCustomers.filter((customer) => {
-          if (customer.status === 1) {
-            return customer;
-          }
-        });
-        const onSite = data.data.getUser.newCustomers.filter((customer) => {
-          if (customer.status === 2) {
-            return customer;
-          }
-        });
-        const surveyinProgress = data.data.getUser.newCustomers.filter((customer) => {
-          if (customer.status === 3) {
-            return customer;
-          }
-        });
-        const surveyComplete = data.data.getUser.newCustomers.filter((customer) => {
-          if (customer.status === 4) {
-            return customer;
-          }
-        });
-        const myEstimates = data.data.getUser.estimates.filter((customer) => {
-          if (customer.status === 6) {
-            return customer;
-          }
-        });
-        this.setState({ newCustomers });
-        this.setState({ followUp });
-        this.setState({ onSite });
-        this.setState({ surveyinProgress });
-        this.setState({ surveyComplete });
-        this.setState({ myEstimates });
-    
-    });    /*
+
+/*
     this.loggedIn().then((result) => {
       if (result === false) {
         this.logIn();
       }
     });
-      */
+
+*/
     RNCalendarEvents.authorizeEventStore()
      .then((status) => {
        console.log(status);
@@ -167,14 +120,19 @@ class _Root extends Component {
   );
 
   logIn = () => {
+   // console.log('logging in');
     this.lock.show({}, (err, profile, token) => {
       if (err) {
         console.error(err);
       } else {
         store.save('token', { token, profile });
         this.props.saveProfile(profile);
+
+        this.setState({
+          userID: profile.identities[0].userId,
+        });
         this.props.data.refetch({
-          id: profile.identities[0].userId,
+          pollInterval: 1000,
         });
       }
     });
@@ -194,10 +152,9 @@ class _Root extends Component {
   };
 
   render() {
-    console.log(this.props.data.getMyCustomers)
     return (
       <Main
-        logout={this.logOut}
+        logout={this.props.logout}
         // profile={this.props.profile}
         updateUser={this.updateUser}
         getProfile={this.props.saveProfile}
@@ -209,15 +166,10 @@ class _Root extends Component {
         getAppointmentsforDay={this.props.getAppointmentsforDay}
         deleteAppointment={this.props.deleteAppointment}
         acceptEstimate={this.props.acceptEstimate}
-        data={this.props.data}
-        user={this.state.user}
-        newCustomers={this.state.newCustomers}
-        followUp={this.state.followUp}
-        onSite={this.state.onSite}
+        userID={this.state.userID}
         myEstimates={this.state.myEstimates}
-        surveyinProgress={this.state.surveyinProgress}
-        surveyComplete={this.state.surveyComplete}
         dimensions={this.state.dimensions}
+        user={this.props.data.user}
         myCustomers={this.props.data.getMyCustomers}
       />
     );
@@ -242,8 +194,7 @@ const Root = compose(
   graphql(updateCustomer, { name: 'updateCustomer' }),
   graphql(submitFollowup, { name: 'submitFollowup' }),
   graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
-  graphql(getUserQuery, { options: { pollInterval: 1000 } }),
-  graphql(getMyCustomers, {
+  graphql(getUserandCustomers, {
     options: ({ userId }) => ({ variables: { id: userId }, pollInterval: 1000 }),
   }),
   connect(mapStateToProps, mapActionsToProps),

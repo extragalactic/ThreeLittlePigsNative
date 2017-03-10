@@ -5,8 +5,8 @@ import SurveyCardNotes from './surveyCardNotes';
 
 const SurveyNotesModal = ({
    open,
-   close, 
-   updateText, 
+   close,
+   updateText,
    updateSelection,
    selection,
    selected,

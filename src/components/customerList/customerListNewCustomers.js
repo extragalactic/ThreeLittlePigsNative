@@ -4,17 +4,21 @@ import { List, ListItem } from 'react-native-elements';
 import { ScrollView, Text } from 'react-native';
 import { Container, Content } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
+import { graphql, compose } from 'react-apollo';
+
 import { Actions } from 'react-native-router-flux';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 import CustomerDetailsIPadSurveyor from '../customerDetails/customerDetailsIPadSurveyor';
+import { getMyCustomers } from '../../graphql/queries';
+
 
 const selectCustomer = (selection) => {
   Actions.customerDetails({ selection });
 };
 
 
-class CustomerListNewCustomers extends React.Component {
+class _CustomerListNewCustomers extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -33,7 +37,7 @@ class CustomerListNewCustomers extends React.Component {
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
                 <List>
-                  {this.props.myCustomers.newcustomers.map((customer, idx) => (
+                  {this.props.data.getMyCustomers.newcustomers.map((customer, idx) => (
                     <ListItem
                       containerStyle={MasterStyleSheet.customersListItem}
                       key={idx}
@@ -46,7 +50,7 @@ class CustomerListNewCustomers extends React.Component {
               </Col>
               <Col style={MasterStyleSheet.ipadViewRight}>
                 <CustomerDetailsIPadSurveyor
-                  myCustomers={this.props.myCustomers}
+                  myCustomers={this.props.data.getMyCustomers}
                   customerId={this.state.selection}
                   user={this.props.user}
                   submitFollowup={this.props.submitFollowup}
@@ -67,7 +71,7 @@ class CustomerListNewCustomers extends React.Component {
         style={MasterStyleSheet.list}
       >
         <List >
-          {this.props.myCustomers.newcustomers.map((customer, idx) => (
+          {this.props.data.getMyCustomers.newcustomers.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}
@@ -81,4 +85,11 @@ class CustomerListNewCustomers extends React.Component {
     );
   }
 }
+
+const CustomerListNewCustomers = compose(
+  graphql(getMyCustomers, {
+    options: ({ user }) => ({ variables: { id: user._id }, pollInterval: 1000 }),
+  }),
+)(_CustomerListNewCustomers);
+
 export default CustomerListNewCustomers;

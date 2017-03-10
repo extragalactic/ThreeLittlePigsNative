@@ -48,7 +48,7 @@ class _SurveyMainModal extends React.Component {
     };
   }
   getPhoto = () => {
-    console.log('picker');
+    // console.log('picker');
 
     this.setState({
       photoModal: true,
@@ -73,12 +73,12 @@ class _SurveyMainModal extends React.Component {
       photoGallery: true,
     });
     this.props.getSurveyPhotos({
-      variables: { id: this.props.customer.id }
-    }).then(data => this.setState({surveyPhotos: data.data.getSurveyPhotos}));
+      variables: { id: this.props.customer.id },
+    }).then(data => this.setState({ surveyPhotos: data.data.getSurveyPhotos }));
   };
 
   changeSelection = (selection) => {
-    console.log(selection);
+  //  console.log(selection);
     this.setState({
       selection: ['no header'],
     });
@@ -98,7 +98,7 @@ class _SurveyMainModal extends React.Component {
     });
   };
   TakePhoto = () => {
-    ImagePickerManager.launchCamera(photoOptions, (data)  => {
+    ImagePickerManager.launchCamera(photoOptions, (data) => {
       this.props.addSurveyPhoto({
         variables: {
           heading: this.state.selected,
@@ -115,7 +115,7 @@ class _SurveyMainModal extends React.Component {
     });
   };
   AddFromLibrary = () => {
-    ImagePickerManager.launchImageLibrary(photoOptions, (data)  => {
+    ImagePickerManager.launchImageLibrary(photoOptions, (data) => {
       this.props.addSurveyPhoto({
         variables: {
           heading: this.state.selected,
@@ -147,14 +147,14 @@ class _SurveyMainModal extends React.Component {
   };
 
   updateSelection = (selection) => {
-    console.log(selection)
+   // console.log(selection)
     const doesExist = this.state.selection.indexOf(selection);
     if (doesExist !== -1) {
       _.pull(this.state.selection, selection);
     } else {
       this.state.selection.push(selection);
     }
-    console.log(this.state)
+  //  console.log(this.state)
   }
   tooggleReady = () => {
     this.setState({
@@ -244,19 +244,11 @@ class _SurveyMainModal extends React.Component {
               onPress={() => console.log(this)}
             />
           </View>
-          <View style={MasterStyleSheet.surveyMainButton}>
-            <Icon
-              name={this.state.ready ? 'thumb-up' : 'thumb-down'}
-              color="#517fa4"
-              raised
-              onPress={this.tooggleReady}
-            />
-          </View>
           <SurveyNotesModal
             open={this.state.notesModal}
             close={() => this.setState({ notesModal: false })}
-            updateText={(text) => this.setState({ notes: text })}
-            updateSelection={(notesSelection) => this.setState({ notesSelection })}
+            updateText={text => this.setState({ notes: text })}
+            updateSelection={notesSelection => this.setState({ notesSelection })}
             submitNotes={this.submitNotes}
             notes={this.state.notes}
             notesSelection={this.state.notesSelection}
@@ -267,8 +259,8 @@ class _SurveyMainModal extends React.Component {
             open={this.state.photoModal}
             updatePhotoCaption={this.updatePhotoCaption}
             close={() => this.setState({ photoModal: false })}
-            updateText={(text) => console.log(text)}
-            updateSelection={(photoSelection) => this.setState({ photoSelection })}
+            updateText={text => console.log(text)}
+            updateSelection={photoSelection => this.setState({ photoSelection })}
             photoCaption={this.state.photoCaption}
             photoSelection={this.state.photoSelection}
             selection={this.state.selection}
@@ -298,3 +290,16 @@ const SurveyMainModal = compose(
 )(_SurveyMainModal);
 
 export default SurveyMainModal;
+
+
+/*
+  <View style={MasterStyleSheet.surveyMainButton}>
+            <Icon
+              name={this.state.ready ? 'thumb-up' : 'thumb-down'}
+              color="#517fa4"
+              raised
+              onPress={this.tooggleReady}
+            />
+          </View>
+
+*/

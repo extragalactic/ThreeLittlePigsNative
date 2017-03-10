@@ -5,16 +5,19 @@ import { ScrollView, Text } from 'react-native';
 import { Container, Content } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
+import { graphql, compose } from 'react-apollo';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 import CustomerDetailsIPadQueue from '../customerDetails/customerDetailsIPadQueue';
+import { getMyCustomers, getQueue } from '../../graphql/queries';
+
 
 const selectCustomer = (selection) => {
   Actions.customerDetails({ selection });
 };
 
 
-class CustomerListEstimateQueue extends React.Component {
+class _CustomerListEstimateQueue extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -33,7 +36,7 @@ class CustomerListEstimateQueue extends React.Component {
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
                 <List >
-                  {this.props.surveyComplete.map((customer, idx) => (
+                  {this.props.data.getQueue.map((customer, idx) => (
                     <ListItem
                       containerStyle={MasterStyleSheet.customersListItem}
                       key={idx}
@@ -46,7 +49,7 @@ class CustomerListEstimateQueue extends React.Component {
               </Col>
               <Col style={MasterStyleSheet.ipadViewRight}>
                 <CustomerDetailsIPadQueue
-                  myCustomers={this.props.myCustomers}
+                  myCustomers={this.props.data.getQueue}
                   customerId={this.state.selection}
                   selection={this.state.selection}
                   user={this.props.user}
@@ -68,7 +71,7 @@ class CustomerListEstimateQueue extends React.Component {
         style={MasterStyleSheet.list}
       >
         <List >
-          {this.props.surveyinProgress.map((customer, idx) => (
+          {this.props.data.getQueue.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}
@@ -82,5 +85,10 @@ class CustomerListEstimateQueue extends React.Component {
     );
   }
 }
+const CustomerListEstimateQueue = compose(
+  graphql(getQueue, {
+    options: { pollInterval: 1000 },
+  }),
+)(_CustomerListEstimateQueue);
 
 export default CustomerListEstimateQueue;

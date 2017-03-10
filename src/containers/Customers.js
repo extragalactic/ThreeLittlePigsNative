@@ -1,20 +1,21 @@
 import React from 'react';
 import { View } from 'react-native';
 import Spinner from 'react-native-spinkit';
+import { graphql, compose } from 'react-apollo';
 import { Router, Scene } from 'react-native-router-flux';
 import CustomerMain from '../components/customerMain';
 import CustomerListNewCustomers from '../components/customerList/customerListNewCustomers';
 import CustomerListFollowUp from '../components/customerList/customerListFollowup';
-import CustomerListEstimateQueue from '../components/customerList/customerListEstimateQueue'
+import CustomerListEstimateQueue from '../components/customerList/customerListEstimateQueue';
 import CustomerListOnsite from '../components/customerList/customerListOnsite';
 import CustomerListsurveyinProgress from '../components/customerList/customerListSurveyinProgress';
 import CustomerListSurveyComplete from '../components/customerList/customerListSurveyComplete';
-import CustomerListMyEstimates from '../components/customerList/customerListMyEstimates';
+import CustomerListMyEstimates from '../components/Estimates/customerListMyEstimates';
 import CustomerDetails from '../components/customerDetails';
-
 import CustomerDetailsQueue from '../components/customerDetails/customerDetailsIPadQueue';
-
+import CustomerDetailsEstimator from '../components/Estimates/customerDetailsIPadEstimator';
 import { MasterStyleSheet } from '../style/MainStyles';
+
 
 const Customers = ({
   user,
@@ -55,12 +56,7 @@ const Customers = ({
           passProps
           user={user}
           getCustomer={getCustomer}
-          newCustomers={newCustomers}
-          followUp={followUp}
           myEstimates={myEstimates}
-          onSite={onSite}
-          surveyinProgress={surveyinProgress}
-          surveyComplete={surveyComplete}
           myCustomers={myCustomers}
         />
         <Scene
@@ -78,7 +74,6 @@ const Customers = ({
           getUser={getUser}
           updateUser={updateUser}
           deleteAppointment={deleteAppointment}
-          data={data}
         />
         <Scene
           key={'customerListFollowUp'}
@@ -95,7 +90,6 @@ const Customers = ({
           getUser={getUser}
           updateUser={updateUser}
           deleteAppointment={deleteAppointment}
-          data={data}
         />
         <Scene
           key={'customerListMyEstimates'}
@@ -113,7 +107,6 @@ const Customers = ({
           getUser={getUser}
           updateUser={updateUser}
           deleteAppointment={deleteAppointment}
-          data={data}
         />
         <Scene
           key={'customerListOnsite'}
@@ -200,7 +193,6 @@ const Customers = ({
           getUser={getUser}
           updateUser={updateUser}
           deleteAppointment={deleteAppointment}
-          data={data}
           myCustomers={myCustomers}
         />
         <Scene
@@ -217,7 +209,21 @@ const Customers = ({
           updateUser={updateUser}
           deleteAppointment={deleteAppointment}
           myCustomers={myCustomers}
-          data={data}
+        />
+        <Scene
+          key={'customerDetailsEstimator'}
+          component={CustomerDetailsEstimator}
+          passProps
+          user={user}
+          getCustomer={getCustomer}
+          submitFollowup={submitFollowup}
+          getAppointmentsforDay={getAppointmentsforDay}
+          updateCustomer={updateCustomer}
+          addNotes={addNotes}
+          getUser={getUser}
+          updateUser={updateUser}
+          deleteAppointment={deleteAppointment}
+          myCustomers={myCustomers}
         />
       </Scene>
     </Router>

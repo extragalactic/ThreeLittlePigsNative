@@ -17,10 +17,9 @@ const styles = StyleSheet.create({
 class Surveys extends Component {
   render() {
     return (
-      <WebView
-        source={{uri: 'https://tlpm.ca/photoedit'}}
-        style={{marginTop: 20}}
-      />
+      <View>
+        <Text> {this.props.myCustomers.newcustomers.length}</Text>
+      </View>
     );
   }
 }

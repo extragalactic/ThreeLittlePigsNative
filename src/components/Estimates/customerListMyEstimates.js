@@ -5,16 +5,17 @@ import { ScrollView, Text } from 'react-native';
 import { Container, Content } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
-
+import { getMyCustomers, getQueue } from '../../graphql/queries';
+import { graphql, compose } from 'react-apollo';
 import { MasterStyleSheet } from '../../style/MainStyles';
-import CustomerDetailsIPadQueue from '../customerDetails/customerDetailsIPadQueue';
+import CustomerDetailsIPadEstimator from '../Estimates/customerDetailsIPadEstimator';
 
 const selectCustomer = (selection) => {
-  Actions.customerDetails({ selection });
+  Actions.customerDetailsEstimator({ selection });
 };
 
 
-class CustomerListEstimateQueue extends React.Component {
+class _CustomerListMyEstimates extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -26,27 +27,30 @@ class CustomerListEstimateQueue extends React.Component {
     this.setState({ selection });
   }
   render() {
+   // console.log("myestimate", this)
     if (DeviceInfo.isTablet()) {
       return (
         <Container>
           <Content>
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
-                <List >
-                  {this.props.surveyComplete.map((customer, idx) => (
-                    <ListItem
-                      containerStyle={MasterStyleSheet.customersListItem}
-                      key={idx}
-                      title={customer.address}
-                      subtitle={`${customer.firstName} ${customer.lastName}`}
-                      onPress={this.setSelection.bind(this, customer.id)}
-                    />),
+                <ScrollView>
+                  <List >
+                    {this.props.data.getMyCustomers.myestimates.map((customer, idx) => (
+                      <ListItem
+                        containerStyle={MasterStyleSheet.customersListItem}
+                        key={idx}
+                        title={customer.address}
+                        subtitle={`${customer.firstName} ${customer.lastName}`}
+                        onPress={this.setSelection.bind(this, customer.id)}
+                      />),
               )}
-                </List>
+                  </List>
+                </ScrollView>
               </Col>
               <Col style={MasterStyleSheet.ipadViewRight}>
-                <CustomerDetailsIPadQueue
-                  myCustomers={this.props.myCustomers}
+                <CustomerDetailsIPadEstimator
+                  myCustomers={this.props.data.getMyCustomers}
                   customerId={this.state.selection}
                   selection={this.state.selection}
                   user={this.props.user}
@@ -68,7 +72,7 @@ class CustomerListEstimateQueue extends React.Component {
         style={MasterStyleSheet.list}
       >
         <List >
-          {this.props.surveyinProgress.map((customer, idx) => (
+          {this.props.data.getMyCustomers.myestimates.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}
@@ -83,4 +87,10 @@ class CustomerListEstimateQueue extends React.Component {
   }
 }
 
-export default CustomerListEstimateQueue;
+const CustomerListMyEstimates = compose(
+  graphql(getMyCustomers, {
+    options: ({ user }) => ({ variables: { id: user._id }, pollInterval: 1000 }),
+  }),
+)(_CustomerListMyEstimates);
+
+export default CustomerListMyEstimates;

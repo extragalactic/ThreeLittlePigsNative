@@ -1,6 +1,6 @@
 import React from 'react';
-import { Modal, View, Button, Image, Dimensions } from 'react-native';
-import { Icon, Text } from 'react-native-elements';
+import { Modal, View, Image, Dimensions, ScrollView } from 'react-native';
+import { Icon, Text, Button } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import { MasterStyleSheet } from '../../style/MainStyles';
 
@@ -12,7 +12,7 @@ class SurveyCompleteModal extends React.Component {
     this.state = { estimate: {} };
   }
   render() {
-    if (!this.props.finishedSurvey) {
+    if (!this.props.myCustomers.myestimates) {
       return (
         <Text> No Survey </Text>
       );
@@ -30,37 +30,63 @@ class SurveyCompleteModal extends React.Component {
           size={38}
           color={'blue'}
         />
-        <Swiper showsButtons={true}>
-          { this.props.finishedSurvey.map((survey, idx) => (
-            <View
-             style={MasterStyleSheet.surveyResultPhotosView}
-              key={idx}
-            >
-              <Text
-                h1
-              >{survey.heading}</Text>
-              <Swiper
-                width={window.width / 1.4}
-                height={window.height / 1.4}
+        <View>
+          <Swiper showsButtons>
+            { this.props.finishedSurvey.map((survey, idx) => (
+              <View
+                style={MasterStyleSheet.surveyResultPhotosView}
+                key={idx}
               >
-                {survey.photos.map((photo, idx) => (
-                  <View
-                    style={MasterStyleSheet.surveyResultInsideView}
-                  >
-                    <Image
-                      style={MasterStyleSheet.surveyResultPhotos}
-                      source={{ uri: photo.url }}
-                    />
-                  </View>
+                <Text
+                  h3
+                >{survey.heading}</Text>
+                <Swiper
+                  width={window.width / 1.3}
+                  height={window.height / 1.8}
+                >
+                  {survey.photos.map((photo, idx) => (
+                    <View
+                      style={MasterStyleSheet.surveyResultInsideView}
+                    >
+                      <Image
+                        style={MasterStyleSheet.surveyResultPhotos}
+                        source={{ uri: photo.url }}
+                      />
+                    </View>
           ))}
-              </Swiper>
-            </View>
+                </Swiper>
+                <View
+                  style={MasterStyleSheet.surveyResultsNotes}
+                >
+                  <ScrollView
+                    contentContainerStyle={MasterStyleSheet.surveyResultsNotesView}
+                  >
 
-      ))}
-        </Swiper>
+                    { survey.notes.map(note => (
+                      <View>
+                        <Text h4> {note.description}</Text>
+                        <Text h5> {note.text}</Text>
+                      </View>
+                ))}
+
+                  </ScrollView>
+                </View>
+              </View>
+        ))}
+          </Swiper>
+          <Button
+            buttonStyle={MasterStyleSheet.surveyResultsButton}
+            icon={{ name: 'attach-money' }}
+            backgroundColor={this.props.ready ? '#01DF3A' : '#03A9F4'}
+            title={this.props.ready ? 'Survey is Ready' : 'Make Ready'}
+            onPress={this.props.toggleReady}
+          />
+        </View>
+
       </Modal>
     );
   }
 }
 
 export default SurveyCompleteModal;
+

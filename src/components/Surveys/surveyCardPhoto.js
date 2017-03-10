@@ -34,11 +34,11 @@ const SurveyCardPhoto = ({
     <Button
       title={'Take Photo'}
       onPress={TakePhoto}
-     />
+    />
     <Button
       title={'Library'}
       onPress={AddFromLibrary}
-   />
+    />
     <PickerIOS
       style={MasterStyleSheet.surveyCardPicker}
       itemStyle={MasterStyleSheet.surveyCardPickerItem}

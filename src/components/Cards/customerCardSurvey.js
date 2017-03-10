@@ -5,9 +5,10 @@ import { View } from 'react-native';
 import { MasterStyleSheet } from '../../style/MainStyles';
 
 const CustomerCardSurvey = ({ customer, startSurvey, surveyComplete }) => (
-  <Card 
+  <Card
     containerStyle={MasterStyleSheet.cardStyle}
-    title={'Survey'}>
+    title={'Survey'}
+  >
     <View>
       <Button
         icon={{ name: 'assignment' }}
@@ -20,7 +21,7 @@ const CustomerCardSurvey = ({ customer, startSurvey, surveyComplete }) => (
         icon={{ name: 'assignment' }}
         backgroundColor="#03A9F4"
         buttonStyle={MasterStyleSheet.mainButtonStyle}
-        title="Surveys"
+        title="Survey"
         onPress={surveyComplete}
       />
     </View>

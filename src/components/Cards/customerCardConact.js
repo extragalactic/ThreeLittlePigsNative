@@ -3,9 +3,10 @@ import { Card, Button } from 'react-native-elements';
 import { MasterStyleSheet } from '../../style/MainStyles';
 
 const CustomerCardConact = ({ customer, openDrawer, openFollowupModal, openFormModal }) => (
-  <Card 
-     containerStyle={MasterStyleSheet.cardStyle}
-    title={customer.firstName ? `${customer.firstName} ${customer.lastName}` : 'Customer'}>
+  <Card
+    containerStyle={MasterStyleSheet.cardStyle}
+    title={customer.firstName ? `${customer.firstName} ${customer.lastName}` : 'Customer'}
+  >
     <Button
       icon={{ name: 'phone' }}
       backgroundColor="#03A9F4"

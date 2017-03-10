@@ -13,12 +13,12 @@ const styles = StyleSheet.create({
     bottom: 66,
     marginBottom: -60,
   },
-  secondTitle:{
+  secondTitle: {
     color: 'black',
   },
-  listStyle : {
+  listStyle: {
     height: 55,
-  }
+  },
 });
 
 const FirstNameSwipe = ({ toggleForm, customer }) => (
@@ -32,7 +32,7 @@ const FirstNameSwipe = ({ toggleForm, customer }) => (
       autoClose
     >
       <ListItem
-       containerStyle={styles.listStyle}	
+        containerStyle={styles.listStyle}
         title={customer.firstName}
         rightTitle={'First Name'}
         rightTitleStyle={styles.secondTitle}
@@ -50,7 +50,7 @@ const FirstNameForm = ({ updateFormState, updateCustomer, customer }) => (
     />
     <Icon
       containerStyle={styles.button}
-      name='save'
+      name="save"
       raised
       onPress={updateCustomer.bind(this, 'firstNameEdit', 'firstName')}
     />
@@ -68,7 +68,7 @@ const LastNameSwipe = ({ toggleForm, customer }) => (
       autoClose
     >
       <ListItem
-            containerStyle={styles.listStyle}	
+        containerStyle={styles.listStyle}
         title={customer.lastName}
         rightTitle={'Last Name'}
         rightTitleStyle={styles.secondTitle}
@@ -86,7 +86,7 @@ const LastNameForm = ({ updateFormState, updateCustomer, customer }) => (
     />
     <Icon
       containerStyle={styles.button}
-      name='save'
+      name="save"
       raised
       onPress={updateCustomer.bind(this, 'lastNameEdit', 'lastName')}
     />
@@ -104,7 +104,7 @@ const Email1Swipe = ({ toggleForm, customer }) => (
       autoClose
     >
       <ListItem
-            containerStyle={styles.listStyle}	
+        containerStyle={styles.listStyle}
         title={customer.email1}
         rightTitle={'Email 1'}
         rightTitleStyle={styles.secondTitle}
@@ -122,7 +122,7 @@ const Email1Form = ({ updateFormState, updateCustomer, customer }) => (
     />
     <Icon
       containerStyle={styles.button}
-      name='save'
+      name="save"
       raised
       onPress={updateCustomer.bind(this, 'email1Edit', 'email1')}
     />
@@ -140,7 +140,7 @@ const Email2Swipe = ({ toggleForm, customer }) => (
       autoClose
     >
       <ListItem
-            containerStyle={styles.listStyle}	
+        containerStyle={styles.listStyle}
         title={customer.email2}
         rightTitle={'Email 2'}
         rightTitleStyle={styles.secondTitle}
@@ -158,7 +158,7 @@ const Email2Form = ({ updateFormState, updateCustomer, customer }) => (
     />
     <Icon
       containerStyle={styles.button}
-      name='save'
+      name="save"
       raised
       onPress={updateCustomer.bind(this, 'email2Edit', 'email2')}
     />
@@ -176,7 +176,7 @@ const CphoneSwipe = ({ toggleForm, customer }) => (
       autoClose
     >
       <ListItem
-            containerStyle={styles.listStyle}	
+        containerStyle={styles.listStyle}
         title={customer.cphone}
         rightTitle={'Mobile'}
         rightTitleStyle={styles.secondTitle}
@@ -194,7 +194,7 @@ const CphoneForm = ({ updateFormState, updateCustomer, customer }) => (
     />
     <Icon
       containerStyle={styles.button}
-      name='save'
+      name="save"
       raised
       onPress={updateCustomer.bind(this, 'cphoneEdit', 'cphone')}
     />
@@ -211,7 +211,7 @@ const HphoneSwipe = ({ toggleForm, customer }) => (
       autoClose
     >
       <ListItem
-            containerStyle={styles.listStyle}	
+        containerStyle={styles.listStyle}
         title={customer.hphone}
         rightTitle={'Home'}
         rightTitleStyle={styles.secondTitle}
@@ -229,7 +229,7 @@ const HphoneForm = ({ updateFormState, updateCustomer, customer }) => (
     />
     <Icon
       containerStyle={styles.button}
-      name='save'
+      name="save"
       raised
       onPress={updateCustomer.bind(this, 'hphoneEdit', 'hphone')}
     />
@@ -247,7 +247,7 @@ const WphoneSwipe = ({ toggleForm, customer }) => (
       autoClose
     >
       <ListItem
-            containerStyle={styles.listStyle}	
+        containerStyle={styles.listStyle}
         title={customer.wphone}
         rightTitle={'Work'}
         rightTitleStyle={styles.secondTitle}
@@ -265,7 +265,7 @@ const WphoneForm = ({ updateFormState, updateCustomer, customer }) => (
     />
     <Icon
       containerStyle={styles.button}
-      name='save'
+      name="save"
       raised
       onPress={updateCustomer.bind(this, 'wphoneEdit', 'wphone')}
     />
@@ -283,7 +283,7 @@ const AddressSwipe = ({ toggleForm, customer }) => (
       autoClose
     >
       <ListItem
-            containerStyle={styles.listStyle}	
+        containerStyle={styles.listStyle}
         title={customer.address}
         rightTitle={'Address'}
         rightTitleStyle={styles.secondTitle}
@@ -301,7 +301,7 @@ const AddressForm = ({ updateFormState, updateCustomer, customer }) => (
     />
     <Icon
       containerStyle={styles.button}
-      name='save'
+      name="save"
       raised
       onPress={updateCustomer.bind(this, 'addressEdit', 'address')}
     />

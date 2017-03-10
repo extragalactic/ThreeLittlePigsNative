@@ -10,7 +10,7 @@ const CustomerFormModal = ({
     closeFormModal,
     onCalSave,
     customer,
-    updateCustomer, 
+    updateCustomer,
    }) => (
      <View style={MasterStyleSheet.modalView}>
        <Modal

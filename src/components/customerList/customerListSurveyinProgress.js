@@ -5,16 +5,18 @@ import { ScrollView, Text } from 'react-native';
 import { Container, Content } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
+import { graphql, compose } from 'react-apollo';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 import CustomerDetailsIPadSurveyor from '../customerDetails/customerDetailsIPadSurveyor';
+import { getMyCustomers } from '../../graphql/queries';
 
 const selectCustomer = (selection) => {
   Actions.customerDetails({ selection });
 };
 
 
-class CustomerListSurvyeinProgress extends React.Component {
+class _CustomerListSurvyeinProgress extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -33,7 +35,7 @@ class CustomerListSurvyeinProgress extends React.Component {
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
                 <List >
-                  {this.props.surveyinProgress.map((customer, idx) => (
+                  {this.props.data.getMyCustomers.inprogress.map((customer, idx) => (
                     <ListItem
                       containerStyle={MasterStyleSheet.customersListItem}
                       key={idx}
@@ -46,7 +48,7 @@ class CustomerListSurvyeinProgress extends React.Component {
               </Col>
               <Col style={MasterStyleSheet.ipadViewRight}>
                 <CustomerDetailsIPadSurveyor
-                  myCustomers={this.props.myCustomers}
+                  myCustomers={this.props.data.getMyCustomers}
                   customerId={this.state.selection}
                   selection={this.state.selection}
                   user={this.props.user}
@@ -67,7 +69,7 @@ class CustomerListSurvyeinProgress extends React.Component {
         style={MasterStyleSheet.list}
       >
         <List >
-          {this.props.myCustomers.inprogress.map((customer, idx) => (
+          {this.props.data.getMyCustomers.inprogress.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}
@@ -81,5 +83,12 @@ class CustomerListSurvyeinProgress extends React.Component {
     );
   }
 }
+
+
+const CustomerListSurvyeinProgress = compose(
+  graphql(getMyCustomers, {
+    options: ({ user }) => ({ variables: { id: user._id }, pollInterval: 1000 }),
+  }),
+)(_CustomerListSurvyeinProgress);
 
 export default CustomerListSurvyeinProgress;

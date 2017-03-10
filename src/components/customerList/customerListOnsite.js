@@ -5,16 +5,18 @@ import { ScrollView, Text } from 'react-native';
 import { Container, Content } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
+import { graphql, compose } from 'react-apollo';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 import CustomerDetailsIPadSurveyor from '../customerDetails/customerDetailsIPadSurveyor';
+import { getMyCustomers } from '../../graphql/queries';
 
 const selectCustomer = (selection) => {
   Actions.customerDetails({ selection });
 };
 
 
-class CustomerListonSite extends React.Component {
+class _CustomerListonSite extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -33,7 +35,7 @@ class CustomerListonSite extends React.Component {
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
                 <List >
-                  {this.props.myCustomers.onsite.map((customer, idx) => (
+                  {this.props.data.getMyCustomers.onsite.map((customer, idx) => (
                     <ListItem
                       containerStyle={MasterStyleSheet.customersListItem}
                       key={idx}
@@ -46,7 +48,7 @@ class CustomerListonSite extends React.Component {
               </Col>
               <Col style={MasterStyleSheet.ipadViewRight}>
                 <CustomerDetailsIPadSurveyor
-                  myCustomers={this.props.myCustomers}
+                  myCustomers={this.props.data.getMyCustomers}
                   customerId={this.state.selection}
                   user={this.props.user}
                   updateCustomer={this.props.updateCustomer}
@@ -66,7 +68,7 @@ class CustomerListonSite extends React.Component {
         style={MasterStyleSheet.list}
       >
         <List >
-          {this.props.onSite.map((customer, idx) => (
+          {this.props.data.getMyCustomers.onsite.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}
@@ -80,4 +82,13 @@ class CustomerListonSite extends React.Component {
     );
   }
 }
+
+
+const CustomerListonSite = compose(
+  graphql(getMyCustomers, {
+    options: ({ user }) => ({ variables: { id: user._id }, pollInterval: 1000 }),
+  }),
+)(_CustomerListonSite);
+
+
 export default CustomerListonSite;

@@ -19,7 +19,7 @@ import {
   WphoneSwipe,
   WphoneForm,
   AddressSwipe,
-  AddressForm
+  AddressForm,
 } from './updateCustomerFormListItem';
 
 const styles = StyleSheet.create({
@@ -87,7 +87,7 @@ class UpdateCustomerForm extends React.Component {
   };
 
   render() {
-    console.log(this.props)
+   // console.log(this.props)
     const customer = this.props.customer;
     return (
       <View>

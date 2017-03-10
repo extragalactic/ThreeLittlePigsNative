@@ -215,5 +215,178 @@ const getMyCustomers = gql `
     
   }
 }`;
+const getPrices = gql`
+  query getPrices {
+  getPrices {
+    description
+    price
+  }
+}`;
 
-export { getUserQuery, getMessages, getCustomer, getFinishedSurvey, getMyCustomers };
+const getEstimateResults = gql `
+  query getEstimateResult($custid: String){
+  getEstimateResults(custid: $custid) {
+    prices {
+      description
+      price
+    }
+  }
+}`;
+
+const getUserandCustomers = gql `
+  query getUserandCustomers($id: String) {
+  getMyCustomers(id:$id ){
+     newcustomers {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+      
+    }
+     followup {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+     }
+    onsite {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+    }
+   inprogress {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+   }
+    surveycomplete {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+    }
+    myestimates {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+    }
+    
+  }
+   user(id:$id){
+      _id
+      firstName
+      lastName
+      mobile
+      surveyor
+      estimator
+      office
+      region   
+      newCustomers{
+       id
+       firstName
+       lastName
+       email1
+       email2
+       cphone
+       hphone
+       wphone
+       address   
+   }
+      estimates {
+        id
+        firstName
+        lastName
+        email1
+        email2
+        hphone
+        cphone
+        wphone
+        address
+        status
+      }
+      followUp {
+        name
+        start
+        end
+        description
+        address      
+    }
+ }
+getQueue {
+      id
+    firstName
+    lastName
+    address
+    email1
+    email2
+    cphone
+    hphone
+    wphone
+}
+}`;
+
+const getQueue = gql `
+ query getQueue{
+  getQueue {
+       id
+    firstName
+    lastName
+    address
+    email1
+    email2
+    cphone
+    hphone
+    wphone
+  }
+}`;
+
+export {
+  getQueue,
+  getUserandCustomers,
+  getEstimateResults,
+  getPrices,
+  getUserQuery,
+  getMessages,
+  getCustomer,
+  getFinishedSurvey,
+  getMyCustomers,
+};
