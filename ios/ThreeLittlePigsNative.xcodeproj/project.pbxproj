@@ -29,6 +29,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		15B8B48011D1CA560760276B /* libPods-ThreeLittlePigsNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 951DBD324911D9A544AE150B /* libPods-ThreeLittlePigsNative.a */; };
 		1B204EF3D2E74A119A2DF960 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4D14C76BDE24B749F243D7B /* Roboto_medium.ttf */; };
+		1EC4DE437D9441FB9E8C35BE /* libRealmReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F3A692DBE9479DA1B73DA4 /* libRealmReact.a */; };
 		21A42A2B5F8E438C81979A40 /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B4526BD62644710B2608BC8 /* Comic Sans MS.ttf */; };
 		27C73677A7274ACB84E7D256 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2413E8E68774DC58351DAB8 /* EvilIcons.ttf */; };
 		28EEB0C663924DD1BC85A3A1 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 589395683319425A9F69FD98 /* Rubik-Regular.ttf */; };
@@ -82,6 +83,7 @@
 		A3A7F2F81E58C5160014CD1D /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3142B751E4C39CB00B27675 /* libCodePush.a */; };
 		A3A7F8511E58CD690014CD1D /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A7F7CD1E58C8180014CD1D /* libRCTOneSignal.a */; };
 		A674C646054945E4BBDA20EC /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97E5BDB64AB3416DA23A4453 /* EvilIcons.ttf */; };
+		A87D5841973A48678EB14AD1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 263BCEC4F58A4BA18E3513C6 /* libc++.tbd */; };
 		AD8B94C65DA94E748D22257A /* Skia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE22B2E2FE464FFDA70AC0FB /* Skia.ttf */; };
 		B03BEDE64162499181C94ECF /* libA0RNLock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0DFEBB886EA46A28CEEA5CD /* libA0RNLock.a */; };
 		B739C3122F0445A2AD1A514B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE7852CA3204ECC96F63DE9 /* MaterialIcons.ttf */; };
@@ -470,6 +472,13 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		A3A0D4E81E7743E700CC8036 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F0CFDEE75EF54250B97E610C /* RealmReact.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F60690131CA2766F0003FB26;
+			remoteInfo = RealmReact;
+		};
 		A3A7F6711E58C5650014CD1D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A3A7F61F1E58C5640014CD1D /* Pods.xcodeproj */;
@@ -563,6 +572,7 @@
 		063A8281870449A489EC7521 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		06A9314625474E3FA122B217 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		0701194298C74DD3BEE328E3 /* Andale Mono.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Andale Mono.ttf"; path = "../node_modules/native-base/Fonts/Andale Mono.ttf"; sourceTree = "<group>"; };
+		07F3A692DBE9479DA1B73DA4 /* libRealmReact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRealmReact.a; sourceTree = "<group>"; };
 		0E643E754B21415E8E57F5B2 /* libsqlite3.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		12FCDDF4784E458E9E55A2A0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
@@ -578,6 +588,7 @@
 		15B833A136C04FE595808E1A /* Rubik-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Medium.ttf"; path = "../node_modules/native-base/Fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; };
 		17C8B709548240FDBEDC95D3 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		1EE7852CA3204ECC96F63DE9 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		263BCEC4F58A4BA18E3513C6 /* libc++.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		2859AB0CDCCF02D0E896BBAA /* Pods-ThreeLittlePigsNative-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreeLittlePigsNative-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreeLittlePigsNative-tvOSTests/Pods-ThreeLittlePigsNative-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		2B3B1A50029E40E6867CD529 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ThreeLittlePigsNative-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ThreeLittlePigsNative-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1448,6 +1459,7 @@
 		EE22B2E2FE464FFDA70AC0FB /* Skia.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Skia.ttf; path = "../node_modules/native-base/Fonts/Skia.ttf"; sourceTree = "<group>"; };
 		EE48BF1CD3E27B86BA51B560 /* Pods-ThreeLittlePigsNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThreeLittlePigsNative.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThreeLittlePigsNative/Pods-ThreeLittlePigsNative.release.xcconfig"; sourceTree = "<group>"; };
 		EEE2280C30864F2295E237AA /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		F0CFDEE75EF54250B97E610C /* RealmReact.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RealmReact.xcodeproj; path = "../node_modules/realm/react-native/ios/RealmReact.xcodeproj"; sourceTree = "<group>"; };
 		F0DFEBB886EA46A28CEEA5CD /* libA0RNLock.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libA0RNLock.a; sourceTree = "<group>"; };
 		FAE92239E17C45DDA2CCC3EB /* Rubik-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Light.ttf"; path = "../node_modules/native-base/Fonts/Rubik-Light.ttf"; sourceTree = "<group>"; };
 		FE13BB1402864C4B9A7C97BC /* Rubik-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Black.ttf"; path = "../node_modules/native-base/Fonts/Rubik-Black.ttf"; sourceTree = "<group>"; };
@@ -1500,6 +1512,8 @@
 				F7D4AB1D6C484FDCA86A833E /* libRNVectorIcons.a in Frameworks */,
 				68FBA74F2CE64BB69BDCDF66 /* libz.tbd in Frameworks */,
 				F0F6B8C36B9A411FA5BF906E /* libRNDeviceInfo.a in Frameworks */,
+				1EC4DE437D9441FB9E8C35BE /* libRealmReact.a in Frameworks */,
+				A87D5841973A48678EB14AD1 /* libc++.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1683,6 +1697,7 @@
 				46D7ADCD416346A2A139F262 /* CodePush.xcodeproj */,
 				71A5F347258744EB960CACCA /* RNDeviceInfo.xcodeproj */,
 				CD28C0B36A8546A7B4024594 /* RCTOneSignal.xcodeproj */,
+				F0CFDEE75EF54250B97E610C /* RealmReact.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1912,6 +1927,14 @@
 			isa = PBXGroup;
 			children = (
 				A39EBDEB1E492AEA00CB5AC9 /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A3A0D4B11E7743E700CC8036 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3A0D4E91E7743E700CC8036 /* libRealmReact.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3208,6 +3231,7 @@
 				8B9DCD6DF117147F425F0A5C /* libPods-ThreeLittlePigsNativeTests.a */,
 				0E643E754B21415E8E57F5B2 /* libsqlite3.tbd */,
 				8951AC6E67684D2498967B62 /* libz.tbd */,
+				263BCEC4F58A4BA18E3513C6 /* libc++.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3487,6 +3511,10 @@
 				{
 					ProductGroup = A39EBD931E492AEA00CB5AC9 /* Products */;
 					ProjectRef = E3FCC6C3480C4C3585150890 /* ReactNativeConfig.xcodeproj */;
+				},
+				{
+					ProductGroup = A3A0D4B11E7743E700CC8036 /* Products */;
+					ProjectRef = F0CFDEE75EF54250B97E610C /* RealmReact.xcodeproj */;
 				},
 				{
 					ProductGroup = A37BD06D1E492749005EBD46 /* Products */;
@@ -3880,6 +3908,13 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = A39EBDEA1E492AEA00CB5AC9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A3A0D4E91E7743E700CC8036 /* libRealmReact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRealmReact.a;
+			remoteRef = A3A0D4E81E7743E700CC8036 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A3A7F6721E58C5650014CD1D /* libAFNetworking.a */ = {
@@ -4283,6 +4318,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lc++",
@@ -4306,6 +4342,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -4346,6 +4383,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SimpleKeychain\"",
 					"\"${PODS_ROOT}/Headers/Public/TouchIDAuth\"",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
+					"$(SRCROOT)/../node_modules/realm/src/**",
 				);
 				INFOPLIST_FILE = ThreeLittlePigsNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4388,6 +4426,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SimpleKeychain\"",
 					"\"${PODS_ROOT}/Headers/Public/TouchIDAuth\"",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
+					"$(SRCROOT)/../node_modules/realm/src/**",
 				);
 				INFOPLIST_FILE = ThreeLittlePigsNative/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4420,6 +4459,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -4449,6 +4489,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -4480,6 +4521,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.ThreeLittlePigsNative-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4505,6 +4547,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.ThreeLittlePigsNative-tvOSTests";
