@@ -440,7 +440,6 @@
 		F1BFAA3CEE11F916822DE2B0DCBDE279 /* TouchIDAuth-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E8312861234D76BCE4D4740BA6F2A4 /* TouchIDAuth-dummy.m */; };
 		F1F93EE1AA5E870F2CE81325CE9EB643 /* AFAutoPurgingImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 3433D2970417E1D975C1722EDAB2041A /* AFAutoPurgingImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F2467D4C791079E025ED80CBDAEB4E45 /* A0UsernameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8C91AC5E3A02064DB1EDFD2E863BBD /* A0UsernameValidator.m */; };
-		F2D69B6D564C69D3F382B08EE4024D4C /* cellphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CE9260804501C62754174E9A95B497A /* cellphone.png */; };
 		F333A35E4EC10732E5CF13ECA673643E /* linkedin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41FBAF11150FD127AE8E376FD8DCC82F /* linkedin@3x.png */; };
 		F38715BF627B6A89E18B6C29322EA6BE /* A0APIv1Router.m in Sources */ = {isa = PBXBuildFile; fileRef = C7731C719ADF62DDCDE637FFD7879CFD /* A0APIv1Router.m */; };
 		F5CC06F3E0C232483A72DCCFAF393BE0 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D5750E7A2C7641CEAED74F87CDC510AC /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -766,7 +765,6 @@
 		7BB5888A2D6965FBF87F2AC73A193A19 /* thecity@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "thecity@3x.png"; path = "Auth0/Social/thecity@3x.png"; sourceTree = "<group>"; };
 		7BC7D30D93E001C7E33608995761E2E1 /* paypal.png */ = {isa = PBXFileReference; includeInIndex = 1; name = paypal.png; path = Auth0/Social/paypal.png; sourceTree = "<group>"; };
 		7BE197ABD9A7499AD1A98F0448EAC647 /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFAutoPurgingImageCache.m; path = "UIKit+AFNetworking/AFAutoPurgingImageCache.m"; sourceTree = "<group>"; };
-		7CE9260804501C62754174E9A95B497A /* cellphone.png */ = {isa = PBXFileReference; includeInIndex = 1; name = cellphone.png; path = Auth0/Images/cellphone.png; sourceTree = "<group>"; };
 		7D57A62DA471F2AF2E75C5C4E9E03416 /* A0Strategy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = A0Strategy.h; path = Lock/Core/A0Strategy.h; sourceTree = "<group>"; };
 		7EB6B9A379BD3792F16DE94CA13C6D45 /* facebook.png */ = {isa = PBXFileReference; includeInIndex = 1; name = facebook.png; path = Auth0/Social/facebook.png; sourceTree = "<group>"; };
 		80C9F26B9A86B0A02DDEF810F6519169 /* Lock-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Lock-dummy.m"; sourceTree = "<group>"; };
@@ -1097,7 +1095,6 @@
 				AAA98CD153D4476945E96EA25065876B /* box.png */,
 				AE986FD81C9404291DE9F60BC28F6B7A /* box@2x.png */,
 				EE8BDE8F9E592C1D4590E89C0E75A8F5 /* box@3x.png */,
-				7CE9260804501C62754174E9A95B497A /* cellphone.png */,
 				9AFA96B3553F0D5077A4BBCE25611753 /* cellphone@2x.png */,
 				68775B5B60DBCCEE559842B9DCA18705 /* cellphone@3x.png */,
 				383E29E597F788F1E54962E16500BC37 /* close.png */,
@@ -2182,7 +2179,6 @@
 				ED109D5213ACC329122B5ED5B27C8995 /* box.png in Resources */,
 				396DD2C180FBC798BE01448E5FCDF5B9 /* box@2x.png in Resources */,
 				9F82CE05C8C2A1ED618C36EC89B75620 /* box@3x.png in Resources */,
-				F2D69B6D564C69D3F382B08EE4024D4C /* cellphone.png in Resources */,
 				74570072912BD47FE51116893586368E /* cellphone@2x.png in Resources */,
 				9D465F3C24DCF5DB54D48071F656F35E /* cellphone@3x.png in Resources */,
 				01B913E2B26FC917E03AD4722DC6D75A /* close.png in Resources */,
