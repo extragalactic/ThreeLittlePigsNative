@@ -987,7 +987,6 @@
 		A3A7F47D1E58C5630014CD1D /* NSData+A0JWTSafeBase64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+A0JWTSafeBase64.h"; sourceTree = "<group>"; };
 		A3A7F47E1E58C5630014CD1D /* TouchIDAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TouchIDAuth.h; sourceTree = "<group>"; };
 		A3A7F4821E58C5630014CD1D /* CountryCodes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CountryCodes.plist; sourceTree = "<group>"; };
-		A3A7F4851E58C5630014CD1D /* cellphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellphone@2x.png"; sourceTree = "<group>"; };
 		A3A7F4861E58C5630014CD1D /* cellphone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellphone@3x.png"; sourceTree = "<group>"; };
 		A3A7F4871E58C5630014CD1D /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		A3A7F4881E58C5630014CD1D /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
@@ -2458,8 +2457,6 @@
 		A3A7F4831E58C5630014CD1D /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				A3A7F4851E58C5630014CD1D /* cellphone@2x.png */,
-				A3A7F4861E58C5630014CD1D /* cellphone@3x.png */,
 				A3A7F4871E58C5630014CD1D /* close.png */,
 				A3A7F4881E58C5630014CD1D /* close@2x.png */,
 				A3A7F4891E58C5630014CD1D /* close@3x.png */,

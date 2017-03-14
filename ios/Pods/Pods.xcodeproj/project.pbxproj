@@ -202,7 +202,6 @@
 		73811DA312BCB537D44D62EC6AD15766 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DD98F0DBC1F742AF03C6966A805699D0 /* AFHTTPSessionManager.m */; };
 		7390794C304502F5158F757D112F1C11 /* A0Lock+A0TouchIDLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165423E70075DE1530FEC34EDD29D32 /* A0Lock+A0TouchIDLockViewController.m */; };
 		740A4BB09814B8F24C1BF4FB5C537954 /* A0SimpleKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = 0222907AB4B106166AF65608890B8C5C /* A0SimpleKeychain.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		74570072912BD47FE51116893586368E /* cellphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFA96B3553F0D5077A4BBCE25611753 /* cellphone@2x.png */; };
 		74700A3E3E8DF478341A6B70F3C12F7D /* A0IdentityProviderAuthenticator.m in Sources */ = {isa = PBXBuildFile; fileRef = 15008488C8816D75A4DE3C1DAE277AA2 /* A0IdentityProviderAuthenticator.m */; };
 		74CDC736250685823CC5769C72286C5B /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = DD4070BE4DD14AB61061881A7D1F9AA0 /* MASUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		757925F63B22FD7B2D19BA68595E5F2C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3FED1DD5C0B7407290761A80348F06B /* UIKit.framework */; };
@@ -826,7 +825,6 @@
 		9913121B9158252D2A634DEDDFBDB892 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = Auth0/Info.plist; sourceTree = "<group>"; };
 		994B0F41D46921613C9055FDF251F6DB /* AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-prefix.pch"; sourceTree = "<group>"; };
 		9AB6379E00A205ADD1D8C50EA47D060D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
-		9AFA96B3553F0D5077A4BBCE25611753 /* cellphone@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "cellphone@2x.png"; path = "Auth0/Images/cellphone@2x.png"; sourceTree = "<group>"; };
 		9BF310411CE3D0F3DEBC4BEBD0C015B7 /* A0ServiceCollectionViewLayoutDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = A0ServiceCollectionViewLayoutDelegate.h; path = Lock/UI/Private/A0ServiceCollectionViewLayoutDelegate.h; sourceTree = "<group>"; };
 		9C5B9DBC2ED88E08F7D1DDDABBE42CB0 /* AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
 		9C74A4C9EAF1DCBB9B2314585A3EFD54 /* libTouchIDAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libTouchIDAuth.a; path = libTouchIDAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1095,8 +1093,6 @@
 				AAA98CD153D4476945E96EA25065876B /* box.png */,
 				AE986FD81C9404291DE9F60BC28F6B7A /* box@2x.png */,
 				EE8BDE8F9E592C1D4590E89C0E75A8F5 /* box@3x.png */,
-				9AFA96B3553F0D5077A4BBCE25611753 /* cellphone@2x.png */,
-				68775B5B60DBCCEE559842B9DCA18705 /* cellphone@3x.png */,
 				383E29E597F788F1E54962E16500BC37 /* close.png */,
 				C1E72106464DBD3850A7D2910484D68F /* close@2x.png */,
 				AAC22BE72B10BAC7B80E912CF095FF1F /* close@3x.png */,
@@ -2179,8 +2175,6 @@
 				ED109D5213ACC329122B5ED5B27C8995 /* box.png in Resources */,
 				396DD2C180FBC798BE01448E5FCDF5B9 /* box@2x.png in Resources */,
 				9F82CE05C8C2A1ED618C36EC89B75620 /* box@3x.png in Resources */,
-				74570072912BD47FE51116893586368E /* cellphone@2x.png in Resources */,
-				9D465F3C24DCF5DB54D48071F656F35E /* cellphone@3x.png in Resources */,
 				01B913E2B26FC917E03AD4722DC6D75A /* close.png in Resources */,
 				D4D97FC558FF16352E3FEA0ECE0B8658 /* close@2x.png in Resources */,
 				D44672545FC8C41556001B445468E43C /* close@3x.png in Resources */,
