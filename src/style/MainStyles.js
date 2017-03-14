@@ -281,6 +281,15 @@ const MasterStyleSheet = StyleSheet.create({
   addEstimateButton: {
     bottom: 20,
     margin: 2,
+    width: 200,
+    flexDirection: 'column',
+  },
+
+  addEstimateButtonRow1: {
+    bottom: 20,
+    margin: 2,
+    width: 200,
+    flexDirection: 'row',
   },
   EstimateMainSwipe: {
     marginBottom: 119,

@@ -127,6 +127,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fs')
     compile project(':realm')
     compile project(':react-native-onesignal')
     compile project(':react-native-device-info')
