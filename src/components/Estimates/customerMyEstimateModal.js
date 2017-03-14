@@ -8,7 +8,7 @@ import Swiper from 'react-native-swiper';
 import { MasterStyleSheet } from '../../style/MainStyles';
 
 import EstimatePriceModal from './estimatePriceModal';
-import PhotoGalleryModal from '../photoGallery/photoGalleryModal';
+import PhotoGalleryEstimates from '../photoGallery/photoGalleryEstimates';
 import CustomGenericsModal from './customGenericsModal';
 
 
@@ -247,51 +247,59 @@ class MyEstimateModal extends React.Component {
                       </ScrollView>
                     </View>
                   </Card>
+                  <View
+                  style={MasterStyleSheet.addEstimateButtonRow1}
+                  >
                   <Button
-                    buttonStyle={MasterStyleSheet.addEstimateButton}
                     icon={{ name: 'attach-money' }}
                     backgroundColor="#03A9F4"
                     title="Add Price"
                     onPress={() => this.setState({ pricingModal: true })}
                   />
                   <Button
-                    buttonStyle={MasterStyleSheet.addEstimateButton}
                     icon={{ name: 'info' }}
                     backgroundColor="#03A9F4"
-                    title="More Info"
+                    title="Ask Surveyor"
                   />
+                  </View>
                   <Button
                     buttonStyle={MasterStyleSheet.addEstimateButton}
                     icon={{ name: 'help' }}
                     backgroundColor="#03A9F4"
-                    title="Get Advice"
+                    title="Ask Dave"
                   />
 
                   <Button
                     buttonStyle={MasterStyleSheet.addEstimateButton}
                     icon={{ name: 'attach-money' }}
                     backgroundColor="#03A9F4"
-                    title="Re-Assign"
+                    title="Send to Office"
                   />
                   <Button
                     buttonStyle={MasterStyleSheet.addEstimateButton}
                     icon={{ name: 'attach-money' }}
                     backgroundColor="#03A9F4"
-                    title="Onsite Visit Required"
+                    title="Onsite"
                   />
                   <Button
                     buttonStyle={MasterStyleSheet.addEstimateButton}
                     icon={{ name: 'email' }}
                     backgroundColor="#03A9F4"
-                    title="Preview Estimate"
+                    onPress={() => this.setState({ galleryModal: true })}
+                    title="Select Photos"
+                  />
+                  <Button
+                    buttonStyle={MasterStyleSheet.addEstimateButton}
+                    icon={{ name: 'email' }}
+                    backgroundColor="#03A9F4"
+                    title="Preview"
                     onPress={() => this.props.sendEstimate(this.state)}
                   />
                   <Button
                     buttonStyle={MasterStyleSheet.addEstimateButton}
                     icon={{ name: 'email' }}
                     backgroundColor="#03A9F4"
-                    title="Send Estimate"
-                    onPress={() => this.setState({ galleryModal: true })}
+                    title="Send"
                   />
                 </View>
               </Col>
@@ -299,7 +307,7 @@ class MyEstimateModal extends React.Component {
             </Grid>
           </Content>
         </Container>
-        <PhotoGalleryModal
+        <PhotoGalleryEstimates
           open={this.state.galleryModal}
           close={() => this.setState({ galleryModal: false })}
           photos={this.props.customer.survey.photos}

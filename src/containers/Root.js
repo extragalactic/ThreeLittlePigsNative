@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions } from 'react-native';
+import { Text } from 'react-native';
 import Auth0Lock from 'react-native-lock';
 import store from 'react-native-simple-store';
 import Config from 'react-native-config';
@@ -8,7 +8,10 @@ import { graphql, compose } from 'react-apollo';
 import codePush from 'react-native-code-push';
 import OneSignal from 'react-native-onesignal';
 import RNCalendarEvents from 'react-native-calendar-events';
-import { getUserQuery, getMyCustomers, getUserandCustomers } from '../graphql/queries';
+import { getUserandCustomers } from '../graphql/queries';
+import { authInit, saveProfile, getUserID } from '../Realm/authRealm';
+
+
 import {
    acceptEstimate,
    getCustomer,
@@ -20,9 +23,6 @@ import {
    getUser,
   } from '../graphql/mutations';
 import Main from './Main';
-import { isTokenExpired } from '../Utils/jwtHelper';
-
-const window = Dimensions.get('window');
 
 class _Root extends Component {
   static defaultProps = {
@@ -31,40 +31,19 @@ class _Root extends Component {
   }
   constructor(props) {
     super(props);
-    this.lock = new Auth0Lock({ clientId: Config.AUTH0_ID, domain: Config.AUTH0_DOMAIN }, {});
-    this.state = {
-      user: {},
-      newCustomers: [],
-      followUp: [],
-      onSite: [],
-      surveyinProgress: [],
-      surveyComplete: [],
-      myEstimates: [],
-      dimensions: window,
-      loggedIn: false,
-      userID: '5852eb3ec6e9650100965f2e',
-
-    };
+    this.lock = new Auth0Lock({ clientId: process.env.AUTH0_ID, domain: process.env.AUTH0_DOMAIN }, {});
   }
-
   componentDidMount() {
+    if (!authInit()) {
+      this.logIn();
+    }
     codePush.sync();
-
     OneSignal.configure({});
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('registered', this.onRegistered);
     OneSignal.addEventListener('ids', this.onIds);
 
-
-/*
-    this.loggedIn().then((result) => {
-      if (result === false) {
-        this.logIn();
-      }
-    });
-
-*/
     RNCalendarEvents.authorizeEventStore()
      .then((status) => {
        console.log(status);
@@ -93,7 +72,7 @@ class _Root extends Component {
       this.props.acceptEstimate({
         variables: {
           custid: customer,
-          userid: this.state.user._id,
+          userid: getUserID(),
         },
       });
     }
@@ -107,72 +86,40 @@ class _Root extends Component {
    // console.log('Device info: ', device);
   }
 
-
-  loggedIn = () => (
-    store.get('token')
-      .then((data) => {
-        if (data === null) {
-          return false;
-        }
-        const token = data.token.idToken;
-        return !!token && !isTokenExpired(token);
-      })
-  );
-
   logIn = () => {
    // console.log('logging in');
     this.lock.show({}, (err, profile, token) => {
       if (err) {
         console.error(err);
       } else {
-        store.save('token', { token, profile });
-        this.props.saveProfile(profile);
-
-        this.setState({
-          userID: profile.identities[0].userId,
-        });
-        this.props.data.refetch({
-          pollInterval: 1000,
-        });
+        saveProfile(profile, token);
       }
     });
   };
-  updateUser = (id) => {
-    this.props.getUser({ variables: {
-      id,
-    } }).then((data) => {
-      this.setState({
-        user: data.data.getUser,
-      });
-    });
-  }
+
   logOut = () => {
     store.delete('token');
     this.logIn();
   };
 
   render() {
-    return (
-      <Main
-        logout={this.props.logout}
-        // profile={this.props.profile}
-        updateUser={this.updateUser}
-        getProfile={this.props.saveProfile}
-        getCustomer={this.props.getCustomer}
-        updateCustomer={this.props.updateCustomer}
-        getUser={this.props.getUser}
-        submitFollowup={this.props.submitFollowup}
-        addNotes={this.props.addNotes}
-        getAppointmentsforDay={this.props.getAppointmentsforDay}
-        deleteAppointment={this.props.deleteAppointment}
-        acceptEstimate={this.props.acceptEstimate}
-        userID={this.state.userID}
-        myEstimates={this.state.myEstimates}
-        dimensions={this.state.dimensions}
-        user={this.props.data.user}
-        myCustomers={this.props.data.getMyCustomers}
-      />
-    );
+    if (authInit()) {
+      return (
+        <Main
+          getCustomer={this.props.getCustomer}
+          updateCustomer={this.props.updateCustomer}
+          getUser={this.props.getUser}
+          submitFollowup={this.props.submitFollowup}
+          addNotes={this.props.addNotes}
+          getAppointmentsforDay={this.props.getAppointmentsforDay}
+          deleteAppointment={this.props.deleteAppointment}
+          acceptEstimate={this.props.acceptEstimate}
+          userID={getUserID()}
+          user={this.props.data.user}
+        />
+      );
+    }
+    return <Text> Spinner</Text>;
   }
 }
 const mapActionsToProps = dispatch => ({
@@ -185,7 +132,7 @@ const mapStateToProps = state => ({
   profile: state.profile,
 });
 
-const Root = compose(
+let Root = compose(
   graphql(getUser, { name: 'getUser' }),
   graphql(acceptEstimate, { name: 'acceptEstimate' }),
   graphql(deleteAppointment, { name: 'deleteAppointment' }),
@@ -195,15 +142,9 @@ const Root = compose(
   graphql(submitFollowup, { name: 'submitFollowup' }),
   graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
   graphql(getUserandCustomers, {
-    options: ({ userId }) => ({ variables: { id: userId }, pollInterval: 1000 }),
+    options: { variables: { id: getUserID() }, pollInterval: 1000 },
   }),
   connect(mapStateToProps, mapActionsToProps),
 )(_Root);
 
-Root = codePush(Root);
-export default Root;
-
-/*
-getMyCustomers
-userId
-*/
+export default Root = codePush(Root);

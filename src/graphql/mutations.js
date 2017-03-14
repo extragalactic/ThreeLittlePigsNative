@@ -236,6 +236,7 @@ const getSurveyPhotos = gql`
     photo
     caption
     selected
+    docID
   }
 }`;
 
@@ -274,6 +275,7 @@ const getFinishedSurvey = gql `
       timestamp
       user
       thumb
+      docID
       url
     }
   }

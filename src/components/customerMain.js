@@ -101,7 +101,7 @@ const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyi
           <ListItem
             hideChevron
             title="Sent Estimates"
-            badge={{ value: myEstimates.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+            badge={{ value: props.data.getMyCustomers.myestimates.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
             containerStyle={MasterStyleSheet.mainList}
             onPress={selectMyEstimates}
           />
