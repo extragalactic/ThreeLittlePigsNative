@@ -109,6 +109,15 @@
 /* Begin PBXBuildRule section */
 		A398CDBD1E778F8900226B2D /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
+			compilerSpec = "com.apple.build-tasks.copy-png-file";
+			fileType = image.png;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# copypng\n";
+		};
+		A398CE4F1E7795CC00226B2D /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.proxy.script;
 			fileType = image.png;
 			isEditable = 1;
@@ -987,7 +996,6 @@
 		A3A7F47D1E58C5630014CD1D /* NSData+A0JWTSafeBase64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+A0JWTSafeBase64.h"; sourceTree = "<group>"; };
 		A3A7F47E1E58C5630014CD1D /* TouchIDAuth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TouchIDAuth.h; sourceTree = "<group>"; };
 		A3A7F4821E58C5630014CD1D /* CountryCodes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CountryCodes.plist; sourceTree = "<group>"; };
-		A3A7F4861E58C5630014CD1D /* cellphone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cellphone@3x.png"; sourceTree = "<group>"; };
 		A3A7F4871E58C5630014CD1D /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		A3A7F4881E58C5630014CD1D /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
 		A3A7F4891E58C5630014CD1D /* close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@3x.png"; sourceTree = "<group>"; };
@@ -3332,6 +3340,7 @@
 				41F70F3085EC47426777CE9B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
+				A398CE4F1E7795CC00226B2D /* PBXBuildRule */,
 				A398CDBD1E778F8900226B2D /* PBXBuildRule */,
 			);
 			dependencies = (
