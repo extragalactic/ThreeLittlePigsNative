@@ -256,6 +256,7 @@ class _CustomerDetailsIPadEstimator extends Component {
     });
   };
   render() {
+    console.log('estimattor', this)
     if (!this.props.data.customer) {
       return (
         <Image

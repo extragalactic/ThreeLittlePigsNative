@@ -31,7 +31,7 @@ class _Root extends Component {
   }
   constructor(props) {
     super(props);
-    this.lock = new Auth0Lock({ clientId: process.env.AUTH0_ID, domain: process.env.AUTH0_DOMAIN }, {});
+    this.lock = new Auth0Lock({ clientId: Config.AUTH0_ID, domain: Config.AUTH0_DOMAIN }, {});
   }
   componentDidMount() {
     if (!authInit()) {

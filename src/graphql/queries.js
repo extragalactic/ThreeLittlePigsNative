@@ -109,6 +109,7 @@ const getCustomer = gql `
         photo
         caption
         selected
+        docID
       }
     }
   }

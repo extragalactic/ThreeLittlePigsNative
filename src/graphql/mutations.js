@@ -256,6 +256,7 @@ const selectSurveyPhotos = gql `
     photo
     caption
     selected
+    docID
   }
 }`;
 
@@ -346,7 +347,19 @@ const sendEstimate = gql `
       }
     }`;
 
+const getBase64 = gql `
+  mutation getBase64($docID: String){
+  getImageBase64(docID: $docID){
+    docID
+    base64
+    url  
+  }
+}
+`;
+
+
 export {
+  getBase64,
   sendEstimate,
   getEstimateResults,
   addPrice,

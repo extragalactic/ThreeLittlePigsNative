@@ -146,8 +146,8 @@ class MyEstimateModal extends React.Component {
                         style={{ height: 200, borderColor: 'black', borderWidth: 1, borderRightWidth: 0.5 }}
                       >
                         <Text> Description</Text>
-                        { this.props.estimate.prices ? this.props.estimate.prices.map(price => (
-                          <Text> {price.description}</Text>
+                        { this.props.estimate.prices ? this.props.estimate.prices.map((price, idx) => (
+                          <Text key={idx}> {price.description}</Text>
                           ),
                         ) : null}
                       </Col>
@@ -156,8 +156,8 @@ class MyEstimateModal extends React.Component {
                         style={{ height: 200, borderColor: 'black', borderWidth: 1, borderLeftWidth: 0.5 }}
                       >
                         <Text> Price</Text>
-                        { this.props.estimate.prices ? this.props.estimate.prices.map(price => (
-                          <Text> {price.price}</Text>
+                        { this.props.estimate.prices ? this.props.estimate.prices.map((price, idx) => (
+                          <Text key={idx}> {price.price}</Text>
                           ),
                         ) : null}
                       </Col>
@@ -248,59 +248,40 @@ class MyEstimateModal extends React.Component {
                     </View>
                   </Card>
                   <View
-                  style={MasterStyleSheet.addEstimateButtonRow1}
+                    style={MasterStyleSheet.addEstimateButtonRow1}
                   >
-                  <Button
-                    icon={{ name: 'attach-money' }}
-                    backgroundColor="#03A9F4"
-                    title="Add Price"
-                    onPress={() => this.setState({ pricingModal: true })}
-                  />
-                  <Button
-                    icon={{ name: 'info' }}
-                    backgroundColor="#03A9F4"
-                    title="Ask Surveyor"
-                  />
+                    <Button
+                      buttonStyle={MasterStyleSheet.addEstimateButton}
+                      icon={{ name: 'attach-money' }}
+                      backgroundColor="#03A9F4"
+                      title="Price"
+                      onPress={() => this.setState({ pricingModal: true })}
+                    />
+                    <Button
+                      buttonStyle={MasterStyleSheet.addEstimateButton}
+                      icon={{ name: 'email' }}
+                      backgroundColor="#03A9F4"
+                      onPress={() => this.setState({ galleryModal: true })}
+                      title="Photos"
+                    />
                   </View>
-                  <Button
-                    buttonStyle={MasterStyleSheet.addEstimateButton}
-                    icon={{ name: 'help' }}
-                    backgroundColor="#03A9F4"
-                    title="Ask Dave"
-                  />
-
-                  <Button
-                    buttonStyle={MasterStyleSheet.addEstimateButton}
-                    icon={{ name: 'attach-money' }}
-                    backgroundColor="#03A9F4"
-                    title="Send to Office"
-                  />
-                  <Button
-                    buttonStyle={MasterStyleSheet.addEstimateButton}
-                    icon={{ name: 'attach-money' }}
-                    backgroundColor="#03A9F4"
-                    title="Onsite"
-                  />
-                  <Button
-                    buttonStyle={MasterStyleSheet.addEstimateButton}
-                    icon={{ name: 'email' }}
-                    backgroundColor="#03A9F4"
-                    onPress={() => this.setState({ galleryModal: true })}
-                    title="Select Photos"
-                  />
-                  <Button
-                    buttonStyle={MasterStyleSheet.addEstimateButton}
-                    icon={{ name: 'email' }}
-                    backgroundColor="#03A9F4"
-                    title="Preview"
-                    onPress={() => this.props.sendEstimate(this.state)}
-                  />
-                  <Button
-                    buttonStyle={MasterStyleSheet.addEstimateButton}
-                    icon={{ name: 'email' }}
-                    backgroundColor="#03A9F4"
-                    title="Send"
-                  />
+                  <View
+                    style={MasterStyleSheet.addEstimateButtonRow1}
+                  >
+                    <Button
+                      buttonStyle={MasterStyleSheet.addEstimateButton}
+                      icon={{ name: 'email' }}
+                      backgroundColor="#03A9F4"
+                      title="Preview"
+                      onPress={() => this.props.sendEstimate(this.state)}
+                    />
+                    <Button
+                      buttonStyle={MasterStyleSheet.addEstimateButton}
+                      icon={{ name: 'email' }}
+                      backgroundColor="#03A9F4"
+                      title="Send"
+                    />
+                  </View>
                 </View>
               </Col>
 

@@ -30,8 +30,6 @@ class _CustomerListMyEstimates extends React.Component {
    // console.log("myestimate", this)
     if (DeviceInfo.isTablet()) {
       return (
-        <Container>
-          <Content>
             <Grid>
               <Col style={MasterStyleSheet.ipadViewLeft}>
                 <ScrollView>
@@ -63,8 +61,6 @@ class _CustomerListMyEstimates extends React.Component {
                 />
               </Col>
             </Grid>
-          </Content>
-        </Container>
       );
     }
     return (

@@ -12,11 +12,7 @@ class SurveyCompleteModal extends React.Component {
     this.state = { estimate: {} };
   }
   render() {
-    if (!this.props.myCustomers.myestimates) {
-      return (
-        <Text> No Survey </Text>
-      );
-    }
+
     return (
       <Modal
         animationType={'slide'}

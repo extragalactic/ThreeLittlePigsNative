@@ -29,7 +29,7 @@ const MasterStyleSheet = StyleSheet.create({
   },
   ipadViewRight: {
     marginTop: 55,
-    height: window.height - 50,
+    height: window.height / 1.12,
   },
   iphoneViewTop: {
     marginTop: 60,
@@ -75,7 +75,7 @@ const MasterStyleSheet = StyleSheet.create({
   },
   modalIcon: {
     marginTop: 20,
-    right: DeviceInfo.isTablet() ? 660 : window.width / 2.3,
+    right: DeviceInfo.isTablet() ? window.width / 2.1 : window.width / 2.3,
   },
   modalView: {
     marginTop: 10,
@@ -102,7 +102,7 @@ const MasterStyleSheet = StyleSheet.create({
   customerCardMap: {
     backgroundColor: '#CFCFC4',
     height: 210,
-    width: window.width - 800,
+    width: window.width / 2.3,
   },
   constacCustomerContainerOne: {
     flex: 1,
@@ -279,10 +279,7 @@ const MasterStyleSheet = StyleSheet.create({
     alignSelf: 'center',
   },
   addEstimateButton: {
-    bottom: 20,
-    margin: 2,
-    width: 200,
-    flexDirection: 'column',
+    width: window.width / 8,
   },
 
   addEstimateButtonRow1: {
@@ -290,6 +287,7 @@ const MasterStyleSheet = StyleSheet.create({
     margin: 2,
     width: 200,
     flexDirection: 'row',
+    alignItems: 'center',
   },
   EstimateMainSwipe: {
     marginBottom: 119,
