@@ -27,4 +27,4 @@ class Pricing extends Component {
   }
 }
 
-export default Pricing ;
+export default Pricing;

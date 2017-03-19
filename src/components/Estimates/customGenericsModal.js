@@ -19,7 +19,7 @@ class CustomGenericsModal extends React.Component {
     return (
       <Modal
         isOpen={this.props.open}
-        onClosed={this.props.close}
+
         style={MasterStyleSheet.EstimatePriceModal}
         position={'center'}
       >

@@ -13,7 +13,6 @@ const surveyGalleryModal = ({
       onClosed={close}
       position={'center'}
     >
-    {console.log(photos)}
       <PhotoBrowser
         mediaList={photos}
         alwaysShowControls
@@ -21,9 +20,6 @@ const surveyGalleryModal = ({
         displayNavArrows
         onBack={close}
         startOnGrid
-        onSelectionChanged={(media, index, isSelected) => {
-          selectPhoto(index);
-        }}
       />
     </Modal>
 );

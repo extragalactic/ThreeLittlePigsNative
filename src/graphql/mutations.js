@@ -230,13 +230,12 @@ const addSurveyPhoto = gql`
      }
   }`;
 const getSurveyPhotos = gql`
-  mutation getSurveyImaged($id: String){
+  mutation getSurveyImages($id: String){
   getSurveyPhotos(id: $id) {
     thumb
     photo
     caption
     selected
-    docID
   }
 }`;
 
@@ -256,7 +255,6 @@ const selectSurveyPhotos = gql `
     photo
     caption
     selected
-    docID
   }
 }`;
 
@@ -343,7 +341,18 @@ const getEstimateResults = gql `
 const sendEstimate = gql `
     mutation sendEstimate($custid: String, $generics: generics){
       generatePDFEstimate(custid: $custid, generics: $generics){
-        id
+        base64
+        url
+        docID
+      }
+    }`;
+
+const generatePDF = gql `
+    mutation generatePDF($custid: String, $generics: generics){
+      generatePDFEstimate(custid: $custid, generics: $generics){
+        base64
+        url
+        docID
       }
     }`;
 
@@ -354,11 +363,16 @@ const getBase64 = gql `
     base64
     url  
   }
-}
-`;
+}`;
 
+const deletePrice = gql `
+  mutation deletePrice($custid: String, $index: Int){
+  deletePrice(custid:$custid, index: $index)
+}`;
 
 export {
+  deletePrice,
+  generatePDF,
   getBase64,
   sendEstimate,
   getEstimateResults,

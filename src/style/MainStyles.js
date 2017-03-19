@@ -78,7 +78,7 @@ const MasterStyleSheet = StyleSheet.create({
     right: DeviceInfo.isTablet() ? window.width / 2.1 : window.width / 2.3,
   },
   modalView: {
-    marginTop: 10,
+
   },
   modalFolloupView: {
     marginTop: 10,
@@ -102,7 +102,7 @@ const MasterStyleSheet = StyleSheet.create({
   customerCardMap: {
     backgroundColor: '#CFCFC4',
     height: 210,
-    width: window.width / 2.3,
+    width: DeviceInfo.isTablet() ? window.width / 2.3 : window.width / 1.3,
   },
   constacCustomerContainerOne: {
     flex: 1,
@@ -232,8 +232,6 @@ const MasterStyleSheet = StyleSheet.create({
   },
   surveyResultPricingView: {
     flex: 1,
-    borderColor: 'black',
-    borderWidth: 4,
     margin: 20,
   },
   surveyResultInsideView: {
@@ -255,7 +253,11 @@ const MasterStyleSheet = StyleSheet.create({
     padding: 10,
     margin: 4,
   },
+  checkBox: {
+    backgroundColor: '#8c92ac',
 
+
+  },
   EstimatePriceModal: {
     alignItems: 'center',
     height: DeviceInfo.isTablet() ? window.height / 2.9 : window.height / 1.60,
@@ -264,6 +266,7 @@ const MasterStyleSheet = StyleSheet.create({
   AutoComplete: {},
   EstimateModalColLeft: {
     height: window.height - 55,
+
   },
   EstimateModalColRight: {
     height: window.height - 55,
@@ -272,6 +275,9 @@ const MasterStyleSheet = StyleSheet.create({
     flex: 1,
     bottom: 20,
     marginTop: 40,
+    backgroundColor: '#CFCFC4',
+
+
   },
   PricingCard: {
     position: 'absolute',
@@ -279,15 +285,16 @@ const MasterStyleSheet = StyleSheet.create({
     alignSelf: 'center',
   },
   addEstimateButton: {
-    width: window.width / 8,
+    width: window.width / 7,
+    backgroundColor: '#8c92ac',
   },
 
   addEstimateButtonRow1: {
-    bottom: 20,
-    margin: 2,
-    width: 200,
     flexDirection: 'row',
     alignItems: 'center',
+    marginRight: 6,
+    marginBottom: 2,
+    marginTop: 30,
   },
   EstimateMainSwipe: {
     marginBottom: 119,
@@ -296,7 +303,7 @@ const MasterStyleSheet = StyleSheet.create({
     flex: 1,
     position: 'absolute',
     top: 300,
-    height: 210,
+    height: window.height / 1.9,
 
   },
 });

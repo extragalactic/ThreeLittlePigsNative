@@ -31,38 +31,35 @@ class _CustomerListFollowup extends React.Component {
     console.log('followup', this.props);
     if (DeviceInfo.isTablet()) {
       return (
-        <Container>
-          <Content>
-            <Grid>
-              <Col style={MasterStyleSheet.ipadViewLeft}>
-                <List >
-                  {this.props.data.getMyCustomers.followup.map((customer, idx) => (
-                    <ListItem
-                      containerStyle={MasterStyleSheet.customersListItem}
-                      key={idx}
-                      title={customer.address}
-                      subtitle={`${customer.firstName} ${customer.lastName}`}
-                      onPress={this.setSelection.bind(this, customer.id)}
-                    />),
+        <Grid>
+          <Col style={MasterStyleSheet.ipadViewLeft}>
+            <List >
+              {this.props.data.getMyCustomers.followup.map((customer, idx) => (
+                <ListItem
+                  containerStyle={MasterStyleSheet.customersListItem}
+                  key={idx}
+                  title={customer.address}
+                  subtitle={`${customer.firstName} ${customer.lastName}`}
+                  onPress={this.setSelection.bind(this, customer.id)}
+                />),
               )}
-                </List>
-              </Col>
-              <Col style={MasterStyleSheet.ipadViewRight}>
-                <CustomerDetailsIPadSurveyor
-                  myCustomers={this.props.data.getMyCustomers}
-                  customerId={this.state.selection}
-                  user={this.props.user}
-                  submitFollowup={this.props.submitFollowup}
-                  updateCustomer={this.props.updateCustomer}
-                  getAppointmentsforDay={this.props.getAppointmentsforDay}
-                  addNotes={this.props.addNotes}
-                  updateUser={this.props.updateUser}
-                  deleteAppointment={this.props.deleteAppointment}
-                />
-              </Col>
-            </Grid>
-          </Content>
-        </Container>
+            </List>
+          </Col>
+          <Col style={MasterStyleSheet.ipadViewRight}>
+            <CustomerDetailsIPadSurveyor
+              myCustomers={this.props.data.getMyCustomers}
+              customerId={this.state.selection}
+              user={this.props.user}
+              submitFollowup={this.props.submitFollowup}
+              updateCustomer={this.props.updateCustomer}
+              getAppointmentsforDay={this.props.getAppointmentsforDay}
+              addNotes={this.props.addNotes}
+              updateUser={this.props.updateUser}
+              deleteAppointment={this.props.deleteAppointment}
+            />
+          </Col>
+        </Grid>
+
       );
     }
     return (

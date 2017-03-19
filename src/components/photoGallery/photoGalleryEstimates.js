@@ -2,9 +2,14 @@ import React from 'react';
 import { ActionSheetIOS, CameraRoll, AlertIOS } from 'react-native';
 import Modal from 'react-native-modalbox';
 import PhotoBrowser from 'react-native-photo-browser';
+import ImagePickerManager from 'react-native-image-picker';
+
 import { graphql, compose } from 'react-apollo';
 
-import { getBase64 } from '../../graphql/mutations';
+import { getBase64, addSurveyPhoto, selectSurveyPhotos } from '../../graphql/mutations';
+
+import photoOptions from '../Surveys/photoOptions';
+import ZoomViewModal from './zoomViewModal';
 
 const BUTTONS = [
   'Save',
@@ -19,13 +24,13 @@ const CANCEL_INDEX = 6;
 class _PhotoGalleryEstimates extends React.Component {
   constructor() {
     super();
-    this.state = { clicked: '' };
+    this.state = { clicked: '', zoomModal: false };
   }
 
-  downloadImage = (url) => {
+  downloadImage = (image) => {
     this.props.getBase64({
       variables: {
-        docID: url.docID,
+        docID: image.docID,
       },
     }).then((base64) => {
       CameraRoll.saveToCameraRoll(base64.data.getImageBase64.base64, 'photo')
@@ -34,6 +39,22 @@ class _PhotoGalleryEstimates extends React.Component {
       AlertIOS.alert('Photo Saved');
     });
   };
+
+  uploadImage = () => {
+    ImagePickerManager.launchImageLibrary(photoOptions, (data) => {
+      this.props.addSurveyPhoto({
+        variables: {
+          heading: 'DirectUpload',
+          description: this.state.photoCaption,
+          orginalBase64: data.data,
+          timestamp: new Date(),
+          custid: this.props.customer.id,
+          user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+        },
+      });
+    });
+  };
+
 
   showActionSheet = (media, index) => {
     ActionSheetIOS.showActionSheetWithOptions({
@@ -46,16 +67,36 @@ class _PhotoGalleryEstimates extends React.Component {
       if (selection === 'Save') {
         this.downloadImage(media);
       }
+      if (selection === 'Add') {
+        this.uploadImage();
+      }
+      if (selection === 'View') {
+        this.setState({ zoomModal: true });
+      }
+    });
+  };
+
+  togglePhotoSelection = (index) => {
+    this.props.selectSurveyPhotos({
+      variables: {
+        custid: this.props.customer.id,
+        index,
+      },
     });
   };
 
   render() {
     return (
+
       <Modal
         isOpen={this.props.open}
         onClosed={this.props.close}
         position={'center'}
       >
+        <ZoomViewModal
+          open={this.state.zoomModal}
+          close={() => { this.setState({ zoomModal: false }); }}
+        />
         <PhotoBrowser
           mediaList={this.props.photos}
           alwaysShowControls
@@ -65,7 +106,7 @@ class _PhotoGalleryEstimates extends React.Component {
           displaySelectionButtons
           onActionButton={(media, index) => this.showActionSheet(media, index)}
           onSelectionChanged={(media, index, isSelected) => {
-            this.props.selectPhoto(index);
+            this.togglePhotoSelection(index);
           }}
         />
       </Modal>
@@ -73,9 +114,11 @@ class _PhotoGalleryEstimates extends React.Component {
   }
 }
 
+
 const PhotoGalleryEstimates = compose(
   graphql(getBase64, { name: 'getBase64' }),
+  graphql(addSurveyPhoto, { name: 'addSurveyPhoto' }),
+  graphql(selectSurveyPhotos, { name: 'selectSurveyPhotos' }),
 )(_PhotoGalleryEstimates);
-
 
 export default PhotoGalleryEstimates;

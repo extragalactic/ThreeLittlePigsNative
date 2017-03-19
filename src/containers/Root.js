@@ -10,7 +10,7 @@ import OneSignal from 'react-native-onesignal';
 import RNCalendarEvents from 'react-native-calendar-events';
 import { getUserandCustomers } from '../graphql/queries';
 import { authInit, saveProfile, getUserID } from '../Realm/authRealm';
-
+import { downloadPDF } from '../Utils/localFileSystem';
 
 import {
    acceptEstimate,
@@ -103,6 +103,7 @@ class _Root extends Component {
   };
 
   render() {
+    downloadPDF();
     if (authInit()) {
       return (
         <Main
