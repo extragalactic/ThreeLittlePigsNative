@@ -28,11 +28,11 @@ const saveProfile = (profile, token) => {
     },
   };
 
-  let realm = new Realm({ schema: [UserSchema] });
+  const realm = new Realm({ schema: [UserSchema] });
   realm.write(() => {
-    let user = realm.create('User', {
+    const user = realm.create('User', {
       email: profile.email,
-      token:  token.idToken,
+      token: token.idToken,
       id: profile.identities[0].userId,
     });
   });
@@ -53,7 +53,6 @@ const getUserID = () => {
   const user = realm.objects('User');
   if (user[0]) {
     return user[0].id;
-
   }
 };
 

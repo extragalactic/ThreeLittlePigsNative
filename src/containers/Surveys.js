@@ -4,7 +4,9 @@ import {
   View,
   StyleSheet,
   WebView,
+  NativeModules,
 } from 'react-native';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -15,11 +17,15 @@ const styles = StyleSheet.create({
 });
 
 class Surveys extends Component {
+  componentDidMount() {
+    console.log(NativeModules);
+  }
+
   render() {
     return (
-      <View>
-        <Text> {this.props.myCustomers.newcustomers.length}</Text>
-      </View>
+      <WebView
+        source={{ uri: 'https://tlpm.ca/documents/JohnFritzEstimate.pdf' }}
+      />
     );
   }
 }

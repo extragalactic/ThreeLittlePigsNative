@@ -31,39 +31,36 @@ class _CustomerListEstimateQueue extends React.Component {
   render() {
     if (DeviceInfo.isTablet()) {
       return (
-        <Container>
-          <Content>
-            <Grid>
-              <Col style={MasterStyleSheet.ipadViewLeft}>
-                <List >
-                  {this.props.data.getQueue.map((customer, idx) => (
-                    <ListItem
-                      containerStyle={MasterStyleSheet.customersListItem}
-                      key={idx}
-                      title={customer.address}
-                      subtitle={`${customer.firstName} ${customer.lastName}`}
-                      onPress={this.setSelection.bind(this, customer.id)}
-                    />),
+        <Grid>
+          <Col style={MasterStyleSheet.ipadViewLeft}>
+            <List >
+              {this.props.data.getQueue.map((customer, idx) => (
+                <ListItem
+                  containerStyle={MasterStyleSheet.customersListItem}
+                  key={idx}
+                  title={customer.address}
+                  subtitle={`${customer.firstName} ${customer.lastName}`}
+                  onPress={this.setSelection.bind(this, customer.id)}
+                />),
               )}
-                </List>
-              </Col>
-              <Col style={MasterStyleSheet.ipadViewRight}>
-                <CustomerDetailsIPadQueue
-                  myCustomers={this.props.data.getQueue}
-                  customerId={this.state.selection}
-                  selection={this.state.selection}
-                  user={this.props.user}
-                  acceptEstimate={this.props.acceptEstimate}
-                  updateCustomer={this.props.updateCustomer}
-                  getAppointmentsforDay={this.props.getAppointmentsforDay}
-                  addNotes={this.props.addNotes}
-                  updateUser={this.props.updateUser}
-                  deleteAppointment={this.props.deleteAppointment}
-                />
-              </Col>
-            </Grid>
-          </Content>
-        </Container>
+            </List>
+          </Col>
+          <Col style={MasterStyleSheet.ipadViewRight}>
+            <CustomerDetailsIPadQueue
+              myCustomers={this.props.data.getQueue}
+              customerId={this.state.selection}
+              selection={this.state.selection}
+              user={this.props.user}
+              acceptEstimate={this.props.acceptEstimate}
+              updateCustomer={this.props.updateCustomer}
+              getAppointmentsforDay={this.props.getAppointmentsforDay}
+              addNotes={this.props.addNotes}
+              updateUser={this.props.updateUser}
+              deleteAppointment={this.props.deleteAppointment}
+            />
+          </Col>
+        </Grid>
+
       );
     }
     return (

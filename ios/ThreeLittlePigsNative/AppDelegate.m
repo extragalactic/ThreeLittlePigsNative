@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [BuddyBuildSDK setup];
+[BuddyBuildSDK setup];
   
   NSURL *jsCodeLocation;
 

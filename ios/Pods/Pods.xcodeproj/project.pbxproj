@@ -202,6 +202,7 @@
 		73811DA312BCB537D44D62EC6AD15766 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DD98F0DBC1F742AF03C6966A805699D0 /* AFHTTPSessionManager.m */; };
 		7390794C304502F5158F757D112F1C11 /* A0Lock+A0TouchIDLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7165423E70075DE1530FEC34EDD29D32 /* A0Lock+A0TouchIDLockViewController.m */; };
 		740A4BB09814B8F24C1BF4FB5C537954 /* A0SimpleKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = 0222907AB4B106166AF65608890B8C5C /* A0SimpleKeychain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		74570072912BD47FE51116893586368E /* cellphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AFA96B3553F0D5077A4BBCE25611753 /* cellphone@2x.png */; };
 		74700A3E3E8DF478341A6B70F3C12F7D /* A0IdentityProviderAuthenticator.m in Sources */ = {isa = PBXBuildFile; fileRef = 15008488C8816D75A4DE3C1DAE277AA2 /* A0IdentityProviderAuthenticator.m */; };
 		74CDC736250685823CC5769C72286C5B /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = DD4070BE4DD14AB61061881A7D1F9AA0 /* MASUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		757925F63B22FD7B2D19BA68595E5F2C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3FED1DD5C0B7407290761A80348F06B /* UIKit.framework */; };
@@ -439,6 +440,7 @@
 		F1BFAA3CEE11F916822DE2B0DCBDE279 /* TouchIDAuth-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C1E8312861234D76BCE4D4740BA6F2A4 /* TouchIDAuth-dummy.m */; };
 		F1F93EE1AA5E870F2CE81325CE9EB643 /* AFAutoPurgingImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 3433D2970417E1D975C1722EDAB2041A /* AFAutoPurgingImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F2467D4C791079E025ED80CBDAEB4E45 /* A0UsernameValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = FE8C91AC5E3A02064DB1EDFD2E863BBD /* A0UsernameValidator.m */; };
+		F2D69B6D564C69D3F382B08EE4024D4C /* cellphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CE9260804501C62754174E9A95B497A /* cellphone.png */; };
 		F333A35E4EC10732E5CF13ECA673643E /* linkedin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41FBAF11150FD127AE8E376FD8DCC82F /* linkedin@3x.png */; };
 		F38715BF627B6A89E18B6C29322EA6BE /* A0APIv1Router.m in Sources */ = {isa = PBXBuildFile; fileRef = C7731C719ADF62DDCDE637FFD7879CFD /* A0APIv1Router.m */; };
 		F5CC06F3E0C232483A72DCCFAF393BE0 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D5750E7A2C7641CEAED74F87CDC510AC /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -764,6 +766,7 @@
 		7BB5888A2D6965FBF87F2AC73A193A19 /* thecity@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "thecity@3x.png"; path = "Auth0/Social/thecity@3x.png"; sourceTree = "<group>"; };
 		7BC7D30D93E001C7E33608995761E2E1 /* paypal.png */ = {isa = PBXFileReference; includeInIndex = 1; name = paypal.png; path = Auth0/Social/paypal.png; sourceTree = "<group>"; };
 		7BE197ABD9A7499AD1A98F0448EAC647 /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFAutoPurgingImageCache.m; path = "UIKit+AFNetworking/AFAutoPurgingImageCache.m"; sourceTree = "<group>"; };
+		7CE9260804501C62754174E9A95B497A /* cellphone.png */ = {isa = PBXFileReference; includeInIndex = 1; name = cellphone.png; path = Auth0/Images/cellphone.png; sourceTree = "<group>"; };
 		7D57A62DA471F2AF2E75C5C4E9E03416 /* A0Strategy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = A0Strategy.h; path = Lock/Core/A0Strategy.h; sourceTree = "<group>"; };
 		7EB6B9A379BD3792F16DE94CA13C6D45 /* facebook.png */ = {isa = PBXFileReference; includeInIndex = 1; name = facebook.png; path = Auth0/Social/facebook.png; sourceTree = "<group>"; };
 		80C9F26B9A86B0A02DDEF810F6519169 /* Lock-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Lock-dummy.m"; sourceTree = "<group>"; };
@@ -825,6 +828,7 @@
 		9913121B9158252D2A634DEDDFBDB892 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = Auth0/Info.plist; sourceTree = "<group>"; };
 		994B0F41D46921613C9055FDF251F6DB /* AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-prefix.pch"; sourceTree = "<group>"; };
 		9AB6379E00A205ADD1D8C50EA47D060D /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
+		9AFA96B3553F0D5077A4BBCE25611753 /* cellphone@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; name = "cellphone@2x.png"; path = "Auth0/Images/cellphone@2x.png"; sourceTree = "<group>"; };
 		9BF310411CE3D0F3DEBC4BEBD0C015B7 /* A0ServiceCollectionViewLayoutDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = A0ServiceCollectionViewLayoutDelegate.h; path = Lock/UI/Private/A0ServiceCollectionViewLayoutDelegate.h; sourceTree = "<group>"; };
 		9C5B9DBC2ED88E08F7D1DDDABBE42CB0 /* AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
 		9C74A4C9EAF1DCBB9B2314585A3EFD54 /* libTouchIDAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libTouchIDAuth.a; path = libTouchIDAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1093,6 +1097,9 @@
 				AAA98CD153D4476945E96EA25065876B /* box.png */,
 				AE986FD81C9404291DE9F60BC28F6B7A /* box@2x.png */,
 				EE8BDE8F9E592C1D4590E89C0E75A8F5 /* box@3x.png */,
+				7CE9260804501C62754174E9A95B497A /* cellphone.png */,
+				9AFA96B3553F0D5077A4BBCE25611753 /* cellphone@2x.png */,
+				68775B5B60DBCCEE559842B9DCA18705 /* cellphone@3x.png */,
 				383E29E597F788F1E54962E16500BC37 /* close.png */,
 				C1E72106464DBD3850A7D2910484D68F /* close@2x.png */,
 				AAC22BE72B10BAC7B80E912CF095FF1F /* close@3x.png */,
@@ -2175,6 +2182,9 @@
 				ED109D5213ACC329122B5ED5B27C8995 /* box.png in Resources */,
 				396DD2C180FBC798BE01448E5FCDF5B9 /* box@2x.png in Resources */,
 				9F82CE05C8C2A1ED618C36EC89B75620 /* box@3x.png in Resources */,
+				F2D69B6D564C69D3F382B08EE4024D4C /* cellphone.png in Resources */,
+				74570072912BD47FE51116893586368E /* cellphone@2x.png in Resources */,
+				9D465F3C24DCF5DB54D48071F656F35E /* cellphone@3x.png in Resources */,
 				01B913E2B26FC917E03AD4722DC6D75A /* close.png in Resources */,
 				D4D97FC558FF16352E3FEA0ECE0B8658 /* close@2x.png in Resources */,
 				D44672545FC8C41556001B445468E43C /* close@3x.png in Resources */,
@@ -2552,50 +2562,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		015A368F878AC3E2CEAE21DDE8026304 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = NO;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_DEBUG=1",
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
 		082F1FD8495BD48027793B8D3897C363 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E6589BFF325D6E1124918069E7E87EE5 /* Masonry.xcconfig */;
@@ -2728,7 +2694,7 @@
 			};
 			name = Debug;
 		};
-		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
+		59B042A655B7C20CBAB90E385BF4E4C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2747,26 +2713,30 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 		72D1B831316303C2E356BBAC53FEF78A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2837,6 +2807,29 @@
 			};
 			name = Release;
 		};
+		98857CB04BBB3DBCC8213D12352103BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FFAC642799BA3EA13F27B3467F9FD03 /* Pods-ThreeLittlePigsNative.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
 		A204702A16F176AEE43A950FB134BB44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CEAE6D74454A087839F6BEABB20583D7 /* Lock.xcconfig */;
@@ -2860,7 +2853,47 @@
 			};
 			name = Debug;
 		};
-		BD4122CBE949B1F22368D0828784B1BB /* Release */ = {
+		B7324857C38B065FEB1EEE3105C2367A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BEA5D7D4C129D656E1EC21DC27C10A87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 16F805039CFD168D541C2631D2256601 /* Pods-ThreeLittlePigsNative.release.xcconfig */;
 			buildSettings = {
@@ -2870,7 +2903,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -2897,29 +2930,6 @@
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		FDE1865A8B4371325A049A0AB562CA64 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5FFAC642799BA3EA13F27B3467F9FD03 /* Pods-ThreeLittlePigsNative.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -2952,8 +2962,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				015A368F878AC3E2CEAE21DDE8026304 /* Debug */,
-				44CDBB6D11DE06DB64D6268622BDC47E /* Release */,
+				59B042A655B7C20CBAB90E385BF4E4C7 /* Debug */,
+				B7324857C38B065FEB1EEE3105C2367A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2961,8 +2971,8 @@
 		3A43EA45EF20CD79DFE5746D9E891C61 /* Build configuration list for PBXNativeTarget "Pods-ThreeLittlePigsNative" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FDE1865A8B4371325A049A0AB562CA64 /* Debug */,
-				BD4122CBE949B1F22368D0828784B1BB /* Release */,
+				98857CB04BBB3DBCC8213D12352103BF /* Debug */,
+				BEA5D7D4C129D656E1EC21DC27C10A87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

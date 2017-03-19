@@ -12,7 +12,6 @@ class SurveyCompleteModal extends React.Component {
     this.state = { estimate: {} };
   }
   render() {
-
     return (
       <Modal
         animationType={'slide'}

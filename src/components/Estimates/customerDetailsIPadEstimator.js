@@ -256,7 +256,7 @@ class _CustomerDetailsIPadEstimator extends Component {
     });
   };
   render() {
-    console.log('estimattor', this)
+    console.log('estimattor', this);
     if (!this.props.data.customer) {
       return (
         <Image
@@ -332,6 +332,7 @@ class _CustomerDetailsIPadEstimator extends Component {
             closeSurveyModal={this.closeSurveyModal}
           />
           <MyEstimateModal
+            user={this.props.user}
             estimate={this.state.estimate}
             addPrice={this.addPrice}
             modal={this.state.estimateModal}
