@@ -46,6 +46,7 @@
     "react-native-onesignal": "^3.0.3",
     "react-native-photo-browser": "^0.2.2",
     "react-native-progress": "^3.2.0",
+    "react-native-restart": "0.0.2",
     "react-native-router-flux": "git+https://github.com/aksonov/react-native-router-flux.git",
     "react-native-simple-store": "^1.1.0",
     "react-native-slide-button": "^1.2.1",

@@ -3,8 +3,6 @@ import { Card } from 'react-native-elements';
 import { TextInput, Button, PickerIOS, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { MasterStyleSheet } from '../../style/MainStyles';
 
-const PickerItemIOS = PickerIOS.Item;
-
 const SurveyCardNotes = ({
   updateText,
   submitNotes,
@@ -16,6 +14,7 @@ const SurveyCardNotes = ({
 }) => (
   <Card
     title={`${selected} Notes`}
+    containerStyle={MasterStyleSheet.surveyNotesCard}
 
   >
     <TextInput
@@ -28,18 +27,6 @@ const SurveyCardNotes = ({
       title={'submit'}
       onPress={submitNotes}
     />
-    <PickerIOS
-      selectedValue={notesSelection}
-      onValueChange={slct => updateSelection(slct)}
-    >
-      {selection.map((sel, idx) => (
-        <PickerItemIOS
-          key={idx}
-          value={sel}
-          label={sel}
-        />
-     ))}
-    </PickerIOS>
   </Card>
 );
 

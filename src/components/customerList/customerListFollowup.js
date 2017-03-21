@@ -28,7 +28,6 @@ class _CustomerListFollowup extends React.Component {
     this.setState({ selection });
   }
   render() {
-    console.log('followup', this.props);
     if (DeviceInfo.isTablet()) {
       return (
         <Grid>

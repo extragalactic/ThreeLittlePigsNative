@@ -15,7 +15,6 @@ const pargingSelect = ({ updateSelection }) => (
         'Cracks in foundation',
       ]}
       onSelection={payload => updateSelection(payload)}
-      selectedOptions={[]}
     />
   </View>
 );

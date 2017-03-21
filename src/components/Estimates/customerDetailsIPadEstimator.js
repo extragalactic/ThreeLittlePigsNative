@@ -28,6 +28,7 @@ import {
     getFinishedSurvey,
     getEstimateResults,
     addPrice,
+    deletePrice,
     selectSurveyPhotos,
     sendEstimate,
   } from '../../graphql/mutations';
@@ -208,6 +209,17 @@ class _CustomerDetailsIPadEstimator extends Component {
     this.state.estimate.prices.push({ description, price });
   };
 
+  deletePrice = (index) => {
+    this.props.deletePrice({
+      variables: {
+        custid: this.props.customerId,
+        index,
+      }
+    }).then((res) => {
+      this.state.estimate.prices.splice(index, 1);
+      AlertIOS.alert('Removed');
+    });
+  };
   deleteAppointment = (meetingid, calid) => {
     this.props.deleteAppointment({
       variables: {
@@ -256,7 +268,6 @@ class _CustomerDetailsIPadEstimator extends Component {
     });
   };
   render() {
-    console.log('estimattor', this);
     if (!this.props.data.customer) {
       return (
         <Image
@@ -335,6 +346,7 @@ class _CustomerDetailsIPadEstimator extends Component {
             user={this.props.user}
             estimate={this.state.estimate}
             addPrice={this.addPrice}
+            deletePrice={this.deletePrice}
             modal={this.state.estimateModal}
             customer={this.props.data.customer}
             sendEstimate={this.sendEstimate}
@@ -357,6 +369,7 @@ const CustomerDetailsIPadEstimator = compose(
   graphql(sendEstimate, { name: 'sendEstimate' }),
   graphql(getEstimateResults, { name: 'getEstimateResults' }),
   graphql(addPrice, { name: 'addPrice' }),
+  graphql(deletePrice, { name: 'deletePrice' }),
   graphql(selectSurveyPhotos, { name: 'selectSurveyPhotos' }),
 )(_CustomerDetailsIPadEstimator);
 

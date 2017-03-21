@@ -1,18 +1,19 @@
 import React from 'react';
-import { Modal, View, Image, Dimensions, ScrollView } from 'react-native';
+import { Modal, View, Image, Dimensions, ScrollView, AlertIOS } from 'react-native';
 import { Col, Grid } from 'react-native-easy-grid';
 import { Icon, Text, Card, Button, CheckBox, ListItem } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import { graphql, compose } from 'react-apollo';
 import Swipeout from 'react-native-swipeout';
 
-import { generatePDF, deletePrice } from '../../graphql/mutations';
+import { generatePDF } from '../../graphql/mutations';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 
 import EstimatePriceModal from './estimatePriceModal';
 import PhotoGalleryEstimates from '../photoGallery/photoGalleryEstimates';
 import CustomGenericsModal from './customGenericsModal';
+import EstimatePreviewModal from './estimatePreviewModal';
 import generics from './generics';
 
 const window = Dimensions.get('window');
@@ -24,6 +25,7 @@ class _MyEstimateModal extends React.Component {
       pricingModal: false,
       galleryModal: false,
       customModal: false,
+      estimatePreviewModal: false,
       priceText: false,
       watertest: false,
       concreteSteps: false,
@@ -58,7 +60,9 @@ class _MyEstimateModal extends React.Component {
   }
 
   previewEstimate = (generic) => {
-    console.log(generic);
+    this.setState({
+      estimatePreviewModal: true,
+    });
   };
 
   sendEstimate = () => {
@@ -91,21 +95,21 @@ class _MyEstimateModal extends React.Component {
       warrantyAsStated: this.state.warrantyAsStated,
       existingConcrete: this.state.existingConcrete,
     };
-    this.props.generatePDF({
-      variables: {
-        custid: this.props.customer.id,
-        generics: gen,
-      },
-    });
+    AlertIOS.alert(
+      'Are you sure?',
+       'Estimate will be sent to customer',
+      [{ text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'Send to Customer',
+          onPress: () => this.props.generatePDF({
+            variables: {
+              custid: this.props.customer.id,
+              generics: gen,
+            },
+          }),
+        },
+      ],
+    );
   }
-  deletePrice = (index) => {
-    this.props.deletePrice({
-      variables: {
-        custid: this.props.customer.id,
-        index,
-      },
-    });
-  };
 
   selectPhoto = (index) => {
     this.props.selectSurveyPhotos({
@@ -208,7 +212,7 @@ class _MyEstimateModal extends React.Component {
                       <Swipeout
                         right={[{
                           text: 'Delete',
-                          onPress: () => this.deletePrice(idx),
+                          onPress: () => this.props.deletePrice(idx),
                           backgroundColor: 'red',
                         }]}
                         autoClose
@@ -291,6 +295,11 @@ class _MyEstimateModal extends React.Component {
             updateCustomInput={this.updateCustomInput}
             value={this.state.customText}
           />
+          <EstimatePreviewModal
+            open={this.state.estimatePreviewModal}
+            close={() => this.setState({ estimatePreviewModal: false })}
+            customer={this.props.customer}
+          />
         </Modal>
       </View>
     );
@@ -300,7 +309,6 @@ class _MyEstimateModal extends React.Component {
 
 const MyEstimateModal = compose(
     graphql(generatePDF, { name: 'generatePDF' }),
-    graphql(deletePrice, { name: 'deletePrice' }),
 )(_MyEstimateModal);
 
 export default MyEstimateModal;

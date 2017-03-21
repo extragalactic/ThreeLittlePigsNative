@@ -34,9 +34,10 @@ class _SurveyMainModal extends React.Component {
     super();
     this.state = {
       selected: 'Parging',
-      selection: ['no header'],
+      selection: [],
       count: '',
       notes: '',
+      photos: [],
       photoCaption: '',
       surveyPhotos: [],
       notesModal: false,
@@ -78,7 +79,6 @@ class _SurveyMainModal extends React.Component {
   };
 
   changeSelection = (selection) => {
-  //  console.log(selection);
     this.setState({
       selection: ['no header'],
     });
@@ -99,6 +99,9 @@ class _SurveyMainModal extends React.Component {
   };
   TakePhoto = () => {
     ImagePickerManager.launchCamera(photoOptions, (data) => {
+      this.state.photos.push({
+        photo: data.uri,
+      });
       this.props.addSurveyPhoto({
         variables: {
           heading: this.state.selected,
@@ -107,6 +110,7 @@ class _SurveyMainModal extends React.Component {
           timestamp: new Date(),
           custid: this.props.customer.id,
           user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+          localfile: data.uri,
         },
       });
     });
@@ -116,6 +120,9 @@ class _SurveyMainModal extends React.Component {
   };
   AddFromLibrary = () => {
     ImagePickerManager.launchImageLibrary(photoOptions, (data) => {
+      this.state.photos.push({
+        photo: data.uri,
+      });
       this.props.addSurveyPhoto({
         variables: {
           heading: this.state.selected,
@@ -132,10 +139,11 @@ class _SurveyMainModal extends React.Component {
     });
   };
   submitNotes = () => {
+    console.log(this.state)
     this.props.addSurveyNotes({
       variables: {
         heading: this.state.selected,
-        description: this.state.notesSelection,
+        description: this.state.selection,
         text: this.state.notes,
         timestamp: new Date(),
         custid: this.props.customer.id,
@@ -147,14 +155,12 @@ class _SurveyMainModal extends React.Component {
   };
 
   updateSelection = (selection) => {
-   // console.log(selection)
     const doesExist = this.state.selection.indexOf(selection);
     if (doesExist !== -1) {
       _.pull(this.state.selection, selection);
     } else {
       this.state.selection.push(selection);
     }
-  //  console.log(this.state)
   }
   tooggleReady = () => {
     this.setState({
@@ -256,6 +262,7 @@ class _SurveyMainModal extends React.Component {
             selected={this.state.selected}
           />
           <SurveyPhotosModal
+            photos={this.state.photos}
             open={this.state.photoModal}
             updatePhotoCaption={this.updatePhotoCaption}
             close={() => this.setState({ photoModal: false })}
