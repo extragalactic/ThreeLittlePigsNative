@@ -210,8 +210,10 @@ const addSurveyPhoto = gql`
   $user: String,
   $orginalBase64: String,
   $editedlBase64: String
+  $localfile: String
 ){
     addSurveyPhoto (
+      localfile: $localfile,
       custid: $custid,
       heading: $heading,
       description: $description,

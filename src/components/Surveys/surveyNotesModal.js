@@ -18,7 +18,7 @@ const SurveyNotesModal = ({
       isOpen={open}
       onClosed={close}
       style={MasterStyleSheet.surveyNotesModal}
-      position={'center'}
+      position={'top'}
     >
       <SurveyCardNotes
         updateText={updateText}

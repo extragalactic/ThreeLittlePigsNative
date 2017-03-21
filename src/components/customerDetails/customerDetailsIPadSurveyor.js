@@ -24,7 +24,7 @@ import SurveyMainModal from '../Surveys/surveyMainModal';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 import { getCustomer } from '../../graphql/queries';
-import { getFinishedSurvey } from '../../graphql/mutations';
+import { getFinishedSurvey, toggleSurveyReady } from '../../graphql/mutations';
 
 
 const addMinutes = (date, minutes) => new Date(date.getTime() + minutes * 60000);
@@ -49,6 +49,7 @@ class _CustomerDetailsIPadSurveyor extends Component {
       currentLocation: {},
       messages: [],
       finishedSurvey: [],
+      ready: false,
     };
   }
   onDateChange = (date) => {
@@ -230,6 +231,18 @@ class _CustomerDetailsIPadSurveyor extends Component {
   submitNotes = () => {
     this.setState({ notes: '' });
   };
+
+  toggleReady = () => {
+    this.setState({
+      ready: !this.state.ready,
+    });
+    this.props.toggleSurveyReady({
+      variables: {
+        custid: this.state.customer.id,
+        userid: this.props.user._id,
+      },
+    });
+  };
   render() {
     if (!this.props.data.customer) {
       return (
@@ -309,10 +322,11 @@ class _CustomerDetailsIPadSurveyor extends Component {
           />
           <SurveyCompleteModal
             modal={this.state.formCompleteModal}
-            customer={this.props.data.customer}
+            close={() => { this.setState({ formCompleteModal: false }); }}
             finishedSurvey={this.state.finishedSurvey}
             myCustomers={this.props.myCustomers}
-            close={() => { this.setState({ formCompleteModal: false }); }}
+            ready={this.state.ready}
+            toggleReady={this.toggleReady}
           />
         </View>
       </Drawer>
@@ -325,7 +339,7 @@ const CustomerDetailsIPadSurveyor = compose(
     options: ({ customerId }) => ({ variables: { id: customerId } }),
   }),
   graphql(getFinishedSurvey, { name: 'getFinishedSurvey' }),
+  graphql(toggleSurveyReady, { name: 'toggleSurveyReady' }),
 )(_CustomerDetailsIPadSurveyor);
 
 export default CustomerDetailsIPadSurveyor;
-

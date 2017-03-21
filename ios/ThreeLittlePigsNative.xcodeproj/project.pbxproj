@@ -72,6 +72,7 @@
 		754CA335CFB1417A92333444 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F436F36494F426F8749757A /* libReactNativeConfig.a */; };
 		7EEE312188454B6EA7E32910 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2B3B1A50029E40E6867CD529 /* Entypo.ttf */; };
 		80A1D587EE954ED294C94CA1 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4339439A91FB4D3AB59EFBDD /* Octicons.ttf */; };
+		82EB82BAF3214DB89EE7F931 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E326216A41C4A9DAA9B3AEB /* libRCTRestart.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8B4F51A7ADB44FB7D68495A6 /* libPods-ThreeLittlePigsNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6DB697C6D19C542A8773F9 /* libPods-ThreeLittlePigsNative.a */; };
 		8DE7C26A2A994DF7B3AAADB9 /* libRNCalendarEvents.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E599DCBA528744A384C5BF39 /* libRNCalendarEvents.a */; };
@@ -325,6 +326,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = CodePush;
+		};
+		A36E67221E809CE10040A6C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2E6D827FF84B42459FB4E490 /* RCTRestart.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3245CDED1BFEE35C00EABF68;
+			remoteInfo = RCTRestart;
 		};
 		A37BCFDD1E492461005EBD46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -623,6 +631,7 @@
 		2B3B1A50029E40E6867CD529 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* ThreeLittlePigsNative-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ThreeLittlePigsNative-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ThreeLittlePigsNative-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ThreeLittlePigsNative-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E6D827FF84B42459FB4E490 /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTRestart.xcodeproj; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; };
 		307D74B1DCEC4FE3875AD2B0 /* Rubik-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-LightItalic.ttf"; path = "../node_modules/native-base/Fonts/Rubik-LightItalic.ttf"; sourceTree = "<group>"; };
 		35D68F2C9FF2451ABF6AFBC9 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		3B4526BD62644710B2608BC8 /* Comic Sans MS.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Comic Sans MS.ttf"; path = "../node_modules/native-base/Fonts/Comic Sans MS.ttf"; sourceTree = "<group>"; };
@@ -646,6 +655,7 @@
 		69C5A8752A4C4DD4AAB8A464 /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libCocoaLumberjack.a; sourceTree = "<group>"; };
 		6B735DE95DC441C8A274E58C /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
 		6D0E59A96FC84619A256E043 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		6E326216A41C4A9DAA9B3AEB /* libRCTRestart.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTRestart.a; sourceTree = "<group>"; };
 		71A5F347258744EB960CACCA /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		753B8749F7C54E399156167D /* RNBackgroundFetch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundFetch.xcodeproj; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch.xcodeproj"; sourceTree = "<group>"; };
 		758F488EA59D4981A8008D6E /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
@@ -1555,6 +1565,7 @@
 				B75FBBFA46BC011D823C3698 /* CoreMedia.framework in Frameworks */,
 				73C09BA0DFF779E937884557 /* CoreVideo.framework in Frameworks */,
 				8B4F51A7ADB44FB7D68495A6 /* libPods-ThreeLittlePigsNative.a in Frameworks */,
+				82EB82BAF3214DB89EE7F931 /* libRCTRestart.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1740,6 +1751,7 @@
 				CD28C0B36A8546A7B4024594 /* RCTOneSignal.xcodeproj */,
 				F0CFDEE75EF54250B97E610C /* RealmReact.xcodeproj */,
 				DBD6E8401E884124A9B916C0 /* RNFS.xcodeproj */,
+				2E6D827FF84B42459FB4E490 /* RCTRestart.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1783,6 +1795,14 @@
 			isa = PBXGroup;
 			children = (
 				A3142B751E4C39CB00B27675 /* libCodePush.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A36E66FC1E809CE10040A6C9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A36E67231E809CE10040A6C9 /* libRCTRestart.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3547,6 +3567,10 @@
 					ProjectRef = CD28C0B36A8546A7B4024594 /* RCTOneSignal.xcodeproj */;
 				},
 				{
+					ProductGroup = A36E66FC1E809CE10040A6C9 /* Products */;
+					ProjectRef = 2E6D827FF84B42459FB4E490 /* RCTRestart.xcodeproj */;
+				},
+				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
 					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
 				},
@@ -3795,6 +3819,13 @@
 			fileType = archive.ar;
 			path = libCodePush.a;
 			remoteRef = A3142B741E4C39CB00B27675 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A36E67231E809CE10040A6C9 /* libRCTRestart.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTRestart.a;
+			remoteRef = A36E67221E809CE10040A6C9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A37BCFDE1E492461005EBD46 /* libA0RNLock.a */ = {
@@ -4286,7 +4317,10 @@
 				INFOPLIST_FILE = ThreeLittlePigsNativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-lc++",
 					"-ObjC",
@@ -4306,7 +4340,10 @@
 				INFOPLIST_FILE = ThreeLittlePigsNativeTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-lc++",
 					"-ObjC",
@@ -4349,6 +4386,7 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
 				);
 				INFOPLIST_FILE = ThreeLittlePigsNative/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -4396,6 +4434,7 @@
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/realm/src/**",
 					"$(SRCROOT)/../react-native/React/**",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
 				);
 				INFOPLIST_FILE = ThreeLittlePigsNative/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -4426,7 +4465,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "ThreeLittlePigsNative-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4453,7 +4495,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "ThreeLittlePigsNative-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -4479,7 +4524,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "ThreeLittlePigsNative-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.ThreeLittlePigsNative-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -4501,7 +4549,10 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "ThreeLittlePigsNative-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.ThreeLittlePigsNative-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;

@@ -8,6 +8,7 @@ import { graphql, compose } from 'react-apollo';
 import codePush from 'react-native-code-push';
 import OneSignal from 'react-native-onesignal';
 import RNCalendarEvents from 'react-native-calendar-events';
+import RNRestart from 'react-native-restart';
 import { getUserandCustomers } from '../graphql/queries';
 import { authInit, saveProfile, getUserID } from '../Realm/authRealm';
 import { downloadPDF } from '../Utils/localFileSystem';
@@ -60,14 +61,11 @@ class _Root extends Component {
     OneSignal.removeEventListener('ids', this.onIds);
   }
   onReceived = (notification) => {
-   // console.log("Notification received: ", notification);
   }
 
   onOpened = (openResult) => {
     const customer = openResult.notification.payload.additionalData.customer;
     const action = openResult.notification.payload.additionalData.actionSelected;
-    // console.log(customer, action);
-
     if (action === 'id1') {
       this.props.acceptEstimate({
         variables: {
@@ -93,6 +91,7 @@ class _Root extends Component {
         console.error(err);
       } else {
         saveProfile(profile, token);
+        RNRestart.Restart();
       }
     });
   };

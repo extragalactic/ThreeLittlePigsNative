@@ -16,15 +16,17 @@ const SurveyPhotoModal = ({
    notes,
    TakePhoto,
    AddFromLibrary,
+   photos
   }) => (
     <Modal
       isOpen={open}
       onClosed={close}
       backdrop
       style={MasterStyleSheet.surveyPhotoModal}
-      position={'center'}
+      position={'top'}
     >
       <SurveyCardPhoto
+        photos={photos}
         photoSelection={photoSelection}
         selection={selection}
         selected={selected}
