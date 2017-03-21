@@ -3,12 +3,13 @@ import { Card } from 'react-native-elements';
 import {
   Button,
   PickerIOS,
-  ScrollView,
+  View,
   TextInput,
+  Text,
 } from 'react-native';
-import { MasterStyleSheet } from '../../style/MainStyles';
 
-const PickerItemIOS = PickerIOS.Item;
+import { MasterStyleSheet } from '../../style/MainStyles';
+import PhotoLightBox from './photoLightBox';
 
 const SurveyCardPhoto = ({
   photoSelection,
@@ -21,10 +22,13 @@ const SurveyCardPhoto = ({
   updatePhotoCaption,
   TakePhoto,
   AddFromLibrary,
+  photos,
 }) => (
   <Card
     title={`${selected} Photos`}
+    containerStyle={MasterStyleSheet.surveyPhotoCard}
   >
+    <Text> Add comments to photo</Text>
     <TextInput
       style={MasterStyleSheet.surveyNotesInputText}
       onChangeText={text => updatePhotoCaption(text)}
@@ -39,20 +43,12 @@ const SurveyCardPhoto = ({
       title={'Library'}
       onPress={AddFromLibrary}
     />
-    <PickerIOS
-      style={MasterStyleSheet.surveyCardPicker}
-      itemStyle={MasterStyleSheet.surveyCardPickerItem}
-      selectedValue={photoSelection}
-      onValueChange={slct => updateSelection(slct)}
-    >
-      {selection.map((sel, idx) => (
-        <PickerItemIOS
-          key={idx}
-          value={sel}
-          label={sel}
-        />
-     ))}
-    </PickerIOS>
+    <View>
+      <Text>Preview</Text>
+      <PhotoLightBox
+        photos={photos}
+      />
+    </View>
   </Card>
 );
 

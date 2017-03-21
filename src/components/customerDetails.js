@@ -52,7 +52,6 @@ class _CustomerDetails extends Component {
     };
   }
   componentDidMount() {
-   // console.log('details', this)
     this.props.getCustomer({ variables: {
       id: this.props.selection,
     } }).then((customer) => {
@@ -216,7 +215,6 @@ class _CustomerDetails extends Component {
     });
   };
   changeAppointment = (meetingid, calid) => {
-    // console.log(meetingid, calid);
     this.setState({
       change: true,
     });

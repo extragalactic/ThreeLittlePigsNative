@@ -49,7 +49,6 @@ const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyi
             onPress={selectNewCustomer}
             containerStyle={MasterStyleSheet.mainList}
           />
-          {console.log('MAIN', props)}
           <ListItem
             hideChevron
             title="Customers to followup"

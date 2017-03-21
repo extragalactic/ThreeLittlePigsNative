@@ -181,6 +181,15 @@ const MasterStyleSheet = StyleSheet.create({
     width: 300,
 
   },
+  surveyNotesModal: {
+    alignItems: 'center',
+    height: DeviceInfo.isTablet() ? window.height / 3 : window.height / 3,
+    marginTop: 100,
+    width: DeviceInfo.isTablet() ? window.width / 1.4 : window.width - 20,
+  },
+  surveyNotesCard: {
+
+  },
   surveyNotesInputText: {
     height: 90,
     width: DeviceInfo.isTablet() ? 600 : 300,
@@ -188,6 +197,11 @@ const MasterStyleSheet = StyleSheet.create({
     borderWidth: 2,
     alignItems: 'center',
     padding: 4,
+
+  },
+  surveyPhotoCard: {
+    height: DeviceInfo.isTablet() ? window.height / 1.8 : window.height / 1.8,
+    top: DeviceInfo.isTablet() ? -15 : 0,
 
   },
   surveyNotesModalCard: {
@@ -200,19 +214,14 @@ const MasterStyleSheet = StyleSheet.create({
   surveyPhotoModalCard: {
     backgroundColor: '#FFFF66',
     alignItems: 'center',
-    marginTop: 20,
-    height: DeviceInfo.isTablet() ? window.height / 3.25 : window.height / 1.56,
+    marginTop: 30,
+    height: DeviceInfo.isTablet() ? window.height / 3.25 : window.height / 0.9,
     width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
   },
-  surveyNotesModal: {
-    alignItems: 'center',
-    height: DeviceInfo.isTablet() ? window.height / 2.3 : window.height / 1.60,
-    top: 50,
-    width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
-  },
+
   surveyPhotoModal: {
     alignItems: 'center',
-    height: DeviceInfo.isTablet() ? window.height / 2 : window.height / 1.50,
+    height: DeviceInfo.isTablet() ? window.height / 2 : window.height / 1.56,
     top: 50,
     width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
   },
@@ -255,13 +264,16 @@ const MasterStyleSheet = StyleSheet.create({
   },
   checkBox: {
     backgroundColor: '#8c92ac',
-
-
   },
   EstimatePriceModal: {
     alignItems: 'center',
-    height: DeviceInfo.isTablet() ? window.height / 2.9 : window.height / 1.60,
+    height: DeviceInfo.isTablet() ? window.height / 2.2 : window.height / 1.60,
     width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
+  },
+  PricingCard: {
+    position: 'absolute',
+    width: window.width / 2.1,
+    alignSelf: 'center',
   },
   AutoComplete: {},
   EstimateModalColLeft: {
@@ -278,11 +290,6 @@ const MasterStyleSheet = StyleSheet.create({
     backgroundColor: '#CFCFC4',
 
 
-  },
-  PricingCard: {
-    position: 'absolute',
-    width: window.width / 2.1,
-    alignSelf: 'center',
   },
   addEstimateButton: {
     width: window.width / 7,
@@ -303,7 +310,7 @@ const MasterStyleSheet = StyleSheet.create({
     flex: 1,
     position: 'absolute',
     top: 300,
-    height: window.height / 1.9,
+    height: window.height / 2.5,
 
   },
 });

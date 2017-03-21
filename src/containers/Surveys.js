@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
 
 class Surveys extends Component {
   componentDidMount() {
-    console.log(NativeModules);
   }
 
   render() {
