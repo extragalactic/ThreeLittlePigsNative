@@ -265,15 +265,20 @@ const MasterStyleSheet = StyleSheet.create({
   checkBox: {
     backgroundColor: '#8c92ac',
   },
+  customText: {
+    backgroundColor: '#8c92ac',
+    width: window.width / 2.85,
+    alignItems: 'center',
+    marginLeft: 10,
+  },
   EstimatePriceModal: {
     alignItems: 'center',
-    height: DeviceInfo.isTablet() ? window.height / 2.2 : window.height / 1.60,
+    height: DeviceInfo.isTablet() ? window.height / 3 : window.height / 1.60,
     width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
   },
   PricingCard: {
     position: 'absolute',
     width: window.width / 2.1,
-    alignSelf: 'center',
   },
   AutoComplete: {},
   EstimateModalColLeft: {

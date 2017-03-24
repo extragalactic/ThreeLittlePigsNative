@@ -24,7 +24,11 @@ const CANCEL_INDEX = 6;
 class _PhotoGalleryEstimates extends React.Component {
   constructor() {
     super();
-    this.state = { clicked: '', zoomModal: false };
+    this.state = {
+      clicked: '',
+      zoomModal: false,
+      currentSelection: '',
+  };
   }
 
   downloadImage = (image) => {
@@ -57,6 +61,7 @@ class _PhotoGalleryEstimates extends React.Component {
 
 
   showActionSheet = (media, index) => {
+    this.setState({ currentSelection: this.props.photos[index].photo});
     ActionSheetIOS.showActionSheetWithOptions({
       options: BUTTONS,
       cancelButtonIndex: CANCEL_INDEX,
@@ -87,7 +92,6 @@ class _PhotoGalleryEstimates extends React.Component {
 
   render() {
     return (
-
       <Modal
         isOpen={this.props.open}
         onClosed={this.props.close}
@@ -96,6 +100,7 @@ class _PhotoGalleryEstimates extends React.Component {
         <ZoomViewModal
           open={this.state.zoomModal}
           close={() => { this.setState({ zoomModal: false }); }}
+          photo={this.state.currentSelection}
         />
         <PhotoBrowser
           mediaList={this.props.photos}

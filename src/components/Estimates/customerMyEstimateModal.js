@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, Image, Dimensions, ScrollView, AlertIOS } from 'react-native';
+import { Modal, View, Image, Dimensions, ScrollView, AlertIOS, TouchableHighlight } from 'react-native';
 import { Col, Grid } from 'react-native-easy-grid';
 import { Icon, Text, Card, Button, CheckBox, ListItem } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
@@ -9,6 +9,7 @@ import Swipeout from 'react-native-swipeout';
 import { generatePDF } from '../../graphql/mutations';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
+import ZoomViewModal from '../photoGallery/zoomViewModal';
 
 import EstimatePriceModal from './estimatePriceModal';
 import PhotoGalleryEstimates from '../photoGallery/photoGalleryEstimates';
@@ -55,6 +56,8 @@ class _MyEstimateModal extends React.Component {
       warrantyAsStated: false,
       existingConcrete: false,
       customText: '',
+      zoomModal: false,
+      currentSelection: '',
 
     };
   }
@@ -104,11 +107,20 @@ class _MyEstimateModal extends React.Component {
             variables: {
               custid: this.props.customer.id,
               generics: gen,
+              text: this.state.customText,
             },
           }),
         },
       ],
     );
+  }
+
+  selectImage = (image) => {
+    console.log(image)
+    this.setState({ 
+      currentSelection: image,
+      zoomModal: true,
+     })
   }
 
   selectPhoto = (index) => {
@@ -121,7 +133,7 @@ class _MyEstimateModal extends React.Component {
   };
 
   updateCustomInput = (customText) => {
-    this.setState({ customText });
+    this.setState({ customText, custom: true });
   };
 
   render() {
@@ -172,13 +184,18 @@ class _MyEstimateModal extends React.Component {
                       >
                         {survey.photos.map((photo, idx) => (
                           <View
-                          style={MasterStyleSheet.surveyResultInsideView}
-                        >
-                          <Image
-                               style={MasterStyleSheet.surveyResultPhotos}
-                               source={{ uri: photo.url }}
-                             />
-                        </View>
+                            key={idx}
+                            style={MasterStyleSheet.surveyResultInsideView}
+                          >
+                            <TouchableHighlight
+                              onPress={() => this.selectImage(photo.url)}
+                            >
+                              <Image
+                                style={MasterStyleSheet.surveyResultPhotos}
+                                source={{ uri: photo.url }}
+                              />
+                            </TouchableHighlight>
+                          </View>
           ))}
                       </Swiper>
                       <ScrollView
@@ -186,9 +203,9 @@ class _MyEstimateModal extends React.Component {
                       >
                         { survey.notes.map((note, idx) => (
                           <View key={idx}>
-                          <Text h4> {note.description}</Text>
-                          <Text h5> {note.text}</Text>
-                        </View>
+                            <Text h4> {note.description}</Text>
+                            <Text h5> {note.text}</Text>
+                          </View>
                 ))}
                       </ScrollView>
                     </View>
@@ -228,7 +245,7 @@ class _MyEstimateModal extends React.Component {
                     style={MasterStyleSheet.EstimateGenerics}
                   >
                     <ScrollView>
-                      {generics.map(generic => (
+                      { generics.map(generic => (
                         <CheckBox
                           title={generic.des}
                           onPress={() => this.setState({ [generic.prop]: !this.state[generic.prop] })}
@@ -236,6 +253,12 @@ class _MyEstimateModal extends React.Component {
                           containerStyle={MasterStyleSheet.checkBox}
                         />
                      ))}
+                      <ListItem
+                        raised
+                        containerStyle={MasterStyleSheet.customText}
+                        title="Custom Text"
+                        onPress={() => this.setState({ customModal: true })}
+                      />
                     </ScrollView>
                     <View
                       style={MasterStyleSheet.addEstimateButtonRow1}
@@ -300,12 +323,16 @@ class _MyEstimateModal extends React.Component {
             close={() => this.setState({ estimatePreviewModal: false })}
             customer={this.props.customer}
           />
+        <ZoomViewModal
+          open={this.state.zoomModal}
+          close={() => { this.setState({ zoomModal: false }); }}
+          photo={this.state.currentSelection}
+        />
         </Modal>
       </View>
     );
   }
 }
-
 
 const MyEstimateModal = compose(
     graphql(generatePDF, { name: 'generatePDF' }),

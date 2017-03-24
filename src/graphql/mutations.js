@@ -350,8 +350,8 @@ const sendEstimate = gql `
     }`;
 
 const generatePDF = gql `
-    mutation generatePDF($custid: String, $generics: generics){
-      generatePDFEstimate(custid: $custid, generics: $generics){
+    mutation generatePDF($custid: String, $generics: generics, $text: String){
+      generatePDFEstimate(custid: $custid, generics: $generics, text: $text){
         base64
         url
         docID
