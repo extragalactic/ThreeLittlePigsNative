@@ -45,6 +45,16 @@ class _Root extends Component {
     OneSignal.addEventListener('registered', this.onRegistered);
     OneSignal.addEventListener('ids', this.onIds);
 
+    if (authInit()) {
+      setTimeout(() => {
+        OneSignal.sendTags({
+          userid: this.props.data.user._id,
+          username: `${this.props.data.user.firstName}${this.props.data.user.lastName}`,
+          estimator: this.props.data.user.estimator,
+          surveyor: this.props.data.user.surveyor,
+        });
+      }, 2000);
+    }
     RNCalendarEvents.authorizeEventStore()
      .then((status) => {
        console.log(status);

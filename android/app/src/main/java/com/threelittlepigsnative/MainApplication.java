@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.reactnative.photoview.PhotoViewPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.rnfs.RNFSPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
@@ -45,6 +46,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+<<<<<<< HEAD
+            new PhotoViewPackage(),
+=======
+>>>>>>> 710700b55febf1696fb1767cbec95b68bcbc552f
             new ReactNativeRestartPackage(),
             new RNFSPackage(),
             new ReactNativeOneSignalPackage(),

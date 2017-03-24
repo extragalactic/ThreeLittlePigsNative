@@ -7,6 +7,7 @@ import {
   NativeModules,
 } from 'react-native';
 
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,9 +23,7 @@ class Surveys extends Component {
 
   render() {
     return (
-      <WebView
-        source={{ uri: 'https://tlpm.ca/documents/JohnFritzEstimate.pdf' }}
-      />
+    <Text> test</Text>
     );
   }
 }

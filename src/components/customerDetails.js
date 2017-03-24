@@ -242,15 +242,23 @@ class _CustomerDetails extends Component {
     this.setState({ notes: '' });
   };
   toggleReady = () => {
-    this.setState({
-      ready: !this.state.ready,
-    });
-    this.props.toggleSurveyReady({
-      variables: {
-        custid: this.state.customer.id,
-        userid: this.props.user._id,
-      },
-    });
+    AlertIOS.alert(
+      'Are you sure?',
+       'Survey will be sent to estimator',
+      [{ text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'Send to Estimator',
+          onPress: () => {
+            this.setState({ ready: !this.state.ready });
+            this.props.toggleSurveyReady({
+              variables: {
+                custid: this.state.customer.id,
+                userid: this.props.user._id,
+              },
+            });
+          },
+        },
+      ],
+    );
   };
   render() {
     return (

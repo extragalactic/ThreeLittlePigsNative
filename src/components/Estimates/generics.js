@@ -1,9 +1,5 @@
 const generics = [
   {
-    prop: 'customModal',
-    des: 'Custom',
-  },
-  {
     prop: 'watertest',
     des: 'Waterproof Test',
   },

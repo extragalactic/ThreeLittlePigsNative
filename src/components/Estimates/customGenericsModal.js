@@ -19,7 +19,7 @@ class CustomGenericsModal extends React.Component {
     return (
       <Modal
         isOpen={this.props.open}
-
+        onClosed={this.props.close}	
         style={MasterStyleSheet.EstimatePriceModal}
         position={'center'}
       >
@@ -29,9 +29,9 @@ class CustomGenericsModal extends React.Component {
         >
           <TextInput
             style={{ height: 200, borderColor: 'gray', borderWidth: 1 }}
-            placeholder="Dollar Amount"
             onChangeText={price => this.props.updateCustomInput(price)}
             value={this.props.value}
+            multiline
           />
         </Card>
 
