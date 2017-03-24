@@ -250,6 +250,15 @@ class _CustomerDetailsIPadSurveyor extends Component {
         },
       ],
     );
+    this.setState({
+      ready: !this.state.ready,
+    });
+    this.props.toggleSurveyReady({
+      variables: {
+        custid: this.state.customer.id,
+        userid: this.props.user._id,
+      },
+    });
   };
   render() {
     if (!this.props.data.customer) {

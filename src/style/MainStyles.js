@@ -274,11 +274,11 @@ const MasterStyleSheet = StyleSheet.create({
   EstimatePriceModal: {
     alignItems: 'center',
     height: DeviceInfo.isTablet() ? window.height / 3 : window.height / 1.60,
-    width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
   },
   PricingCard: {
     position: 'absolute',
     width: window.width / 2.1,
+    alignSelf: 'center',
   },
   AutoComplete: {},
   EstimateModalColLeft: {

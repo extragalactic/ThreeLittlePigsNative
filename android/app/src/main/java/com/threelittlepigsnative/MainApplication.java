@@ -46,7 +46,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+<<<<<<< HEAD
             new PhotoViewPackage(),
+=======
+>>>>>>> 710700b55febf1696fb1767cbec95b68bcbc552f
             new ReactNativeRestartPackage(),
             new RNFSPackage(),
             new ReactNativeOneSignalPackage(),
