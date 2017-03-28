@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   Text,
+  ActivityIndicator,
 } from 'react-native';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
@@ -23,6 +24,7 @@ const SurveyCardPhoto = ({
   TakePhoto,
   AddFromLibrary,
   photos,
+  loading,
 }) => (
   <Card
     title={`${selected} Photos`}
@@ -35,7 +37,9 @@ const SurveyCardPhoto = ({
       value={photoCaption}
       multiline
     />
-    <Button
+    {loading ? <ActivityIndicator /> :
+      <View>
+   <Button
       title={'Take Photo'}
       onPress={TakePhoto}
     />
@@ -43,6 +47,10 @@ const SurveyCardPhoto = ({
       title={'Library'}
       onPress={AddFromLibrary}
     />
+      </View>
+    
+  }
+ 
     <View>
       <Text>{photos.length} Photos Taken</Text>
    

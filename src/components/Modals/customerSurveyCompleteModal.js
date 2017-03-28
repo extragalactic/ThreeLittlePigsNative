@@ -32,6 +32,7 @@ class SurveyCompleteModal extends React.Component {
                 style={MasterStyleSheet.surveyResultPhotosView}
                 key={idx}
               >
+              {console.log('log', this)}
                 <Text
                   h3
                 >{survey.heading}</Text>

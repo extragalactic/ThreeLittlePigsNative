@@ -47,6 +47,7 @@ class _SurveyMainModal extends React.Component {
       ready: false,
       notesSelection: 'no header',
       photoSelection: 'no header',
+      loading: false,
     };
   }
   getPhoto = () => {
@@ -103,7 +104,7 @@ class _SurveyMainModal extends React.Component {
   };
   TakePhoto = () => {
     ImagePickerManager.launchCamera(photoOptions, (data) => {
-      console.log(data);
+      this.setState({ loading: true });
       this.state.photos.push({
         photo: data.uri,
       });
@@ -119,20 +120,24 @@ class _SurveyMainModal extends React.Component {
         },
       })
       .then(() => {
-          this.props.getSurveyLocalPhotos({
-      variables: { id: this.props.customer.id },
-    })
+        this.props.getSurveyLocalPhotos({
+          variables: { id: this.props.customer.id },
+        })
     .then((payload) => {
-      this.setState({ surveyPhotos: payload.data.getSurveyLocalPhotos});
+      this.setState({
+        surveyPhotos: payload.data.getSurveyLocalPhotos,
+        loading: false,
+      });
     });
       });
-    })
+    });
     this.setState({
       photoCaption: '',
     });
   };
   AddFromLibrary = () => {
     ImagePickerManager.launchImageLibrary(photoOptions, (data) => {
+      this.setState({ loading: true });
       this.state.photos.push({
         photo: data.uri,
       });
@@ -148,8 +153,11 @@ class _SurveyMainModal extends React.Component {
         },
       })
        .then((payload) => {
-      this.setState({ surveyPhotos: payload.data.getSurveyLocalPhotos});
-    });
+         this.setState({
+           surveyPhotos: payload.data.getSurveyLocalPhotos,
+           loading: false,
+         });
+       });
     });
     this.setState({
       photoCaption: '',
@@ -278,6 +286,7 @@ class _SurveyMainModal extends React.Component {
             selected={this.state.selected}
           />
           <SurveyPhotosModal
+            loading={this.state.loading}
             photos={this.state.photos}
             open={this.state.photoModal}
             updatePhotoCaption={this.updatePhotoCaption}
