@@ -11,10 +11,10 @@ const photoOptions = {
   allowsEditing: false, // Built in functionality to resize/reposition the image after selection
   noData: false, // photos only - disables the base64 `data` field from being generated (greatly improves performance on large photos)
   storageOptions: { // if this key is provided, the image will get saved in the documents directory on ios, and the pictures directory on android (rather than a temporary directory)
-    skipBackup: false, // ios only - image will NOT be backed up to icloud
+    skipBackup: true, // ios only - image will NOT be backed up to icloud
     path: 'images', // ios only - will save image at /Documents/images rather than the root
-    cameraRoll: true,
-    waitUntilSaved: true,
+    cameraRoll: false,
+    waitUntilSaved: false,
   },
 };
 
