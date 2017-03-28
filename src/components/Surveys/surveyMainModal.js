@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import React from 'react';
-import { Modal, View } from 'react-native';
+import { Modal, View, ActivityIndicator } from 'react-native';
 import { Icon } from 'react-native-elements';
 import ImagePickerManager from 'react-native-image-picker';
 import { graphql, compose } from 'react-apollo';
-
+import RNFS from 'react-native-fs';
+import uuid from 'react-native-uuid';
 import SurveyPicker from '../Surveys/surveyPicker';
 import PargingSelect from '../Surveys/pargingSelect';
 import ConcreteSelect from '../Surveys/concreteSelect';
@@ -20,6 +21,8 @@ import SurveyPhotosModal from '../Surveys/surveyPhotoModal';
 import { MasterStyleSheet } from '../../style/MainStyles';
 
 import photoOptions from './photoOptions';
+
+import copyImagefromTemptoPersist from '../../Utils/images';
 
 import {
    addSurveyNotes,
@@ -51,32 +54,45 @@ class _SurveyMainModal extends React.Component {
     };
   }
   getPhoto = () => {
-    // console.log('picker');
-
-    this.setState({
-      photoModal: true,
-    });
-    /*
+    setTimeout(() => {
+      this.setState({ loading: true });
+    }, 1000);
     ImagePickerManager.showImagePicker(photoOptions, (data) => {
+      if (data.didCancel) {
+        this.setState({ loading: false });
+      }
+      const docID = uuid.v4();
+     // copyImagefromTemptoPersist('data.uri');
+      RNFS.copyFile(data.uri, `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`)
+       .then(res => console.log(res))
+       .catch(err => console.error(err));
+      RNFS.readDir(`${RNFS.DocumentDirectoryPath}/images`)
+       .then((result) => {
+       console.table(result);
+       });
       this.props.addSurveyPhoto({
         variables: {
           heading: this.state.selected,
-          description: this.state.notesSelection,
+          description: this.state.photoCaption,
           orginalBase64: data.data,
           timestamp: new Date(),
           custid: this.props.customer.id,
           user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+          localfile: `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`,
         },
+      }).then((res) => {
+         if (res.data.addSurveyPhoto) {
+           this.setState({ loading: false });
+        }
       });
     });
-    */
   };
   viewPhotos = () => {
     this.props.getSurveyLocalPhotos({
       variables: { id: this.props.customer.id },
     })
     .then((data) => {
-      this.setState({ surveyPhotos: data.data.getSurveyLocalPhotos});
+      this.setState({ surveyPhotos: data.data.getSurveyLocalPhotos });
     });
     this.setState({
       photoGallery: true,
@@ -104,10 +120,6 @@ class _SurveyMainModal extends React.Component {
   };
   TakePhoto = () => {
     ImagePickerManager.launchCamera(photoOptions, (data) => {
-      this.setState({ loading: true });
-      this.state.photos.push({
-        photo: data.uri,
-      });
       this.props.addSurveyPhoto({
         variables: {
           heading: this.state.selected,
@@ -138,9 +150,6 @@ class _SurveyMainModal extends React.Component {
   AddFromLibrary = () => {
     ImagePickerManager.launchImageLibrary(photoOptions, (data) => {
       this.setState({ loading: true });
-      this.state.photos.push({
-        photo: data.uri,
-      });
       this.props.addSurveyPhoto({
         variables: {
           heading: this.state.selected,
@@ -227,53 +236,63 @@ class _SurveyMainModal extends React.Component {
               color={'blue'}
             />
           </View>
-          <SurveyPicker
-            changeSelection={this.changeSelection}
-            selection={this.state.selected}
+          {this.state.loading ? <ActivityIndicator
             style={MasterStyleSheet.surveyMainPicker}
-          />
-          <View
-            style={MasterStyleSheet.surveyDetailsList}
-          >
-            {this.state.selected === 'Parging' ? <PargingSelect updateSelection={this.updateSelection} /> : null }
-            {this.state.selected === 'Concrete' ? <ConcreteSelect
-              count={this.state.count}
-              updateCount={this.updateCount}
-              updateSelection={this.updateSelection}
-            /> : null }
-            {this.state.selected === 'Chimney' ? <ChimneySelect updateSelection={this.updateSelection} /> : null }
-            {this.state.selected === 'Brick' ? <BrickSelect updateSelection={this.updateSelection} /> : null }
-            {this.state.selected === 'Flashing' ? <FlashingSelect updateSelection={this.updateSelection} /> : null }
-            {this.state.selected === 'Waterproofing' ? <WaterproofingSelect updateSelection={this.updateSelection} /> : null }
-            {this.state.selected === 'Windowsills' ? <WindowsillsSelect updateSelection={this.updateSelection} /> : null }
-            {this.state.selected === 'Refacing' ? <RefacingSelect updateSelection={this.updateSelection} /> : null }
+            size={'large'}
+          /> :
+          <View>
+            <SurveyPicker
+              changeSelection={this.changeSelection}
+              selection={this.state.selected}
+              style={MasterStyleSheet.surveyMainPicker}
+            />
+
+            <View
+              style={MasterStyleSheet.surveyDetailsList}
+            >
+              {this.state.selected === 'Parging' ? <PargingSelect updateSelection={this.updateSelection} /> : null }
+              {this.state.selected === 'Concrete' ? <ConcreteSelect
+                count={this.state.count}
+                updateCount={this.updateCount}
+                updateSelection={this.updateSelection}
+              /> : null }
+              {this.state.selected === 'Chimney' ? <ChimneySelect updateSelection={this.updateSelection} /> : null }
+              {this.state.selected === 'Brick' ? <BrickSelect updateSelection={this.updateSelection} /> : null }
+              {this.state.selected === 'Flashing' ? <FlashingSelect updateSelection={this.updateSelection} /> : null }
+              {this.state.selected === 'Waterproofing' ? <WaterproofingSelect updateSelection={this.updateSelection} /> : null }
+              {this.state.selected === 'Windowsills' ? <WindowsillsSelect updateSelection={this.updateSelection} /> : null }
+              {this.state.selected === 'Refacing' ? <RefacingSelect updateSelection={this.updateSelection} /> : null }
+            </View>
+            <View style={MasterStyleSheet.surveyMainContainer}>
+              <Icon
+                name="description"
+                color="#517fa4"
+                raised
+                onPress={() => this.setState({ notesModal: true })}
+              />
+              <Icon
+                name="add-a-photo"
+                color="#517fa4"
+                raised
+                onPress={this.getPhoto}
+              />
+              <Icon
+                name="photo"
+                color="#517fa4"
+                raised
+                onPress={this.viewPhotos}
+              />
+              <Icon
+                name="help-outline"
+                color="#517fa4"
+                raised
+                onPress={() => console.log(this)}
+              />
+            </View>
           </View>
-          <View style={MasterStyleSheet.surveyMainContainer}>
-            <Icon
-              name="description"
-              color="#517fa4"
-              raised
-              onPress={() => this.setState({ notesModal: true })}
-            />
-            <Icon
-              name="add-a-photo"
-              color="#517fa4"
-              raised
-              onPress={this.getPhoto}
-            />
-            <Icon
-              name="photo"
-              color="#517fa4"
-              raised
-              onPress={this.viewPhotos}
-            />
-            <Icon
-              name="help-outline"
-              color="#517fa4"
-              raised
-              onPress={() => console.log(this)}
-            />
-          </View>
+       }
+
+
           <SurveyNotesModal
             open={this.state.notesModal}
             close={() => this.setState({ notesModal: false })}
@@ -322,7 +341,7 @@ const SurveyMainModal = compose(
 )(_SurveyMainModal);
 
 export default SurveyMainModal;
- 
+
 
 /*
   <View style={MasterStyleSheet.surveyMainButton}>

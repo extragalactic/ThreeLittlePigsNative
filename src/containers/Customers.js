@@ -37,15 +37,6 @@ const Customers = ({
   myEstimates,
   myCustomers,
  }) => {
-  if (user.newCustomers === null) {
-    return (
-      <View style={MasterStyleSheet.container}>
-        <Spinner
-          type={'9CubeGrid'}
-        />
-      </View>
-    );
-  }
   return (
     <Router>
       <Scene key={'root'}>

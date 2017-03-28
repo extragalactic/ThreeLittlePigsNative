@@ -222,14 +222,7 @@ const addSurveyPhoto = gql`
       editedlBase64:$editedlBase64,
       orginalBase64:$orginalBase64
     )
-    {
-      heading
-      description
-      timestamp
-      user
-      orginalBase64
-      editedlBase64
-     }
+   
   }`;
 const getSurveyPhotos = gql`
   mutation getSurveyImages($id: String){

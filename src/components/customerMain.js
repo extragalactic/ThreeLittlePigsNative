@@ -6,6 +6,7 @@ import { graphql, compose } from 'react-apollo';
 
 import { MasterStyleSheet } from '../style/MainStyles';
 import { getMyCustomers, getUserandCustomers } from '../graphql/queries';
+import { authInit, saveProfile, getUserID } from '../Realm/authRealm';
 
 
 const selectNewCustomer = () => {
@@ -36,16 +37,22 @@ const selectMyEstimates = () => {
   Actions.customerListMyEstimates();
 };
 
-const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyinProgress, surveyComplete, myEstimates, myCustomers }) => (
+const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyinProgress, surveyComplete, myEstimates, myCustomers }) => {
+  if(props.data.loading){
+    console.log( getUserID());
+    return (
+      <Text> loading</Text>
+    )
+  }
+   return(
   <View style={MasterStyleSheet.mainListView}>
-
     <List>
       { user.surveyor ?
         <View>
           <ListItem
             hideChevron
             title={'New Customers'}
-            badge={{ value: props.data.getMyCustomers.newcustomers.length, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
+            badge={{ value: props.data.getMyCustomers.newcustomers ? props.data.getMyCustomers.newcustomers.length : 0, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
             onPress={selectNewCustomer}
             containerStyle={MasterStyleSheet.mainList}
           />
@@ -111,12 +118,12 @@ const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyi
 
     </List>
   </View>
-    );
-
+   );
+};
 
 const CustomerMain = compose(
   graphql(getUserandCustomers, {
-    options: ({ user }) => ({ variables: { id: user._id }, pollInterval: 1000 }),
+    options: { variables: { id: getUserID() }, pollInterval: 1000, fetchPolicy: 'cache-first' },
   }),
 )(_CustomerMain);
 
