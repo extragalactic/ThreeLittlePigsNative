@@ -16,7 +16,8 @@ const SurveyPhotoModal = ({
    notes,
    TakePhoto,
    AddFromLibrary,
-   photos
+   photos,
+   loading,
   }) => (
     <Modal
       isOpen={open}
@@ -26,6 +27,7 @@ const SurveyPhotoModal = ({
       position={'top'}
     >
       <SurveyCardPhoto
+        loading={loading}
         photos={photos}
         photoSelection={photoSelection}
         selection={selection}

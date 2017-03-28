@@ -47,6 +47,7 @@ class _SurveyMainModal extends React.Component {
       ready: false,
       notesSelection: 'no header',
       photoSelection: 'no header',
+      loading: false,
     };
   }
   getPhoto = () => {
@@ -76,9 +77,9 @@ class _SurveyMainModal extends React.Component {
     })
     .then((data) => {
       this.setState({ surveyPhotos: data.data.getSurveyLocalPhotos});
-      this.setState({
-        photoGallery: true,
-      });
+    });
+    this.setState({
+      photoGallery: true,
     });
   };
 
@@ -103,6 +104,7 @@ class _SurveyMainModal extends React.Component {
   };
   TakePhoto = () => {
     ImagePickerManager.launchCamera(photoOptions, (data) => {
+      this.setState({ loading: true });
       this.state.photos.push({
         photo: data.uri,
       });
@@ -116,6 +118,17 @@ class _SurveyMainModal extends React.Component {
           user: `${this.props.user.firstName} ${this.props.user.lastName}`,
           localfile: data.uri,
         },
+      })
+      .then(() => {
+        this.props.getSurveyLocalPhotos({
+          variables: { id: this.props.customer.id },
+        })
+    .then((payload) => {
+      this.setState({
+        surveyPhotos: payload.data.getSurveyLocalPhotos,
+        loading: false,
+      });
+    });
       });
     });
     this.setState({
@@ -124,6 +137,7 @@ class _SurveyMainModal extends React.Component {
   };
   AddFromLibrary = () => {
     ImagePickerManager.launchImageLibrary(photoOptions, (data) => {
+      this.setState({ loading: true });
       this.state.photos.push({
         photo: data.uri,
       });
@@ -137,14 +151,19 @@ class _SurveyMainModal extends React.Component {
           user: `${this.props.user.firstName} ${this.props.user.lastName}`,
           localfile: data.uri,
         },
-      });
+      })
+       .then((payload) => {
+         this.setState({
+           surveyPhotos: payload.data.getSurveyLocalPhotos,
+           loading: false,
+         });
+       });
     });
     this.setState({
       photoCaption: '',
     });
   };
   submitNotes = () => {
-    console.log(this.state)
     this.props.addSurveyNotes({
       variables: {
         heading: this.state.selected,
@@ -267,6 +286,7 @@ class _SurveyMainModal extends React.Component {
             selected={this.state.selected}
           />
           <SurveyPhotosModal
+            loading={this.state.loading}
             photos={this.state.photos}
             open={this.state.photoModal}
             updatePhotoCaption={this.updatePhotoCaption}

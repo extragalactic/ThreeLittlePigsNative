@@ -1,6 +1,5 @@
 import RNFS from 'react-native-fs';
 
-
 const downloadPDF = () => {
   RNFS.readDir(RNFS.MainBundlePath)
   .then((result) => {
