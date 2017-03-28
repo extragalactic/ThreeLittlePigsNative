@@ -44,10 +44,8 @@ const SurveyCardPhoto = ({
       onPress={AddFromLibrary}
     />
     <View>
-      <Text>Preview</Text>
-      <PhotoLightBox
-        photos={photos}
-      />
+      <Text>{photos.length} Photos Taken</Text>
+   
     </View>
   </Card>
 );

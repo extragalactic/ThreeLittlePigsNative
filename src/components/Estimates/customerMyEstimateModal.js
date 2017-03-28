@@ -63,9 +63,50 @@ class _MyEstimateModal extends React.Component {
   }
 
   previewEstimate = (generic) => {
-    this.setState({
+    const gen = {
+      watertest: this.state.watertest,
+      concreteSteps: this.state.concreteSteps,
+      concreteCare: this.state.concreteCare,
+      refacingSlice: this.state.refacingSlice,
+      refacingComplete: this.state.refacingComplete,
+      coping: this.state.coping,
+      flagstone: this.state.flagstone,
+      flashing: this.state.flashing,
+      fwarranty: this.state.fwarranty,
+      obc: this.state.obc,
+      pargeex: this.state.pargeex,
+      pwarranty: this.state.pwarranty,
+      retaining: this.state.retaining,
+      roof: this.state.roof,
+      sills: this.state.sills,
+      tuckpoint: this.state.tuckpoint,
+      custom: this.state.custom,
+      waterproofing: this.state.waterproofing,
+      disclaimerA: this.state.disclaimerA,
+      disclaimerS: this.state.disclaimerS,
+      tuckpointUniform: this.state.tuckpointUniform,
+      surveyInvite: this.state.surveyInvite,
+      surveyInviteDave: this.state.surveyInviteDave,
+      customerClean: this.state.customerClean,
+      additionalWork: this.state.additionalWork,
+      warrantyAsStated: this.state.warrantyAsStated,
+      existingConcrete: this.state.existingConcrete,
+    };
+    this.props.generatePDF({
+      variables: {
+        custid: this.props.customer.id,
+        generics: gen,
+        text: this.state.customText,
+        preview: true,
+      },
+    })
+    .then((confirm) => {
+      console.log(confirm);
+      this.setState({
       estimatePreviewModal: true,
     });
+    });
+    
   };
 
   sendEstimate = () => {
@@ -108,6 +149,7 @@ class _MyEstimateModal extends React.Component {
               custid: this.props.customer.id,
               generics: gen,
               text: this.state.customText,
+              preview: false,
             },
           }),
         },
