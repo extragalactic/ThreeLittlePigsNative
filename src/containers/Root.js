@@ -12,6 +12,8 @@ import RNRestart from 'react-native-restart';
 import { getUserandCustomers } from '../graphql/queries';
 import { authInit, saveProfile, getUserID } from '../Realm/authRealm';
 import { downloadPDF } from '../Utils/localFileSystem';
+import auth0cred from '../../authcred';
+
 
 import {
    acceptEstimate,
@@ -32,7 +34,7 @@ class _Root extends Component {
   }
   constructor(props) {
     super(props);
-    this.lock = new Auth0Lock({ clientId: Config.AUTH0_ID, domain: Config.AUTH0_DOMAIN }, {});
+    this.lock = new Auth0Lock({ clientId: auth0cred.AUTH0_ID, domain: auth0cred.AUTH0_DOMAIN }, {});
   }
   componentDidMount() {
     if (!authInit()) {
