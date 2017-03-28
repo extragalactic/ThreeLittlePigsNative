@@ -103,6 +103,7 @@ class _SurveyMainModal extends React.Component {
   };
   TakePhoto = () => {
     ImagePickerManager.launchCamera(photoOptions, (data) => {
+      console.log(data);
       this.state.photos.push({
         photo: data.uri,
       });
@@ -116,8 +117,16 @@ class _SurveyMainModal extends React.Component {
           user: `${this.props.user.firstName} ${this.props.user.lastName}`,
           localfile: data.uri,
         },
-      });
+      })
+      .then(() => {
+          this.props.getSurveyLocalPhotos({
+      variables: { id: this.props.customer.id },
+    })
+    .then((payload) => {
+      this.setState({ surveyPhotos: payload.data.getSurveyLocalPhotos});
     });
+      });
+    })
     this.setState({
       photoCaption: '',
     });
@@ -137,14 +146,16 @@ class _SurveyMainModal extends React.Component {
           user: `${this.props.user.firstName} ${this.props.user.lastName}`,
           localfile: data.uri,
         },
-      });
+      })
+       .then((payload) => {
+      this.setState({ surveyPhotos: payload.data.getSurveyLocalPhotos});
+    });
     });
     this.setState({
       photoCaption: '',
     });
   };
   submitNotes = () => {
-    console.log(this.state)
     this.props.addSurveyNotes({
       variables: {
         heading: this.state.selected,
