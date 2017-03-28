@@ -27,6 +27,7 @@ import {
    getSurveyPhotos,
    toggleSurveyReady,
    selectSurveyPhotos,
+   getSurveyLocalPhotos,
   } from '../../graphql/mutations';
 
 class _SurveyMainModal extends React.Component {
@@ -70,12 +71,15 @@ class _SurveyMainModal extends React.Component {
     */
   };
   viewPhotos = () => {
-    this.setState({
-      photoGallery: true,
-    });
-    this.props.getSurveyPhotos({
+    this.props.getSurveyLocalPhotos({
       variables: { id: this.props.customer.id },
-    }).then(data => this.setState({ surveyPhotos: data.data.getSurveyPhotos }));
+    })
+    .then((data) => {
+      this.setState({ surveyPhotos: data.data.getSurveyLocalPhotos});
+      this.setState({
+        photoGallery: true,
+      });
+    });
   };
 
   changeSelection = (selection) => {
@@ -131,6 +135,7 @@ class _SurveyMainModal extends React.Component {
           timestamp: new Date(),
           custid: this.props.customer.id,
           user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+          localfile: data.uri,
         },
       });
     });
@@ -291,13 +296,13 @@ class _SurveyMainModal extends React.Component {
 const SurveyMainModal = compose(
   graphql(selectSurveyPhotos, { name: 'selectSurveyPhotos' }),
   graphql(toggleSurveyReady, { name: 'toggleSurveyReady' }),
-  graphql(getSurveyPhotos, { name: 'getSurveyPhotos' }),
+  graphql(getSurveyLocalPhotos, { name: 'getSurveyLocalPhotos' }),
   graphql(addSurveyNotes, { name: 'addSurveyNotes' }),
   graphql(addSurveyPhoto, { name: 'addSurveyPhoto' }),
 )(_SurveyMainModal);
 
 export default SurveyMainModal;
-
+ 
 
 /*
   <View style={MasterStyleSheet.surveyMainButton}>

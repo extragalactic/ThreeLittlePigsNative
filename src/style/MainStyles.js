@@ -184,10 +184,11 @@ const MasterStyleSheet = StyleSheet.create({
   surveyNotesModal: {
     alignItems: 'center',
     height: DeviceInfo.isTablet() ? window.height / 3 : window.height / 3,
-    marginTop: 100,
+    marginTop: 120,
     width: DeviceInfo.isTablet() ? window.width / 1.4 : window.width - 20,
   },
   surveyNotesCard: {
+    marginTop: 0
 
   },
   surveyNotesInputText: {
@@ -200,7 +201,8 @@ const MasterStyleSheet = StyleSheet.create({
 
   },
   surveyPhotoCard: {
-    height: DeviceInfo.isTablet() ? window.height / 1.8 : window.height / 1.8,
+    marginTop: 0,
+    height: DeviceInfo.isTablet() ? window.height / 1.8 : window.height / 1.56,
     top: DeviceInfo.isTablet() ? -15 : 0,
 
   },
@@ -221,7 +223,7 @@ const MasterStyleSheet = StyleSheet.create({
 
   surveyPhotoModal: {
     alignItems: 'center',
-    height: DeviceInfo.isTablet() ? window.height / 2 : window.height / 1.56,
+    height: DeviceInfo.isTablet() ? window.height / 3.25 : window.height / 1.56,
     top: 50,
     width: DeviceInfo.isTablet() ? window.width / 2 : window.width - 20,
   },
@@ -274,6 +276,8 @@ const MasterStyleSheet = StyleSheet.create({
   EstimatePriceModal: {
     alignItems: 'center',
     height: DeviceInfo.isTablet() ? window.height / 3 : window.height / 1.60,
+    width: window.width / 2,
+
   },
   PricingCard: {
     position: 'absolute',
