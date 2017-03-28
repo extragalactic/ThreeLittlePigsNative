@@ -79,6 +79,7 @@
 		8FEB1FD18DFC4459AF34F14F /* Arial Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 562DDB80F5794CA79A7D2A02 /* Arial Black.ttf */; };
 		957D8532E8DC461A98FA3B81 /* SanFranciscoThin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6080C9E71C8C4A24829A3E22 /* SanFranciscoThin.ttf */; };
 		96D4C6B06A21468082042729 /* Georgia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D4301E1924B4E0A9D2A51EF /* Georgia.ttf */; };
+		A3270E861E8A1BDF001D8CC8 /* 3lplogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A3270E851E8A1BDF001D8CC8 /* 3lplogo.jpg */; };
 		A375BB641E63ED900096ACD7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A375BB631E63ED900096ACD7 /* Images.xcassets */; };
 		A37BD0921E49276D005EBD46 /* TSLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37BD0911E49276D005EBD46 /* TSLocationManager.framework */; };
 		A385A2501E7B7B9200E2588A /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A385A17D1E7B6F6E00E2588A /* libRCTActionSheet.a */; };
@@ -676,6 +677,7 @@
 		9AAA72D10702407C8B270DD2 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		9D46ACCFD99E401E97BAC814 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		A2557840AFCA4B8D91546BCC /* Rubik-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Bold.ttf"; path = "../node_modules/native-base/Fonts/Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		A3270E851E8A1BDF001D8CC8 /* 3lplogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 3lplogo.jpg; path = ../../3LPMasonry/assets/images/3lplogo.jpg; sourceTree = "<group>"; };
 		A375BB631E63ED900096ACD7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A37BD0211E4924E6005EBD46 /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneSignal.framework; path = Pods/OneSignal/iOS_SDK/Framework/OneSignal.framework; sourceTree = "<group>"; };
 		A37BD0911E49276D005EBD46 /* TSLocationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSLocationManager.framework; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation/TSLocationManager.framework"; sourceTree = "<group>"; };
@@ -3330,6 +3332,7 @@
 		C4C8258BC1024CC39EDA6C96 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3270E851E8A1BDF001D8CC8 /* 3lplogo.jpg */,
 				4D69225A53E940F2BBEE2C9D /* Entypo.ttf */,
 				97E5BDB64AB3416DA23A4453 /* EvilIcons.ttf */,
 				DC13EC6647ED44CA9EA3CE1F /* FontAwesome.ttf */,
@@ -4110,6 +4113,7 @@
 				C4CABCC899A3426E9586753E /* Ionicons.ttf in Resources */,
 				5A0DE0D85EF64F509E5BFA8B /* MaterialCommunityIcons.ttf in Resources */,
 				B739C3122F0445A2AD1A514B /* MaterialIcons.ttf in Resources */,
+				A3270E861E8A1BDF001D8CC8 /* 3lplogo.jpg in Resources */,
 				095B408A37B5454CA018B8A8 /* Octicons.ttf in Resources */,
 				368AC49761A94100B5F7AA8A /* SimpleLineIcons.ttf in Resources */,
 				70764CFC4A574EFAB5E498F7 /* Zocial.ttf in Resources */,

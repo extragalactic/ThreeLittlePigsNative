@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5E987FF73190B1A35B702930FF301E006E52C3A1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "5E987FF73190B1A35B702930FF301E006E52C3A1" : 9223372036854775807,
+    "C971535ED72D5465E16F125CA431BC74AA81E5F5" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F1F545A9-CE2C-497A-9303-25CEC38A6F30",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "5E987FF73190B1A35B702930FF301E006E52C3A1" : "ThreeLittlePigsNative\/",
+    "C971535ED72D5465E16F125CA431BC74AA81E5F5" : "3LPMasonry\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ThreeLittlePigsNative",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ios\/ThreeLittlePigsNative.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AletheiaTechnologies\/ThreeLittlePigsNative.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5E987FF73190B1A35B702930FF301E006E52C3A1"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JonathonJulian\/3LPMasonry.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C971535ED72D5465E16F125CA431BC74AA81E5F5"
+    }
+  ]
+}

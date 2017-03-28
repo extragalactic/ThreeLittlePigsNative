@@ -76,9 +76,9 @@ class _SurveyMainModal extends React.Component {
     })
     .then((data) => {
       this.setState({ surveyPhotos: data.data.getSurveyLocalPhotos});
-      this.setState({
-        photoGallery: true,
-      });
+    });
+    this.setState({
+      photoGallery: true,
     });
   };
 
