@@ -4,7 +4,7 @@ import RNFS from 'react-native-fs';
 const downloadPDF = () => {
   RNFS.readDir(RNFS.MainBundlePath)
   .then((result) => {
-    console.table(result);
+   // console.table(result);
 
     // stat the first file
     return Promise.all([RNFS.stat(result[0].path), result[0].path]);
