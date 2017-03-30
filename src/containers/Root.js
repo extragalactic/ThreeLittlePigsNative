@@ -106,8 +106,8 @@ class _Root extends Component {
   };
 
   logOut = () => {
-    store.delete('token');
-    this.logIn();
+   // store.delete('token');
+   // this.logIn();
   };
 
   render() {

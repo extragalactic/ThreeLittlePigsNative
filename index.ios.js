@@ -19,7 +19,7 @@ import { profileReducer } from './src/reducers/authReducer';
 const client = new ApolloClient({
   connectToDevTools: true,
   networkInterface: createNetworkInterface({
-    uri: 'http://192.168.1.106:8080/graphql',
+    uri: 'https://tlpm.ca/graphql',
   },
     {
       shouldBatch: true,

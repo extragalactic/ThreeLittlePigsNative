@@ -47,8 +47,6 @@ const Customers = ({
           passProps
           user={user}
           getCustomer={getCustomer}
-          myEstimates={myEstimates}
-          myCustomers={myCustomers}
         />
         <Scene
           key={'customerListNewCustomers'}

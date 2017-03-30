@@ -13,7 +13,6 @@ const surveyGalleryModal = ({
       onClosed={close}
       position={'center'}
     >
-    {console.log(photos)}
       <PhotoBrowser
         mediaList={photos}
         alwaysShowControls

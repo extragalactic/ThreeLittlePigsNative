@@ -123,7 +123,7 @@ const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyi
 
 const CustomerMain = compose(
   graphql(getUserandCustomers, {
-    options: { variables: { id: getUserID() }, pollInterval: 1000, fetchPolicy: 'cache-first' },
+    options: { variables: { id: getUserID() }, pollInterval: 2000 },
   }),
 )(_CustomerMain);
 

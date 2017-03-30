@@ -101,12 +101,12 @@ class _MyEstimateModal extends React.Component {
       },
     })
     .then((confirm) => {
-      console.log(confirm);
-      this.setState({
-      estimatePreviewModal: true,
+      if (confirm.data.generatePDFEstimate) {
+        this.setState({
+          estimatePreviewModal: true,
+        });
+      }
     });
-    });
-    
   };
 
   sendEstimate = () => {
@@ -151,6 +151,8 @@ class _MyEstimateModal extends React.Component {
               text: this.state.customText,
               preview: false,
             },
+          }).then((res) => {
+              console.log(res)
           }),
         },
       ],

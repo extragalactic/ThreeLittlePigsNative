@@ -10,6 +10,7 @@ const getCustomer = gql `mutation getCustomer($id: String){
     cphone
     hphone
     wphone
+    estimatePDF
     address
         coordinates {
       latitude
@@ -354,11 +355,7 @@ const sendEstimate = gql `
 
 const generatePDF = gql `
     mutation generatePDF($custid: String, $generics: generics, $text: String, $preview: Boolean){
-      generatePDFEstimate(custid: $custid, generics: $generics, text: $text, preview: $preview){
-        base64
-        url
-        docID
-      }
+      generatePDFEstimate(custid: $custid, generics: $generics, text: $text, preview: $preview)
     }`;
 
 const getBase64 = gql `
