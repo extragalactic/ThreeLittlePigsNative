@@ -39,7 +39,6 @@ const selectMyEstimates = () => {
 
 const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyinProgress, surveyComplete, myEstimates, myCustomers }) => {
   if(!props.data.getMyCustomers.newcustomers){
-    console.log( getUserID());
     return (
       <Text> loading</Text>
     )
