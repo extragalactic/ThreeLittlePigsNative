@@ -12,6 +12,7 @@ class SurveyCompleteModal extends React.Component {
     this.state = { estimate: {} };
   }
   render() {
+    console.log(this);
     return (
       <Modal
         animationType={'slide'}
@@ -32,7 +33,6 @@ class SurveyCompleteModal extends React.Component {
                 style={MasterStyleSheet.surveyResultPhotosView}
                 key={idx}
               >
-              {console.log('log', this)}
                 <Text
                   h3
                 >{survey.heading}</Text>

@@ -48,11 +48,16 @@ class _SurveyMainModal extends React.Component {
       photoGallery: false,
       photoModal: false,
       ready: false,
-      notesSelection: 'no header',
-      photoSelection: 'no header',
+      notesSelection: '',
+      photoSelection: '',
       loading: false,
     };
   }
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> cd8be99732d08057bc8cfd52007348921598caa7
   getPhoto = () => {
     setTimeout(() => {
       this.setState({ loading: true });
@@ -61,6 +66,35 @@ class _SurveyMainModal extends React.Component {
       if (data.didCancel) {
         this.setState({ loading: false });
       }
+<<<<<<< HEAD
+
+      if (!data.didCancel) {
+        this.setState({ loading: false });
+        const docID = uuid.v4();
+        RNFS.copyFile(data.uri, `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`)
+       .then(res => console.log(res))
+       .catch(err => console.error(err));
+        RNFS.readDir(`${RNFS.DocumentDirectoryPath}/images`)
+       .then((result) => {
+         console.table(result);
+       });
+        this.props.addSurveyPhoto({
+          variables: {
+            heading: this.state.selected,
+            description: this.state.photoCaption,
+            orginalBase64: data.data,
+            timestamp: new Date(),
+            custid: this.props.customer.id,
+            user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+            localfile: `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`,
+          },
+        }).then((res) => {
+          if (res.data.addSurveyPhoto) {
+            this.setState({ loading: false });
+          }
+        });
+      }
+=======
       const docID = uuid.v4();
      // copyImagefromTemptoPersist('data.uri');
       RNFS.copyFile(data.uri, `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`)
@@ -85,14 +119,20 @@ class _SurveyMainModal extends React.Component {
            this.setState({ loading: false });
         }
       });
+>>>>>>> cd8be99732d08057bc8cfd52007348921598caa7
     });
   };
   viewPhotos = () => {
-    this.props.getSurveyLocalPhotos({
+    this.props.getSurveyPhotos({
       variables: { id: this.props.customer.id },
     })
     .then((data) => {
+<<<<<<< HEAD
+
+      this.setState({ surveyPhotos: data.data.getSurveyPhotos });
+=======
       this.setState({ surveyPhotos: data.data.getSurveyLocalPhotos });
+>>>>>>> cd8be99732d08057bc8cfd52007348921598caa7
     });
     this.setState({
       photoGallery: true,
@@ -132,12 +172,12 @@ class _SurveyMainModal extends React.Component {
         },
       })
       .then(() => {
-        this.props.getSurveyLocalPhotos({
+        this.props.getSurveyPhotos({
           variables: { id: this.props.customer.id },
         })
     .then((payload) => {
       this.setState({
-        surveyPhotos: payload.data.getSurveyLocalPhotos,
+        surveyPhotos: payload.data.getSurveyPhotos,
         loading: false,
       });
     });
@@ -163,7 +203,7 @@ class _SurveyMainModal extends React.Component {
       })
        .then((payload) => {
          this.setState({
-           surveyPhotos: payload.data.getSurveyLocalPhotos,
+           surveyPhotos: payload.data.getSurveyPhotos,
            loading: false,
          });
        });
@@ -228,13 +268,17 @@ class _SurveyMainModal extends React.Component {
           visible={this.props.modal}
         >
           <View>
-            <Icon
+            { !this.state.loading ? <Icon
               onPress={this.props.closeSurveyModal}
               name={'chevron-left'}
               iconStyle={MasterStyleSheet.modalIcon}
               size={45}
               color={'blue'}
+<<<<<<< HEAD
+            /> : null }
+=======
             />
+>>>>>>> cd8be99732d08057bc8cfd52007348921598caa7
           </View>
           {this.state.loading ? <ActivityIndicator
             style={MasterStyleSheet.surveyMainPicker}
@@ -335,12 +379,14 @@ class _SurveyMainModal extends React.Component {
 const SurveyMainModal = compose(
   graphql(selectSurveyPhotos, { name: 'selectSurveyPhotos' }),
   graphql(toggleSurveyReady, { name: 'toggleSurveyReady' }),
-  graphql(getSurveyLocalPhotos, { name: 'getSurveyLocalPhotos' }),
+  graphql(getSurveyPhotos, { name: 'getSurveyPhotos' }),
   graphql(addSurveyNotes, { name: 'addSurveyNotes' }),
   graphql(addSurveyPhoto, { name: 'addSurveyPhoto' }),
 )(_SurveyMainModal);
 
 export default SurveyMainModal;
+<<<<<<< HEAD
+=======
 
 
 /*
@@ -352,5 +398,5 @@ export default SurveyMainModal;
               onPress={this.tooggleReady}
             />
           </View>
+>>>>>>> cd8be99732d08057bc8cfd52007348921598caa7
 
-*/
