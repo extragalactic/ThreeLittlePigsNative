@@ -53,11 +53,8 @@ class _SurveyMainModal extends React.Component {
       loading: false,
     };
   }
-<<<<<<< HEAD
 
 
-=======
->>>>>>> cd8be99732d08057bc8cfd52007348921598caa7
   getPhoto = () => {
     setTimeout(() => {
       this.setState({ loading: true });
@@ -66,7 +63,6 @@ class _SurveyMainModal extends React.Component {
       if (data.didCancel) {
         this.setState({ loading: false });
       }
-<<<<<<< HEAD
 
       if (!data.didCancel) {
         this.setState({ loading: false });
@@ -94,32 +90,6 @@ class _SurveyMainModal extends React.Component {
           }
         });
       }
-=======
-      const docID = uuid.v4();
-     // copyImagefromTemptoPersist('data.uri');
-      RNFS.copyFile(data.uri, `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`)
-       .then(res => console.log(res))
-       .catch(err => console.error(err));
-      RNFS.readDir(`${RNFS.DocumentDirectoryPath}/images`)
-       .then((result) => {
-       console.table(result);
-       });
-      this.props.addSurveyPhoto({
-        variables: {
-          heading: this.state.selected,
-          description: this.state.photoCaption,
-          orginalBase64: data.data,
-          timestamp: new Date(),
-          custid: this.props.customer.id,
-          user: `${this.props.user.firstName} ${this.props.user.lastName}`,
-          localfile: `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`,
-        },
-      }).then((res) => {
-         if (res.data.addSurveyPhoto) {
-           this.setState({ loading: false });
-        }
-      });
->>>>>>> cd8be99732d08057bc8cfd52007348921598caa7
     });
   };
   viewPhotos = () => {
@@ -127,12 +97,8 @@ class _SurveyMainModal extends React.Component {
       variables: { id: this.props.customer.id },
     })
     .then((data) => {
-<<<<<<< HEAD
 
       this.setState({ surveyPhotos: data.data.getSurveyPhotos });
-=======
-      this.setState({ surveyPhotos: data.data.getSurveyLocalPhotos });
->>>>>>> cd8be99732d08057bc8cfd52007348921598caa7
     });
     this.setState({
       photoGallery: true,
@@ -274,11 +240,7 @@ class _SurveyMainModal extends React.Component {
               iconStyle={MasterStyleSheet.modalIcon}
               size={45}
               color={'blue'}
-<<<<<<< HEAD
             /> : null }
-=======
-            />
->>>>>>> cd8be99732d08057bc8cfd52007348921598caa7
           </View>
           {this.state.loading ? <ActivityIndicator
             style={MasterStyleSheet.surveyMainPicker}
@@ -385,18 +347,3 @@ const SurveyMainModal = compose(
 )(_SurveyMainModal);
 
 export default SurveyMainModal;
-<<<<<<< HEAD
-=======
-
-
-/*
-  <View style={MasterStyleSheet.surveyMainButton}>
-            <Icon
-              name={this.state.ready ? 'thumb-up' : 'thumb-down'}
-              color="#517fa4"
-              raised
-              onPress={this.tooggleReady}
-            />
-          </View>
->>>>>>> cd8be99732d08057bc8cfd52007348921598caa7
-
