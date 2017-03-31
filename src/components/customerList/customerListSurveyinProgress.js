@@ -1,20 +1,25 @@
 import React from 'react';
 import DeviceInfo from 'react-native-device-info';
 import { List, ListItem } from 'react-native-elements';
-import { ScrollView, Text } from 'react-native';
-import { Container, Content } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { ScrollView } from 'react-native';
+import { Col, Grid } from 'react-native-easy-grid';
+import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { graphql, compose } from 'react-apollo';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 import CustomerDetailsIPadSurveyor from '../customerDetails/customerDetailsIPadSurveyor';
-import { getMyCustomers } from '../../graphql/queries';
+import { getUserandCustomers } from '../../graphql/queries';
+import {
+   submitFollowup,
+   getAppointmentsforDay,
+   updateCustomer,
+   addNotes,
+   deleteAppointment } from '../../graphql/mutations';
 
 const selectCustomer = (selection) => {
   Actions.customerDetails({ selection });
 };
-
 
 class _CustomerListSurvyeinProgress extends React.Component {
   constructor() {
@@ -39,7 +44,7 @@ class _CustomerListSurvyeinProgress extends React.Component {
                   key={idx}
                   title={customer.address}
                   subtitle={`${customer.firstName} ${customer.lastName}`}
-                  onPress={this.setSelection.bind(this, customer.id)}
+                  onPress={() => setSelection(customer.id)}
                 />),
               )}
             </List>
@@ -72,7 +77,7 @@ class _CustomerListSurvyeinProgress extends React.Component {
               key={idx}
               title={customer.address}
               subtitle={`${customer.firstName} ${customer.lastName}`}
-              onPress={selectCustomer.bind(this, customer.id)}
+              onPress={() => selectCustomer(customer.id)}
             />),
               )}
         </List>
@@ -81,11 +86,22 @@ class _CustomerListSurvyeinProgress extends React.Component {
   }
 }
 
+const mapActionsToProps = dispatch => ({
+  saveCustomer(currentCustomer) {
+    dispatch({ type: 'SAVE_CUSTOMER', payload: currentCustomer });
+  },
+});
 
 const CustomerListSurvyeinProgress = compose(
-  graphql(getMyCustomers, {
-    options: ({ user }) => ({ variables: { id: user._id }, pollInterval: 1000 }),
-  }),
+   graphql(getUserandCustomers, {
+     options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
+   }),
+   graphql(submitFollowup, { name: 'submitFollowup' }),
+   graphql(updateCustomer, { name: 'updateCustomer' }),
+   graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
+   graphql(addNotes, { name: 'addNotes' }),
+   graphql(deleteAppointment, { name: 'deleteAppointment' }),
+   connect(null, mapActionsToProps),
 )(_CustomerListSurvyeinProgress);
 
 export default CustomerListSurvyeinProgress;

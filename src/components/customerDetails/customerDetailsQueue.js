@@ -8,20 +8,22 @@ import {
 import Drawer from 'react-native-drawer';
 import { graphql, compose } from 'react-apollo';
 
-import RNCalendarEvents from '../../node_modules/react-native-calendar-events/index.ios';
+import RNCalendarEvents from 'react-native-calendar-events';
+import { Actions } from 'react-native-router-flux';
 
-import CustomerCardConact from './Cards/customerCardConact';
-import CustomerCardChat from './Cards/customerCardChat';
-import CustomerCardMaps from './Cards/customerCardMaps';
-import CustomerCardSurvey from './Cards/customerCardSurvey';
-import SurveyCompleteModal from './Modals/customerSurveyCompleteModal';
-import ContactCustomerMenu from './contactCustomerMenu';
-import CustomerFollowupModal from './Modals/customerFollowupModal';
-import CustomerFormModal from './Modals/customerFormModal';
-import CustomerNotesModal from './Modals/customerNotesModal';
-import SurveyMainModal from './Surveys/surveyMainModal';
+import CustomerCardConact from '../Cards/customerCardConact';
+import CustomerCardChat from '../Cards/customerCardChat';
+import CustomerCardMaps from '../Cards/customerCardMaps';
+import CustomerCardQueue from '../Cards/customerCardQueue';
+import CustomerCardSurvey from '../Cards/customerCardSurvey';
+import SurveyCompleteModal from '../Modals/customerSurveyCompleteModal';
+import ContactCustomerMenu from '../contactCustomerMenu';
+import CustomerFollowupModal from '../Modals/customerFollowupModal';
+import CustomerFormModal from '../Modals/customerFormModal';
+import CustomerNotesModal from '../Modals/customerNotesModal';
+import SurveyMainModal from '../Surveys/surveyMainModal';
 
-import { MasterStyleSheet } from '../style/MainStyles';
+import { MasterStyleSheet } from '../../style/MainStyles';
 
 import { getFinishedSurvey,
    toggleSurveyReady,
@@ -31,13 +33,14 @@ import { getFinishedSurvey,
    addNotes,
    deleteAppointment,
    getCustomer,
-  } from '../graphql/mutations';
+   acceptEstimate,
+  } from '../../graphql/mutations';
 
-import { getUserandCustomers } from '../graphql/queries';
+import { getUserandCustomers } from '../../graphql/queries';
 
 const addMinutes = (date, minutes) => new Date(date.getTime() + minutes * 60000);
 
-class _CustomerDetails extends Component {
+class _CustomerDetailsQueue extends Component {
   constructor() {
     super();
     this.state = {
@@ -242,6 +245,16 @@ class _CustomerDetails extends Component {
     Linking.openURL(`http://maps.apple.com/?daddr=${this.state.customer.coordinates.latitude},${this.state.customer.coordinates.longitude}&dirflg=d&t=h`);
   };
 
+  acceptEstimate = () => {
+    this.props.acceptEstimate({
+      variables: {
+        custid: this.state.customer.id,
+        userid: this.props.id,
+      },
+    });
+    Actions.home();
+  }
+
   updateNotes = (notes) => {
     this.setState({
       notes,
@@ -293,11 +306,11 @@ class _CustomerDetails extends Component {
             />
             <CustomerCardMaps customer={this.state.customer} getDirections={this.getDirections} />
             <CustomerCardChat customer={this.state.customer} getNotes={this.openNotesModal} />
-            <CustomerCardSurvey
+             <CustomerCardQueue
               customer={this.state.customer}
-              startSurvey={this.openSurveyModal}
-              surveyComplete={this.getFinishedSurvey}
+              acceptEstimate={this.acceptEstimate}
             />
+   
           </ScrollView>
           <CustomerNotesModal
             modal={this.state.notesModal}
@@ -348,7 +361,8 @@ class _CustomerDetails extends Component {
   }
 }
 
-const CustomerDetails = compose(
+const CustomerDetailsQueue = compose(
+graphql(acceptEstimate, { name: 'acceptEstimate' }),
 graphql(getFinishedSurvey, { name: 'getFinishedSurvey' }),
 graphql(toggleSurveyReady, { name: 'toggleSurveyReady' }),
 graphql(submitFollowup, { name: 'submitFollowup' }),
@@ -358,11 +372,11 @@ graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
 graphql(addNotes, { name: 'addNotes' }),
 graphql(deleteAppointment, { name: 'deleteAppointment' }),
 graphql(getUserandCustomers, {
-    options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
-  }),
-)(_CustomerDetails);
+  options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
+}),
+)(_CustomerDetailsQueue);
 
-export default CustomerDetails;
+export default CustomerDetailsQueue ;
 
 
 // <CustomerCardPricing customer={this.state.customer} />//

@@ -1,24 +1,27 @@
 import React from 'react';
 import DeviceInfo from 'react-native-device-info';
 import { List, ListItem } from 'react-native-elements';
-import { ScrollView, Text } from 'react-native';
-import { Container, Content } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { connect } from 'react-redux';
 import { graphql, compose } from 'react-apollo';
-
+import { ScrollView, Text } from 'react-native';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 import CustomerDetailsIPadSurveyor from '../customerDetails/customerDetailsIPadSurveyor';
-import { getMyCustomers } from '../../graphql/queries';
-
-
-const selectCustomer = (selection) => {
-  Actions.customerDetails({ selection });
-};
-
+import { getUserandCustomers } from '../../graphql/queries';
+import {
+   submitFollowup,
+   getAppointmentsforDay,
+   updateCustomer,
+   addNotes,
+   deleteAppointment } from '../../graphql/mutations';
 
 class _CustomerListNewCustomers extends React.Component {
+  static defaultProps = {
+    currentCustomer: React.PropTypes.object,
+    saveCustomer: React.PropTypes.func,
+  }
   constructor() {
     super();
     this.state = {
@@ -27,30 +30,38 @@ class _CustomerListNewCustomers extends React.Component {
   }
 
   setSelection = (selection) => {
+    console.log(selection);
     this.setState({ selection });
+    this.props.saveCustomer(selection);
   }
+
+  selectCustomer = (selection) => {
+    this.props.saveCustomer(selection);
+    Actions.customerDetails({ selection });
+  };
+
   render() {
     if (DeviceInfo.isTablet()) {
       return (
         <Grid>
           <Col style={MasterStyleSheet.ipadViewLeft}>
             <List>
-              {this.props.data.getMyCustomers.newcustomers.map((customer, idx) => (
+              {this.props.data.getMyCustomers ? this.props.data.getMyCustomers.newcustomers.map((customer, idx) => (
                 <ListItem
                   containerStyle={MasterStyleSheet.customersListItem}
                   key={idx}
                   title={customer.address}
                   subtitle={`${customer.firstName} ${customer.lastName}`}
-                  onPress={this.setSelection.bind(this, customer.id)}
+                  onPress={() => this.selectCustomer(customer._id)}
                 />),
-              )}
+              ) : null }
             </List>
           </Col>
           <Col style={MasterStyleSheet.ipadViewRight}>
             <CustomerDetailsIPadSurveyor
               myCustomers={this.props.data.getMyCustomers}
               customerId={this.state.selection}
-              user={this.props.user}
+              user={this.props.data.user}
               submitFollowup={this.props.submitFollowup}
               updateCustomer={this.props.updateCustomer}
               getAppointmentsforDay={this.props.getAppointmentsforDay}
@@ -67,25 +78,37 @@ class _CustomerListNewCustomers extends React.Component {
         style={MasterStyleSheet.list}
       >
         <List >
-          {this.props.data.getMyCustomers.newcustomers.map((customer, idx) => (
+          {this.props.data.getMyCustomers ? this.props.data.getMyCustomers.newcustomers.map((customer, idx) => (
             <ListItem
               containerStyle={MasterStyleSheet.customersListItem}
               key={idx}
               title={customer.address}
               subtitle={`${customer.firstName} ${customer.lastName}`}
-              onPress={selectCustomer.bind(this, customer.id)}
+              onPress={() => this.selectCustomer(customer.id)}
             />),
-              )}
+              ) : null}
         </List>
       </ScrollView>
     );
   }
 }
 
+const mapActionsToProps = dispatch => ({
+  saveCustomer(currentCustomer) {
+    dispatch({ type: 'SAVE_CUSTOMER', payload: currentCustomer });
+  },
+});
+
 const CustomerListNewCustomers = compose(
-  graphql(getMyCustomers, {
-    options: ({ user }) => ({ variables: { id: user._id }, pollInterval: 1000 }),
+  graphql(getUserandCustomers, {
+    options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
   }),
+   graphql(submitFollowup, { name: 'submitFollowup' }),
+   graphql(updateCustomer, { name: 'updateCustomer' }),
+   graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
+   graphql(addNotes, { name: 'addNotes' }),
+   graphql(deleteAppointment, { name: 'deleteAppointment' }),
+   connect(null, mapActionsToProps),
 )(_CustomerListNewCustomers);
 
 export default CustomerListNewCustomers;

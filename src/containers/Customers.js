@@ -36,6 +36,7 @@ const Customers = ({
   acceptEstimate,
   myEstimates,
   myCustomers,
+  userID,
  }) => {
   return (
     <Router>
@@ -47,12 +48,14 @@ const Customers = ({
           passProps
           user={user}
           getCustomer={getCustomer}
+          id={userID}
         />
         <Scene
           key={'customerListNewCustomers'}
           component={CustomerListNewCustomers}
           passProps
           user={user}
+          id={userID}
           getCustomer={getCustomer}
           newCustomers={newCustomers}
           myCustomers={myCustomers}

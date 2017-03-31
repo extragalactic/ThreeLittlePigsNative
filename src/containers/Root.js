@@ -37,6 +37,8 @@ class _Root extends Component {
     if (!authInit()) {
       this.logIn();
     }
+   this.props.saveProfile(getUserID())
+
     codePush.sync();
     OneSignal.configure({});
     OneSignal.addEventListener('received', this.onReceived);
@@ -45,6 +47,7 @@ class _Root extends Component {
     OneSignal.addEventListener('ids', this.onIds);
 
     if (authInit()) {
+      /*
       setTimeout(() => {
         OneSignal.sendTags({
           userid: this.props.data.user._id,
@@ -52,7 +55,7 @@ class _Root extends Component {
           estimator: this.props.data.user.estimator,
           surveyor: this.props.data.user.surveyor,
         });
-      }, 2000);
+      }, 2000); */
     }
     RNCalendarEvents.authorizeEventStore()
      .then((status) => {
@@ -61,6 +64,11 @@ class _Root extends Component {
      .catch((error) => {
        console.error(error);
      });
+
+     setTimeout(() => {
+       console.log(this.props)
+
+     }, 2000)
   }
 
   componentWillUnmount() {
@@ -106,8 +114,7 @@ class _Root extends Component {
   };
 
   logOut = () => {
-   // store.delete('token');
-   // this.logIn();
+    this.logIn();
   };
 
   render() {
@@ -122,8 +129,7 @@ class _Root extends Component {
           getAppointmentsforDay={this.props.getAppointmentsforDay}
           deleteAppointment={this.props.deleteAppointment}
           acceptEstimate={this.props.acceptEstimate}
-          userID={getUserID()}
-          user={this.props.data.user}
+          userID={this.props.profile}
         />
       );
     }
@@ -149,9 +155,6 @@ let Root = compose(
   graphql(updateCustomer, { name: 'updateCustomer' }),
   graphql(submitFollowup, { name: 'submitFollowup' }),
   graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
-  graphql(getUserandCustomers, {
-    options: { variables: { id: getUserID() }, pollInterval: 1000 },
-  }),
   connect(mapStateToProps, mapActionsToProps),
 )(_Root);
 

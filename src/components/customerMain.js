@@ -38,13 +38,12 @@ const selectMyEstimates = () => {
 };
 
 const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyinProgress, surveyComplete, myEstimates, myCustomers }) => {
-  if(!props.data.getMyCustomers.newcustomers){
+  if (!props.data.getMyCustomers){
     return (
       <Text> loading</Text>
-    )
+    );
   }
-   return(
-  <View style={MasterStyleSheet.mainListView}>
+  return (<View style={MasterStyleSheet.mainListView}>
     <List>
       { user.surveyor ?
         <View>
@@ -83,10 +82,7 @@ const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyi
             containerStyle={MasterStyleSheet.mainList}
             onPress={selectSurveyComplete}
           />
-
         </View> : null }
-
-
       {user.estimator ?
         <View>
           <ListItem
@@ -110,47 +106,18 @@ const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyi
             containerStyle={MasterStyleSheet.mainList}
             onPress={selectMyEstimates}
           />
-
         </View>
-
         : null}
 
     </List>
   </View>
-   );
+  );
 };
 
 const CustomerMain = compose(
   graphql(getUserandCustomers, {
-    options: { variables: { id: getUserID() }, pollInterval: 2000 },
+    options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
   }),
 )(_CustomerMain);
 
 export default CustomerMain;
-
-
-/*
-    <List containerStyle={{ marginTop: 65 }}>
-      {user.newCustomers.map((customer, idx) => (
-        <ListItem
-          containerStyle={{height: 80, borderTopWidth: 2, borderBottomWidth: 1 }}
-          key={idx}
-          title={customer.address}
-          subtitle={`${customer.firstName} ${customer.lastName}`}
-          onPress={selectCustomer.bind(this, customer.id)}
-        />),
-            )}
-    </List>
-     <ListItem
-        hideChevron
-        title='My Estimates'
-        badge={{ value: 0, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
-      />
-      <ListItem
-      hideChevron
-        title='Completed Estimates'
-        badge={{ value: 0, badgeTextStyle: { color: 'lightblue' }, badgeContainerStyle: { marginTop: -1 } }}
-      />
-
-
-*/
