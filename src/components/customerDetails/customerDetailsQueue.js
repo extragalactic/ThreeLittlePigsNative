@@ -126,7 +126,6 @@ class _CustomerDetailsQueue extends Component {
           end: endhour,
           calid: id,
         } });
-        this.props.updateUser(this.props.id);
       })
      .catch((error) => {
        console.error(error);

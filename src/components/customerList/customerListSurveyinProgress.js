@@ -44,7 +44,7 @@ class _CustomerListSurvyeinProgress extends React.Component {
                   key={idx}
                   title={customer.address}
                   subtitle={`${customer.firstName} ${customer.lastName}`}
-                  onPress={() => setSelection(customer.id)}
+                  onPress={() => this.setSelection(customer.id)}
                 />),
               )}
             </List>
@@ -54,7 +54,7 @@ class _CustomerListSurvyeinProgress extends React.Component {
               myCustomers={this.props.data.getMyCustomers}
               customerId={this.state.selection}
               selection={this.state.selection}
-              user={this.props.user}
+              user={this.props.data.user}
               updateCustomer={this.props.updateCustomer}
               getAppointmentsforDay={this.props.getAppointmentsforDay}
               addNotes={this.props.addNotes}

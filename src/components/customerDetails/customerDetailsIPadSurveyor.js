@@ -55,7 +55,7 @@ class _CustomerDetailsIPadSurveyor extends Component {
   onDateChange = (date) => {
     this.setState({ date });
     this.props.getAppointmentsforDay({ variables: {
-      userid: this.props.user._id,
+      userid: this.props.userid,
       date,
     } }).then((data) => {
       this.setState({
@@ -67,7 +67,7 @@ class _CustomerDetailsIPadSurveyor extends Component {
     this.props.addNotes({ variables: {
       custid: this.props.data.customer.id,
       name: `${this.props.data.customer.firstName} ${this.props.data.customer.lastName}`,
-      userid: this.props.user._id,
+      userid: this.props.userid,
       text: message[0].text,
       createdAt: message[0].createdAt,
     } });
@@ -97,7 +97,7 @@ class _CustomerDetailsIPadSurveyor extends Component {
         AlertIOS.alert('Appointment Saved');
         that.props.submitFollowup({ variables: {
           description: selection ? selection.description : 'Followup',
-          userid: this.props.user._id,
+          userid: this.props.userid,
           custid: this.props.data.customer.id,
           name: `${this.props.data.customer.firstName} ${this.props.data.customer.lastName}`,
           address: this.props.data.customer.address,
@@ -105,7 +105,7 @@ class _CustomerDetailsIPadSurveyor extends Component {
           end: endhour,
           calid: id,
         } });
-        this.props.updateUser(this.props.user._id);
+      //s  this.props.updateUser(this.props.userid);
       })
      .catch((error) => {
        console.error(error);
@@ -196,11 +196,11 @@ class _CustomerDetailsIPadSurveyor extends Component {
     this.props.deleteAppointment({
       variables: {
         meetingid,
-        userid: this.props.user._id,
+        userid: this.props.userid,
       },
     }).then(() => {
       if (this.state.change) { AlertIOS.alert('Appointment Removed'); }
-      this.props.updateUser(this.props.user._id);
+      this.props.updateUser(this.props.userid);
       RNCalendarEvents.removeEvent(calid).then(status => console.log(status));
     });
   };
@@ -239,26 +239,20 @@ class _CustomerDetailsIPadSurveyor extends Component {
       [{ text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
         { text: 'Send to Estimator',
           onPress: () => {
-            this.setState({ ready: !this.state.ready });
             this.props.toggleSurveyReady({
               variables: {
                 custid: this.state.customer.id,
-                userid: this.props.user._id,
+                userid: this.props.userid,
               },
+            }).then(() => {
+              this.setState({
+                ready: !this.state.ready,
+              });
             });
           },
         },
       ],
     );
-    this.setState({
-      ready: !this.state.ready,
-    });
-    this.props.toggleSurveyReady({
-      variables: {
-        custid: this.state.customer.id,
-        userid: this.props.user._id,
-      },
-    });
   };
   render() {
     if (!this.props.data.customer) {

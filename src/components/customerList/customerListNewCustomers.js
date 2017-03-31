@@ -32,15 +32,16 @@ class _CustomerListNewCustomers extends React.Component {
   setSelection = (selection) => {
     console.log(selection);
     this.setState({ selection });
-    this.props.saveCustomer(selection);
+    //this.props.saveCustomer(selection);
   }
 
   selectCustomer = (selection) => {
-    this.props.saveCustomer(selection);
+   // this.props.saveCustomer(selection);
     Actions.customerDetails({ selection });
   };
 
   render() {
+    console.log('newcustomer', this.props)
     if (DeviceInfo.isTablet()) {
       return (
         <Grid>
@@ -52,7 +53,8 @@ class _CustomerListNewCustomers extends React.Component {
                   key={idx}
                   title={customer.address}
                   subtitle={`${customer.firstName} ${customer.lastName}`}
-                  onPress={() => this.selectCustomer(customer._id)}
+                  onPress={() => this.setSelection(customer.id)}
+
                 />),
               ) : null }
             </List>
@@ -62,6 +64,7 @@ class _CustomerListNewCustomers extends React.Component {
               myCustomers={this.props.data.getMyCustomers}
               customerId={this.state.selection}
               user={this.props.data.user}
+              userid={this.props.id}
               submitFollowup={this.props.submitFollowup}
               updateCustomer={this.props.updateCustomer}
               getAppointmentsforDay={this.props.getAppointmentsforDay}

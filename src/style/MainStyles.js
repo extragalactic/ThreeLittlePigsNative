@@ -101,15 +101,15 @@ const MasterStyleSheet = StyleSheet.create({
     marginRight: 0,
     marginTop: 7,
     backgroundColor: '#7789cb',
-    width: DeviceInfo.isTablet() ? null : window.width / 2,
+    width: DeviceInfo.isTablet() ? window.width / 6.5 : window.width / 2,
   },
-    searchButtonStyle: {
+  searchButtonStyle: {
     borderRadius: 15,
     marginLeft: 0,
     marginRight: 0,
     marginTop: 7,
     backgroundColor: '#7098a3',
-    width: DeviceInfo.isTablet() ? null : window.width / 2,
+    width: DeviceInfo.isTablet() ? window.width / 6.5 : window.width / 2,
   },
   pricingCardView: {
     width: 260,
