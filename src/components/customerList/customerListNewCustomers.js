@@ -30,7 +30,6 @@ class _CustomerListNewCustomers extends React.Component {
   }
 
   setSelection = (selection) => {
-    console.log(selection);
     this.setState({ selection });
     //this.props.saveCustomer(selection);
   }
@@ -41,7 +40,6 @@ class _CustomerListNewCustomers extends React.Component {
   };
 
   render() {
-    console.log('newcustomer', this.props)
     if (DeviceInfo.isTablet()) {
       return (
         <Grid>

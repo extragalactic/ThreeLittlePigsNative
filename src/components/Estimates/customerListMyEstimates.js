@@ -6,10 +6,15 @@ import { Col, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
 import { graphql, compose } from 'react-apollo';
 
-import { getMyCustomers } from '../../graphql/queries';
 import { MasterStyleSheet } from '../../style/MainStyles';
 import CustomerDetailsIPadEstimator from '../Estimates/customerDetailsIPadEstimator';
-
+import { getUserandCustomers } from '../../graphql/queries';
+import {
+   submitFollowup,
+   getAppointmentsforDay,
+   updateCustomer,
+   addNotes,
+   deleteAppointment } from '../../graphql/mutations';
 const selectCustomer = (selection) => {
   Actions.customerDetailsEstimator({ selection });
 };
@@ -83,9 +88,14 @@ class _CustomerListMyEstimates extends React.Component {
 }
 
 const CustomerListMyEstimates = compose(
-  graphql(getMyCustomers, {
-    options: ({ user }) => ({ variables: { id: user._id }, pollInterval: 1000 }),
+  graphql(getUserandCustomers, {
+    options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
   }),
+   graphql(submitFollowup, { name: 'submitFollowup' }),
+   graphql(updateCustomer, { name: 'updateCustomer' }),
+   graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
+   graphql(addNotes, { name: 'addNotes' }),
+   graphql(deleteAppointment, { name: 'deleteAppointment' }),
 )(_CustomerListMyEstimates);
 
 export default CustomerListMyEstimates;

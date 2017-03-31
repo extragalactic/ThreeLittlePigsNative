@@ -357,8 +357,8 @@ graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
 graphql(addNotes, { name: 'addNotes' }),
 graphql(deleteAppointment, { name: 'deleteAppointment' }),
 graphql(getUserandCustomers, {
-    options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
-  }),
+  options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
+}),
 )(_CustomerDetails);
 
 export default CustomerDetails;

@@ -60,7 +60,7 @@ class _UserHome extends React.Component {
               onPress={() => Actions.customerListFollowUp()}
             />
             <Button
-              title={'Apointments'}
+              title={'Appointments'}
               buttonStyle={MasterStyleSheet.mainButtonStyle}
               onPress={() => Actions.customerListOnsite()}
             />
@@ -86,7 +86,7 @@ class _UserHome extends React.Component {
             <Button
               title={'My Estimates'}
               buttonStyle={MasterStyleSheet.estimateButtonStyle}
-              onPress={() => Actions.customerListsurveyComplete()}
+              onPress={() => Actions.customerListMyEstimates()}
             />
            </View> : null}
             <Button

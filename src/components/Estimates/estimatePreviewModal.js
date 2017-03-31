@@ -23,7 +23,7 @@ class EstimatePreviewModal extends React.Component {
             color={'blue'}
           />
           <WebView
-            source={{ uri: `https://tlpm.ca/documents/${this.props.customer.firstName}${this.props.customer.lastName}Estimate.pdf` }}
+            source={{ uri: `https://3lpm.s3.ca-central-1.amazonaws.com/${this.props.customer.id}/${this.props.customer.firstName}${this.props.customer.lastName}Estimate.pdf` }}
           />
         </Modal>
       </View>

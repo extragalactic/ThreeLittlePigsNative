@@ -76,6 +76,12 @@ const routes = Actions.create(
       passProps
       id={getUserID()}
     />
+    <Scene
+      key={'customerListMyEstimates'}
+      component={CustomerListMyEstimates}
+      passProps
+      id={getUserID()}
+    />
   </Scene>,
 );
 
