@@ -8,12 +8,10 @@ import Spinner from 'react-native-spinkit';
 import { connect } from 'react-redux';
 import { graphql, compose } from 'react-apollo';
 import { Card, Button } from 'react-native-elements';
-import { MasterStyleSheet } from '../../style/MainStyles';
 import { Actions } from 'react-native-router-flux';
+import OneSignal from 'react-native-onesignal';
 import { getUserandCustomers } from '../../graphql/queries';
-
-
-
+import { MasterStyleSheet } from '../../style/MainStyles';
 
 const styles = StyleSheet.create({
   container: {
@@ -33,7 +31,14 @@ class _UserHome extends React.Component {
     super(props);
   }
   componentDidMount() {
- 
+    setTimeout(() => {
+        OneSignal.sendTags({
+          userid: this.props.data.user._id,
+          username: `${this.props.data.user.firstName}${this.props.data.user.lastName}`,
+          estimator: this.props.data.user.estimator,
+          surveyor: this.props.data.user.surveyor,
+        });
+    }, 2000);
   }
   render() {
     if (this.props.data.loading){
