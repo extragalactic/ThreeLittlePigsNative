@@ -54,7 +54,7 @@ class _CustomerListEstimateQueue extends React.Component {
               myCustomers={this.props.data.getQueue}
               customerId={this.state.selection}
               selection={this.state.selection}
-              user={this.props.user}
+              user={this.props.data.user}
               acceptEstimate={this.props.acceptEstimate}
               updateCustomer={this.props.updateCustomer}
               getAppointmentsforDay={this.props.getAppointmentsforDay}

@@ -31,7 +31,8 @@ class _UserHome extends React.Component {
     super(props);
   }
   componentDidMount() {
-   if (!this.props.data.loading){
+
+     console.log('onesignal')
      setTimeout(() => {
         OneSignal.sendTags({
           userid: this.props.data.user._id,
@@ -39,8 +40,8 @@ class _UserHome extends React.Component {
           estimator: this.props.data.user.estimator,
           surveyor: this.props.data.user.surveyor,
         });
-    }, 2000);
-   }
+    }, 5000);
+
  }
   render() {
     if (this.props.data.loading){

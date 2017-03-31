@@ -24,7 +24,7 @@ import SurveyMainModal from '../Surveys/surveyMainModal';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 import { getCustomer } from '../../graphql/queries';
-import { getFinishedSurvey } from '../../graphql/mutations';
+import { getFinishedSurvey, acceptEstimate } from '../../graphql/mutations';
 
 
 const addMinutes = (date, minutes) => new Date(date.getTime() + minutes * 60000);
@@ -196,7 +196,7 @@ class _CustomerDetailsIPadQueue extends Component {
         userid: this.props.user._id,
       },
     });
-    Actions.customerMain();
+    Actions.home();
   }
 
   deleteAppointment = (meetingid, calid) => {
@@ -327,6 +327,8 @@ const CustomerDetailsIPadQueue = compose(
     options: ({ customerId }) => ({ variables: { id: customerId } }),
   }),
   graphql(getFinishedSurvey, { name: 'getFinishedSurvey' }),
+  graphql(acceptEstimate, { name: 'acceptEstimate' }),
+
 )(_CustomerDetailsIPadQueue);
 
 export default CustomerDetailsIPadQueue;
