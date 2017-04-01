@@ -28,7 +28,7 @@ import { customerReducer } from './src/reducers/currentCustomer';
 const client = new ApolloClient({
   connectToDevTools: true,
   networkInterface: createNetworkInterface({
-    uri: 'https://tlpm.ca/graphql',
+    uri:  process.env.PROD ? 'https://tlpm.ca/graphql' : 'http://192.168.1.106:8080/graphql',
   },
     {
       shouldBatch: true,

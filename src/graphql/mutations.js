@@ -11,6 +11,7 @@ const getCustomer = gql `mutation getCustomer($id: String){
     hphone
     wphone
     estimatePDF
+    surveyReadyforPrice
     address
         coordinates {
       latitude

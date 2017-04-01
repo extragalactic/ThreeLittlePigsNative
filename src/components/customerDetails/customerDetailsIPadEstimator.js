@@ -14,7 +14,7 @@ import { graphql, compose } from 'react-apollo';
 import CustomerCardConact from '../Cards/customerCardConact';
 import CustomerCardChat from '../Cards/customerCardChat';
 import CustomerCardMaps from '../Cards/customerCardMaps';
-import MyEstimateModal from '../Estimates/customerMyEstimateModal';
+import MyEstimateModal from '../Modals/customerMyEstimateModal';
 import CustomerCardEstimate from '../Cards/customerCardEstimate';
 import ContactCustomerMenu from '../contactCustomerMenu';
 import CustomerFollowupModal from '../Modals/customerFollowupModal';

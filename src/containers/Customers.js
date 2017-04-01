@@ -10,10 +10,10 @@ import CustomerListEstimateQueue from '../components/customerList/customerListEs
 import CustomerListOnsite from '../components/customerList/customerListOnsite';
 import CustomerListsurveyinProgress from '../components/customerList/customerListSurveyinProgress';
 import CustomerListSurveyComplete from '../components/customerList/customerListSurveyComplete';
-import CustomerListMyEstimates from '../components/Estimates/customerListMyEstimates';
+import CustomerListMyEstimates from '../components/customerList/customerListMyEstimates';
 import CustomerDetails from '../components/customerDetails';
 import CustomerDetailsQueue from '../components/customerDetails/customerDetailsIPadQueue';
-import CustomerDetailsEstimator from '../components/Estimates/customerDetailsIPadEstimator';
+import CustomerDetailsEstimator from '../components/customerDetails/customerDetailsIPadEstimator';
 import { MasterStyleSheet } from '../style/MainStyles';
 
 

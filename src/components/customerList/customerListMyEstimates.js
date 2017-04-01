@@ -7,7 +7,7 @@ import { Actions } from 'react-native-router-flux';
 import { graphql, compose } from 'react-apollo';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
-import CustomerDetailsIPadEstimator from '../Estimates/customerDetailsIPadEstimator';
+import CustomerDetailsIPadEstimator from '../customerDetails/customerDetailsIPadEstimator';
 import { getUserandCustomers } from '../../graphql/queries';
 import {
    submitFollowup,

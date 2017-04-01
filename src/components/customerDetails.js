@@ -4,6 +4,8 @@ import {
   View,
   AlertIOS,
   Linking,
+  Text,
+  ActivityIndicator,
 } from 'react-native';
 import Drawer from 'react-native-drawer';
 import { graphql, compose } from 'react-apollo';
@@ -20,9 +22,7 @@ import CustomerFollowupModal from './Modals/customerFollowupModal';
 import CustomerFormModal from './Modals/customerFormModal';
 import CustomerNotesModal from './Modals/customerNotesModal';
 import SurveyMainModal from './Surveys/surveyMainModal';
-
 import { MasterStyleSheet } from '../style/MainStyles';
-
 import { getFinishedSurvey,
    toggleSurveyReady,
    submitFollowup,
@@ -32,8 +32,7 @@ import { getFinishedSurvey,
    deleteAppointment,
    getCustomer,
   } from '../graphql/mutations';
-
-import { getUserandCustomers } from '../graphql/queries';
+import { getMyCustomer } from '../graphql/queries';
 
 const addMinutes = (date, minutes) => new Date(date.getTime() + minutes * 60000);
 
@@ -60,16 +59,6 @@ class _CustomerDetails extends Component {
       ready: false,
     };
   }
-  componentDidMount() {
-    this.props.getCustomer({ variables: {
-      id: this.props.selection,
-    } }).then((customer) => {
-      this.setState({
-        customer: customer.data.getCustomer,
-      });
-    });
-  }
-
   onDateChange = (date) => {
     this.setState({ date });
     this.props.getAppointmentsforDay({ variables: {
@@ -83,8 +72,8 @@ class _CustomerDetails extends Component {
   };
   onSend = (message) => {
     this.props.addNotes({ variables: {
-      custid: this.state.customer.id,
-      name: `${this.state.customer.firstName} ${this.state.customer.lastName}`,
+      custid: this.props.data.customer.id,
+      name: `${this.props.data.customer.firstName} ${this.props.data.customer.lastName}`,
       userid: this.props.id,
       text: message[0].text,
       createdAt: message[0].createdAt,
@@ -105,9 +94,9 @@ class _CustomerDetails extends Component {
     const starthour = this.state.date.toISOString();
     const that = this;
 
-    RNCalendarEvents.saveEvent(`${selection ? selection.description : 'Followup'} ${this.state.customer.firstName} ${this.state.customer.lastName}`, {
-      location: this.state.customer.address,
-      notes: this.state.customer.cphone,
+    RNCalendarEvents.saveEvent(`${selection ? selection.description : 'Followup'} ${this.props.data.customer.firstName} ${this.props.data.customer.lastName}`, {
+      location: this.props.data.customer.address,
+      notes: this.props.data.customer.cphone,
       startDate: starthour,
       endDate: endhour,
     })
@@ -116,9 +105,9 @@ class _CustomerDetails extends Component {
         that.props.submitFollowup({ variables: {
           description: selection ? selection.description : 'Followup',
           userid: this.props.id,
-          custid: this.state.customer.id,
-          name: `${this.state.customer.firstName} ${this.state.customer.lastName}`,
-          address: this.state.customer.address,
+          custid: this.props.data.customer.id,
+          name: `${this.props.data.customer.firstName} ${this.props.data.customer.lastName}`,
+          address: this.props.data.customer.address,
           start: starthour,
           end: endhour,
           calid: id,
@@ -143,73 +132,26 @@ class _CustomerDetails extends Component {
     this.setState({ formCompleteModal: true });
   };
 
-  openDrawer = () => {
-    this.setState({
-      drawer: true,
-    });
-  };
-  closeDrawer = () => {
-    this.setState({
-      drawer: false,
-    });
-  };
-  openFollowupModal = () => {
-    this.setState({
-      followModal: true,
-    });
-  };
-  openFormModal = () => {
-    this.setState({
-      formModal: true,
-    });
-  };
-  closeFormModal = () => {
-    this.setState({
-      formModal: false,
-    });
-  };
-  openNotesModal = () => {
-    this.setState({
-      notesModal: true,
-    });
-  };
-  closeNotesModal = () => {
-    this.setState({
-      notesModal: false,
-    });
-  };
-  openSurveyModal = () => {
-    this.setState({
-      surveyModal: true,
-    });
-  };
-  closeSurveyModal = () => {
-    this.setState({
-      surveyModal: false,
-    });
-  };
-  openSurveyCompleteModal = () => {
-    this.setState({
-      surveyCompleteModal: true,
-    });
-  };
-  closeSurveyCompleteModal = () => {
-    this.setState({
-      surveyCompleteModal: false,
+  getCurrentLocation = () => {
+    const that = this;
+    navigator.geolocation.getCurrentPosition((position) => {
+      that.setState({
+        currentLocation: position.coords,
+      });
     });
   };
 
-  closeFollowupModal = () => {
+  getDirections = () => {
+    this.getCurrentLocation();
+    Linking.openURL(`http://maps.apple.com/?daddr=${this.props.data.customer.coordinates.latitude},${this.props.data.customer.coordinates.longitude}&dirflg=d&t=h`);
+  };
+  changeAppointment = (meetingid, calid) => {
     this.setState({
-      followModal: false,
+      change: true,
     });
+    RNCalendarEvents.removeEvent(calid).then(status => console.log(status));
   };
 
-  updateIndex = (selectedIndex) => {
-    this.setState({
-      selectedIndex,
-    });
-  };
   deleteAppointment = (meetingid, calid) => {
     this.props.deleteAppointment({
       variables: {
@@ -222,98 +164,103 @@ class _CustomerDetails extends Component {
       RNCalendarEvents.removeEvent(calid).then(status => console.log(status));
     });
   };
-  changeAppointment = (meetingid, calid) => {
-    this.setState({
-      change: true,
-    });
-    RNCalendarEvents.removeEvent(calid).then(status => console.log(status));
-  };
-  getCurrentLocation = () => {
-    const that = this;
-    navigator.geolocation.getCurrentPosition((position) => {
-      that.setState({
-        currentLocation: position.coords,
-      });
-    });
-  };
-  getDirections = () => {
-    this.getCurrentLocation();
-    Linking.openURL(`http://maps.apple.com/?daddr=${this.state.customer.coordinates.latitude},${this.state.customer.coordinates.longitude}&dirflg=d&t=h`);
-  };
 
-  updateNotes = (notes) => {
-    this.setState({
-      notes,
-    });
-  };
-  submitNotes = () => {
-    this.setState({ notes: '' });
-  };
   toggleReady = () => {
-    AlertIOS.alert(
+    if (this.props.data.customer.surveyReadyforPrice){
+      AlertIOS.alert(
+      'Are you sure?',
+       'Survey will be removed from queue',
+        [{ text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+          { text: 'Set to not ready',
+            onPress: () => {
+              this.setState({ ready: !this.state.ready });
+              this.props.toggleSurveyReady({
+                variables: {
+                  custid: this.props.data.customer.id,
+                  userid: this.props.id,
+                },
+              });
+            },
+          },
+        ],
+      );
+    } else {
+      AlertIOS.alert(
       'Are you sure?',
        'Survey will be sent to estimator',
-      [{ text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-        { text: 'Send to Estimator',
-          onPress: () => {
-            this.setState({ ready: !this.state.ready });
-            this.props.toggleSurveyReady({
-              variables: {
-                custid: this.state.customer.id,
-                userid: this.props.id,
-              },
-            });
+        [{ text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+          { text: 'Send to Estimator',
+            onPress: () => {
+              this.setState({ ready: !this.state.ready });
+              this.props.toggleSurveyReady({
+                variables: {
+                  custid: this.props.data.customer.id,
+                  userid: this.props.id,
+                },
+              });
+            },
           },
-        },
-      ],
+        ],
     );
+    }
   };
   render() {
+    if (this.props.data.loading) {
+      return (
+        <ActivityIndicator />
+      );
+    }
     return (
       <Drawer
         type="static"
         open={this.state.drawer}
-        content={<ContactCustomerMenu customer={this.state.customer} />}
+        content={<ContactCustomerMenu customer={this.props.data.customer} />}
         tapToClose
         openDrawerOffset={0.3} // 20% gap on the right side of drawer
         panCloseMask={0.2}
         closedDrawerOffset={-4}
-        onCloseStart={this.closeDrawer}
+        onCloseStart={() => { this.setState({ drawer: false }); }}
       >
         <View style={MasterStyleSheet.container}>
           <ScrollView
             style={MasterStyleSheet.iPhoneListScroll}
           >
             <CustomerCardConact
-              customer={this.state.customer}
-              openDrawer={this.openDrawer}
-              openFollowupModal={this.openFollowupModal}
-              openFormModal={this.openFormModal}
+              customer={this.props.data.customer}
+              openDrawer={() => { this.setState({ drawer: true }); }}
+              openFollowupModal={() => { this.setState({ followModal: true }); }}
+              openFormModal={() => { this.setState({ formModal: true }); }}
             />
-            <CustomerCardMaps customer={this.state.customer} getDirections={this.getDirections} />
-            <CustomerCardChat customer={this.state.customer} getNotes={this.openNotesModal} />
+            <CustomerCardMaps
+              customer={this.props.data.customer}
+              getDirections={this.getDirections}
+            />
+            <CustomerCardChat
+              customer={this.props.data.customer}
+              getNotes={() => { this.setState({ notesModal: true }); }}
+            />
             <CustomerCardSurvey
-              customer={this.state.customer}
-              startSurvey={this.openSurveyModal}
+              customer={this.props.data.customer}
+              startSurvey={() => { this.setState({ surveyModal: true }); }}
               surveyComplete={this.getFinishedSurvey}
             />
           </ScrollView>
           <CustomerNotesModal
             modal={this.state.notesModal}
-            customer={this.state.customer}
-            customerId={this.state.customer.id}
-            closeNotesModal={this.closeNotesModal}
+            customer={this.props.data.customer}
+            customerId={this.props.selection}
+            closeNotesModal={() => { this.setState({ notesModal: false }); }}
             onSend={this.onSend}
             messages={this.state.messages}
           />
           <CustomerFollowupModal
             modal={this.state.followModal}
-            closeFollowupModal={this.closeFollowupModal}
+            closeFollowupModal={() => { this.setState({ followModal: false }); }}
             onDateChange={this.onDateChange}
             onCalSave={this.onCalSaveFollow}
             date={this.state.date}
-            updateIndex={this.updateIndex}
-            customer={this.state.customer}
+            updateIndex={(selectedIndex) => { this.setState({ selectedIndex }); }}
+            customer={this.props.data.customer}
             dateSelection={this.state.dateSelection}
             changeAppointment={this.changeAppointment}
             deleteAppointment={this.deleteAppointment}
@@ -323,22 +270,22 @@ class _CustomerDetails extends Component {
           />
           <CustomerFormModal
             modal={this.state.formModal}
-            customer={this.state.customer}
-            closeFormModal={this.closeFormModal}
+            customer={this.props.data.customer}
+            closeFormModal={() => { this.setState({ formModal: false }); }}
             updateCustomer={this.props.updateCustomer}
           />
           <SurveyMainModal
             modal={this.state.surveyModal}
-            customer={this.state.customer}
-            user={this.props.data.user}
-            closeSurveyModal={this.closeSurveyModal}
+            customer={this.props.data.customer}
+            id={this.props.id}
+            closeSurveyModal={() => { this.setState({ surveyModal: false }); }}
           />
           <SurveyCompleteModal
             modal={this.state.formCompleteModal}
             close={() => { this.setState({ formCompleteModal: false }); }}
             finishedSurvey={this.state.finishedSurvey}
             myCustomers={this.props.myCustomers}
-            ready={this.state.ready}
+            ready={this.props.data.customer.surveyReadyforPrice}
             toggleReady={this.toggleReady}
           />
         </View>
@@ -356,12 +303,12 @@ graphql(getCustomer, { name: 'getCustomer' }),
 graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
 graphql(addNotes, { name: 'addNotes' }),
 graphql(deleteAppointment, { name: 'deleteAppointment' }),
-graphql(getUserandCustomers, {
-  options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
-}),
+  graphql(getMyCustomer, {
+    options: ({ selection }) => ({ variables: { id: selection }, pollInterval: 1000 }),
+  }),
 )(_CustomerDetails);
 
 export default CustomerDetails;
 
 
-// <CustomerCardPricing customer={this.state.customer} />//
+// <CustomerCardPricing customer={this.props.data.customer} />//

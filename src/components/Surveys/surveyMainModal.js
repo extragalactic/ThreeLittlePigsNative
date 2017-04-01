@@ -33,6 +33,9 @@ import {
    getSurveyLocalPhotos,
   } from '../../graphql/mutations';
 
+import { getUserandCustomers } from '../../graphql/queries';
+
+
 class _SurveyMainModal extends React.Component {
   constructor() {
     super();
@@ -81,7 +84,7 @@ class _SurveyMainModal extends React.Component {
             orginalBase64: data.data,
             timestamp: new Date(),
             custid: this.props.customer.id,
-            user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+            user: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
             localfile: `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`,
           },
         }).then((res) => {
@@ -133,7 +136,7 @@ class _SurveyMainModal extends React.Component {
           orginalBase64: data.data,
           timestamp: new Date(),
           custid: this.props.customer.id,
-          user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+          user: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
           localfile: data.uri,
         },
       })
@@ -163,7 +166,7 @@ class _SurveyMainModal extends React.Component {
           orginalBase64: data.data,
           timestamp: new Date(),
           custid: this.props.customer.id,
-          user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+          user: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
           localfile: data.uri,
         },
       })
@@ -186,8 +189,8 @@ class _SurveyMainModal extends React.Component {
         text: this.state.notes,
         timestamp: new Date(),
         custid: this.props.customer.id,
-        userid: this.props.user._id,
-        user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+        userid: this.props.data.user._id,
+        user: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
       },
     });
     this.setState({ notes: '' });
@@ -208,7 +211,7 @@ class _SurveyMainModal extends React.Component {
     this.props.toggleSurveyReady({
       variables: {
         custid: this.props.customer.id,
-        userid: this.props.user._id,
+        userid: this.props.data.user._id,
       },
     });
   };
@@ -297,8 +300,6 @@ class _SurveyMainModal extends React.Component {
             </View>
           </View>
        }
-
-
           <SurveyNotesModal
             open={this.state.notesModal}
             close={() => this.setState({ notesModal: false })}
@@ -339,6 +340,9 @@ class _SurveyMainModal extends React.Component {
 }
 
 const SurveyMainModal = compose(
+  graphql(getUserandCustomers, {
+    options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
+  }),
   graphql(selectSurveyPhotos, { name: 'selectSurveyPhotos' }),
   graphql(toggleSurveyReady, { name: 'toggleSurveyReady' }),
   graphql(getSurveyPhotos, { name: 'getSurveyPhotos' }),

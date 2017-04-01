@@ -324,7 +324,7 @@ class _CustomerDetailsIPadQueue extends Component {
 
 const CustomerDetailsIPadQueue = compose(
   graphql(getCustomer, {
-    options: ({ customerId }) => ({ variables: { id: customerId } }),
+    options: ({ customerId }) => ({ variables: { id: customerId }, pollInterval: 2000 }),
   }),
   graphql(getFinishedSurvey, { name: 'getFinishedSurvey' }),
   graphql(acceptEstimate, { name: 'acceptEstimate' }),

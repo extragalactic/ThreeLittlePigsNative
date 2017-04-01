@@ -69,6 +69,8 @@ const getCustomer = gql `
     hphone
     wphone
     address
+    surveyReadyforPrice
+    estimatePDF
     coordinates {
       latitude
       longitude
@@ -115,6 +117,65 @@ const getCustomer = gql `
   }
 }`;
 
+const getMyCustomer = gql `
+  query getCustomer($id: String!){
+  customer(id: $id) {
+     id
+    firstName
+    lastName
+    email1
+    email2
+    cphone
+    hphone
+    wphone
+    address
+    surveyReadyforPrice
+    estimatePDF
+    coordinates {
+      latitude
+      longitude
+    }
+   surveyor {
+      id
+      firstName
+      lastName
+      mobile
+    }
+    estimator
+    status
+    notes{
+      _id
+      text
+      user {
+        name
+        _id
+      }
+    }
+    survey {
+      notes {
+        heading
+        description
+        timestamp
+        user
+        text
+    }
+      photos{
+        heading
+        description
+        timestamp
+        user
+        orginalBase64
+        editedlBase64
+        thumbURL
+        thumb
+        photo
+        caption
+        selected
+        docID
+      }
+    }
+  }
+}`;
 
 const getFinishedSurvey = gql `
   query getFinishedSurvey($id: String){
@@ -382,6 +443,7 @@ const getQueue = gql `
 
 export {
   getQueue,
+  getMyCustomer,
   getUserandCustomers,
   getEstimateResults,
   getPrices,

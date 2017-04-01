@@ -56,14 +56,12 @@ class SurveyCompleteModal extends React.Component {
                   <ScrollView
                     contentContainerStyle={MasterStyleSheet.surveyResultsNotesView}
                   >
-
                     { survey.notes.map(note => (
                       <View>
                         <Text h4> {note.description}</Text>
                         <Text h5> {note.text}</Text>
                       </View>
                 ))}
-
                   </ScrollView>
                 </View>
               </View>
@@ -71,7 +69,7 @@ class SurveyCompleteModal extends React.Component {
           </Swiper>
           <Button
             buttonStyle={MasterStyleSheet.surveyResultsButton}
-            icon={{ name: 'attach-money' }}
+            icon={{ name: 'check-circle' }}
             backgroundColor={this.props.ready ? '#01DF3A' : '#03A9F4'}
             title={this.props.ready ? 'Survey is Ready' : 'Make Ready'}
             onPress={this.props.toggleReady}

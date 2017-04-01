@@ -15,7 +15,7 @@ import EstimatePriceModal from './estimatePriceModal';
 import PhotoGalleryEstimates from '../photoGallery/photoGalleryEstimates';
 import CustomGenericsModal from './customGenericsModal';
 import EstimatePreviewModal from './estimatePreviewModal';
-import generics from './generics';
+import generics from '../Estimates/generics';
 
 const window = Dimensions.get('window');
 

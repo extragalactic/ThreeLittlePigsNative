@@ -18,10 +18,9 @@ import CustomerListEstimateQueue from './components/customerList/customerListEst
 import CustomerListOnsite from './components/customerList/customerListOnsite';
 import CustomerListsurveyinProgress from './components/customerList/customerListSurveyinProgress';
 import CustomerListSurveyComplete from './components/customerList/customerListSurveyComplete';
-import CustomerListMyEstimates from './components/Estimates/customerListMyEstimates';
+import CustomerListMyEstimates from './components/customerList/customerListMyEstimates';
 import CustomerDetailsIpadQueue from './components/customerDetails/customerDetailsIPadQueue';
 import CustomerDetailsQueue from './components/customerDetails/customerDetailsQueue';
-import CustomerDetailsEstimator from './components/Estimates/customerDetailsIPadEstimator';
 
 import { getUserID } from './Realm/authRealm';
 
