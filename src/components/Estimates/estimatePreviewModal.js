@@ -1,4 +1,4 @@
-import { View, Modal, WebView } from 'react-native';
+import { View, Modal, WebView,  ActivityIndicator } from 'react-native';
 import { Icon } from 'react-native-elements';
 import React from 'react';
 import { MasterStyleSheet } from '../../style/MainStyles';
@@ -6,9 +6,20 @@ import { MasterStyleSheet } from '../../style/MainStyles';
 class EstimatePreviewModal extends React.Component {
   constructor() {
     super();
-    this.state = { someKey: 'someValue' };
+    this.state = {
+      loading: true,
+    };
   }
 
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 9000);
+  }
+  componentWillUnmount() {
+    this.setState({ loading: true });
+
+  }
   render() {
     return (
       <View>
@@ -22,9 +33,11 @@ class EstimatePreviewModal extends React.Component {
             size={32}
             color={'blue'}
           />
+          {this.state.loading ? <ActivityIndicator /> :
           <WebView
             source={{ uri: `https://3lpm.s3.ca-central-1.amazonaws.com/${this.props.customer.id}/${this.props.customer.firstName}${this.props.customer.lastName}Estimate.pdf` }}
           />
+        }
         </Modal>
       </View>
     );

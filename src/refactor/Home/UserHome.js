@@ -87,7 +87,7 @@ class _UserHome extends React.Component {
         {user.estimator ?
           <View>
             <Button
-              title={'Estimate Queue'}
+              title={'Ready for Pricing'}
               buttonStyle={MasterStyleSheet.estimateButtonStyle}
               onPress={() => Actions.customerListQueue()}
             />
