@@ -88,7 +88,7 @@ class _CustomerDetailsIPadQueue extends Component {
 
     RNCalendarEvents.saveEvent(`${selection ? selection.description : 'Followup'} ${this.props.data.customer.firstName} ${this.props.data.customer.lastName}`, {
       location: this.props.data.customer.address,
-      notes: this.props.data.customer.cphone,
+      notes: this.props.data.customer.cphone ? this.props.data.customer.cphone : this.props.data.customer.hphone,
       startDate: starthour,
       endDate: endhour,
     })
@@ -332,13 +332,3 @@ const CustomerDetailsIPadQueue = compose(
 )(_CustomerDetailsIPadQueue);
 
 export default CustomerDetailsIPadQueue;
-
-/*
-
- <SurveyCompleteModal
-            modal={this.state.formCompleteModal}
-            customer={this.props.data.customer}
-            completedSurvey={this.state.finishedSurvey}
-            close={() => { this.setState({ formCompleteModal: false }); }}
-          />
-*/

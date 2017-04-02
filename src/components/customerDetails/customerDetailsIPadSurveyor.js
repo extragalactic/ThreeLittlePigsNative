@@ -10,7 +10,6 @@ import Drawer from 'react-native-drawer';
 import RNCalendarEvents from 'react-native-calendar-events';
 import { graphql, compose } from 'react-apollo';
 
-
 import CustomerCardConact from '../Cards/customerCardConact';
 import CustomerCardChat from '../Cards/customerCardChat';
 import CustomerCardMaps from '../Cards/customerCardMaps';
@@ -23,9 +22,16 @@ import CustomerNotesModal from '../Modals/customerNotesModal';
 import SurveyMainModal from '../Surveys/surveyMainModal';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
-import { getCustomer } from '../../graphql/queries';
-import { getFinishedSurvey, toggleSurveyReady } from '../../graphql/mutations';
+import { getFinishedSurvey,
+   toggleSurveyReady,
+   submitFollowup,
+   getAppointmentsforDay,
+   updateCustomer,
+   addNotes,
+   deleteAppointment,   
+  } from '../../graphql/mutations';
 
+import { getCustomer } from '../../graphql/queries';
 
 const addMinutes = (date, minutes) => new Date(date.getTime() + minutes * 60000);
 
@@ -89,7 +95,7 @@ class _CustomerDetailsIPadSurveyor extends Component {
 
     RNCalendarEvents.saveEvent(`${selection ? selection.description : 'Followup'} ${this.props.data.customer.firstName} ${this.props.data.customer.lastName}`, {
       location: this.props.data.customer.address,
-      notes: this.props.data.customer.cphone,
+      notes: this.props.data.customer.cphone ? this.props.data.customer.cphone : this.props.data.customer.hphone,
       startDate: starthour,
       endDate: endhour,
     })
@@ -254,6 +260,7 @@ class _CustomerDetailsIPadSurveyor extends Component {
       ],
     );
   };
+  selectIndex = selectedIndex => this.setState({ selectedIndex });
   render() {
     if (!this.props.data.customer) {
       return (
@@ -306,11 +313,11 @@ class _CustomerDetailsIPadSurveyor extends Component {
           />
           <CustomerFollowupModal
             modal={this.state.followModal}
-            closeFollowupModal={this.closeFollowupModal}
+            closeFollowupModal={() => { this.setState({ followModal: false }); }}
             onDateChange={this.onDateChange}
             onCalSave={this.onCalSaveFollow}
             date={this.state.date}
-            updateIndex={this.updateIndex}
+            updateIndex={this.selectIndex}
             customer={this.props.data.customer}
             dateSelection={this.state.dateSelection}
             changeAppointment={this.changeAppointment}
@@ -350,8 +357,10 @@ const CustomerDetailsIPadSurveyor = compose(
   graphql(getCustomer, {
     options: ({ customerId }) => ({ variables: { id: customerId } }),
   }),
+  graphql(addNotes, { name: 'addNotes' }),
   graphql(getFinishedSurvey, { name: 'getFinishedSurvey' }),
+  graphql(submitFollowup, { name: 'submitFollowup' }),
   graphql(toggleSurveyReady, { name: 'toggleSurveyReady' }),
-)(_CustomerDetailsIPadSurveyor);
+  )(_CustomerDetailsIPadSurveyor);
 
 export default CustomerDetailsIPadSurveyor;

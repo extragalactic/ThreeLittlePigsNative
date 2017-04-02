@@ -49,7 +49,7 @@ class _CustomerDetails extends Component {
       surveyModal: false,
       date: new Date(),
       timeZoneOffsetInHours: (-1) * (new Date()).getTimezoneOffset() / 60,
-      selectedIndex: '',
+      selectedIndex: 'Followup',
       dateSelection: [],
       notes: '',
       change: false,
@@ -60,6 +60,7 @@ class _CustomerDetails extends Component {
     };
   }
   onDateChange = (date) => {
+    console.log(date);
     this.setState({ date });
     this.props.getAppointmentsforDay({ variables: {
       userid: this.props.id,
@@ -80,6 +81,7 @@ class _CustomerDetails extends Component {
     } });
   }
   onCalSaveFollow = () => {
+  
     const howlong = (type) => {
       if (type === 'Followup') {
         return { duration: 15, description: 'Followup' };
@@ -93,10 +95,9 @@ class _CustomerDetails extends Component {
     const endhour = new Date(end).toISOString();
     const starthour = this.state.date.toISOString();
     const that = this;
-
     RNCalendarEvents.saveEvent(`${selection ? selection.description : 'Followup'} ${this.props.data.customer.firstName} ${this.props.data.customer.lastName}`, {
       location: this.props.data.customer.address,
-      notes: this.props.data.customer.cphone,
+      notes: this.props.data.customer.cphone ? this.props.data.customer.cphone : this.props.data.customer.hphone,
       startDate: starthour,
       endDate: endhour,
     })
@@ -119,6 +120,7 @@ class _CustomerDetails extends Component {
     this.setState({
       change: false,
     });
+    
   };
 
   getFinishedSurvey = () => {
@@ -204,6 +206,11 @@ class _CustomerDetails extends Component {
     );
     }
   };
+  selectIndex = (selectedIndex) => { 
+    console.log(selectedIndex);
+    this.setState({ selectedIndex });
+    
+     }
   render() {
     if (this.props.data.loading) {
       return (
@@ -238,6 +245,7 @@ class _CustomerDetails extends Component {
             <CustomerCardChat
               customer={this.props.data.customer}
               getNotes={() => { this.setState({ notesModal: true }); }}
+              id={this.props.id}
             />
             <CustomerCardSurvey
               customer={this.props.data.customer}
@@ -259,7 +267,7 @@ class _CustomerDetails extends Component {
             onDateChange={this.onDateChange}
             onCalSave={this.onCalSaveFollow}
             date={this.state.date}
-            updateIndex={(selectedIndex) => { this.setState({ selectedIndex }); }}
+            updateIndex={this.selectIndex}
             customer={this.props.data.customer}
             dateSelection={this.state.dateSelection}
             changeAppointment={this.changeAppointment}

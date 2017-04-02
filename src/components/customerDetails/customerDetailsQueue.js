@@ -110,7 +110,7 @@ class _CustomerDetailsQueue extends Component {
 
     RNCalendarEvents.saveEvent(`${selection ? selection.description : 'Followup'} ${this.state.customer.firstName} ${this.state.customer.lastName}`, {
       location: this.state.customer.address,
-      notes: this.state.customer.cphone,
+      notes: this.props.data.customer.cphone ? this.props.data.customer.cphone : this.props.data.customer.hphone,
       startDate: starthour,
       endDate: endhour,
     })
