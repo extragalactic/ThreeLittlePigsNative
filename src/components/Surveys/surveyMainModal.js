@@ -110,7 +110,7 @@ class _SurveyMainModal extends React.Component {
 
   changeSelection = (selection) => {
     this.setState({
-      selection: ['no header'],
+      selection: [],
     });
 
     this.setState({
