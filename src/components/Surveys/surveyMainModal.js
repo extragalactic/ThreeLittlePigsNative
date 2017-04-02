@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { Modal, View, ActivityIndicator } from 'react-native';
+import { Modal, View, ActivityIndicator, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 import ImagePickerManager from 'react-native-image-picker';
 import { graphql, compose } from 'react-apollo';
@@ -84,7 +84,7 @@ class _SurveyMainModal extends React.Component {
             orginalBase64: data.data,
             timestamp: new Date(),
             custid: this.props.customer.id,
-            user: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
+            user: `${this.props.user.firstName} ${this.props.user.lastName}`,
             localfile: `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`,
           },
         }).then((res) => {
@@ -229,6 +229,14 @@ class _SurveyMainModal extends React.Component {
     });
   };
   render() {
+    console.log
+    if(this.props.data.loading){
+      return (
+        <View>
+        <Text>Loading </Text>
+        </View>
+      )
+    }
     return (
       <View style={MasterStyleSheet.surveyMainView}>
         <Modal

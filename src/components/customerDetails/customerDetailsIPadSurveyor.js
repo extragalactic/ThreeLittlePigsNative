@@ -328,8 +328,9 @@ class _CustomerDetailsIPadSurveyor extends Component {
           <SurveyMainModal
             modal={this.state.surveyModal}
             customer={this.props.data.customer}
+            id={this.props.id}
             user={this.props.user}
-            closeSurveyModal={this.closeSurveyModal}
+            closeSurveyModal={() => { this.setState({ surveyModal: false }); }}
           />
           <SurveyCompleteModal
             modal={this.state.formCompleteModal}
