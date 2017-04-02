@@ -102,7 +102,7 @@ const mapActionsToProps = dispatch => ({
 
 const CustomerListNewCustomers = compose(
   graphql(getUserandCustomers, {
-    options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
+    options: ({ id }) => ({ variables: { id } }),
   }),
    graphql(submitFollowup, { name: 'submitFollowup' }),
    graphql(updateCustomer, { name: 'updateCustomer' }),

@@ -22,12 +22,13 @@ const ContactCustomerMenu = ({ customer }) => (
           raised
           onPress={() => Communications.phonecall(customer.hphone, true)}
         /> : null}
-      <Icon
-        name="work"
-        color="#517fa4"
-        raised
-        onPress={() => Communications.phonecall(customer.wphone, true)}
-      />
+      {customer.wphone ?
+        <Icon
+          name="work"
+          color="#517fa4"
+          raised
+          onPress={() => Communications.phonecall(customer.wphone, true)}
+        /> : null}
     </View>
     <View style={MasterStyleSheet.constacCustomerContainerTwo}>
       <Icon
@@ -40,14 +41,14 @@ const ContactCustomerMenu = ({ customer }) => (
         name="mail-outline"
         color="#517fa4"
         raised
-        onPress={() => Communications.email(customer.email1)}
+        onPress={() => Communications.email([customer.email1], null, null, null, 'my body text')}
       />
-      <Icon
+      {customer.email2 ? <Icon
         name="email"
         color="#517fa4"
         raised
-        onPress={() => Communications.email(customer.email2)}
-      />
+        onPress={() => Communications.email([customer.email2], null, null, null, 'my body text')}
+      /> : null}
     </View>
   </View>
   );

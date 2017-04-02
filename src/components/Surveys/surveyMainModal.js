@@ -349,7 +349,7 @@ class _SurveyMainModal extends React.Component {
 
 const SurveyMainModal = compose(
   graphql(getUserandCustomers, {
-    options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
+    options: ({ id }) => ({ variables: { id } }),
   }),
   graphql(selectSurveyPhotos, { name: 'selectSurveyPhotos' }),
   graphql(toggleSurveyReady, { name: 'toggleSurveyReady' }),
