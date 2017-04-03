@@ -10,7 +10,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import { graphql, compose } from 'react-apollo';
-import {GiftedChat, Actions, Bubble} from 'react-native-gifted-chat';
+import { GiftedChat, Actions, Bubble} from 'react-native-gifted-chat';
+import _ from 'lodash';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
 import { getCustomer } from '../../graphql/queries';
@@ -39,7 +40,7 @@ class _GiftedChatContainer extends React.Component {
     this._isMounted = true;
     this.setState(() => {
       return {
-        messages: this.props.data.customer.notes,
+        messages: _.reverse(this.props.data.customer.notes),
       };
     });
   }
@@ -59,7 +60,7 @@ class _GiftedChatContainer extends React.Component {
       if (this._isMounted === true) {
         this.setState((previousState) => {
           return {
-            messages: GiftedChat.prepend(previousState.messages, this.props.data.customer.notes),
+            messages: GiftedChat.prepend(previousState.messages, _.reverse(this.props.data.customer.notes)),
             loadEarlier: false,
             isLoadingEarlier: false,
           };
