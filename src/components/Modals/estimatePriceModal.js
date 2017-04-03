@@ -29,11 +29,15 @@ class _EstimatePriceModal extends React.Component {
   }
 
   submitPrice = () => {
-    this.props.addPrice(this.state.query, this.state.price);
-    this.setState({
-      price: 0,
-      query: '',
-    });
+    const inputValidate = this.state.query === '' || this.state.price === '';
+    console.log(!inputValidate);
+    if (!inputValidate) {
+      this.props.addPrice(this.state.query, this.state.price);
+      this.setState({
+        price: 0,
+        query: '',
+      });
+    }
   };
 
   render() {

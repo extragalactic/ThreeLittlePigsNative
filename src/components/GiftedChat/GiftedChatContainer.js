@@ -177,7 +177,6 @@ class _GiftedChatContainer extends React.Component {
   }
 
   render() {
-    console.log(this)
     return (
     <GiftedChat
         messages={this.state.messages}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Auth0Lock from 'react-native-lock';
 import Config from 'react-native-config';
 import { connect } from 'react-redux';
