@@ -14,7 +14,7 @@ class EstimatePreviewModal extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.setState({ loading: false });
-    }, 9000);
+    }, 12000);
   }
   componentWillUnmount() {
     this.setState({ loading: true });
