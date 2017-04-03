@@ -9,7 +9,7 @@ import Auth0Lock from 'react-native-lock';
 import Config from 'react-native-config';
 import RNRestart from 'react-native-restart';
 import { connect } from 'react-redux';
-import { authInit, saveProfile, getUserID } from '../../Realm/authRealm';
+import { saveProfile } from '../../Realm/authRealm';
 
 const styles = StyleSheet.create({
   container: {
@@ -30,11 +30,9 @@ class _NoLogin extends React.Component {
     this.lock.show({}, (err, profile, token) => {
       if (err) {
         console.error(err);
-      } 
+      }
       saveProfile(profile, token);
-      //this.props.saveProfile(profile)
       RNRestart.Restart();
-    
     });
   }
   render() {
@@ -47,7 +45,6 @@ class _NoLogin extends React.Component {
       </View>
     );
   }
-
 }
 
 const mapActionsToProps = dispatch => ({
@@ -57,7 +54,5 @@ const mapActionsToProps = dispatch => ({
 });
 
 const NoLogin = connect(null, mapActionsToProps)(_NoLogin);
+
 export default NoLogin;
-
-
-

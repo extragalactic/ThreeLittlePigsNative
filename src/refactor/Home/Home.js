@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-} from 'react-native';
 import Auth0Lock from 'react-native-lock';
 import Config from 'react-native-config';
-import Spinner from 'react-native-spinkit';
 import { connect } from 'react-redux';
-import { MasterStyleSheet } from '../style/MainStyles';
-import { authInit, saveProfile, getUserID } from '../Realm/authRealm';
+import { authInit, getUserID } from '../../Realm/authRealm';
 
-import LoggedIn from '../refactor/Home/LoggedIn';
-import NoLogin from '../refactor/Home/NoLogin'; 
-
+import LoggedIn from './LoggedIn';
+import NoLogin from './NoLogin';
 
 class _Home extends Component {
   static defaultProps = {
@@ -22,6 +14,9 @@ class _Home extends Component {
   }
   constructor(props) {
     super(props);
+    this.state = {
+      connected: false,
+    };
     this.lock = new Auth0Lock({ clientId: Config.AUTH0_ID, domain: Config.AUTH0_DOMAIN }, {});
   }
   componentDidMount() {

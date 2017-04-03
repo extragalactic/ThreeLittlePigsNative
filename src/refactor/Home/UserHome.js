@@ -31,9 +31,7 @@ class _UserHome extends React.Component {
     super(props);
   }
   componentDidMount() {
-
-     console.log('onesignal')
-     setTimeout(() => {
+    setTimeout(() => {
         OneSignal.sendTags({
           userid: this.props.data.user._id,
           username: `${this.props.data.user.firstName}${this.props.data.user.lastName}`,
@@ -119,8 +117,4 @@ const UserHome = compose(
    connect(null, mapActionsToProps),
 )(_UserHome);
 
-
-
 export default UserHome;
-
-
