@@ -9,7 +9,7 @@ import {
   ActionConst,
 } from 'react-native-router-flux';
 
-import Home from './containers/Home';
+import Home from './refactor/Home/Home';
 
 import CustomerDetails from './components/customerDetails';
 import CustomerListNewCustomers from './components/customerList/customerListNewCustomers';

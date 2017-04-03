@@ -1,23 +1,12 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import store from 'react-native-simple-store';
 import thunk from 'redux-thunk';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import Auth0Lock from 'react-native-lock';
-import Config from 'react-native-config';
+
 import { ApolloProvider } from 'react-apollo';
-import {
-    Router,
-    Scene,
-    Actions,
-} from 'react-native-router-flux';
-
-import { authInit, saveProfile, getUserID } from './src/Realm/authRealm';
-
-
-import Root from './src/containers/Root';
+import { Router } from 'react-native-router-flux';
 
 import routes from './src/Routes';
 
@@ -28,7 +17,7 @@ import { customerReducer } from './src/reducers/currentCustomer';
 const client = new ApolloClient({
   connectToDevTools: true,
   networkInterface: createNetworkInterface({
-    uri:  process.env.PROD ? 'https://tlpm.ca/graphql' : 'http://192.168.1.106:8080/graphql',
+    uri: 'http://192.168.1.106:8080/graphql',
   },
     {
       shouldBatch: true,

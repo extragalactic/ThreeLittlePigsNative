@@ -14,7 +14,7 @@ import {
 
 import Customers from '../containers/Customers';
 import Surveys from '../containers/Surveys';
-import Home from '../containers/Home';
+import Home from '../refactor/Home/Home';
 
 let styles = {};
 

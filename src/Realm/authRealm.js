@@ -19,6 +19,7 @@ const authInit = () => {
 };
 
 const saveProfile = (profile, token) => {
+  console.log('savepfile', profile);
   const UserSchema = {
     name: 'User',
     properties: {
