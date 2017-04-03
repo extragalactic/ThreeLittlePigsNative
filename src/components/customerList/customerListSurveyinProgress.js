@@ -55,6 +55,8 @@ class _CustomerListSurvyeinProgress extends React.Component {
               customerId={this.state.selection}
               selection={this.state.selection}
               user={this.props.data.user}
+                            id={this.props.id}
+
               updateCustomer={this.props.updateCustomer}
               getAppointmentsforDay={this.props.getAppointmentsforDay}
               addNotes={this.props.addNotes}

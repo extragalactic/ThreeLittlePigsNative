@@ -55,6 +55,7 @@ class _CustomerListFollowup extends React.Component {
               myCustomers={this.props.data.getMyCustomers}
               customerId={this.state.selection}
               user={this.props.data.user}
+              id={this.props.id}
               submitFollowup={this.props.submitFollowup}
               updateCustomer={this.props.updateCustomer}
               getAppointmentsforDay={this.props.getAppointmentsforDay}

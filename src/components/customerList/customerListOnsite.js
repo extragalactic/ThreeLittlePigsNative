@@ -57,6 +57,7 @@ class _CustomerListonSite extends React.Component {
               updateCustomer={this.props.updateCustomer}
               getAppointmentsforDay={this.props.getAppointmentsforDay}
               addNotes={this.props.addNotes}
+              id={this.props.id}
               updateUser={this.props.updateUser}
               deleteAppointment={this.props.deleteAppointment}
             />

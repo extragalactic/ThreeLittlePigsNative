@@ -302,6 +302,7 @@ class _CustomerDetailsIPadEstimator extends Component {
             <CustomerCardChat
               customer={this.props.data.customer}
               getNotes={this.openNotesModal}
+              id={this.props.id}
             />
             <CustomerCardEstimate
               getEstimate={this.getFinishedSurvey}
@@ -339,8 +340,8 @@ class _CustomerDetailsIPadEstimator extends Component {
           <SurveyMainModal
             modal={this.state.surveyModal}
             customer={this.props.data.customer}
-            user={this.props.user}
-            closeSurveyModal={this.closeSurveyModal}
+            id={this.props.id}
+            closeSurveyModal={() => { this.setState({ surveyModal: false }); }}
           />
           <MyEstimateModal
             user={this.props.user}

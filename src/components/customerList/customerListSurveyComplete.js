@@ -55,6 +55,8 @@ class _CustomerListSurveyComplete extends React.Component {
               myCustomers={this.props.data.getMyCustomers}
               customerId={this.state.selection}
               selection={this.state.selection}
+                            id={this.props.id}
+
               user={this.props.data.user}
               updateCustomer={this.props.updateCustomer}
               getAppointmentsforDay={this.props.getAppointmentsforDay}

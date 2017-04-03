@@ -295,7 +295,9 @@ class _CustomerDetailsIPadSurveyor extends Component {
             />
             <CustomerCardChat
               customer={this.props.data.customer}
-              getNotes={this.openNotesModal}
+              getNotes={() => { this.setState({ notesModal: true }); }}
+              id={this.props.id}
+
             />
             <CustomerCardSurvey
               customer={this.props.data.customer}
@@ -336,7 +338,6 @@ class _CustomerDetailsIPadSurveyor extends Component {
             modal={this.state.surveyModal}
             customer={this.props.data.customer}
             id={this.props.id}
-            user={this.props.user}
             closeSurveyModal={() => { this.setState({ surveyModal: false }); }}
           />
           <SurveyCompleteModal

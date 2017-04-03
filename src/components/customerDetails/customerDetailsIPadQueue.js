@@ -273,6 +273,8 @@ class _CustomerDetailsIPadQueue extends Component {
             <CustomerCardChat
               customer={this.props.data.customer}
               getNotes={this.openNotesModal}
+                            id={this.props.id}
+
             />
             <CustomerCardQueue
               customer={this.props.data.customer}
@@ -312,8 +314,8 @@ class _CustomerDetailsIPadQueue extends Component {
           <SurveyMainModal
             modal={this.state.surveyModal}
             customer={this.props.data.customer}
-            user={this.props.user}
-            closeSurveyModal={this.closeSurveyModal}
+            id={this.props.id}
+            closeSurveyModal={() => { this.setState({ surveyModal: false }); }}
           />
 
         </View>

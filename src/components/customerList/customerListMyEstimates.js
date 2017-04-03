@@ -56,6 +56,8 @@ class _CustomerListMyEstimates extends React.Component {
               customerId={this.state.selection}
               selection={this.state.selection}
               user={this.props.user}
+                            id={this.props.id}
+
               acceptEstimate={this.props.acceptEstimate}
               updateCustomer={this.props.updateCustomer}
               getAppointmentsforDay={this.props.getAppointmentsforDay}

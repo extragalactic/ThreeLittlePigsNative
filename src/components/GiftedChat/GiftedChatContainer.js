@@ -177,6 +177,7 @@ class _GiftedChatContainer extends React.Component {
   }
 
   render() {
+    console.log(this)
     return (
     <GiftedChat
         messages={this.state.messages}
@@ -210,7 +211,7 @@ const styles = StyleSheet.create({
 
 const GiftedChatContainer = compose(
   graphql(getCustomer, {
-    options: ({ id }) => ({ variables: { id } }),
+    options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
   }),
   graphql(addNotes, { name: 'addNotes' }),
 )(_GiftedChatContainer);

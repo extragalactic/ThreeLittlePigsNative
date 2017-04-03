@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {NetInfo} from 'react-native';
 import { graphql, compose } from 'react-apollo';
 import codePush from 'react-native-code-push';
 import OneSignal from 'react-native-onesignal';
@@ -15,6 +16,21 @@ class _LoggedIn extends React.Component {
     this.state = { };
   }
   componentDidMount() {
+    NetInfo.fetch().done((reach) => {
+  console.log('Initial: ' + reach);
+});
+function handleFirstConnectivityChange(reach) {
+  console.log('First change: ' + reach);
+  NetInfo.removeEventListener(
+    'change',
+    handleFirstConnectivityChange
+  );
+}
+NetInfo.addEventListener(
+  'change',
+  handleFirstConnectivityChange
+);
+
     //codePush.sync();
     OneSignal.configure({});
     OneSignal.addEventListener('received', this.onReceived);

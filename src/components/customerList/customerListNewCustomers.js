@@ -63,6 +63,7 @@ class _CustomerListNewCustomers extends React.Component {
               customerId={this.state.selection}
               user={this.props.data.user}
               userid={this.props.id}
+              id={this.props.id}
               submitFollowup={this.props.submitFollowup}
               updateCustomer={this.props.updateCustomer}
               getAppointmentsforDay={this.props.getAppointmentsforDay}
@@ -102,7 +103,7 @@ const mapActionsToProps = dispatch => ({
 
 const CustomerListNewCustomers = compose(
   graphql(getUserandCustomers, {
-    options: ({ id }) => ({ variables: { id } }),
+    options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
   }),
    graphql(submitFollowup, { name: 'submitFollowup' }),
    graphql(updateCustomer, { name: 'updateCustomer' }),

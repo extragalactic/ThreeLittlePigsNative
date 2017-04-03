@@ -308,6 +308,8 @@ class _CustomerDetailsQueue extends Component {
              <CustomerCardQueue
               customer={this.state.customer}
               acceptEstimate={this.acceptEstimate}
+              id={this.props.id}
+
             />
    
           </ScrollView>
@@ -342,9 +344,9 @@ class _CustomerDetailsQueue extends Component {
           />
           <SurveyMainModal
             modal={this.state.surveyModal}
-            customer={this.state.customer}
-            user={this.props.data.user}
-            closeSurveyModal={this.closeSurveyModal}
+            customer={this.props.data.customer}
+            id={this.props.id}
+            closeSurveyModal={() => { this.setState({ surveyModal: false }); }}
           />
           <SurveyCompleteModal
             modal={this.state.formCompleteModal}
