@@ -13,7 +13,7 @@ class _LoggedIn extends React.Component {
     this.state = { };
   }
   componentDidMount() {
-    codePush.sync();
+    //codePush.sync();
     OneSignal.configure({});
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
@@ -59,7 +59,7 @@ class _LoggedIn extends React.Component {
   render() {
     return (
       <UserHome
-        id={this.props.profile}
+        id={this.props.id}
       />
     );
   }

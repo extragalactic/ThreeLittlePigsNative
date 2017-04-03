@@ -21,13 +21,17 @@ import CustomerListSurveyComplete from './components/customerList/customerListSu
 import CustomerListMyEstimates from './components/customerList/customerListMyEstimates';
 import CustomerDetailsIpadQueue from './components/customerDetails/customerDetailsIPadQueue';
 import CustomerDetailsQueue from './components/customerDetails/customerDetailsQueue';
-import GiftedChatContainer from './components/GiftedChat/GiftedChatContainer'
+import GiftedChatContainer from './components/GiftedChat/GiftedChatContainer';
 
 import { getUserID } from './Realm/authRealm';
 
 const routes = Actions.create(
   <Scene key="root">
-    <Scene key="home" component={() => <Home />} />
+    <Scene
+      id={getUserID()}
+      key="home"
+      component={Home}
+    />
     <Scene
       key={'customerDetails'}
       component={CustomerDetails}

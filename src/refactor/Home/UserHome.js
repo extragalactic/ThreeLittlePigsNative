@@ -31,6 +31,7 @@ class _UserHome extends React.Component {
     super(props);
   }
   componentDidMount() {
+    
     setTimeout(() => {
         OneSignal.sendTags({
           userid: this.props.data.user._id,
@@ -39,10 +40,9 @@ class _UserHome extends React.Component {
           surveyor: this.props.data.user.surveyor,
         });
     }, 5000);
-
  }
   render() {
-    if (this.props.data.loading){
+    if (!this.props.data.user){
       return (
         <Spinner />
       );

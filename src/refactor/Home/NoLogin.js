@@ -31,7 +31,7 @@ class _NoLogin extends React.Component {
       if (err) {
         console.error(err);
       }
-      console.log(profile);
+     // console.log(profile);
       saveProfile(profile, token);
       RNRestart.Restart();
     });

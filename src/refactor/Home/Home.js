@@ -17,16 +17,18 @@ class _Home extends Component {
     this.state = {
       connected: false,
     };
-    this.lock = new Auth0Lock({ clientId: Config.AUTH0_ID, domain: Config.AUTH0_DOMAIN }, {});
   }
   componentDidMount() {
-    console.log('testingone')
+    console.log('testingone', this);
   }
   render() {
 
     if (authInit()) {
+      console.log('logedin', this)
       return (
-        <LoggedIn />
+        <LoggedIn
+          id={this.props.id}
+        />
       );
     }
     return (
@@ -44,3 +46,7 @@ const mapActionsToProps = dispatch => ({
 const Home = connect(null, mapActionsToProps)(_Home);
 
 export default Home;
+/*
+
+
+*/
