@@ -19,12 +19,9 @@ class _Home extends Component {
     };
   }
   componentDidMount() {
-    console.log('testingone', this);
   }
   render() {
-
     if (authInit()) {
-      console.log('logedin', this)
       return (
         <LoggedIn
           id={this.props.id}
@@ -36,7 +33,6 @@ class _Home extends Component {
     );
   }
 }
-
 const mapActionsToProps = dispatch => ({
   saveProfile(profile) {
     dispatch({ type: 'SAVE_PROFILE', payload: profile });
@@ -46,7 +42,3 @@ const mapActionsToProps = dispatch => ({
 const Home = connect(null, mapActionsToProps)(_Home);
 
 export default Home;
-/*
-
-
-*/

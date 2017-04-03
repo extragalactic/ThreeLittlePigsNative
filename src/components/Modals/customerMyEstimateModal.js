@@ -152,7 +152,7 @@ class _MyEstimateModal extends React.Component {
               preview: false,
             },
           }).then((res) => {
-              console.log(res)
+            //console.log(res)
           }),
         },
       ],
@@ -160,11 +160,10 @@ class _MyEstimateModal extends React.Component {
   }
 
   selectImage = (image) => {
-    console.log(image)
-    this.setState({ 
+    this.setState({
       currentSelection: image,
       zoomModal: true,
-     })
+    });
   }
 
   selectPhoto = (index) => {

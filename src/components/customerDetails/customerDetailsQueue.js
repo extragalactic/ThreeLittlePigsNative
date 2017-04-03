@@ -262,24 +262,44 @@ class _CustomerDetailsQueue extends Component {
   submitNotes = () => {
     this.setState({ notes: '' });
   };
-  toggleReady = () => {
-    AlertIOS.alert(
+toggleReady = () => {
+    if (this.props.data.customer.surveyReadyforPrice){
+      AlertIOS.alert(
+      'Are you sure?',
+       'Survey will be removed from queue',
+        [{ text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+          { text: 'Set to not ready',
+            onPress: () => {
+              this.setState({ ready: !this.state.ready });
+              this.props.toggleSurveyReady({
+                variables: {
+                  custid: this.props.data.customer.id,
+                  userid: this.props.id,
+                },
+              });
+            },
+          },
+        ],
+      );
+    } else {
+      AlertIOS.alert(
       'Are you sure?',
        'Survey will be sent to estimator',
-      [{ text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-        { text: 'Send to Estimator',
-          onPress: () => {
-            this.setState({ ready: !this.state.ready });
-            this.props.toggleSurveyReady({
-              variables: {
-                custid: this.state.customer.id,
-                userid: this.props.id,
-              },
-            });
+        [{ text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+          { text: 'Send to Estimator',
+            onPress: () => {
+              this.setState({ ready: !this.state.ready });
+              this.props.toggleSurveyReady({
+                variables: {
+                  custid: this.props.data.customer.id,
+                  userid: this.props.id,
+                },
+              });
+            },
           },
-        },
-      ],
+        ],
     );
+    }
   };
   render() {
     return (
@@ -353,7 +373,7 @@ class _CustomerDetailsQueue extends Component {
             close={() => { this.setState({ formCompleteModal: false }); }}
             finishedSurvey={this.state.finishedSurvey}
             myCustomers={this.props.myCustomers}
-            ready={this.state.ready}
+            ready={this.props.data.customer.surveyReadyforPrice}
             toggleReady={this.toggleReady}
           />
         </View>

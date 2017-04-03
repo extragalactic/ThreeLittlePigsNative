@@ -364,7 +364,7 @@ class _CustomerDetailsIPadEstimator extends Component {
 
 const CustomerDetailsIPadEstimator = compose(
   graphql(getCustomer, {
-    options: ({ customerId }) => ({ variables: { id: customerId } }),
+    options: ({ customerId }) => ({ variables: { id: customerId }, pollInterval: 1000 }),
   }),
   graphql(getFinishedSurvey, { name: 'getFinishedSurvey' }),
   graphql(sendEstimate, { name: 'sendEstimate' }),

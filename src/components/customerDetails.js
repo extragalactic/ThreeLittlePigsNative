@@ -60,8 +60,7 @@ class _CustomerDetails extends Component {
     };
   }
   onDateChange = (date) => {
-    console.log(date);
-    this.setState({ date });
+     this.setState({ date });
     this.props.getAppointmentsforDay({ variables: {
       userid: this.props.id,
       date,
