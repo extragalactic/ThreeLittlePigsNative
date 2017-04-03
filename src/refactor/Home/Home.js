@@ -20,9 +20,10 @@ class _Home extends Component {
     this.lock = new Auth0Lock({ clientId: Config.AUTH0_ID, domain: Config.AUTH0_DOMAIN }, {});
   }
   componentDidMount() {
+    console.log('testingone')
   }
   render() {
-    console.log(getUserID())
+
     if (authInit()) {
       return (
         <LoggedIn />

@@ -5,6 +5,7 @@ import codePush from 'react-native-code-push';
 import OneSignal from 'react-native-onesignal';
 import RNCalendarEvents from 'react-native-calendar-events';
 import UserHome from './UserHome';
+import { getUserID } from '../../Realm/authRealm';
 
 class _LoggedIn extends React.Component {
   constructor() {
