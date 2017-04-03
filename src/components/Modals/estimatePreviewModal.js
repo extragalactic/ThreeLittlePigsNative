@@ -18,7 +18,6 @@ class EstimatePreviewModal extends React.Component {
   }
   componentWillUnmount() {
     this.setState({ loading: true });
-
   }
   render() {
     return (
