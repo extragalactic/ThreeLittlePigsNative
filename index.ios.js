@@ -4,7 +4,6 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
 import { ApolloProvider } from 'react-apollo';
 import { Router } from 'react-native-router-flux';
 
