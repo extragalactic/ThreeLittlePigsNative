@@ -54,21 +54,20 @@ class _SurveyMainModal extends React.Component {
       notesSelection: '',
       photoSelection: '',
       loading: false,
+      imageUploading: false,
     };
   }
 
 
   getPhoto = () => {
-    setTimeout(() => {
-      this.setState({ loading: true });
-    }, 1000);
+    this.setState({ loading: true });
     ImagePickerManager.showImagePicker(photoOptions, (data) => {
       if (data.didCancel) {
         this.setState({ loading: false });
       }
 
       if (!data.didCancel) {
-        this.setState({ loading: false });
+        this.setState({ imageUploading: true });
         const docID = uuid.v4();
         RNFS.copyFile(data.uri, `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`)
        .then(res => console.log(res))
@@ -89,7 +88,10 @@ class _SurveyMainModal extends React.Component {
           },
         }).then((res) => {
           if (res.data.addSurveyPhoto) {
-            this.setState({ loading: false });
+            this.setState({
+              loading: false,
+              imageUploading: false,
+            });
           }
         });
       }
@@ -100,7 +102,6 @@ class _SurveyMainModal extends React.Component {
       variables: { id: this.props.customer.id },
     })
     .then((data) => {
-
       this.setState({ surveyPhotos: data.data.getSurveyPhotos });
     });
     this.setState({
@@ -229,13 +230,12 @@ class _SurveyMainModal extends React.Component {
     });
   };
   render() {
-    console.log
-    if(this.props.data.loading){
+    if (this.props.data.loading) {
       return (
         <View>
-        <Text>Loading </Text>
+          <Text>Loading </Text>
         </View>
-      )
+      );
     }
     return (
       <View style={MasterStyleSheet.surveyMainView}>
@@ -253,18 +253,19 @@ class _SurveyMainModal extends React.Component {
               color={'blue'}
             /> : null }
           </View>
-          {this.state.loading ? <ActivityIndicator
+          {this.state.imageUploading ? <ActivityIndicator
             style={MasterStyleSheet.surveyMainPicker}
             size={'large'}
           /> :
           <View>
-            <SurveyPicker
-              changeSelection={this.changeSelection}
-              selection={this.state.selected}
-              style={MasterStyleSheet.surveyMainPicker}
-            />
+            {!this.state.loading ?
+              <SurveyPicker
+                changeSelection={this.changeSelection}
+                selection={this.state.selected}
+                style={MasterStyleSheet.surveyMainPicker}
+              /> : null}
 
-            <View
+            {!this.state.loading ? <View
               style={MasterStyleSheet.surveyDetailsList}
             >
               {this.state.selected === 'Parging' ? <PargingSelect updateSelection={this.updateSelection} /> : null }
@@ -280,32 +281,37 @@ class _SurveyMainModal extends React.Component {
               {this.state.selected === 'Windowsills' ? <WindowsillsSelect updateSelection={this.updateSelection} /> : null }
               {this.state.selected === 'Refacing' ? <RefacingSelect updateSelection={this.updateSelection} /> : null }
             </View>
-            <View style={MasterStyleSheet.surveyMainContainer}>
-              <Icon
-                name="description"
-                color="#517fa4"
-                raised
-                onPress={() => this.setState({ notesModal: true })}
-              />
-              <Icon
-                name="add-a-photo"
-                color="#517fa4"
-                raised
-                onPress={this.getPhoto}
-              />
-              <Icon
-                name="photo"
-                color="#517fa4"
-                raised
-                onPress={this.viewPhotos}
-              />
-              <Icon
-                name="help-outline"
-                color="#517fa4"
-                raised
-                onPress={() => console.log(this)}
-              />
-            </View>
+            : null }
+            {!this.state.loading ?
+              <View style={MasterStyleSheet.surveyMainContainer}>
+                <Icon
+                  name="description"
+                  color="#517fa4"
+                  raised
+                  onPress={() => this.setState({ notesModal: true })}
+                />
+                <Icon
+                  name="add-a-photo"
+                  color="#517fa4"
+                  raised
+                  onPress={this.getPhoto}
+                />
+                <Icon
+                  name="photo"
+                  color="#517fa4"
+                  raised
+                  onPress={this.viewPhotos}
+                />
+                <Icon
+                  name="help-outline"
+                  color="#517fa4"
+                  raised
+                  onPress={() => console.log(this)}
+                />
+              </View>
+ : null}
+
+
           </View>
        }
           <SurveyNotesModal
