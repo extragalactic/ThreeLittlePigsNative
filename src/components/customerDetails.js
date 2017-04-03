@@ -207,12 +207,13 @@ class _CustomerDetails extends Component {
     }
   };
   selectIndex = (selectedIndex) => { 
-    console.log(selectedIndex);
+  //  console.log(selectedIndex);
     this.setState({ selectedIndex });
     
      }
   render() {
-    if (this.props.data.loading) {
+  //  console.log('detials', this)
+    if (!this.props.data.customer) {
       return (
         <ActivityIndicator />
       );

@@ -84,7 +84,7 @@ class _SurveyMainModal extends React.Component {
             orginalBase64: data.data,
             timestamp: new Date(),
             custid: this.props.customer.id,
-            user: `${this.props.user.firstName} ${this.props.user.lastName}`,
+            user: `${this.props.data.user.firstName} ${this.props.data.user.lastName}`,
             localfile: `${RNFS.DocumentDirectoryPath}/images/${docID}.jpg`,
           },
         }).then((res) => {

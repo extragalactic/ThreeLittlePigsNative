@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import codePush from 'react-native-code-push';
 import OneSignal from 'react-native-onesignal';
 import RNCalendarEvents from 'react-native-calendar-events';
 import UserHome from './UserHome';
 import { getUserID } from '../../Realm/authRealm';
+
+import { acceptEstimate } from '../../graphql/mutations';
 
 class _LoggedIn extends React.Component {
   constructor() {
@@ -70,6 +72,7 @@ const mapStateToProps = state => ({
 
 const LoggedIn = compose(
   connect(mapStateToProps, null),
+  graphql(acceptEstimate, { name: 'acceptEstimate' }),
 )(_LoggedIn);
 
 export default LoggedIn;
