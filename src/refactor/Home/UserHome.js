@@ -23,26 +23,26 @@ const styles = StyleSheet.create({
 });
 
 class _UserHome extends React.Component {
-  static defaultProps = {
-    profile: React.PropTypes.object,
+  static propTypes = {
+    profile: React.PropTypes.string,
     saveProfile: React.PropTypes.func,
+    data: React.PropTypes.object,
   }
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    
     setTimeout(() => {
-        OneSignal.sendTags({
-          userid: this.props.data.user._id,
-          username: `${this.props.data.user.firstName}${this.props.data.user.lastName}`,
-          estimator: this.props.data.user.estimator,
-          surveyor: this.props.data.user.surveyor,
-        });
+      OneSignal.sendTags({
+        userid: this.props.data.user._id,
+        username: `${this.props.data.user.firstName}${this.props.data.user.lastName}`,
+        estimator: this.props.data.user.estimator,
+        surveyor: this.props.data.user.surveyor,
+      });
     }, 5000);
- }
+  }
   render() {
-    if (!this.props.data.user){
+    if (!this.props.data.user) {
       return (
         <Spinner />
       );
@@ -58,27 +58,29 @@ class _UserHome extends React.Component {
             <Button
               title={'New Customers'}
               buttonStyle={MasterStyleSheet.mainButtonStyle}
-              onPress={() => Actions.customerListNewCustomers()}
+              onPress={() => Actions.customerList({ params: { id: this.props.profile, type: 'newcustomers' } })}
             />
             <Button
               title={'Customers to Followup'}
               buttonStyle={MasterStyleSheet.mainButtonStyle}
-              onPress={() => Actions.customerListFollowUp()}
+              onPress={() => Actions.customerList({ params: { id: this.props.profile, type: 'followup' } })}
+
             />
             <Button
               title={'Appointments'}
               buttonStyle={MasterStyleSheet.mainButtonStyle}
-              onPress={() => Actions.customerListOnsite()}
+              onPress={() => Actions.customerList({ params: { id: this.props.profile, type: 'onsite' } })}
             />
             <Button
               title={'Surveys'}
               buttonStyle={MasterStyleSheet.mainButtonStyle}
-              onPress={() => Actions.customerListsurveyinProgress()}
+              onPress={() => Actions.customerList({ params: { id: this.props.profile, type: 'inprogress' } })}
+
             />
             <Button
               title={'Completed Surveys'}
               buttonStyle={MasterStyleSheet.mainButtonStyle}
-              onPress={() => Actions.customerListsurveyComplete()}
+              onPress={() => Actions.customerList({ params: { id: this.props.profile, type: 'surveycomplete' } })}
             />
           </View>
           : null}
@@ -87,34 +89,33 @@ class _UserHome extends React.Component {
             <Button
               title={'Ready for Pricing'}
               buttonStyle={MasterStyleSheet.estimateButtonStyle}
-              onPress={() => Actions.customerListQueue()}
+              onPress={() => Actions.customerList({ params: { id: this.props.profile, type: 'estimatequeue' } })}
             />
             <Button
               title={'My Estimates'}
               buttonStyle={MasterStyleSheet.estimateButtonStyle}
-              onPress={() => Actions.customerListMyEstimates()}
+              onPress={() => Actions.customerList({ params: { id: this.props.profile, type: 'myestimates' } })}
             />
-           </View> : null}
-            <Button
-              title={'Search'}
-              buttonStyle={MasterStyleSheet.searchButtonStyle}
-            />
+          </View> : null}
+        <Button
+          title={'Search'}
+          buttonStyle={MasterStyleSheet.searchButtonStyle}
+        />
       </View>
     );
   }
 }
 
-const mapActionsToProps = dispatch => ({
-  saveProfile(profile) {
-    dispatch({ type: 'SAVE_PROFILE', payload: profile });
-  },
+const mapStateToProps = state => ({
+  profile: state.profile,
 });
 
 const UserHome = compose(
   graphql(getUserandCustomers, {
     options: ({ id }) => ({ variables: { id }, pollInterval: 5000 }),
   }),
-   connect(null, mapActionsToProps),
+  connect(mapStateToProps, null),
 )(_UserHome);
 
 export default UserHome;
+

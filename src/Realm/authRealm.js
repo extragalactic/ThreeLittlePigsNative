@@ -15,7 +15,7 @@ const authInit = () => {
   if (!user[0]) {
     return false;
   }
-  return true;
+  return false;
 };
 
 const saveProfile = (profile, token) => {
@@ -57,4 +57,3 @@ const getUserID = () => {
 };
 
 export { authInit, saveProfile, getUserID };
-

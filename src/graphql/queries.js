@@ -179,7 +179,7 @@ const getMyCustomer = gql `
 
 const getFinishedSurvey = gql `
   query getFinishedSurvey($id: String){
-  getFinishedSurvey(id: $id) {
+  getFinishedSurveyQuery(id: $id) {
     heading
     notes {
       description
@@ -371,7 +371,29 @@ const getUserandCustomers = gql `
       status
       address
     }
-    
+  estimatequeue {
+      id
+      firstName
+      lastName
+      cphone
+      hphone
+      wphone
+      email1
+      email2
+      status
+      address
+    }
+  }
+  getQueue {
+       id
+    firstName
+    lastName
+    address
+    email1
+    email2
+    cphone
+    hphone
+    wphone
   }
    user(id:$id){
       _id

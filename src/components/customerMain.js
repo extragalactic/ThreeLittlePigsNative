@@ -1,3 +1,4 @@
+//this file is no longer in use!
 import React from 'react';
 import { View, Text } from 'react-native';
 import { List, ListItem, Button } from 'react-native-elements';
@@ -6,8 +7,6 @@ import { graphql, compose } from 'react-apollo';
 
 import { MasterStyleSheet } from '../style/MainStyles';
 import { getMyCustomers, getUserandCustomers } from '../graphql/queries';
-import { authInit, saveProfile, getUserID } from '../Realm/authRealm';
-
 
 const selectNewCustomer = () => {
   Actions.customerListNewCustomers();

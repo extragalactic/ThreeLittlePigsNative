@@ -1,22 +1,19 @@
 import React from 'react';
 import {
-  ScrollView,
   View,
-  AlertIOS,
-  Linking,
   Text,
-  ActivityIndicator,
   Platform,
   StyleSheet,
 } from 'react-native';
 import { graphql, compose } from 'react-apollo';
-import { GiftedChat, Actions, Bubble} from 'react-native-gifted-chat';
+import { connect } from 'react-redux';
+import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
 import _ from 'lodash';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
 import { getCustomer } from '../../graphql/queries';
 
-import { addNotes } from '../../graphql/mutations';
+import { addNotes, getUser } from '../../graphql/mutations';
 
 class _GiftedChatContainer extends React.Component {
   constructor() {
@@ -26,6 +23,7 @@ class _GiftedChatContainer extends React.Component {
       loadEarlier: true,
       typingText: null,
       isLoadingEarlier: false,
+      user: {},
     };
     this._isMounted = false;
     this.onSend = this.onSend.bind(this);
@@ -37,6 +35,18 @@ class _GiftedChatContainer extends React.Component {
     this._isAlright = null;
   }
   componentWillMount() {
+    console.log('g', this)
+   this.props.getUser({
+     variables: {
+       id: this.props.profile,
+     },
+   }).then((profile) => {
+     this.setState({
+       user: profile.data.getUser,
+     });
+     console.log(this.state);
+   })
+
     this._isMounted = true;
     this.setState(() => {
       return {
@@ -72,7 +82,7 @@ class _GiftedChatContainer extends React.Component {
   onSend(messages = []) {
      this.props.addNotes({ variables: {
       custid: this.props.data.customer.id,
-      name: `${this.props.user.firstName} ${this.props.user.lastName}`,
+      name: `${this.state.user.firstName} ${this.state.user.lastName}`,
       userid: this.props.id,
       text: messages[0].text,
       createdAt: messages[0].createdAt,
@@ -207,12 +217,17 @@ const styles = StyleSheet.create({
     color: '#aaa',
   },
 });
+const mapStateToProps = state => ({
+  profile: state.profile,
+});
 
 const GiftedChatContainer = compose(
   graphql(getCustomer, {
     options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
   }),
+  connect(mapStateToProps, null),
   graphql(addNotes, { name: 'addNotes' }),
+  graphql(getUser, { name: 'getUser' }),
 )(_GiftedChatContainer);
 
 export default GiftedChatContainer;

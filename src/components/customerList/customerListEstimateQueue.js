@@ -2,14 +2,15 @@ import React from 'react';
 import DeviceInfo from 'react-native-device-info';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { ScrollView, Text } from 'react-native';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { ScrollView } from 'react-native';
+import { Col, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
 import { graphql, compose } from 'react-apollo';
 
 import { MasterStyleSheet } from '../../style/MainStyles';
 import CustomerDetailsIPadQueue from '../customerDetails/customerDetailsIPadQueue';
 import { getQueue, getUserandCustomers } from '../../graphql/queries';
+
 import {
    submitFollowup,
    getAppointmentsforDay,

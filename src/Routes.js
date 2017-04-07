@@ -22,13 +22,13 @@ import CustomerListMyEstimates from './components/customerList/customerListMyEst
 import CustomerDetailsIpadQueue from './components/customerDetails/customerDetailsIPadQueue';
 import CustomerDetailsQueue from './components/customerDetails/customerDetailsQueue';
 import GiftedChatContainer from './components/GiftedChat/GiftedChatContainer';
-
-import { getUserID } from './Realm/authRealm';
+import EstimateContainer from './refactor/Estimates/EstimatesContainer';
+import CustomerListContainer from './refactor/CustomerList/CustomerListContainer';
+import CustomerDetailsContainer from './refactor/CustomerDetails/CustomerDetailsContainer';
 
 const routes = Actions.create(
   <Scene key="root">
     <Scene
-      id={getUserID()}
       key="home"
       component={Home}
     />
@@ -36,61 +36,76 @@ const routes = Actions.create(
       key={'customerDetails'}
       component={CustomerDetails}
       passProps
-      id={getUserID()}
     />
     <Scene
       key={'customerDetailsQueue'}
       component={CustomerDetailsQueue}
       passProps
-      id={getUserID()}
     />
     <Scene
       key={'customerListNewCustomers'}
       component={CustomerListNewCustomers}
       passProps
-      id={getUserID()}
     />
     <Scene
       key={'customerListFollowUp'}
       component={CustomerListFollowUp}
       passProps
-      id={getUserID()}
     />
     <Scene
       key={'customerListOnsite'}
       component={CustomerListOnsite}
       passProps
-      id={getUserID()}
     />
     <Scene
       key={'customerListsurveyinProgress'}
       component={CustomerListsurveyinProgress}
       passProps
-      id={getUserID()}
     />
     <Scene
       key={'customerListsurveyComplete'}
       component={CustomerListSurveyComplete}
       passProps
-      id={getUserID()}
     />
     <Scene
       key={'customerListQueue'}
       component={CustomerListEstimateQueue}
       passProps
-      id={getUserID()}
     />
     <Scene
       key={'customerListMyEstimates'}
       component={CustomerListMyEstimates}
       passProps
-      id={getUserID()}
     />
     <Scene
       key={'giftedChatContainer'}
       component={GiftedChatContainer}
       passProps
-      id={getUserID()}
+    />
+    <Scene
+      key={'estimateContainer'}
+      component={EstimateContainer}
+      passProps
+    />
+    <Scene
+      key={'customerList'}
+      component={CustomerListContainer}
+      passProps
+    />
+    <Scene
+      key={'customerDetailsContainer'}
+      component={CustomerDetailsContainer}
+      passProps
+    />
+    <Scene
+      key={'customerDetailsContainer'}
+      component={CustomerDetailsContainer}
+      passProps
+    />
+    <Scene
+      key={'myEstimates'}
+      component={EstimateContainer}
+      passProps
     />
   </Scene>,
 );

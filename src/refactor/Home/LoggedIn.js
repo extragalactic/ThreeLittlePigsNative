@@ -1,36 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NetInfo } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { graphql, compose } from 'react-apollo';
 import codePush from 'react-native-code-push';
 import OneSignal from 'react-native-onesignal';
 import RNCalendarEvents from 'react-native-calendar-events';
 import UserHome from './UserHome';
-import { getUserID } from '../../Realm/authRealm';
-
 import { acceptEstimate } from '../../graphql/mutations';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#DCDCDC',
+  },
+});
 
 class _LoggedIn extends React.Component {
   constructor() {
     super();
-    this.state = { };
+    this.state = {
+
+    };
   }
   componentDidMount() {
-    NetInfo.fetch().done((reach) => {
-     //console.log(`Initial: ${reach}`);
-    });
-    function handleFirstConnectivityChange(reach) {
-      //console.log(`First change: ${reach}`);
-      NetInfo.removeEventListener(
-    'change',
-    handleFirstConnectivityChange,
-  );
-    }
-    NetInfo.addEventListener(
-  'change',
-  handleFirstConnectivityChange,
-);
-
     // codePush.sync();
     OneSignal.configure({});
     OneSignal.addEventListener('received', this.onReceived);
@@ -61,7 +55,7 @@ class _LoggedIn extends React.Component {
       this.props.acceptEstimate({
         variables: {
           custid: customer,
-          userid: getUserID(),
+          userid: 'getUserID()',
         },
       });
     }
@@ -77,7 +71,7 @@ class _LoggedIn extends React.Component {
   render() {
     return (
       <UserHome
-        id={this.props.id}
+        id={this.props.profile}
       />
     );
   }
