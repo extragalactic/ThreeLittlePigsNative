@@ -58,19 +58,19 @@ query getUser($id: String){
 }`;
 
 const getCustomer = gql `
-  query getCustomer($id: String!){
+ query getCustomer($id: String!){
   customer(id: $id) {
      id
     firstName
     lastName
+    estimatePDF
+    surveyReadyforPrice
     email1
     email2
     cphone
     hphone
     wphone
     address
-    surveyReadyforPrice
-    estimatePDF
     coordinates {
       latitude
       longitude
@@ -81,6 +81,27 @@ const getCustomer = gql `
       lastName
       mobile
     }
+    estimate{
+      photos {
+        heading
+        description
+        timestamp
+        user
+        orginalBase64
+        editedlBase64
+        thumbURL
+        thumb
+        photo
+        caption
+        selected
+      }
+      prices {
+      description
+      price
+      }
+      
+    }
+
     estimator
     status
     notes{
@@ -115,22 +136,23 @@ const getCustomer = gql `
       }
     }
   }
-}`;
+}
+`;
 
 const getMyCustomer = gql `
-  query getCustomer($id: String!){
+   query getCustomer($id: String!){
   customer(id: $id) {
      id
     firstName
     lastName
+    estimatePDF
+    surveyReadyforPrice
     email1
     email2
     cphone
     hphone
     wphone
     address
-    surveyReadyforPrice
-    estimatePDF
     coordinates {
       latitude
       longitude
@@ -141,6 +163,27 @@ const getMyCustomer = gql `
       lastName
       mobile
     }
+    estimate{
+      photos {
+        heading
+        description
+        timestamp
+        user
+        orginalBase64
+        editedlBase64
+        thumbURL
+        thumb
+        photo
+        caption
+        selected
+      }
+      prices {
+      description
+      price
+      }
+      
+    }
+
     estimator
     status
     notes{
@@ -194,6 +237,83 @@ const getFinishedSurvey = gql `
       user
       thumb
       url
+    }
+  }
+  customer(id: $id) {
+     id
+    firstName
+    lastName
+    estimatePDF
+    surveyReadyforPrice
+    email1
+    email2
+    cphone
+    hphone
+    wphone
+    address
+    coordinates {
+      latitude
+      longitude
+    }
+   surveyor {
+      id
+      firstName
+      lastName
+      mobile
+    }
+    estimate{
+      photos {
+        heading
+        description
+        timestamp
+        user
+        orginalBase64
+        editedlBase64
+        thumbURL
+        thumb
+        photo
+        caption
+        selected
+      }
+      prices {
+      description
+      price
+      }
+      
+    }
+
+    estimator
+    status
+    notes{
+      _id
+      text
+      user {
+        name
+        _id
+      }
+    }
+    survey {
+      notes {
+        heading
+        description
+        timestamp
+        user
+        text
+    }
+      photos{
+        heading
+        description
+        timestamp
+        user
+        orginalBase64
+        editedlBase64
+        thumbURL
+        thumb
+        photo
+        caption
+        selected
+        docID
+      }
     }
   }
 }`;

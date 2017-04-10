@@ -89,7 +89,7 @@ class _UserHome extends React.Component {
             <Button
               title={'Ready for Pricing'}
               buttonStyle={MasterStyleSheet.estimateButtonStyle}
-              onPress={() => Actions.customerList({ params: { id: this.props.profile, type: 'estimatequeue' } })}
+              onPress={() => Actions.customerListContainerQueue({ params: { id: this.props.profile, type: 'estimatequeue' } })}
             />
             <Button
               title={'My Estimates'}

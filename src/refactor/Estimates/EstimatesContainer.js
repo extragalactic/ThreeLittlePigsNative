@@ -5,6 +5,8 @@ import { Text, Card, Button, CheckBox, ListItem } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import { graphql, compose } from 'react-apollo';
 import Swipeout from 'react-native-swipeout';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import { generatePDF } from '../../graphql/mutations';
 import { getFinishedSurvey } from '../../graphql/queries';
@@ -15,6 +17,8 @@ import PhotoGalleryEstimates from '../../components/photoGallery/photoGalleryEst
 import CustomGenericsModal from '../../components/Modals/customGenericsModal';
 import EstimatePreviewModal from '../../components/Modals/estimatePreviewModal';
 import generics from '../../components/Estimates/generics';
+import { estimateStyles } from '../Style/estimateStyle';
+
 
 const window = Dimensions.get('window');
 
@@ -92,7 +96,7 @@ class _EstimatesContainer extends React.Component {
     };
     this.props.generatePDF({
       variables: {
-        custid: this.props.customer.id,
+        custid: this.props.currentCustomer,
         generics: gen,
         text: this.state.customText,
         preview: true,
@@ -144,7 +148,7 @@ class _EstimatesContainer extends React.Component {
         { text: 'Send to Customer',
           onPress: () => this.props.generatePDF({
             variables: {
-              custid: this.props.customer.id,
+              custid: this.props.currentCustomer,
               generics: gen,
               text: this.state.customText,
               preview: false,
@@ -167,7 +171,7 @@ class _EstimatesContainer extends React.Component {
   selectPhoto = (index) => {
     this.props.selectSurveyPhotos({
       variables: {
-        custid: this.props.customer.id,
+        custid: this.props.currentCustomer,
         index,
       },
     });
@@ -177,8 +181,7 @@ class _EstimatesContainer extends React.Component {
     this.setState({ customText, custom: true });
   };
   render() {
-    console.log('estimates', this)
-  if (!this.props.finishedSurvey) {
+   if (!this.props.data.getFinishedSurveyQuery) {
       return (
         <Text> No Survey </Text>
       );
@@ -191,14 +194,14 @@ class _EstimatesContainer extends React.Component {
               style={MasterStyleSheet.EstimateModalColLeft}
             >
               <View
-                style={MasterStyleSheet.surveyResultPhotosView}
+                style={estimateStyles.surveyResultPhotosView}
               >
                 <Swiper
                   showsButtons
                   style={MasterStyleSheet.EstimateMainSwipe}
                   width={window.width / 2}
                 >
-                  { this.props.finishedSurvey.map((survey, idx) => (
+                  { this.props.data.getFinishedSurveyQuery.map((survey, idx) => (
                     <View
                       key={idx}
                     >
@@ -230,8 +233,8 @@ class _EstimatesContainer extends React.Component {
                       >
                         { survey.notes.map((note, idx) => (
                           <View key={idx}>
-                            <Text h4> {note.description}</Text>
-                            <Text h5> {note.text}</Text>
+                            <Text h3> {note.description}</Text>
+                            <Text h4> {note.text}</Text>
                           </View>
                 ))}
                       </ScrollView>
@@ -251,23 +254,6 @@ class _EstimatesContainer extends React.Component {
                   title={'3LP Estimate'}
                   containerStyle={MasterStyleSheet.EstimatePreviewCard}
                 >
-                  <ScrollView>
-                    { this.props.estimate.prices ? this.props.estimate.prices.map((price, idx) => (
-                      <Swipeout
-                        right={[{
-                          text: 'Delete',
-                          onPress: () => this.props.deletePrice(idx),
-                          backgroundColor: 'red',
-                        }]}
-                        autoClose
-                      >
-                        <ListItem
-                          title={price.description}
-                          badge={{ value: `$${price.price}.00`, badgeTextStyle: { color: 'white' }, badgeContainerStyle: { marginTop: -1 } }}
-                        />
-                      </Swipeout>
-                )) : null }
-                  </ScrollView>
                   <View
                     style={MasterStyleSheet.EstimateGenerics}
                   >
@@ -294,12 +280,12 @@ class _EstimatesContainer extends React.Component {
                         raised
                         buttonStyle={MasterStyleSheet.addEstimateButton}
                         title="Price"
-                        onPress={() => this.setState({ pricingModal: true })}
+                        onPress={() => Actions.pricingContainer()}
                       />
                       <Button
                         raised
                         buttonStyle={MasterStyleSheet.addEstimateButton}
-                        onPress={() => this.setState({ galleryModal: true })}
+                        onPress={() => Actions.photoGalleryContainer()}
                         title="Photos"
                       />
                     </View>
@@ -326,10 +312,10 @@ class _EstimatesContainer extends React.Component {
           </Grid>
           <PhotoGalleryEstimates
             user={this.props.user}
-            customer={this.props.customer}
+            customer={this.props.data.customer}
             open={this.state.galleryModal}
             close={() => this.setState({ galleryModal: false })}
-            photos={this.props.customer.survey.photos}
+            photos={this.props.data.customer.survey.photos}
             selectPhoto={this.selectPhoto}
           />
           <EstimatePriceModal
@@ -348,7 +334,7 @@ class _EstimatesContainer extends React.Component {
           <EstimatePreviewModal
             open={this.state.estimatePreviewModal}
             close={() => this.setState({ estimatePreviewModal: false })}
-            customer={this.props.customer}
+            customer={this.props.data.customer}
           />
         <ZoomViewModal
           open={this.state.zoomModal}
@@ -358,10 +344,14 @@ class _EstimatesContainer extends React.Component {
       </View>
     );
   }
-  }
+}
+const mapStateToProps = state => ({
+  currentCustomer: state.currentCustomer,
+});
 
 const EstimatesContainer = compose(
     graphql(generatePDF, { name: 'generatePDF' }),
+    connect(mapStateToProps, null),
     graphql(getFinishedSurvey, {
       options: ({ id }) => ({ variables: { id }, pollInterval: 2000 }),
     }),

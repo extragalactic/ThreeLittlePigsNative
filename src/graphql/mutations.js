@@ -316,22 +316,9 @@ const acceptEstimate = gql `
 }`;
 
 const addPrice = gql`
-  mutation($custid: String, $description :String, $price: Int){
-  addPricing(custid: $custid, description: $description, price: $price){
-    photos {
-      heading
-      description
-      timestamp
-      user
-      orginalBase64
-      editedlBase64
-      thumbURL
-      thumb
-      photo
-      caption
-      selected
-    }
-  }
+  mutation($custid: String, $price: [PriceInput]){
+  addPricing(custid: $custid, price: $price)
+  
 }`;
 
 const getEstimateResults = gql `

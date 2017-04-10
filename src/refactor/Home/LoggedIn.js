@@ -8,20 +8,10 @@ import RNCalendarEvents from 'react-native-calendar-events';
 import UserHome from './UserHome';
 import { acceptEstimate } from '../../graphql/mutations';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DCDCDC',
-  },
-});
-
 class _LoggedIn extends React.Component {
   constructor() {
     super();
     this.state = {
-
     };
   }
   componentDidMount() {

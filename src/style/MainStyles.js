@@ -269,14 +269,19 @@ const MasterStyleSheet = StyleSheet.create({
     fontWeight: 'bold',
   },
   surveyResultPhotos: {
-    width: DeviceInfo.isTablet() ? window.width / 2 : window.width / 1.1,
+    width: window.width,
     height: DeviceInfo.isTablet() ? window.height / 2 : 300,
   },
   surveyResultsNotes: {
     width: DeviceInfo.isTablet() ? window.width / 3 : window.width / 1.1,
     height: DeviceInfo.isTablet() ? window.height / 3 : window.height / 4,
   },
-  surveyResultsNotesView: {},
+  surveyResultsNotesView: {
+    marginTop: 40,
+    backgroundColor: '#FFFACD',
+    height: window.height / 3.4,
+
+  },
   CustomerCardNotesButton: {
     padding: 10,
     margin: 4,
@@ -302,18 +307,29 @@ const MasterStyleSheet = StyleSheet.create({
     alignSelf: 'center',
   },
   AutoComplete: {},
+
   EstimateModalColLeft: {
-    height: window.height - 55,
+    height: window.height,
+    backgroundColor: '#CFCFC4',
+
 
   },
   EstimateModalColRight: {
-    height: window.height - 55,
+    height: window.height,
+    backgroundColor: '#CFCFC4',
+ 
+    marginBottom: 200,
+
   },
   EstimatePreviewCard: {
+    backgroundColor: '#e7e8ee',
+
     flex: 1,
-    bottom: 20,
-    marginTop: 40,
-    backgroundColor: '#CFCFC4',
+  //  bottom: 20,
+    marginTop: 120,
+    marginBottom: 10,
+   // height: window.height,
+
 
 
   },
@@ -335,8 +351,10 @@ const MasterStyleSheet = StyleSheet.create({
   EstimateGenerics: {
     flex: 1,
     position: 'absolute',
-    top: 300,
-    height: window.height / 2.5,
+    alignSelf: 'center',
+    marginTop: 30,
+   // top: 100,
+    height: window.height / 1.3,
 
   },
 });

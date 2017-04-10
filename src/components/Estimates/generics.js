@@ -36,10 +36,6 @@ const generics = [
     des: 'Chimney',
   },
   {
-    prop: 'sills',
-    des: 'Stone Window Sills',
-  },
-  {
     prop: 'refacingSlice',
     des: 'Stone Refacing Slices',
   },

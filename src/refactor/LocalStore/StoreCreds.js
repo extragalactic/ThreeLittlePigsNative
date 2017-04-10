@@ -1,4 +1,3 @@
-
 import store from 'react-native-simple-store';
 import { isTokenExpired } from '../../Utils/jwtHelper';
 

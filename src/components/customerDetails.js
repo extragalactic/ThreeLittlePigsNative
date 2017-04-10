@@ -205,11 +205,10 @@ class _CustomerDetails extends Component {
     );
     }
   };
-  selectIndex = (selectedIndex) => { 
+  selectIndex = (selectedIndex) => {
   //  console.log(selectedIndex);
     this.setState({ selectedIndex });
-    
-     }
+  }
   render() {
   //  console.log('detials', this)
     if (!this.props.data.customer) {

@@ -8,9 +8,9 @@ import { Col, Grid } from 'react-native-easy-grid';
 import { Actions } from 'react-native-router-flux';
 import { MasterStyleSheet } from '../../style/MainStyles';
 import CustomerDetailsContainer from '../../refactor/CustomerDetails/CustomerDetailsContainer';
-import { getUserandCustomers } from '../../graphql/queries';
+import { getUserandCustomers, getQueue } from '../../graphql/queries';
 
-class _CustomerListContainer extends React.Component {
+class _CustomerListContainerQueue extends React.Component {
   static propTypes = {
     getMyCustomers: React.PropTypes.object,
     data: React.PropTypes.object,
@@ -27,17 +27,21 @@ class _CustomerListContainer extends React.Component {
 
   selectCustomer = (selection) => {
     this.props.saveCustomer(selection);
-    Actions.customerDetailsContainer({ params: { customerId: selection, userid: this.props.id } });
+    Actions.customerDetailsContainer({ params: {
+      customerId: selection,
+      userid: this.props.id,
+      type: 'queue',
+    } });
   };
-  
   render() {
+    console.log('q', this)
     if (DeviceInfo.isTablet()) {
       return (
         <Grid>
           <Col style={MasterStyleSheet.ipadViewLeft}>
             <List>
-              {this.props.data.getMyCustomers ?
-                this.props.data.getMyCustomers[this.props.params.type].map((customer, idx) => (
+              {this.props.data.getQueue ?
+                this.props.data.getQueue.map((customer, idx) => (
                   <ListItem
                     containerStyle={MasterStyleSheet.customersListItem}
                     key={idx}
@@ -50,7 +54,7 @@ class _CustomerListContainer extends React.Component {
           </Col>
           <Col style={MasterStyleSheet.ipadViewRight}>
             <CustomerDetailsContainer
-              params={{ customerId: this.props.currentCustomer }} //params
+              params={{ customerId: this.props.currentCustomer, type: 'queue' }} //params
               userid={this.props.id}
             />
           </Col>
@@ -62,8 +66,8 @@ class _CustomerListContainer extends React.Component {
         style={MasterStyleSheet.list}
       >
         <List >
-          {this.props.data.getMyCustomers ?
-            this.props.data.getMyCustomers[this.props.params.type].map((customer, idx) => (
+          {this.props.data.getQueue ?
+            this.props.data.getQueue.map((customer, idx) => (
               <ListItem
                 containerStyle={MasterStyleSheet.customersListItem}
                 key={idx}
@@ -88,11 +92,14 @@ const mapActionsToProps = dispatch => ({
   },
 });
 
-const CustomerListContainer = compose(
+const CustomerListContainerQueue = compose(
   graphql(getUserandCustomers, {
     options: ({ params }) => ({ variables: { id: params.id }, pollInterval: 2000 }),
   }),
+   graphql(getQueue, {
+     options: { pollInterval: 1000 },
+    }),
    connect(mapStateToProps, mapActionsToProps),
-)(_CustomerListContainer);
+)(_CustomerListContainerQueue);
 
-export default CustomerListContainer;
+export default CustomerListContainerQueue;

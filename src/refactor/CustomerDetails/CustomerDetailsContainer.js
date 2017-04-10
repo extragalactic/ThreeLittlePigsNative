@@ -10,6 +10,7 @@ import Drawer from 'react-native-drawer';
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
 import RNCalendarEvents from 'react-native-calendar-events';
+import { Actions } from 'react-native-router-flux';
 
 import CustomerCardConact from '../../components/Cards/customerCardConact';
 import CustomerCardChat from '../../components/Cards/customerCardChat';
@@ -31,8 +32,10 @@ import { getFinishedSurvey,
    addNotes,
    deleteAppointment,
    getCustomer,
+   acceptEstimate,
   } from '../../graphql/mutations';
 import { getMyCustomer } from '../../graphql/queries';
+import CustomerCardQueue from '../../components/Cards/customerCardQueue';
 
 const addMinutes = (date, minutes) => new Date(date.getTime() + minutes * 60000);
 
@@ -62,7 +65,7 @@ class _CustomerDetails extends Component {
   onDateChange = (date) => {
     this.setState({ date });
     this.props.getAppointmentsforDay({ variables: {
-      userid: this.props.userid,
+      userid: this.props.profile,
       date,
     } }).then((data) => {
       this.setState({
@@ -74,7 +77,7 @@ class _CustomerDetails extends Component {
     this.props.addNotes({ variables: {
       custid: this.props.data.customer.id,
       name: `${this.props.data.customer.firstName} ${this.props.data.customer.lastName}`,
-      userid: this.props.userid,
+      userid: this.props.profile,
       text: message[0].text,
       createdAt: message[0].createdAt,
     } });
@@ -118,10 +121,10 @@ class _CustomerDetails extends Component {
     this.setState({
       change: false,
     });
-    
   };
 
   getFinishedSurvey = () => {
+    console.log('fin', this)
     this.props.getFinishedSurvey({
       variables: {
         id: this.props.selection,
@@ -145,6 +148,16 @@ class _CustomerDetails extends Component {
     this.getCurrentLocation();
     Linking.openURL(`http://maps.apple.com/?daddr=${this.props.data.customer.coordinates.latitude},${this.props.data.customer.coordinates.longitude}&dirflg=d&t=h`);
   };
+  acceptEstimate = () => {
+    this.props.acceptEstimate({
+      variables: {
+        custid: this.props.data.customer.id,
+        userid: this.props.profile,
+      },
+    });
+    Actions.home();
+  }
+
   changeAppointment = (meetingid, calid) => {
     this.setState({
       change: true,
@@ -156,7 +169,7 @@ class _CustomerDetails extends Component {
     this.props.deleteAppointment({
       variables: {
         meetingid,
-        userid: this.props.userid,
+        userid: this.props.profile
       },
     }).then(() => {
       if (this.state.change) { AlertIOS.alert('Appointment Removed'); }
@@ -176,7 +189,7 @@ class _CustomerDetails extends Component {
               this.props.toggleSurveyReady({
                 variables: {
                   custid: this.props.data.customer.id,
-                  userid: this.props.userid,
+                  userid: this.props.profile,
                 },
               });
             },
@@ -194,7 +207,7 @@ class _CustomerDetails extends Component {
               this.props.toggleSurveyReady({
                 variables: {
                   custid: this.props.data.customer.id,
-                  userid: this.props.userid,
+                  userid: this.props.profile,
                 },
               });
             },
@@ -206,7 +219,6 @@ class _CustomerDetails extends Component {
   selectIndex = selectedIndex => this.setState({ selectedIndex });
 
   render() {
-    console.log('cust', this)
     if (!this.props.data.customer) {
       return (
         <ActivityIndicator />
@@ -252,7 +264,16 @@ class _CustomerDetails extends Component {
                 getEstimate={this.getFinishedSurvey}
               />
           }
+          { this.props.params.type === 'queue' ?
+          
+           <CustomerCardQueue
+             customer={this.props.data.customer}
+              acceptEstimate={this.acceptEstimate}
+              id={this.props.userid}
 
+            />
+          
+          : null}
           </ScrollView>
           <CustomerFollowupModal
             modal={this.state.followModal}
@@ -287,6 +308,7 @@ class _CustomerDetails extends Component {
             finishedSurvey={this.state.finishedSurvey}
             ready={this.props.data.customer.surveyReadyforPrice}
             toggleReady={this.toggleReady}
+            id={this.props.data.customer.id}
           />
         </View>
       </Drawer>
@@ -310,6 +332,7 @@ graphql(getCustomer, { name: 'getCustomer' }),
 graphql(getAppointmentsforDay, { name: 'getAppointmentsforDay' }),
 graphql(addNotes, { name: 'addNotes' }),
 graphql(deleteAppointment, { name: 'deleteAppointment' }),
+graphql(acceptEstimate, { name: 'acceptEstimate' }),
 connect(mapStateToProps, null),
 )(_CustomerDetails);
 

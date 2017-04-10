@@ -25,6 +25,9 @@ import GiftedChatContainer from './components/GiftedChat/GiftedChatContainer';
 import EstimateContainer from './refactor/Estimates/EstimatesContainer';
 import CustomerListContainer from './refactor/CustomerList/CustomerListContainer';
 import CustomerDetailsContainer from './refactor/CustomerDetails/CustomerDetailsContainer';
+import CustomerListContainerQueue from './refactor/CustomerList/CustomerListContainerQueue';
+import PhotoGalleryContainer from './refactor/PhotoGallery/PhotoGalleryContainer';
+import PricingContainer from './refactor/Estimates/PricingContainer';
 
 const routes = Actions.create(
   <Scene key="root">
@@ -107,7 +110,25 @@ const routes = Actions.create(
       component={EstimateContainer}
       passProps
     />
+    <Scene
+      key={'customerListContainerQueue'}
+      component={CustomerListContainerQueue}
+      passProps
+    />
+    <Scene
+      key={'pricingContainer'}
+      component={PricingContainer}
+      passProps
+    />
+    <Scene
+      key={'photoGalleryContainer'}
+      component={PhotoGalleryContainer}
+      passProps
+      hideBackImage
+      sceneStyle={{ marginTop: 50 }}
+    />
   </Scene>,
 );
 
 export default routes;
+

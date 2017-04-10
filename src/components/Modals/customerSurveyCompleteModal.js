@@ -2,16 +2,27 @@ import React from 'react';
 import { Modal, View, Image, Dimensions, ScrollView } from 'react-native';
 import { Icon, Text, Button } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
+import { graphql, compose } from 'react-apollo';
+import { connect } from 'react-redux';
+import { getFinishedSurvey } from '../../graphql/queries';
 import { MasterStyleSheet } from '../../style/MainStyles';
 
 const window = Dimensions.get('window');
 
-class SurveyCompleteModal extends React.Component {
+class _SurveyCompleteModal extends React.Component {
   constructor() {
     super();
     this.state = { estimate: {} };
   }
   render() {
+    console.log(this)
+ if(!this.props.data.getFinishedSurveyQuery) {
+   return (
+     <View>
+      <Text> Loading </Text>
+     </View>
+   )
+ }
     return (
       <Modal
         animationType={'slide'}
@@ -27,7 +38,7 @@ class SurveyCompleteModal extends React.Component {
         />
         <View>
           <Swiper showsButtons>
-            { this.props.finishedSurvey.map((survey, idx) => (
+            { this.props.data.getFinishedSurveyQuery.map((survey, idx) => (
               <View
                 style={MasterStyleSheet.surveyResultPhotosView}
                 key={idx}
@@ -70,8 +81,8 @@ class SurveyCompleteModal extends React.Component {
           <Button
             buttonStyle={MasterStyleSheet.surveyResultsButton}
             icon={{ name: 'check-circle' }}
-            backgroundColor={this.props.ready ? '#01DF3A' : '#03A9F4'}
-            title={this.props.ready ? 'Survey is Ready' : 'Make Ready'}
+            backgroundColor={this.props.data.customer.surveyReadyforPrice ? '#01DF3A' : '#03A9F4'}
+            title={this.props.data.customer.surveyReadyforPrice ? 'Survey is Ready' : 'Make Ready'}
             onPress={this.props.toggleReady}
           />
         </View>
@@ -81,5 +92,15 @@ class SurveyCompleteModal extends React.Component {
   }
 }
 
-export default SurveyCompleteModal;
+const mapStateToProps = state => ({
+  profile: state.profile,
+});
 
+const SurveyCompleteModal = compose(
+ graphql(getFinishedSurvey, {
+   options: ({ id }) => ({ variables: { id }, pollInterval: 2000 }),
+ }),
+connect(mapStateToProps, null),
+)(_SurveyCompleteModal);
+
+export default SurveyCompleteModal;

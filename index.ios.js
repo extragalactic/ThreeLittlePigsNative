@@ -10,14 +10,14 @@ import { Router } from 'react-native-router-flux';
 
 import routes from './src/Routes';
 
-import { profileReducer } from './src/reducers/authReducer';
+import { profileReducer, saveUserReducer } from './src/reducers/authReducer';
 import { customerReducer } from './src/reducers/currentCustomer';
 
 
 const client = new ApolloClient({
   connectToDevTools: true,
   networkInterface: createNetworkInterface({
-    uri: 'https://tlpm.ca/graphql',
+    uri: 'http://192.168.1.108:8080/graphql',
   },
     {
       shouldBatch: true,
@@ -34,6 +34,7 @@ const combinedReducers =
   combineReducers({
     profile: profileReducer,
     apollo: client.reducer(),
+    user: saveUserReducer,
     currentCustomer: customerReducer,
   });
 

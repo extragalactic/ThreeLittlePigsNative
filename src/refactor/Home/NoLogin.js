@@ -45,13 +45,25 @@ class _NoLogin extends React.Component {
       <View
         style={styles.container}
       >
-        <Button
+      { this.props.serverIsOnline ?  <Button
           icon={{ name: 'lock-outline' }}
           backgroundColor="#03A9F4"
           title="Login"
           buttonStyle={MasterStyleSheet.mainButtonStyle}
           onPress={() => this.logIn()}
-        />
+        /> :
+
+    <View
+     style={styles.container}
+    >    
+    <Text>
+    Cant Connect to Server!
+    </Text>
+         <Spinner />
+        </View>
+      
+     }
+       
       </View>
     );
   }

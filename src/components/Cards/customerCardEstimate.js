@@ -16,16 +16,15 @@ const _CustomerCardEstimate = ({ ...props }) => (
         backgroundColor="#03A9F4"
         buttonStyle={MasterStyleSheet.mainButtonStyle}
         title="Estimate"
-        onPress={() => Actions.myEstimates({ id: props.profile })}
+        onPress={() => Actions.myEstimates({ id: props.currentCustomer })}
       />
     </View>
   </Card>
 );
 
 const mapStateToProps = state => ({
-  profile: state.profile,
+  currentCustomer: state.currentCustomer,
 });
-
 const CustomerCardEstimate = connect(mapStateToProps, null)(_CustomerCardEstimate);
 
 

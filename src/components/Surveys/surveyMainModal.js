@@ -245,57 +245,80 @@ class _SurveyMainModal extends React.Component {
           visible={this.props.modal}
         >
           <View>
-            { !this.state.loading ? <Icon
-              onPress={this.props.closeSurveyModal}
-              name={'chevron-left'}
-              iconStyle={MasterStyleSheet.modalIcon}
-              size={45}
-              color={'blue'}
-            /> : null }
-          </View>
-          {this.state.imageUploading ? <ActivityIndicator
-            style={MasterStyleSheet.surveyMainPicker}
-            size={'large'}
-          /> :
-          <View>
-            {!this.state.loading ?
-              <SurveyPicker
-                changeSelection={this.changeSelection}
-                selection={this.state.selected}
-                style={MasterStyleSheet.surveyMainPicker}
-              /> : null}
-
-            {!this.state.loading ? <View
-              style={MasterStyleSheet.surveyDetailsList}
-            >
-              {this.state.selected === 'Parging' ? <PargingSelect updateSelection={this.updateSelection} /> : null }
-              {this.state.selected === 'Concrete' ? <ConcreteSelect
-                count={this.state.count}
-                updateCount={this.updateCount}
-                updateSelection={this.updateSelection}
+            { !this.state.loading ?
+              <Icon
+                onPress={this.props.closeSurveyModal}
+                name={'chevron-left'}
+                iconStyle={MasterStyleSheet.modalIcon}
+                size={45}
+                color={'blue'}
               /> : null }
-              {this.state.selected === 'Chimney' ? <ChimneySelect updateSelection={this.updateSelection} /> : null }
-              {this.state.selected === 'Brick' ? <BrickSelect updateSelection={this.updateSelection} /> : null }
-              {this.state.selected === 'Flashing' ? <FlashingSelect updateSelection={this.updateSelection} /> : null }
-              {this.state.selected === 'Waterproofing' ? <WaterproofingSelect updateSelection={this.updateSelection} /> : null }
-              {this.state.selected === 'Windowsills' ? <WindowsillsSelect updateSelection={this.updateSelection} /> : null }
-              {this.state.selected === 'Refacing' ? <RefacingSelect updateSelection={this.updateSelection} /> : null }
-            </View>
+          </View>
+          {this.state.imageUploading ?
+            <ActivityIndicator
+              style={MasterStyleSheet.surveyMainPicker}
+              size={'large'}
+            /> :
+            <View>
+              { !this.state.loading ?
+                <SurveyPicker
+                  changeSelection={this.changeSelection}
+                  selection={this.state.selected}
+                  style={MasterStyleSheet.surveyMainPicker}
+                /> : null}
+
+              { !this.state.loading ?
+                <View
+                  style={MasterStyleSheet.surveyDetailsList}
+                >
+                  { this.state.selected === 'Parging' ?
+                    <PargingSelect updateSelection={this.updateSelection} /> : null }
+                  { this.state.selected === 'Concrete' ?
+                    <ConcreteSelect
+                      count={this.state.count}
+                      updateCount={this.updateCount}
+                      updateSelection={this.updateSelection}
+                    /> : null }
+                  { this.state.selected === 'Chimney' ?
+                    <ChimneySelect
+                      updateSelection={this.updateSelection}
+                    /> : null }
+                  { this.state.selected === 'Brick' ?
+                    <BrickSelect
+                      updateSelection={this.updateSelection}
+                    /> : null }
+                  { this.state.selected === 'Flashing' ?
+                    <FlashingSelect
+                      updateSelection={this.updateSelection}
+                    /> : null }
+                  { this.state.selected === 'Waterproofing' ?
+                    <WaterproofingSelect
+                      updateSelection={this.updateSelection}
+                    /> : null }
+                  { this.state.selected === 'Windowsills' ?
+                    <WindowsillsSelect
+                      updateSelection={this.updateSelection}
+                    /> : null }
+                  { this.state.selected === 'Refacing' ?
+                    <RefacingSelect
+                      updateSelection={this.updateSelection}
+                    /> : null }
+                </View>
             : null }
-            {!this.state.loading ?
-              <View style={MasterStyleSheet.surveyMainContainer}>
-                <Icon
-                  name="description"
+              { !this.state.loading ?
+                <View style={MasterStyleSheet.surveyMainContainer}>
+                  <Icon
+                  n  ame="description"
                   color="#517fa4"
                   raised
                   onPress={() => this.setState({ notesModal: true })}
-                />
-                <Icon
-                  name="add-a-photo"
-                  color="#517fa4"
-                  raised
-                  onPress={this.getPhoto}
-                />
+                  />
+                 <Icon
+                   name="add-a-photo"
+                   color="#517fa4"
+                   raised
+                   onPress={this.getPhoto}
+                 />
                 <Icon
                   name="photo"
                   color="#517fa4"
@@ -309,9 +332,7 @@ class _SurveyMainModal extends React.Component {
                   onPress={() => console.log(this)}
                 />
               </View>
- : null}
-
-
+            : null}
           </View>
        }
           <SurveyNotesModal
