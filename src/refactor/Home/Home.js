@@ -48,7 +48,6 @@ class _Home extends Component {
           },
         }).then(user => this.props.saveUserObject(user.data.getUser));
       }
-      console.log(this.props);
     }, 1000);
     const that = this;
     NetInfo.isConnected.fetch().then((isConnected) => {

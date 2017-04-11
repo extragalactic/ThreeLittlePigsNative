@@ -59,15 +59,11 @@ class _Root extends Component {
     }
     RNCalendarEvents.authorizeEventStore()
      .then((status) => {
-       console.log(status);
+      // console.log(status);
      })
      .catch((error) => {
        console.error(error);
      });
-
-    setTimeout(() => {
-      console.log(this.props);
-    }, 2000);
   }
 
   componentWillUnmount() {

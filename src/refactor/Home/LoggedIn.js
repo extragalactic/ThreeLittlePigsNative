@@ -23,7 +23,7 @@ class _LoggedIn extends React.Component {
     OneSignal.addEventListener('ids', this.onIds);
     RNCalendarEvents.authorizeEventStore()
      .then((status) => {
-       console.log(status);
+       // console.log(status);
      })
      .catch((error) => {
        console.error(error);

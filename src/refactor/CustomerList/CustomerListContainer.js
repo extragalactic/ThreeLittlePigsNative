@@ -31,7 +31,6 @@ class _CustomerListContainer extends React.Component {
   };
 
   render() {
-    console.log('list', this);
     if (DeviceInfo.isTablet()) {
       return (
         <Grid>

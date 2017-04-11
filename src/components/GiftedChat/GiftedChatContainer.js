@@ -35,7 +35,7 @@ class _GiftedChatContainer extends React.Component {
     this._isAlright = null;
   }
   componentWillMount() {
-    console.log('g', this);
+    //console.log('g', this);
     this.props.getUser({
       variables: {
         id: this.props.profile,
@@ -44,7 +44,7 @@ class _GiftedChatContainer extends React.Component {
       this.setState({
         user: profile.data.getUser,
       });
-      console.log(this.state);
+    //  console.log(this.state);
     });
 
     this._isMounted = true;

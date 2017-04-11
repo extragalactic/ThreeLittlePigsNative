@@ -35,7 +35,7 @@ class _PricingDetails extends React.Component {
   }
   handleKeyDown = (e) => {
     if (e.nativeEvent.key == 'Enter') {
-      console.log('submit');
+      //console.log('submit');
     }
   }
   addPrice = () => {
@@ -60,7 +60,6 @@ class _PricingDetails extends React.Component {
     });
   }
   addPricetoEstimate = () => {
-    console.log('add', this.state);
     const prices = [];
     if (this.state.text0) {
       prices.push({

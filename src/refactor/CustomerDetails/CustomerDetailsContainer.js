@@ -124,7 +124,6 @@ class _CustomerDetails extends Component {
   };
 
   getFinishedSurvey = () => {
-    console.log('fin', this);
     this.props.getFinishedSurvey({
       variables: {
         id: this.props.selection,

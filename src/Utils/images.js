@@ -12,7 +12,7 @@ const saveImagetoCameraRoll = (image) => {
 const addImagetoEstimate = () => {};
 
 const copyImagefromTemptoPersist = (path) => {
-  console.log(path);
+  //console.log(path);
 };
 
 

@@ -34,7 +34,6 @@ class _CustomerListContainerQueue extends React.Component {
     } });
   };
   render() {
-    console.log('q', this);
     if (DeviceInfo.isTablet()) {
       return (
         <Grid>
