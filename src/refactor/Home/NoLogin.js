@@ -37,6 +37,7 @@ class _NoLogin extends React.Component {
         console.error(err);
       }
       saveProfile(token.idToken, profile.identities[0].userId);
+      RNRestart.Restart();
     });
   };
 
