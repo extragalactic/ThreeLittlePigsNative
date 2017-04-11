@@ -35,24 +35,22 @@ class _GiftedChatContainer extends React.Component {
     this._isAlright = null;
   }
   componentWillMount() {
-    console.log('g', this)
-   this.props.getUser({
-     variables: {
-       id: this.props.profile,
-     },
-   }).then((profile) => {
-     this.setState({
-       user: profile.data.getUser,
-     });
-     console.log(this.state);
-   })
+    console.log('g', this);
+    this.props.getUser({
+      variables: {
+        id: this.props.profile,
+      },
+    }).then((profile) => {
+      this.setState({
+        user: profile.data.getUser,
+      });
+      console.log(this.state);
+    });
 
     this._isMounted = true;
-    this.setState(() => {
-      return {
-        messages: _.reverse(this.props.data.customer.notes),
-      };
-    });
+    this.setState(() => ({
+      messages: _.reverse(this.props.data.customer.notes),
+    }));
   }
 
   componentWillUnmount() {
@@ -60,71 +58,61 @@ class _GiftedChatContainer extends React.Component {
   }
 
   onLoadEarlier() {
-    this.setState((previousState) => {
-      return {
-        isLoadingEarlier: true,
-      };
-    });
+    this.setState(previousState => ({
+      isLoadingEarlier: true,
+    }));
 
     setTimeout(() => {
       if (this._isMounted === true) {
-        this.setState((previousState) => {
-          return {
-            messages: GiftedChat.prepend(previousState.messages, _.reverse(this.props.data.customer.notes)),
-            loadEarlier: false,
-            isLoadingEarlier: false,
-          };
-        });
+        this.setState(previousState => ({
+          messages: GiftedChat.prepend(previousState.messages, _.reverse(this.props.data.customer.notes)),
+          loadEarlier: false,
+          isLoadingEarlier: false,
+        }));
       }
     }, 1000); // simulating network
   }
 
   onSend(messages = []) {
-     this.props.addNotes({ variables: {
+    this.props.addNotes({ variables: {
       custid: this.props.data.customer.id,
       name: `${this.state.user.firstName} ${this.state.user.lastName}`,
       userid: this.props.id,
       text: messages[0].text,
       createdAt: messages[0].createdAt,
     } });
-      this.setState((previousState) => {
-      return {
-        messages: GiftedChat.append(previousState.messages, messages,{
-          _id: Math.round(Math.random() * 1000000),
-          text: messages[0].text ,
-          createdAt: new Date(),
-          user: {
-            _id: 1,
-            name: 'John Fritz',
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages, {
+        _id: Math.round(Math.random() * 1000000),
+        text: messages[0].text,
+        createdAt: new Date(),
+        user: {
+          _id: 1,
+          name: 'John Fritz',
             // avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
-        } ),
-      };
-    });
+        },
+      }),
+    }));
 
     // for demo purpose
    // this.answerDemo(messages);
   }
 
   onReceive(text) {
-    console.log(text)
-    
-    this.setState((previousState) => { 
-      return {
-        messages: GiftedChat.append(previousState.messages, {
-          _id: Math.round(Math.random() * 1000000),
-          text: text,
-          createdAt: new Date(),
-          user: {
-            _id: 1,
-            name: 'John Fritz',
+    console.log(text);
+
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, {
+        _id: Math.round(Math.random() * 1000000),
+        text,
+        createdAt: new Date(),
+        user: {
+          _id: 1,
+          name: 'John Fritz',
             // avatar: 'https://facebook.github.io/react/img/logo_og.png',
-          },
-        }),
-      };
-     
-    });
-     
+        },
+      }),
+    }));
   }
 
   renderCustomActions(props) {
@@ -142,7 +130,7 @@ class _GiftedChatContainer extends React.Component {
       'Action 2': (props) => {
         alert('option 2');
       },
-      'Cancel': () => {},
+      Cancel: () => {},
     };
     return (
       <Actions
@@ -159,7 +147,7 @@ class _GiftedChatContainer extends React.Component {
         wrapperStyle={{
           left: {
             backgroundColor: '#f0f0f0',
-          }
+          },
         }}
       />
     );
@@ -173,7 +161,7 @@ class _GiftedChatContainer extends React.Component {
     );
   }
 
- renderFooter(props) {
+  renderFooter(props) {
     if (this.state.typingText) {
       return (
         <View style={styles.footerContainer}>
@@ -188,7 +176,7 @@ class _GiftedChatContainer extends React.Component {
 
   render() {
     return (
-    <GiftedChat
+      <GiftedChat
         messages={this.state.messages}
         onSend={this.onSend}
         loadEarlier={this.state.loadEarlier}

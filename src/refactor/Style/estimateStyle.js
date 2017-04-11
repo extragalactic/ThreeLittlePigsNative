@@ -29,6 +29,10 @@ const estimateStyles = StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: 50,
     marginTop: 10,
+    color: 'blue',
+    fontWeight: 'bold',
+    fontFamily: 'Cochin',
+    backgroundColor: '#eee9e9',
   },
   pricePrice: {
     alignSelf: 'center',
@@ -40,20 +44,59 @@ const estimateStyles = StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: 50,
     marginBottom: 20,
+    backgroundColor: '#eee9e9',
+
   },
   surveyResultPhotosView: {
-    flex: 1, 
+    flex: 1,
     marginTop: 100,
     marginLeft: 30,
     backgroundColor: '#CFCFC4',
     alignItems: 'center',
   },
   priceCard: {
-    width: window.width / 2.3,
+    width: window.width / 2.5,
     alignSelf: 'center',
+    borderRadius: 30,
+    borderWidth: 6,
+    padding: 2,
+    backgroundColor: '#779ECB',
 
-  }
+
+  },
+  savedPriceCard: {
+    width: window.width / 2.5,
+    alignSelf: 'center',
+    borderRadius: 30,
+    backgroundColor: '#CFCFC4',
+    borderWidth: 6,
+
+
+  },
+  estimateButton: {
+    borderRadius: 15,
+    borderWidth: 6,
+    marginLeft: 0,
+    marginRight: 0,
+    marginTop: 50,
+    backgroundColor: '#779ECB',
+    width: window.width / 5,
+    marginBottom: 20,
+    bottom: 30,
+
+  },
+  inputStyle: {
+    color: 'blue',
+    fontWeight: 'bold',
+    fontSize: 18,
+    fontFamily: 'Cochin',
+    height: 60,
+  },
+  scrollView: {
+    height: window.width / 1.65,
+  },
 });
 
 
-export  { estimateStyles } ;
+export { estimateStyles } ;
+2;

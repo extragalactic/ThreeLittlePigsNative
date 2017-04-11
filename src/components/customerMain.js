@@ -1,4 +1,4 @@
-//this file is no longer in use!
+// this file is no longer in use!
 import React from 'react';
 import { View, Text } from 'react-native';
 import { List, ListItem, Button } from 'react-native-elements';
@@ -37,7 +37,7 @@ const selectMyEstimates = () => {
 };
 
 const _CustomerMain = ({ ...props, user, newCustomers, followUp, onSite, surveyinProgress, surveyComplete, myEstimates, myCustomers }) => {
-  if (!props.data.getMyCustomers){
+  if (!props.data.getMyCustomers) {
     return (
       <Text> loading</Text>
     );

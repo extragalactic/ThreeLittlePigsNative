@@ -28,7 +28,7 @@ class _PhotoGalleryEstimates extends React.Component {
       clicked: '',
       zoomModal: false,
       currentSelection: '',
-  };
+    };
   }
 
   downloadImage = (image) => {
@@ -61,7 +61,7 @@ class _PhotoGalleryEstimates extends React.Component {
 
 
   showActionSheet = (media, index) => {
-    this.setState({ currentSelection: this.props.photos[index].photo});
+    this.setState({ currentSelection: this.props.photos[index].photo });
     ActionSheetIOS.showActionSheetWithOptions({
       options: BUTTONS,
       cancelButtonIndex: CANCEL_INDEX,

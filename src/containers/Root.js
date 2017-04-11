@@ -37,7 +37,7 @@ class _Root extends Component {
     if (!authInit()) {
       this.logIn();
     }
-   this.props.saveProfile(getUserID())
+    this.props.saveProfile(getUserID());
 
     codePush.sync();
     OneSignal.configure({});
@@ -65,10 +65,9 @@ class _Root extends Component {
        console.error(error);
      });
 
-     setTimeout(() => {
-       console.log(this.props)
-
-     }, 2000)
+    setTimeout(() => {
+      console.log(this.props);
+    }, 2000);
   }
 
   componentWillUnmount() {

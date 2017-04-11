@@ -53,7 +53,7 @@ class _CustomerListContainer extends React.Component {
             <CustomerDetailsContainer
               params={{
                 customerId: this.props.currentCustomer,
-                type: this.props.params.type }} //params
+                type: this.props.params.type }} // params
               userid={this.props.id}
             />
           </Col>

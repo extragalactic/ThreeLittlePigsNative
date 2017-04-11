@@ -115,6 +115,7 @@ const MasterStyleSheet = StyleSheet.create({
     width: 260,
     borderColor: 'gray',
     borderWidth: 1,
+
   },
   customerCardMap: {
     backgroundColor: '#CFCFC4',
@@ -205,7 +206,7 @@ const MasterStyleSheet = StyleSheet.create({
     width: DeviceInfo.isTablet() ? window.width / 1.4 : window.width - 20,
   },
   surveyNotesCard: {
-    marginTop: 0
+    marginTop: 0,
 
   },
   surveyNotesInputText: {
@@ -305,6 +306,8 @@ const MasterStyleSheet = StyleSheet.create({
     position: 'absolute',
     width: window.width / 2.1,
     alignSelf: 'center',
+    borderRadius: 15,
+
   },
   AutoComplete: {},
 
@@ -317,19 +320,21 @@ const MasterStyleSheet = StyleSheet.create({
   EstimateModalColRight: {
     height: window.height,
     backgroundColor: '#CFCFC4',
- 
+
     marginBottom: 200,
 
   },
   EstimatePreviewCard: {
     backgroundColor: '#e7e8ee',
 
+    borderRadius: 15,
+
+
     flex: 1,
   //  bottom: 20,
     marginTop: 120,
     marginBottom: 10,
    // height: window.height,
-
 
 
   },

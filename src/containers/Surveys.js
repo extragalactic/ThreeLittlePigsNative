@@ -23,7 +23,7 @@ class Surveys extends Component {
 
   render() {
     return (
-    <Text> test</Text>
+      <Text> test</Text>
     );
   }
 }

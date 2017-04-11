@@ -38,22 +38,22 @@ const SurveyCardPhoto = ({
       multiline
     />
     {loading ? <ActivityIndicator /> :
-      <View>
-   <Button
-      title={'Take Photo'}
-      onPress={TakePhoto}
-    />
-    <Button
-      title={'Library'}
-      onPress={AddFromLibrary}
-    />
-      </View>
-    
+    <View>
+      <Button
+        title={'Take Photo'}
+        onPress={TakePhoto}
+      />
+      <Button
+        title={'Library'}
+        onPress={AddFromLibrary}
+      />
+    </View>
+
   }
- 
+
     <View>
       <Text>{photos.length} Photos Taken</Text>
-   
+
     </View>
   </Card>
 );

@@ -273,7 +273,7 @@ class _CustomerDetailsIPadQueue extends Component {
             <CustomerCardChat
               customer={this.props.data.customer}
               getNotes={this.openNotesModal}
-                            id={this.props.id}
+              id={this.props.id}
 
             />
             <CustomerCardQueue

@@ -28,7 +28,7 @@ const generics = [
     des: 'Concrete Care',
   },
   {
-    prop: 'nbc',
+    prop: 'retaining',
     des: 'Retaining walk outs (NBC)',
   },
   {
@@ -36,17 +36,19 @@ const generics = [
     des: 'Chimney',
   },
   {
-    prop: 'refacingSlice',
+    prop: 'refacingSlices',
     des: 'Stone Refacing Slices',
   },
   {
     prop: 'refacingComplete',
     des: 'Complete Stone Refacing',
   },
+/*
   {
     prop: 'pargeex',
     des: 'Parge concrete exterior foundation',
   },
+*/
   {
     prop: 'coping',
     des: 'Coping Stone',

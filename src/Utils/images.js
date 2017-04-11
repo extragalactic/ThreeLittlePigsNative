@@ -16,5 +16,4 @@ const copyImagefromTemptoPersist = (path) => {
 };
 
 
-
 export { saveImagetoCameraRoll, addImagetoEstimate, copyImagefromTemptoPersist };

@@ -308,32 +308,32 @@ class _SurveyMainModal extends React.Component {
               { !this.state.loading ?
                 <View style={MasterStyleSheet.surveyMainContainer}>
                   <Icon
-                  n  ame="description"
-                  color="#517fa4"
-                  raised
-                  onPress={() => this.setState({ notesModal: true })}
+                    n ame="description"
+                    color="#517fa4"
+                    raised
+                    onPress={() => this.setState({ notesModal: true })}
                   />
-                 <Icon
-                   name="add-a-photo"
-                   color="#517fa4"
-                   raised
-                   onPress={this.getPhoto}
-                 />
-                <Icon
-                  name="photo"
-                  color="#517fa4"
-                  raised
-                  onPress={this.viewPhotos}
-                />
-                <Icon
-                  name="help-outline"
-                  color="#517fa4"
-                  raised
-                  onPress={() => console.log(this)}
-                />
-              </View>
+                  <Icon
+                    name="add-a-photo"
+                    color="#517fa4"
+                    raised
+                    onPress={this.getPhoto}
+                  />
+                  <Icon
+                    name="photo"
+                    color="#517fa4"
+                    raised
+                    onPress={this.viewPhotos}
+                  />
+                  <Icon
+                    name="help-outline"
+                    color="#517fa4"
+                    raised
+                    onPress={() => console.log(this)}
+                  />
+                </View>
             : null}
-          </View>
+            </View>
        }
           <SurveyNotesModal
             open={this.state.notesModal}

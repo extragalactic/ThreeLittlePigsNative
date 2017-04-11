@@ -31,7 +31,7 @@ class _CustomerListNewCustomers extends React.Component {
 
   setSelection = (selection) => {
     this.setState({ selection });
-    //this.props.saveCustomer(selection);
+    // this.props.saveCustomer(selection);
   }
 
   selectCustomer = (selection) => {

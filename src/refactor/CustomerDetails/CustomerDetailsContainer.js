@@ -124,7 +124,7 @@ class _CustomerDetails extends Component {
   };
 
   getFinishedSurvey = () => {
-    console.log('fin', this)
+    console.log('fin', this);
     this.props.getFinishedSurvey({
       variables: {
         id: this.props.selection,
@@ -169,7 +169,7 @@ class _CustomerDetails extends Component {
     this.props.deleteAppointment({
       variables: {
         meetingid,
-        userid: this.props.profile
+        userid: this.props.profile,
       },
     }).then(() => {
       if (this.state.change) { AlertIOS.alert('Appointment Removed'); }
@@ -178,7 +178,7 @@ class _CustomerDetails extends Component {
   };
 
   toggleReady = () => {
-    if (this.props.data.customer.surveyReadyforPrice){
+    if (this.props.data.customer.surveyReadyforPrice) {
       AlertIOS.alert(
       'Are you sure?',
        'Survey will be removed from queue',
@@ -264,15 +264,14 @@ class _CustomerDetails extends Component {
                 getEstimate={this.getFinishedSurvey}
               />
           }
-          { this.props.params.type === 'queue' ?
-          
-           <CustomerCardQueue
-             customer={this.props.data.customer}
-              acceptEstimate={this.acceptEstimate}
-              id={this.props.userid}
+            { this.props.params.type === 'queue' ?
 
-            />
-          
+              <CustomerCardQueue
+                customer={this.props.data.customer}
+                acceptEstimate={this.acceptEstimate}
+                id={this.props.userid}
+              />
+
           : null}
           </ScrollView>
           <CustomerFollowupModal

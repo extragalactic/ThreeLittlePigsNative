@@ -37,7 +37,7 @@ const CustomerFollowupModal = ({
            <SegmentedControlIOS
              values={buttons}
              selectedIndex={0}
-             onValueChange={(index) => updateIndex(index)}
+             onValueChange={index => updateIndex(index)}
            />
          </View>
          <DatePickerIOS

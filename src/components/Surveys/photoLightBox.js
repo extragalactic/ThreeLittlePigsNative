@@ -20,17 +20,17 @@ class PhotoLightBox extends React.Component {
       <ScrollView
         horizontal
         style={{
-            flexDirection: 'row',
+          flexDirection: 'row',
         }}
       >
         {this.props.photos.map(photo => (
           <Lightbox
             navigator={this.props.navigator}
-            onOpen={()=> this.setState({
+            onOpen={() => this.setState({
               width: window.width,
               height: window.height,
             })}
-            onClose={()=> this.setState({
+            onClose={() => this.setState({
               width: 120,
               height: 120,
             })}

@@ -29,7 +29,7 @@ class _NoLogin extends React.Component {
     this.lock = new Auth0Lock({ clientId: Config.AUTH0_ID, domain: Config.AUTH0_DOMAIN }, {});
   }
   componentDidMount() {
-   
+
   }
   logIn = () => {
     this.lock.show({}, (err, profile, token) => {
@@ -45,7 +45,7 @@ class _NoLogin extends React.Component {
       <View
         style={styles.container}
       >
-      { this.props.serverIsOnline ?  <Button
+        { this.props.serverIsOnline ? <Button
           icon={{ name: 'lock-outline' }}
           backgroundColor="#03A9F4"
           title="Login"
@@ -53,17 +53,17 @@ class _NoLogin extends React.Component {
           onPress={() => this.logIn()}
         /> :
 
-    <View
-     style={styles.container}
-    >    
-    <Text>
+        <View
+          style={styles.container}
+        >
+          <Text>
     Cant Connect to Server!
     </Text>
-         <Spinner />
+          <Spinner />
         </View>
-      
+
      }
-       
+
       </View>
     );
   }

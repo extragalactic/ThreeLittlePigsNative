@@ -16,7 +16,7 @@ const _CustomerCardChat = ({ getNotes, customer, ...props }) => (
         backgroundColor="#03A9F4"
         title="Notes"
         buttonStyle={MasterStyleSheet.mainButtonStyle}
-        onPress={() => Actions.giftedChatContainer({id: customer.id, user: props.data.user})}
+        onPress={() => Actions.giftedChatContainer({ id: customer.id, user: props.data.user })}
       />
     </View>
   </Card>

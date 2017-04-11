@@ -44,13 +44,12 @@ class _Home extends Component {
       if (this.props.profile) {
         this.props.getUser({
           variables: {
-            id: this.props.profile
+            id: this.props.profile,
           },
-        }).then((user) => this.props.saveUserObject(user.data.getUser));
-    }
-      console.log(this.props) 
-    
-  }, 1000);
+        }).then(user => this.props.saveUserObject(user.data.getUser));
+      }
+      console.log(this.props);
+    }, 1000);
     const that = this;
     NetInfo.isConnected.fetch().then((isConnected) => {
       isConnected ? that.setState({ connected: true }) : that.setState({ connected: false });
@@ -69,16 +68,15 @@ class _Home extends Component {
   }
 
   render() {
-    if (!!(this.state.loggedIn && this.state.connected && this.props.profile && this.state.serverIsOnline)) {
+    if (this.state.loggedIn && this.state.connected && this.props.profile && this.state.serverIsOnline) {
       return (
         <LoggedIn />
       );
     }
     return (
       <NoLogin
-       serverIsOnline={this.state.serverIsOnline}
-      
-       />
+        serverIsOnline={this.state.serverIsOnline}
+      />
     );
   }
 }

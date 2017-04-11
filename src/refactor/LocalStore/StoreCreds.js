@@ -13,9 +13,7 @@ const saveProfile = (token, id) => {
 
 const checkUserLogin = () =>
    getUserData()
-   .then((user) => {
-     return (!!user.token && !isTokenExpired(user.token));
-   }).catch(() => false);
+   .then(user => (!!user.token && !isTokenExpired(user.token))).catch(() => false);
 
 
 export { saveProfile, getUserData, checkUserLogin, getuserId };

@@ -214,7 +214,7 @@ class _CustomerDetailsIPadEstimator extends Component {
       variables: {
         custid: this.props.customerId,
         index,
-      }
+      },
     }).then((res) => {
       this.state.estimate.prices.splice(index, 1);
       AlertIOS.alert('Removed');

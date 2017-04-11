@@ -60,7 +60,7 @@ class _CustomerDetails extends Component {
     };
   }
   onDateChange = (date) => {
-     this.setState({ date });
+    this.setState({ date });
     this.props.getAppointmentsforDay({ variables: {
       userid: this.props.id,
       date,
@@ -80,7 +80,6 @@ class _CustomerDetails extends Component {
     } });
   }
   onCalSaveFollow = () => {
-  
     const howlong = (type) => {
       if (type === 'Followup') {
         return { duration: 15, description: 'Followup' };
@@ -119,7 +118,6 @@ class _CustomerDetails extends Component {
     this.setState({
       change: false,
     });
-    
   };
 
   getFinishedSurvey = () => {
@@ -167,7 +165,7 @@ class _CustomerDetails extends Component {
   };
 
   toggleReady = () => {
-    if (this.props.data.customer.surveyReadyforPrice){
+    if (this.props.data.customer.surveyReadyforPrice) {
       AlertIOS.alert(
       'Are you sure?',
        'Survey will be removed from queue',

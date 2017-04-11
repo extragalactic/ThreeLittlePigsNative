@@ -2,6 +2,7 @@ import React from 'react';
 import { AppRegistry } from 'react-native';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import Config from 'react-native-config';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -17,7 +18,7 @@ import { customerReducer } from './src/reducers/currentCustomer';
 const client = new ApolloClient({
   connectToDevTools: true,
   networkInterface: createNetworkInterface({
-    uri: 'http://192.168.1.108:8080/graphql',
+    uri: Config.PROD ? 'https://tlpm.ca/graphql' : 'http://localhost:8080/graphql',
   },
     {
       shouldBatch: true,

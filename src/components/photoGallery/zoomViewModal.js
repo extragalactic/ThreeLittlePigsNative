@@ -21,8 +21,8 @@ class ZoomViewModal extends React.Component {
             source={{ uri: this.props.photo }}
             minimumZoomScale={0.5}
             maximumZoomScale={3}
-            onLoad={() => console.log("Image loaded!")}
-            style={{ width: window.width, height: window.height }} 
+            onLoad={() => console.log('Image loaded!')}
+            style={{ width: window.width, height: window.height }}
           />
         </Modal>
       </View>

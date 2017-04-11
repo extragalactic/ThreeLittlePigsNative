@@ -107,5 +107,3 @@ const CustomerListFollowup = compose(
 
 export default CustomerListFollowup;
 
-
-

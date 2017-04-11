@@ -30,7 +30,7 @@ export default class CustomActions extends React.Component {
   }
 
   setModalVisible(visible = false) {
-    this.setState({modalVisible: visible});
+    this.setState({ modalVisible: visible });
   }
 
   onActionsPress() {
@@ -55,8 +55,8 @@ export default class CustomActions extends React.Component {
                 },
               });
             },
-            (error) => alert(error.message),
-            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+            error => alert(error.message),
+            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
           );
           break;
         default:
@@ -70,42 +70,52 @@ export default class CustomActions extends React.Component {
 
   renderNavBar() {
     return (
-      <NavBar style={{
-        statusBar: {
-          backgroundColor: '#FFF',
-        },
-        navBar: {
-          backgroundColor: '#FFF',
-        },
-      }}>
-        <NavButton onPress={() => {
-          this.setModalVisible(false);
-        }}>
-          <NavButtonText style={{
-            color: '#000',
-          }}>
+      <NavBar
+        style={{
+          statusBar: {
+            backgroundColor: '#FFF',
+          },
+          navBar: {
+            backgroundColor: '#FFF',
+          },
+        }}
+      >
+        <NavButton
+          onPress={() => {
+            this.setModalVisible(false);
+          }}
+        >
+          <NavButtonText
+            style={{
+              color: '#000',
+            }}
+          >
             {'Cancel'}
           </NavButtonText>
         </NavButton>
-        <NavTitle style={{
-          color: '#000',
-        }}>
+        <NavTitle
+          style={{
+            color: '#000',
+          }}
+        >
           {'Camera Roll'}
         </NavTitle>
-        <NavButton onPress={() => {
-          this.setModalVisible(false);
+        <NavButton
+          onPress={() => {
+            this.setModalVisible(false);
 
-          const images = this.getImages().map((image) => {
-            return {
+            const images = this.getImages().map(image => ({
               image: image.uri,
-            };
-          });
-          this.props.onSend(images);
-          this.setImages([]);
-        }}>
-          <NavButtonText style={{
-            color: '#000',
-          }}>
+            }));
+            this.props.onSend(images);
+            this.setImages([]);
+          }}
+        >
+          <NavButtonText
+            style={{
+              color: '#000',
+            }}
+          >
             {'Send'}
           </NavButtonText>
         </NavButton>

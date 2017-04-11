@@ -15,14 +15,14 @@ class _SurveyCompleteModal extends React.Component {
     this.state = { estimate: {} };
   }
   render() {
-    console.log(this)
- if(!this.props.data.getFinishedSurveyQuery) {
-   return (
-     <View>
-      <Text> Loading </Text>
-     </View>
-   )
- }
+    console.log(this);
+    if (!this.props.data.getFinishedSurveyQuery) {
+      return (
+        <View>
+          <Text> Loading </Text>
+        </View>
+      );
+    }
     return (
       <Modal
         animationType={'slide'}

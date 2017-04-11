@@ -1,4 +1,4 @@
-import { View, Modal, WebView,  ActivityIndicator } from 'react-native';
+import { View, Modal, WebView, ActivityIndicator } from 'react-native';
 import { Icon } from 'react-native-elements';
 import React from 'react';
 import { MasterStyleSheet } from '../../style/MainStyles';

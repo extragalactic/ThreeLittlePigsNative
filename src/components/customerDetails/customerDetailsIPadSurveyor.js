@@ -28,7 +28,7 @@ import { getFinishedSurvey,
    getAppointmentsforDay,
    updateCustomer,
    addNotes,
-   deleteAppointment,   
+   deleteAppointment,
   } from '../../graphql/mutations';
 
 import { getCustomer } from '../../graphql/queries';
@@ -111,7 +111,7 @@ class _CustomerDetailsIPadSurveyor extends Component {
           end: endhour,
           calid: id,
         } });
-      //s  this.props.updateUser(this.props.userid);
+      // s  this.props.updateUser(this.props.userid);
       })
      .catch((error) => {
        console.error(error);
@@ -238,8 +238,8 @@ class _CustomerDetailsIPadSurveyor extends Component {
     this.setState({ notes: '' });
   };
 
- toggleReady = () => {
-    if (this.props.data.customer.surveyReadyforPrice){
+  toggleReady = () => {
+    if (this.props.data.customer.surveyReadyforPrice) {
       AlertIOS.alert(
       'Are you sure?',
        'Survey will be removed from queue',

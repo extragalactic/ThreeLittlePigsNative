@@ -262,8 +262,8 @@ class _CustomerDetailsQueue extends Component {
   submitNotes = () => {
     this.setState({ notes: '' });
   };
-toggleReady = () => {
-    if (this.props.data.customer.surveyReadyforPrice){
+  toggleReady = () => {
+    if (this.props.data.customer.surveyReadyforPrice) {
       AlertIOS.alert(
       'Are you sure?',
        'Survey will be removed from queue',
@@ -325,13 +325,12 @@ toggleReady = () => {
             />
             <CustomerCardMaps customer={this.state.customer} getDirections={this.getDirections} />
             <CustomerCardChat customer={this.state.customer} getNotes={this.openNotesModal} />
-             <CustomerCardQueue
+            <CustomerCardQueue
               customer={this.state.customer}
               acceptEstimate={this.acceptEstimate}
               id={this.props.id}
-
             />
-   
+
           </ScrollView>
           <CustomerNotesModal
             modal={this.state.notesModal}

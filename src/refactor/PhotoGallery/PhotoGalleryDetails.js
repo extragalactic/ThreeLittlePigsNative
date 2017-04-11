@@ -7,7 +7,7 @@ import ImagePickerManager from 'react-native-image-picker';
 import { graphql, compose } from 'react-apollo';
 import { getBase64, addSurveyPhoto, selectSurveyPhotos } from '../../graphql/mutations';
 import { getMyCustomer } from '../../graphql/queries';
-import photoOptions from '../../components/Surveys/photoOptions'; //move this!
+import photoOptions from '../../components/Surveys/photoOptions'; // move this!
 
 const BUTTONS = [
   'Save',
@@ -28,7 +28,7 @@ class _PhotoGalleryDetails extends React.Component {
     };
   }
   componentDidMount() {
-    
+
   }
   downloadImage = (image) => {
     this.props.getBase64({
@@ -59,7 +59,7 @@ class _PhotoGalleryDetails extends React.Component {
   };
 
   showActionSheet = (media, index) => {
-    this.setState({ currentSelection: this.props.data.customer.survey.photos[index].photo});
+    this.setState({ currentSelection: this.props.data.customer.survey.photos[index].photo });
     ActionSheetIOS.showActionSheetWithOptions({
       options: BUTTONS,
       cancelButtonIndex: CANCEL_INDEX,
@@ -89,24 +89,24 @@ class _PhotoGalleryDetails extends React.Component {
   };
 
   render() {
-    console.log('p', this.props)
+    console.log('p', this.props);
     return (
       <PhotoBrowser
         style={{
           margin: 250,
         }}
-          mediaList={this.props.data.customer.survey.photos}
-          alwaysShowControls
-          onBack={() => Actions.pop()}
-          displayActionButton
-          displayNavArrows
-          displaySelectionButtons
-          onActionButton={(media, index) => this.showActionSheet(media, index)}
-          onSelectionChanged={(media, index, isSelected) => {
-            this.togglePhotoSelection(index);
-          }}
-        />
-    
+        mediaList={this.props.data.customer.survey.photos}
+        alwaysShowControls
+        onBack={() => Actions.pop()}
+        displayActionButton
+        displayNavArrows
+        displaySelectionButtons
+        onActionButton={(media, index) => this.showActionSheet(media, index)}
+        onSelectionChanged={(media, index, isSelected) => {
+          this.togglePhotoSelection(index);
+        }}
+      />
+
     );
   }
 

@@ -34,7 +34,7 @@ class _CustomerListContainerQueue extends React.Component {
     } });
   };
   render() {
-    console.log('q', this)
+    console.log('q', this);
     if (DeviceInfo.isTablet()) {
       return (
         <Grid>
@@ -54,7 +54,7 @@ class _CustomerListContainerQueue extends React.Component {
           </Col>
           <Col style={MasterStyleSheet.ipadViewRight}>
             <CustomerDetailsContainer
-              params={{ customerId: this.props.currentCustomer, type: 'queue' }} //params
+              params={{ customerId: this.props.currentCustomer, type: 'queue' }} // params
               userid={this.props.id}
             />
           </Col>
@@ -98,7 +98,7 @@ const CustomerListContainerQueue = compose(
   }),
    graphql(getQueue, {
      options: { pollInterval: 1000 },
-    }),
+   }),
    connect(mapStateToProps, mapActionsToProps),
 )(_CustomerListContainerQueue);
 

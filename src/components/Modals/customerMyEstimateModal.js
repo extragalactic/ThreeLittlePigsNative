@@ -152,7 +152,7 @@ class _MyEstimateModal extends React.Component {
               preview: false,
             },
           }).then((res) => {
-            //console.log(res)
+            // console.log(res)
           }),
         },
       ],
@@ -366,11 +366,11 @@ class _MyEstimateModal extends React.Component {
             close={() => this.setState({ estimatePreviewModal: false })}
             customer={this.props.customer}
           />
-        <ZoomViewModal
-          open={this.state.zoomModal}
-          close={() => { this.setState({ zoomModal: false }); }}
-          photo={this.state.currentSelection}
-        />
+          <ZoomViewModal
+            open={this.state.zoomModal}
+            close={() => { this.setState({ zoomModal: false }); }}
+            photo={this.state.currentSelection}
+          />
         </Modal>
       </View>
     );
