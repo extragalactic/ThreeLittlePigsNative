@@ -24,7 +24,7 @@ class _Home extends Component {
   componentDidMount() {
     const _this = this;
     setInterval(() => {
-      axios.get('http://localhost:8080/onlinestatus')
+      axios.get('https://tlpm.ca/onlinestatus')
         .then((response) => {
           if (response.status === 200) {
             _this.setState({ serverIsOnline: true });
