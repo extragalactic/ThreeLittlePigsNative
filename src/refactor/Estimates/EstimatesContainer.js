@@ -115,7 +115,7 @@ class _EstimatesContainer extends React.Component {
             estimatePreviewModal: true,
             loadingButton: false,
           });
-        }, 10000);
+        }, 15000);
       }
     });
   };

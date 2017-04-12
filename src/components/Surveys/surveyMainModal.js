@@ -308,7 +308,7 @@ class _SurveyMainModal extends React.Component {
               { !this.state.loading ?
                 <View style={MasterStyleSheet.surveyMainContainer}>
                   <Icon
-                    n ame="description"
+                    name="description"
                     color="#517fa4"
                     raised
                     onPress={() => this.setState({ notesModal: true })}

@@ -7,7 +7,7 @@ const RefacingSelect = ({ updateSelection }) => (
   <View style={MasterStyleSheet.surveyItemContainer}>
     <MultipleChoice
       options={[
-        '4 Inch Block',
+        '4 Inch Stone',
         'Sliced Stone',
       ]}
       onSelection={payload => updateSelection(payload)}
