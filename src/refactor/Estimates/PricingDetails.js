@@ -1,10 +1,9 @@
 import React from 'react';
-import { Button, Grid, Row, Col, Card, Text } from 'react-native-elements';
+import { Button, Grid, Row, Col, Card, Text, Icon } from 'react-native-elements';
 import { View, StyleSheet, TextInput, ScrollView } from 'react-native';
-import { Icon } from 'react-native-elements';
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
-import { addPrice } from '../../graphql/mutations';
+import { addPrice, deletePrice } from '../../graphql/mutations';
 import { getCustomer } from '../../graphql/queries';
 import { estimateStyles } from '../Style/estimateStyle';
 import { MasterStyleSheet } from '../../style/MainStyles';
@@ -120,6 +119,17 @@ class _PricingDetails extends React.Component {
       price: '',
     });
   }
+
+  deletePrice = (index0, index1) => {
+    this.props.deletePrice({
+      variables: {
+        index0,
+        index1,
+        custid: this.props.id,
+      },
+    });
+  };
+
   render() {
     return (
       <View
@@ -225,7 +235,7 @@ class _PricingDetails extends React.Component {
                     containerStyle={estimateStyles.savedPriceCard}
                   >
                     <View>
-                      {price.map(p => (
+                      {price.map((p, pIndex) => (
                         <View
                           style={{
                             marginTop: 20,
@@ -247,12 +257,13 @@ class _PricingDetails extends React.Component {
                               size={16}
                               name="close"
                               color="red"
-                              onPress={() => console.log(index)}
+                              onPress={() => this.deletePrice(index, pIndex)}
                             />
 
                           </View>
                           <TextInput
                             style={estimateStyles.priceDescription}
+                            onChangeText={(a, b) => console.log(a, b)}
                             multiline
                             placeholder="Work Description"
                             defaultValue={p.description}
@@ -290,6 +301,8 @@ const PricingDetails = compose(
       options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
     }),
     graphql(addPrice, { name: 'addPrice' }),
+    graphql(deletePrice, { name: 'deletePrice' }),
+
 )(_PricingDetails);
 
 export default PricingDetails;

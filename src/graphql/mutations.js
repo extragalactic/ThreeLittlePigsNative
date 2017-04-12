@@ -356,8 +356,8 @@ const getBase64 = gql `
 }`;
 
 const deletePrice = gql `
-  mutation deletePrice($custid: String, $index: Int){
-  deletePrice(custid:$custid, index: $index)
+  mutation deletePrice($custid: String, $index0: Int, $index1: Int){
+  deletePrice(custid:$custid, index0: $index0, index1: $index1)
 }`;
 
 export {
