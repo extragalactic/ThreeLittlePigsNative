@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActionSheetIOS, CameraRoll, AlertIOS, View } from 'react-native';
+import { ActionSheetIOS, CameraRoll, AlertIOS } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import PhotoBrowser from 'react-native-photo-browser';
@@ -36,9 +36,7 @@ class _PhotoGalleryDetails extends React.Component {
         docID: image.docID,
       },
     }).then((base64) => {
-      CameraRoll.saveToCameraRoll(base64.data.getImageBase64.base64, 'photo')
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
+      CameraRoll.saveToCameraRoll(base64.data.getImageBase64.base64, 'photo');
       AlertIOS.alert('Photo Saved');
     });
   };
@@ -89,7 +87,6 @@ class _PhotoGalleryDetails extends React.Component {
   };
 
   render() {
-    console.log('p', this.props);
     return (
       <PhotoBrowser
         style={{

@@ -13,7 +13,7 @@ import routes from './src/Routes';
 
 import { profileReducer, saveUserReducer } from './src/reducers/authReducer';
 import { customerReducer } from './src/reducers/currentCustomer';
-
+import { priceDescriptionReducer, priceAmountReducer } from './src/reducers/pricingReducer';
 
 const client = new ApolloClient({
   connectToDevTools: true,
@@ -36,6 +36,8 @@ const combinedReducers =
     profile: profileReducer,
     apollo: client.reducer(),
     user: saveUserReducer,
+    priceDescription: priceDescriptionReducer,
+    priceAmount: priceAmountReducer,
     currentCustomer: customerReducer,
   });
 

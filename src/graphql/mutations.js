@@ -356,13 +356,68 @@ const getBase64 = gql `
 }`;
 
 const deletePrice = gql `
-  mutation deletePrice($custid: String, $index0: Int, $index1: Int){
-  deletePrice(custid:$custid, index0: $index0, index1: $index1)
+  mutation deletePrice($custid: String, $index: Int, $option: String){
+  deletePrice(custid:$custid, index: $index, Option: $option)
+}`;
+
+const editPriceDescription = gql `
+  mutation($custid: String, $index: Int, $option: String, $text: String ){
+  editPriceDescription(custid:$custid, index: $index, option: $option, text: $text)
+}`;
+const editPriceAmount = gql `
+  mutation($custid: String, $index: Int, $option: String, $amount: Int ){
+  editPriceAmount(custid:$custid, index: $index, option: $option, amount: $amount)
+}`;
+
+const addNewPrice = gql `
+  mutation addPrice(
+  $custid: String, 
+  $description0: String, 
+  $amount0: Int, 
+  $description1: String, 
+  $amount1: Int,
+  $description2: String, 
+  $amount2: Int,
+  $description3: String, 
+  $amount3: Int,
+  $description4: String, 
+  $amount4: Int,
+  $description5: String, 
+  $amount5: Int
+  
+){
+   addPrice(custid: $custid, price:{
+    description:$description0,
+    amount: $amount0,
+    option1:{
+      description: $description1
+      amount: $amount1
+    }
+    option2:{
+      description: $description2
+      amount: $amount2
+    }
+    option3:{
+      description: $description3
+      amount: $amount3
+    }
+      option4:{
+      description: $description4
+      amount: $amount4
+    }
+      option5:{
+      description: $description5
+      amount: $amount5
+    }
+  })
 }`;
 
 export {
+  editPriceAmount,
+  addNewPrice,
   getSurveyLocalPhotos,
   deletePrice,
+  editPriceDescription,
   generatePDF,
   getBase64,
   sendEstimate,

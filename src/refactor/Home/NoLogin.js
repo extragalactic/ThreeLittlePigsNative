@@ -34,7 +34,7 @@ class _NoLogin extends React.Component {
   logIn = () => {
     this.lock.show({}, (err, profile, token) => {
       if (err) {
-        console.error(err);
+        //console.error(err);
       }
       saveProfile(token.idToken, profile.identities[0].userId);
       RNRestart.Restart();

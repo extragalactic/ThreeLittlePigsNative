@@ -68,46 +68,49 @@ class _EstimatesContainer extends React.Component {
     };
   }
   previewEstimate = (generic) => {
-    this.setState({ loadingButton: true });
-    const gen = {
-      watertest: this.state.watertest,
-      concreteSteps: this.state.concreteSteps,
-      concreteCare: this.state.concreteCare,
-      refacingSlices: this.state.refacingSlices,
-      refacingComplete: this.state.refacingComplete,
-      coping: this.state.coping,
-      flagstone: this.state.flagstone,
-      flashing: this.state.flashing,
-      fwarranty: this.state.fwarranty,
-      chimney: this.state.chimney,
-      obc: this.state.obc,
-      nbc: this.state.nbc,
-      pargeex: this.state.pargeex,
-      pwarranty: this.state.pwarranty,
-      retaining: this.state.retaining,
-      roof: this.state.roof,
-      sills: this.state.sills,
-      tuckpoint: this.state.tuckpoint,
-      custom: this.state.custom,
-      waterproofing: this.state.waterproofing,
-      disclaimerA: this.state.disclaimerA,
-      disclaimerS: this.state.disclaimerS,
-      tuckpointUniform: this.state.tuckpointUniform,
-      surveyInvite: this.state.surveyInvite,
-      surveyInviteDave: this.state.surveyInviteDave,
-      customerClean: this.state.customerClean,
-      additionalWork: this.state.additionalWork,
-      warrantyAsStated: this.state.warrantyAsStated,
-      existingConcrete: this.state.existingConcrete,
-    };
-    this.props.generatePDF({
-      variables: {
-        custid: this.props.currentCustomer,
-        generics: gen,
-        text: this.state.customText,
-        preview: true,
-      },
-    })
+    if (this.props.data.customer.prices.length === 0) {
+      AlertIOS.alert('No Prices!');
+    } else {
+      this.setState({ loadingButton: true });
+      const gen = {
+        watertest: this.state.watertest,
+        concreteSteps: this.state.concreteSteps,
+        concreteCare: this.state.concreteCare,
+        refacingSlices: this.state.refacingSlices,
+        refacingComplete: this.state.refacingComplete,
+        coping: this.state.coping,
+        flagstone: this.state.flagstone,
+        flashing: this.state.flashing,
+        fwarranty: this.state.fwarranty,
+        chimney: this.state.chimney,
+        obc: this.state.obc,
+        nbc: this.state.nbc,
+        pargeex: this.state.pargeex,
+        pwarranty: this.state.pwarranty,
+        retaining: this.state.retaining,
+        roof: this.state.roof,
+        sills: this.state.sills,
+        tuckpoint: this.state.tuckpoint,
+        custom: this.state.custom,
+        waterproofing: this.state.waterproofing,
+        disclaimerA: this.state.disclaimerA,
+        disclaimerS: this.state.disclaimerS,
+        tuckpointUniform: this.state.tuckpointUniform,
+        surveyInvite: this.state.surveyInvite,
+        surveyInviteDave: this.state.surveyInviteDave,
+        customerClean: this.state.customerClean,
+        additionalWork: this.state.additionalWork,
+        warrantyAsStated: this.state.warrantyAsStated,
+        existingConcrete: this.state.existingConcrete,
+      };
+      this.props.generatePDF({
+        variables: {
+          custid: this.props.currentCustomer,
+          generics: gen,
+          text: this.state.customText,
+          preview: true,
+        },
+      })
     .then((confirm) => {
       if (confirm.data.generatePDFEstimate) {
         setTimeout(() => {
@@ -118,6 +121,7 @@ class _EstimatesContainer extends React.Component {
         }, 15000);
       }
     });
+    }
   };
 
   sendEstimate = () => {

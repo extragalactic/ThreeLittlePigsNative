@@ -1,3 +1,4 @@
+
 import gql from 'graphql-tag';
 
 const getMessages = gql `
@@ -60,7 +61,7 @@ query getUser($id: String){
 const getCustomer = gql `
  query getCustomer($id: String!){
   customer(id: $id) {
-     id
+      id
     firstName
     lastName
     estimatePDF
@@ -71,6 +72,41 @@ const getCustomer = gql `
     hphone
     wphone
     address
+     prices {
+      description
+      amount
+      numOptions
+    }
+    prices {
+      description
+      amount
+      numOptions
+      option1 {
+        enabled
+        description
+        amount
+      }
+      option2 {
+        enabled
+        description
+        amount
+      }
+      option3 {
+        enabled
+        description
+        amount
+      }
+      option4 {
+        enabled
+        description
+        amount
+      }
+      option5 {
+        enabled
+        description
+        amount
+      }
+    }
     coordinates {
       latitude
       longitude
@@ -95,13 +131,8 @@ const getCustomer = gql `
         caption
         selected
       }
-      prices {
-      description
-      price
-      }
       
     }
-
     estimator
     status
     notes{
@@ -183,7 +214,6 @@ const getMyCustomer = gql `
       }
       
     }
-
     estimator
     status
     notes{
@@ -239,8 +269,8 @@ const getFinishedSurvey = gql `
       url
     }
   }
-  customer(id: $id) {
-     id
+ customer(id: $id) {
+      id
     firstName
     lastName
     estimatePDF
@@ -251,6 +281,41 @@ const getFinishedSurvey = gql `
     hphone
     wphone
     address
+     prices {
+      description
+      amount
+      numOptions
+    }
+    prices {
+      description
+      amount
+      numOptions
+      option1 {
+        enabled
+        description
+        amount
+      }
+      option2 {
+        enabled
+        description
+        amount
+      }
+      option3 {
+        enabled
+        description
+        amount
+      }
+      option4 {
+        enabled
+        description
+        amount
+      }
+      option5 {
+        enabled
+        description
+        amount
+      }
+    }
     coordinates {
       latitude
       longitude
@@ -275,13 +340,8 @@ const getFinishedSurvey = gql `
         caption
         selected
       }
-      prices {
-      description
-      price
-      }
       
     }
-
     estimator
     status
     notes{
