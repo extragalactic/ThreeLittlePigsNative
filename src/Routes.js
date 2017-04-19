@@ -28,6 +28,7 @@ import CustomerDetailsContainer from './refactor/CustomerDetails/CustomerDetails
 import CustomerListContainerQueue from './refactor/CustomerList/CustomerListContainerQueue';
 import PhotoGalleryContainer from './refactor/PhotoGallery/PhotoGalleryContainer';
 import PricingContainer from './refactor/Estimates/PricingContainer';
+import StreetViewContainer from './refactor/Maps/StreetViewContainer';
 
 const routes = Actions.create(
   <Scene key="root">
@@ -127,6 +128,11 @@ const routes = Actions.create(
       hideBackImage
       sceneStyle={{ marginTop: 50 }}
     />
+    <Scene
+      key={'streetView'}
+      component={StreetViewContainer}
+      passProps
+    />    
   </Scene>,
 );
 

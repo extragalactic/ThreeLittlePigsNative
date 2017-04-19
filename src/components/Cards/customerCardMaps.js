@@ -8,11 +8,10 @@ const defaultMarker = {
   latitude: 37.78825,
 };
 
-const CustomerCardMaps = ({ customer, getDirections }) => (
+const CustomerCardMaps = ({ customer, getDirections, gotoStreetView }) => (
   <Card
     title={customer.address ? `${customer.address}` : 'Address'}
     containerStyle={MasterStyleSheet.cardStyle}
-
   >
     <MapView
       style={MasterStyleSheet.customerCardMap}
@@ -41,6 +40,13 @@ const CustomerCardMaps = ({ customer, getDirections }) => (
       title="Get Directions"
       onPress={getDirections}
     />
+    <Button
+      icon={{ name: 'location-city' }}
+      backgroundColor="#03A9F4"
+      buttonStyle={MasterStyleSheet.mainButtonStyle}
+      title="Street View"
+      onPress={gotoStreetView}
+    />    
   </Card>
 );
 

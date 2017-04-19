@@ -36,7 +36,6 @@ class _Home extends Component {
        .catch(() => {
          _this.setState({ serverIsOnline: false });
        });
-
       checkUserLogin().then(res => this.setState({ loggedIn: res }));
     }, 2000);
     getuserId().then(user => this.props.saveProfile(user));
