@@ -28,9 +28,6 @@ class _UserHome extends React.Component {
     saveProfile: React.PropTypes.func,
     data: React.PropTypes.object,
   }
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     setTimeout(() => {
       OneSignal.sendTags({

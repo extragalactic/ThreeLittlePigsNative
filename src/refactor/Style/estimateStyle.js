@@ -95,6 +95,13 @@ const estimateStyles = StyleSheet.create({
   scrollView: {
     height: window.width / 1.65,
   },
+  closeIcon: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+
 });
 
 

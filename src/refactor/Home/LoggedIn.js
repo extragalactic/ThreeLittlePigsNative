@@ -26,7 +26,7 @@ class _LoggedIn extends React.Component {
        // console.log(status);
      })
      .catch((error) => {
-       console.error(error);
+       //console.error(error);
      });
   }
   componentWillUnmount() {
