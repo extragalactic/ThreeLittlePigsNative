@@ -132,7 +132,7 @@ const routes = Actions.create(
       key={'streetView'}
       component={StreetViewContainer}
       passProps
-    />    
+    />
   </Scene>,
 );
 

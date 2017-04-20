@@ -6,7 +6,7 @@ import { graphql, compose } from 'react-apollo';
 import { MasterStyleSheet } from '../../style/MainStyles';
 import { getUserQuery } from '../../graphql/queries';
 
-const _CustomerCardChat = ({ getNotes, customer, ...props }) => (
+const _CustomerCardChat = ({ customer, ...props }) => (
   <Card
     containerStyle={MasterStyleSheet.cardStyle}
   >

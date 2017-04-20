@@ -224,6 +224,7 @@ class _CustomerDetails extends Component {
   selectIndex = selectedIndex => this.setState({ selectedIndex });
 
   render() {
+    console.log('details', this)
     if (!this.props.data.customer) {
       return (
         <ActivityIndicator />
@@ -257,8 +258,7 @@ class _CustomerDetails extends Component {
             />
             <CustomerCardChat
               customer={this.props.data.customer}
-              getNotes={() => { this.setState({ notesModal: true }); }}
-              id={this.props.userid}
+              id={this.props.profile}
             />
             {this.props.params.type !== 'myestimates' ?
               <CustomerCardSurvey
@@ -275,7 +275,7 @@ class _CustomerDetails extends Component {
               <CustomerCardQueue
                 customer={this.props.data.customer}
                 acceptEstimate={this.acceptEstimate}
-                id={this.props.userid}
+                id={this.props.profile}
               />
 
           : null}
