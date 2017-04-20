@@ -60,6 +60,10 @@ query getUser($id: String){
 
 const getCustomer = gql `
  query getCustomer($id: String!){
+   getPrices {
+     description
+     price
+  }
   customer(id: $id) {
       id
     firstName

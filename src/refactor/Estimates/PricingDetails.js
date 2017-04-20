@@ -1,13 +1,19 @@
 import React from 'react';
 import _ from 'lodash';
 import { Button, Grid, Row, Col, Card, Text, Icon } from 'react-native-elements';
-import { View, StyleSheet, TextInput, ScrollView } from 'react-native';
+import { View, TextInput, ScrollView } from 'react-native';
 import { graphql, compose } from 'react-apollo';
 import { connect } from 'react-redux';
-import { addPrice, addNewPrice, deletePrice, editPriceDescription, editPriceAmount } from '../../graphql/mutations';
-import { getCustomer } from '../../graphql/queries';
+import ModalDropdown from 'react-native-modal-dropdown';
 import { estimateStyles } from '../Style/estimateStyle';
-import { MasterStyleSheet } from '../../style/MainStyles';
+import { getCustomer } from '../../graphql/queries';
+import {
+        addPrice,
+        addNewPrice,
+        deletePrice,
+        editPriceDescription,
+        editPriceAmount,
+       } from '../../graphql/mutations';
 
 class _PricingDetails extends React.Component {
   constructor() {
@@ -28,6 +34,8 @@ class _PricingDetails extends React.Component {
       amount5: 0,
       showInput: false,
       prices: [true],
+      textInput: '',
+      filteredData: [],
     };
   }
 
@@ -86,6 +94,7 @@ class _PricingDetails extends React.Component {
     variable.custid = this.props.id;
     delete variable.numPrices;
     delete variable.prices;
+    delete variable.filteredData;
     this.props.addNewPrice({
       variables: variable,
     }).then((data) => {
@@ -122,6 +131,12 @@ class _PricingDetails extends React.Component {
   handleInputPriceAmount = (amount) => {
     this.props.savePriceAmount({ amount });
   }
+  selectPreviousDescription = (text, index) => {
+    const descriptionIndex = `description${index}`;
+    this.setState({
+      [descriptionIndex]: text,
+    });
+  };
   render() {
     return (
       <View
@@ -183,6 +198,7 @@ class _PricingDetails extends React.Component {
                             onChangeText={text => this.setState({ [textIndex]: text })}
                             value={this.state[textIndex]}
                           />
+
                           <TextInput
                             style={estimateStyles.pricePrice}
                             keyboardType={'numeric'}
@@ -190,6 +206,18 @@ class _PricingDetails extends React.Component {
                             onKeyPress={this.handleKeyDown}
                             onChangeText={price => this.setState({ [priceIndex]: price })}
                             value={this.state[priceIndex]}
+                          />
+                          <ModalDropdown
+                            style={estimateStyles.modalDropDown}
+                            defaultValue={'Choose from previous'}
+                            textStyle={{
+                              fontSize: 24,
+                            }}
+                            dropdownStyle={estimateStyles.dropDown}
+                            options={this.props.data.getPrices.map(price => price.description)}
+                            onSelect={(idx, text) => {
+                              this.selectPreviousDescription(text, index);
+                            }}
                           />
                         </View>
                       );
@@ -201,21 +229,18 @@ class _PricingDetails extends React.Component {
                         flexDirection: 'row',
                       }}
                     >
-                      <Icon
+
+                      <Button
                         raised
-                        size={24}
-                        name="plus"
-                        type="entypo"
-                        color="#517fa4"
+                        title={'OR'}
                         onPress={this.addPricetoState}
+                        buttonStyle={estimateStyles.estimateAddPriceButton}
                       />
-                      <Icon
+                      <Button
                         raised
-                        size={24}
-                        name="plus-square"
-                        type="font-awesome"
-                        color="#517fa4"
+                        title={'ADD'}
                         onPress={this.addPricetoEstimate}
+                        buttonStyle={estimateStyles.estimateAddPriceButton}
                       />
                     </View>
                   </View>
