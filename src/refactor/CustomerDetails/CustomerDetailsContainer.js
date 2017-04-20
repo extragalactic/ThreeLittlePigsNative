@@ -147,6 +147,12 @@ class _CustomerDetails extends Component {
     this.getCurrentLocation();
     Linking.openURL(`http://maps.apple.com/?daddr=${this.props.data.customer.coordinates.latitude},${this.props.data.customer.coordinates.longitude}&dirflg=d&t=h`);
   };
+
+  gotoStreetView = () => {
+    console.log('directions clicked for custid=' + this.props.data.customer.id);
+    Actions.streetView(this.props.data.customer.id);
+  };
+    
   acceptEstimate = () => {
     this.props.acceptEstimate({
       variables: {
@@ -247,6 +253,7 @@ class _CustomerDetails extends Component {
             <CustomerCardMaps
               customer={this.props.data.customer}
               getDirections={this.getDirections}
+              gotoStreetView={this.gotoStreetView}
             />
             <CustomerCardChat
               customer={this.props.data.customer}
