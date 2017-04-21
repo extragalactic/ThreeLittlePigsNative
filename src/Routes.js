@@ -19,7 +19,6 @@ import CustomerListOnsite from './components/customerList/customerListOnsite';
 import CustomerListsurveyinProgress from './components/customerList/customerListSurveyinProgress';
 import CustomerListSurveyComplete from './components/customerList/customerListSurveyComplete';
 import CustomerListMyEstimates from './components/customerList/customerListMyEstimates';
-import CustomerDetailsIpadQueue from './components/customerDetails/customerDetailsIPadQueue';
 import CustomerDetailsQueue from './components/customerDetails/customerDetailsQueue';
 import GiftedChatContainer from './components/GiftedChat/GiftedChatContainer';
 import EstimateContainer from './refactor/Estimates/EstimatesContainer';
@@ -29,6 +28,7 @@ import CustomerListContainerQueue from './refactor/CustomerList/CustomerListCont
 import PhotoGalleryContainer from './refactor/PhotoGallery/PhotoGalleryContainer';
 import PricingContainer from './refactor/Estimates/PricingContainer';
 import StreetViewContainer from './refactor/Maps/StreetViewContainer';
+import SearchContainer from './refactor/SearchCustomer/SearchContainer';
 
 const routes = Actions.create(
   <Scene key="root">
@@ -131,6 +131,11 @@ const routes = Actions.create(
     <Scene
       key={'streetView'}
       component={StreetViewContainer}
+      passProps
+    />
+    <Scene
+      key={'searchContainer'}
+      component={SearchContainer}
       passProps
     />
   </Scene>,

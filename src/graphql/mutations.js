@@ -412,7 +412,89 @@ const addNewPrice = gql `
   })
 }`;
 
+const searchCustomer = gql `
+mutation($searchTerm: String){
+  searchCustomer(searchTerm: $searchTerm) {
+    id
+    firstName
+    lastName
+    estimatePDF
+    surveyReadyforPrice
+    email1
+    email2
+    cphone
+    hphone
+    wphone
+    address
+    coordinates {
+      latitude
+      longitude
+    }
+   surveyor {
+      id
+      firstName
+      lastName
+      mobile
+    }
+    estimate{
+      photos {
+        heading
+        description
+        timestamp
+        user
+        orginalBase64
+        editedlBase64
+        thumbURL
+        thumb
+        photo
+        caption
+        selected
+      }
+      prices {
+      description
+      price
+      }
+      
+    }
+    estimator
+    status
+    notes{
+      _id
+      text
+      user {
+        name
+        _id
+      }
+    }
+    survey {
+      notes {
+        heading
+        description
+        timestamp
+        user
+        text
+    }
+      photos{
+        heading
+        description
+        timestamp
+        user
+        orginalBase64
+        editedlBase64
+        thumbURL
+        thumb
+        photo
+        caption
+        selected
+        docID
+      }
+    }
+  }
+}`;
+
+
 export {
+  searchCustomer,
   editPriceAmount,
   addNewPrice,
   getSurveyLocalPhotos,

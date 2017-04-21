@@ -97,6 +97,7 @@ class _UserHome extends React.Component {
         <Button
           title={'Search'}
           buttonStyle={MasterStyleSheet.searchButtonStyle}
+          onPress={() => Actions.searchContainer()}
         />
       </View>
     );

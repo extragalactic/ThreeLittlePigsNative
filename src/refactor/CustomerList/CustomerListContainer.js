@@ -21,9 +21,6 @@ class _CustomerListContainer extends React.Component {
   componentWillUnmount() {
     this.props.saveCustomer('');
   }
-  setSelection = (selection) => {
-    this.setState({ selection });
-  }
 
   selectCustomer = (selection) => {
     this.props.saveCustomer(selection);

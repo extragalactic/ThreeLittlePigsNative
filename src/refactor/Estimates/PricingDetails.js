@@ -211,7 +211,7 @@ class _PricingDetails extends React.Component {
                             style={estimateStyles.modalDropDown}
                             defaultValue={'Choose from previous'}
                             textStyle={{
-                              fontSize: 24,
+                              fontSize: 18,
                             }}
                             dropdownStyle={estimateStyles.dropDown}
                             options={this.props.data.getPrices.map(price => price.description)}
