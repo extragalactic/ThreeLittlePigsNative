@@ -149,7 +149,7 @@ class _CustomerDetails extends Component {
   };
 
   gotoStreetView = () => {
-    console.log('directions clicked for custid=' + this.props.data.customer.id);
+    console.log('streetview clicked for custid=' + this.props.data.customer.id);
     Actions.streetView(this.props.data.customer.id);
   };
     

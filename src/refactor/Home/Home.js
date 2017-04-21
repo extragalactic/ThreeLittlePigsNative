@@ -18,7 +18,7 @@ class _Home extends Component {
     this.state = {
       connected: false,
       loggedIn: false,
-      serverIsOnline: false,
+      serverIsOnline: true,
     };
   }
   componentDidMount() {
