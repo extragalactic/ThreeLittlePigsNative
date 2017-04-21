@@ -11,7 +11,7 @@ import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
 import _ from 'lodash';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
-import { getCustomer } from '../../graphql/queries';
+import {  getMyCustomer } from '../../graphql/queries';
 
 import { addNotes, getUser } from '../../graphql/mutations';
 
@@ -175,6 +175,7 @@ class _GiftedChatContainer extends React.Component {
   }
 
   render() {
+    console.log('chat', this)
     return (
       <GiftedChat
         messages={this.state.messages}
@@ -210,7 +211,7 @@ const mapStateToProps = state => ({
 });
 
 const GiftedChatContainer = compose(
-  graphql(getCustomer, {
+  graphql(getMyCustomer, {
     options: ({ id }) => ({ variables: { id }, pollInterval: 1000 }),
   }),
   connect(mapStateToProps, null),

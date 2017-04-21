@@ -208,7 +208,7 @@ class _CustomerDetails extends Component {
     this.setState({ selectedIndex });
   }
   render() {
-  //  console.log('detials', this)
+   console.log('detials', this)
     if (!this.props.data.customer) {
       return (
         <ActivityIndicator />

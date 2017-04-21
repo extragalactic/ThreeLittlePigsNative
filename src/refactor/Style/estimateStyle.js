@@ -10,8 +10,12 @@ const estimateStyles = StyleSheet.create({
     alignItems: 'center',
   },
   estimateAddPriceButton: {
-    width: window.width / 6,
+    width: window.width / 12,
     margin: 2,
+  },
+  estimatePreviousButton: {
+    width: window.width / 6,
+    margin: 8,
   },
   priceInputView: {
     flex: 1,
@@ -101,9 +105,21 @@ const estimateStyles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
   },
+  modalDropDown: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  dropDown: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    width: window.width / 4,
+    fontSize: 42,
+  },
 
 });
 
-
-export { estimateStyles } ;
-2;
+export { estimateStyles };

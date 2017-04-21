@@ -38,6 +38,7 @@ class _Home extends Component {
        });
       checkUserLogin().then(res => this.setState({ loggedIn: res }));
     }, 2000);
+    getuserId().then(user => console.log(user));
     getuserId().then(user => this.props.saveProfile(user));
     setTimeout(() => {
       if (this.props.profile) {
