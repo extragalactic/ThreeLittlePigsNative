@@ -107,7 +107,8 @@ const estimateStyles = StyleSheet.create({
   },
   modalDropDown: {
     flex: 1,
-    justifyContent: 'center',
+    fontSize: 200,
+   // justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
   },
@@ -117,7 +118,7 @@ const estimateStyles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     width: window.width / 4,
-    fontSize: 42,
+    height: 200,
   },
 
 });

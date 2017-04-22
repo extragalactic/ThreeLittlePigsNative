@@ -138,6 +138,7 @@ class _PricingDetails extends React.Component {
     });
   };
   render() {
+    console.log('pricing', this)
     return (
       <View
         style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}
@@ -211,6 +212,9 @@ class _PricingDetails extends React.Component {
                             style={estimateStyles.modalDropDown}
                             defaultValue={'Choose from previous'}
                             textStyle={{
+                              fontSize: 24,
+                            }}
+                            dropdownTextStyle={{
                               fontSize: 24,
                             }}
                             dropdownStyle={estimateStyles.dropDown}

@@ -270,6 +270,12 @@ class _CustomerDetails extends Component {
                 getEstimate={this.getFinishedSurvey}
               />
           }
+            { this.props.params.type === 'search' ?
+              <CustomerCardEstimate
+                getEstimate={this.getFinishedSurvey}
+              />
+           : null}
+
             { this.props.params.type === 'queue' ?
 
               <CustomerCardQueue
