@@ -18,7 +18,7 @@ import { priceDescriptionReducer, priceAmountReducer } from './src/reducers/pric
 const client = new ApolloClient({
   connectToDevTools: true,
   networkInterface: createNetworkInterface({
-    uri: 'http://localhost:8080/graphql',
+    uri: 'https://tlpm.ca/graphql',
   },
     {
       shouldBatch: true,

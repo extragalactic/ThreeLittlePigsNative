@@ -8,7 +8,11 @@ const searchStyles = StyleSheet.create({
     marginTop: 65,
     justifyContent: 'flex-start',
   },
-
+  customersListItem: {
+    height: 90,
+    bottom: 10,
+    backgroundColor: '#FFFFFF',
+  },
 });
 
 export default searchStyles;

@@ -58,7 +58,7 @@ class _SearchContainer extends React.Component {
               {this.state.customers ?
                 this.state.customers.map((customer, idx) => (
                   <ListItem
-                    containerStyle={MasterStyleSheet.customersListItem}
+                    containerStyle={searchStyles.customersListItem}
                     key={idx}
                     title={customer.address}
                     subtitle={`${customer.firstName} ${customer.lastName}`}

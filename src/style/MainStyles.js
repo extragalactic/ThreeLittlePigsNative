@@ -66,7 +66,6 @@ const MasterStyleSheet = StyleSheet.create({
     borderTopWidth: 0,
     borderBottomWidth: 1,
     backgroundColor: '#FFFFFF',
-
   },
   logo: {
     width: 400,

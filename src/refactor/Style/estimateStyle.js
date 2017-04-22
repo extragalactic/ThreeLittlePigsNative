@@ -117,9 +117,8 @@ const estimateStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    //width: window.width / 4,
-    height: 40,
-    fontSize: 900,
+    width: window.width / 4,
+    height: 200,
   },
 
 });
