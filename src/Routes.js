@@ -29,6 +29,7 @@ import CustomerListContainerQueue from './refactor/CustomerList/CustomerListCont
 import PhotoGalleryContainer from './refactor/PhotoGallery/PhotoGalleryContainer';
 import PricingContainer from './refactor/Estimates/PricingContainer';
 import StreetViewContainer from './refactor/Maps/StreetViewContainer';
+import PhotoEditorContainer from './refactor/PhotoGallery/PhotoEditorContainer';
 
 const routes = Actions.create(
   <Scene key="root">
@@ -132,7 +133,12 @@ const routes = Actions.create(
       key={'streetView'}
       component={StreetViewContainer}
       passProps
-    />    
+    />  
+    <Scene
+      key={'photoEditor'}
+      component={PhotoEditorContainer}
+      passProps
+    />                
   </Scene>,
 );
 

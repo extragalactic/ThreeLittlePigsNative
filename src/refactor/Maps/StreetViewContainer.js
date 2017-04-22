@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, WebView, View, Text } from 'react-native';
+import { ActivityIndicator, WebView } from 'react-native';
 
 class StreetViewContainer extends React.Component {
 	// props.data is the customer ID
