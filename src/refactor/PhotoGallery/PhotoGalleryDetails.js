@@ -66,7 +66,6 @@ class _PhotoGalleryDetails extends React.Component {
   };
 
   showActionSheet = (media, index) => {
-    console.log(media)
     this.setState({ currentSelection: this.props.data.customer.survey.photos[index].photo });
     ActionSheetIOS.showActionSheetWithOptions({
       options: BUTTONS,

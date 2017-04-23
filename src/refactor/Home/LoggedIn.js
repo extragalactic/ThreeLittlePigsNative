@@ -45,7 +45,7 @@ class _LoggedIn extends React.Component {
       this.props.acceptEstimate({
         variables: {
           custid: customer,
-          userid: 'getUserID()',
+          userid: this.props.profile,
         },
       });
     }

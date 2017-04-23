@@ -23,15 +23,12 @@ import { MasterStyleSheet } from '../../style/MainStyles';
 
 import photoOptions from './photoOptions';
 
-import copyImagefromTemptoPersist from '../../Utils/images';
-
 import {
    addSurveyNotes,
    addSurveyPhoto,
    getSurveyPhotos,
    toggleSurveyReady,
    selectSurveyPhotos,
-   getSurveyLocalPhotos,
   } from '../../graphql/mutations';
 
 import { getUserandCustomers } from '../../graphql/queries';

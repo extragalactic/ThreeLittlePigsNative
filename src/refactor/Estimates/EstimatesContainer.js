@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Image, Dimensions, ScrollView, AlertIOS, TouchableHighlight, ActivityIndicatorIOS } from 'react-native';
+import { View, Image, Dimensions, ScrollView, AlertIOS, TouchableHighlight } from 'react-native';
 import { Col, Grid } from 'react-native-easy-grid';
 import { Text, Card, Button, CheckBox, ListItem } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import { graphql, compose } from 'react-apollo';
-import Swipeout from 'react-native-swipeout';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
@@ -12,13 +11,11 @@ import { generatePDF } from '../../graphql/mutations';
 import { getFinishedSurvey } from '../../graphql/queries';
 import { MasterStyleSheet } from '../../style/MainStyles';
 import ZoomViewModal from '../../components/photoGallery/zoomViewModal';
-import EstimatePriceModal from '../../components/Modals/estimatePriceModal';
 import PhotoGalleryEstimates from '../../components/photoGallery/photoGalleryEstimates';
 import CustomGenericsModal from '../../components/Modals/customGenericsModal';
 import EstimatePreviewModal from '../../components/Modals/estimatePreviewModal';
-import generics from '../../components/Estimates/generics';
+import generics from './generics';
 import { estimateStyles } from '../Style/estimateStyle';
-
 
 const window = Dimensions.get('window');
 
@@ -334,13 +331,6 @@ class _EstimatesContainer extends React.Component {
           close={() => this.setState({ galleryModal: false })}
           photos={this.props.data.customer.survey.photos}
           selectPhoto={this.selectPhoto}
-        />
-        <EstimatePriceModal
-          addPrice={this.props.addPrice}
-          customer={this.props.customer}
-          estimate={this.props.estimate}
-          open={this.state.pricingModal}
-          close={() => this.setState({ pricingModal: false })}
         />
         <CustomGenericsModal
           open={this.state.customModal}
