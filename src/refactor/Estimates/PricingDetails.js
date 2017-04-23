@@ -138,6 +138,7 @@ class _PricingDetails extends React.Component {
     });
   };
   render() {
+    console.log('pricing', this)
     return (
       <View
         style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}

@@ -125,18 +125,3 @@ const SearchContainer = compose(
 
 export default SearchContainer;
 
-
-/*
-
-  <SearchBar
-          lightTheme
-          onChangeText={text => this.onSearchInputChange(text)}
-          placeholder='Type Here...'
-        />
-
-        <Button
-          title={'test'}
-          onPress={() => console.log(this)}
-        />
-
-*/
