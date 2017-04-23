@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Image, Dimensions, ScrollView, AlertIOS, TouchableHighlight, ActivityIndicatorIOS } from 'react-native';
+import { View, Image, Dimensions, ScrollView, AlertIOS, TouchableHighlight } from 'react-native';
 import { Col, Grid } from 'react-native-easy-grid';
 import { Text, Card, Button, CheckBox, ListItem } from 'react-native-elements';
 import Swiper from 'react-native-swiper';
 import { graphql, compose } from 'react-apollo';
-import Swipeout from 'react-native-swipeout';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
@@ -18,7 +17,6 @@ import CustomGenericsModal from '../../components/Modals/customGenericsModal';
 import EstimatePreviewModal from '../../components/Modals/estimatePreviewModal';
 import generics from '../../components/Estimates/generics';
 import { estimateStyles } from '../Style/estimateStyle';
-
 
 const window = Dimensions.get('window');
 

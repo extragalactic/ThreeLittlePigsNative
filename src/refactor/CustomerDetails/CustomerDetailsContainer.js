@@ -149,18 +149,27 @@ class _CustomerDetails extends Component {
   };
 
   gotoStreetView = () => {
-    console.log('directions clicked for custid=' + this.props.data.customer.id);
     Actions.streetView(this.props.data.customer.id);
   };
-    
+
   acceptEstimate = () => {
-    this.props.acceptEstimate({
-      variables: {
-        custid: this.props.data.customer.id,
-        userid: this.props.profile,
-      },
-    });
-    Actions.home();
+    AlertIOS.alert(
+      'Are you sure?',
+       'Estimate will be added to your queue',
+      [{ text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+        { text: 'Accept Estimate',
+          onPress: () => {
+            this.props.acceptEstimate({
+              variables: {
+                custid: this.props.data.customer.id,
+                userid: this.props.profile,
+              },
+            });
+            Actions.home();
+          },
+        },
+      ],
+      );
   }
 
   changeAppointment = (meetingid, calid) => {
@@ -224,7 +233,6 @@ class _CustomerDetails extends Component {
   selectIndex = selectedIndex => this.setState({ selectedIndex });
 
   render() {
-    console.log('details', this)
     if (!this.props.data.customer) {
       return (
         <ActivityIndicator />
