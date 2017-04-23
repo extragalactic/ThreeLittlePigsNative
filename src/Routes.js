@@ -103,11 +103,6 @@ const routes = Actions.create(
       passProps
     />
     <Scene
-      key={'customerDetailsContainer'}
-      component={CustomerDetailsContainer}
-      passProps
-    />
-    <Scene
       key={'myEstimates'}
       component={EstimateContainer}
       passProps
