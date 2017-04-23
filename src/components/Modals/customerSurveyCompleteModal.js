@@ -52,6 +52,7 @@ class _SurveyCompleteModal extends React.Component {
                   {survey.photos.map((photo, idx) => (
                     <View
                       style={MasterStyleSheet.surveyResultInsideView}
+                      key={idx}
                     >
                       <Image
                         style={MasterStyleSheet.surveyResultPhotos}
@@ -66,8 +67,8 @@ class _SurveyCompleteModal extends React.Component {
                   <ScrollView
                     contentContainerStyle={MasterStyleSheet.surveyResultsNotesView}
                   >
-                    { survey.notes.map(note => (
-                      <View>
+                    { survey.notes.map((note, idx) => (
+                      <View key={idx}>
                         <Text h4> {note.description}</Text>
                         <Text h5> {note.text}</Text>
                       </View>

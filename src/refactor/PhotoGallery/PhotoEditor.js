@@ -1,3 +1,5 @@
+// Note: will likely delete this (not required)
+
 import React from 'react';
 import { WebView } from 'react-native';
 
@@ -12,6 +14,7 @@ function PhotoEditor (props) {
 
   return (
     <WebView
+      style={{flex: 1, width: 800}}
       source={{uri: BASE_URL + '/photoedit/' + props.custID}}
     />
   );

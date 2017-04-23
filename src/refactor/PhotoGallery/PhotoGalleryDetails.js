@@ -2,25 +2,33 @@ import React from 'react';
 import { 
   ActionSheetIOS,
   CameraRoll, 
-  AlertIOS, 
-  Modal,
+  AlertIOS,
+  Modal, 
   View } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import PhotoBrowser from 'react-native-photo-browser';
 import ImagePickerManager from 'react-native-image-picker';
 import { graphql, compose } from 'react-apollo';
+// import Modal from 'react-native-modal'; //  trying out an improved Modal
 
 import { getBase64, addSurveyPhoto, selectSurveyPhotos } from '../../graphql/mutations';
 import { getMyCustomer } from '../../graphql/queries';
 import photoOptions from '../../components/Surveys/photoOptions'; // move this!
 import PhotoEditorContainer from './PhotoEditorContainer';
+import StreetViewContainer from '../Maps/StreetViewContainer';
 
+/*
 const BUTTONS = [
   'Edit',
   'Save',
   'Add',
   'Delete',
+];
+*/
+const BUTTONS = [
+  'Save',
+  'Add',
 ];
 const DESTRUCTIVE_INDEX = 5;
 const CANCEL_INDEX = 6;
@@ -75,7 +83,6 @@ class _PhotoGalleryDetails extends React.Component {
     (buttonIndex) => {
       const selection = BUTTONS[buttonIndex];
       if (selection === 'Edit') {
-        // Actions.photoEditor(this.props.data.customer.id);
         this.setState({
           isEditorOpen: true
         });
@@ -104,36 +111,50 @@ class _PhotoGalleryDetails extends React.Component {
 
   render() {
     return (
-      <View>
-        <PhotoBrowser
-          style={{
-            margin: 250,
-            flex: 1
-          }}
-          mediaList={this.props.data.customer.survey.photos}
-          alwaysShowControls
-          onBack={() => Actions.pop()}
-          displayActionButton
-          displayNavArrows
-          displaySelectionButtons
-          startOnGrid
-          onActionButton={(media, index) => this.showActionSheet(media, index)}
-          onSelectionChanged={(media, index, isSelected) => {
-            this.togglePhotoSelection(index);
-          }}
-        />
-
-        <PhotoEditorContainer 
-          style={{flex: 1, width: 800}}
-          open={this.state.isEditorOpen}
-          custID={this.props.data.customer.id}
-        />
-
+      <View style={{flex: 1}}>
+        <Modal
+          style={{flex: 1}}
+          isOpen={!this.state.isEditorOpen}
+          visible={!this.state.isEditorOpen}
+        >
+          <PhotoBrowser
+            style={{
+              margin: 250,
+              flex: 1,
+              width: 800
+            }}
+            mediaList={this.props.data.customer.survey.photos}
+            alwaysShowControls
+            onBack={() => Actions.pop()}
+            displayActionButton
+            displayNavArrows
+            displaySelectionButtons
+            startOnGrid
+            onActionButton={(media, index) => this.showActionSheet(media, index)}
+            onSelectionChanged={(media, index, isSelected) => {
+              this.togglePhotoSelection(index);
+            }}
+          />
+        </Modal>
+        <Modal
+          style={{flex: 1}}
+          isOpen={this.state.isEditorOpen}
+          visible={this.state.isEditorOpen}        
+        >
+          <PhotoEditorContainer 
+            style={{
+              flex: 1,
+              width: 800
+            }}
+            open={this.state.isEditorOpen}
+            custID={this.props.data.customer.id}
+          />
+        </Modal>
       </View>
     );
   }
-
 }
+
 
 const mapUserToProps = state => ({
   user: state.user,
@@ -150,4 +171,3 @@ const PhotoGalleryDetails = compose(
 )(_PhotoGalleryDetails);
 
 export default PhotoGalleryDetails;
-
