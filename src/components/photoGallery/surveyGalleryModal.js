@@ -7,6 +7,8 @@ const surveyGalleryModal = ({
    close,
    photos,
    selectPhoto,
+   showActionSheet,
+   custID
   }) => (
     <Modal
       isOpen={open}
@@ -16,13 +18,14 @@ const surveyGalleryModal = ({
       <PhotoBrowser
         mediaList={photos}
         alwaysShowControls
+        onBack={close}
         displayActionButton
         displayNavArrows
-        onBack={close}
+        displaySelectionButtons
         startOnGrid
+        onActionButton={()=>{}}
       />
     </Modal>
 );
 
 export default surveyGalleryModal;
-

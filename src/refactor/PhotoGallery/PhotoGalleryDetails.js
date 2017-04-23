@@ -1,15 +1,23 @@
 import React from 'react';
-import { ActionSheetIOS, CameraRoll, AlertIOS } from 'react-native';
+import { 
+  ActionSheetIOS,
+  CameraRoll, 
+  AlertIOS, 
+  Modal,
+  View } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import PhotoBrowser from 'react-native-photo-browser';
 import ImagePickerManager from 'react-native-image-picker';
 import { graphql, compose } from 'react-apollo';
+
 import { getBase64, addSurveyPhoto, selectSurveyPhotos } from '../../graphql/mutations';
 import { getMyCustomer } from '../../graphql/queries';
 import photoOptions from '../../components/Surveys/photoOptions'; // move this!
+import PhotoEditorContainer from './PhotoEditorContainer';
 
 const BUTTONS = [
+  'Edit',
   'Save',
   'Add',
   'Delete',
@@ -25,6 +33,7 @@ class _PhotoGalleryDetails extends React.Component {
       clicked: '',
       zoomModal: false,
       currentSelection: '',
+      isEditorOpen: false
     };
   }
   componentDidMount() {
@@ -66,14 +75,21 @@ class _PhotoGalleryDetails extends React.Component {
     },
     (buttonIndex) => {
       const selection = BUTTONS[buttonIndex];
+      if (selection === 'Edit') {
+        // Actions.photoEditor(this.props.data.customer.id);
+        this.setState({
+          isEditorOpen: true
+        });
+      }      
       if (selection === 'Save') {
+        // saves locally to device gallery
         this.downloadImage(media);
       }
       if (selection === 'Add') {
         this.uploadImage();
       }
-      if (selection === 'View') {
-        this.setState({ zoomModal: true });
+      if (selection === 'Delete') {
+        // delete
       }
     });
   };
@@ -89,22 +105,30 @@ class _PhotoGalleryDetails extends React.Component {
 
   render() {
     return (
-      <PhotoBrowser
-        style={{
-          margin: 250,
-        }}
-        mediaList={this.props.data.customer.survey.photos}
-        alwaysShowControls
-        onBack={() => Actions.pop()}
-        displayActionButton
-        displayNavArrows
-        displaySelectionButtons
-        onActionButton={(media, index) => this.showActionSheet(media, index)}
-        onSelectionChanged={(media, index, isSelected) => {
-          this.togglePhotoSelection(index);
-        }}
-      />
+      <Modal>
+        <PhotoBrowser
+          style={{
+            margin: 250,
+          }}
+          mediaList={this.props.data.customer.survey.photos}
+          alwaysShowControls
+          onBack={() => Actions.pop()}
+          displayActionButton
+          displayNavArrows
+          displaySelectionButtons
+          startOnGrid
+          onActionButton={(media, index) => this.showActionSheet(media, index)}
+          onSelectionChanged={(media, index, isSelected) => {
+            this.togglePhotoSelection(index);
+          }}
+        />
 
+        <PhotoEditorContainer 
+          open={this.state.isEditorOpen}
+          custID={this.props.data.customer.id}
+        />
+
+      </Modal>
     );
   }
 

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
-import { Modal, View, ActivityIndicator, Text } from 'react-native';
+import { Modal, View, ActivityIndicator, Text, ActionSheetIOS } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { Icon } from 'react-native-elements';
 import ImagePickerManager from 'react-native-image-picker';
 import { graphql, compose } from 'react-apollo';
@@ -34,6 +35,13 @@ import {
   } from '../../graphql/mutations';
 
 import { getUserandCustomers } from '../../graphql/queries';
+
+const BUTTONS = [
+  'Edit',
+  'Cancel',
+];
+const DESTRUCTIVE_INDEX = 5;
+const CANCEL_INDEX = 6;
 
 
 class _SurveyMainModal extends React.Component {
@@ -106,7 +114,7 @@ class _SurveyMainModal extends React.Component {
     });
     this.setState({
       photoGallery: true,
-    });
+    });  
   };
 
   changeSelection = (selection) => {
@@ -229,6 +237,28 @@ class _SurveyMainModal extends React.Component {
       photoCaption: text,
     });
   };
+
+  showActionSheet = (media, index) => {
+    // this.setState({ currentSelection: this.props.data.customer.survey.photos[index].photo });
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: BUTTONS,
+      cancelButtonIndex: CANCEL_INDEX,
+      destructiveButtonIndex: DESTRUCTIVE_INDEX,
+    },
+    (buttonIndex) => {
+      const selection = BUTTONS[buttonIndex];
+      if (selection === 'Edit') {
+       //  this.setState({ photoGallery: false });
+       //  Actions.streetView(this.props.customer.id);
+       //  this.props.closeSurveyModal();
+      }
+      if (selection === 'Cancel') {
+        // do nothing
+      }
+    });
+  };
+
+
   render() {
     if (this.props.data.loading) {
       return (
@@ -366,6 +396,8 @@ class _SurveyMainModal extends React.Component {
             close={() => this.setState({ photoGallery: false })}
             photos={this.state.surveyPhotos}
             selectPhoto={this.togglePhotoSelection}
+            showActionSheet={(media, index) => this.showActionSheet(media, index)}
+            custID={this.props.customer.id}
           />
         </Modal>
 

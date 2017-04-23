@@ -1,20 +1,28 @@
 import React from 'react';
-import { WebView } from 'react-native';
+import { Modal } from 'react-native';
 
+import PhotoEditor from './PhotoEditor';
 
 PhotoEditorContainer.propTypes = {
-	// params: React.PropTypes.object.isRequired,
+//	custID: React.PropTypes.string.isRequired,
 };
 
 function PhotoEditorContainer (props) {
 
-  // const BASE_URL = 'https://tlpm.ca';
-  const BASE_URL = 'http://localhost:8080';
+  const custID = '58e998682d9c5601001e57ef';
+  const photoIndex = 0;
 
   return (
-    <WebView
-      source={{uri: BASE_URL + '/photoedit/'}}
-    />
+    <Modal
+      isOpen={props.open}
+      visible={props.open}
+      position={'center'}
+    >
+      <PhotoEditor
+        custID={custID}
+        photoIndex={photoIndex}
+      />
+    </Modal>
   );
 }
 
