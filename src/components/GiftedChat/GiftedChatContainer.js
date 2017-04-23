@@ -11,7 +11,7 @@ import { GiftedChat, Actions, Bubble } from 'react-native-gifted-chat';
 import _ from 'lodash';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
-import {  getMyCustomer } from '../../graphql/queries';
+import { getMyCustomer } from '../../graphql/queries';
 
 import { addNotes, getUser } from '../../graphql/mutations';
 

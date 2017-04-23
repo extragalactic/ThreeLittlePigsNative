@@ -1,27 +1,14 @@
 import React from 'react';
 import {
   Scene,
-  Reducer,
-  Router,
-  Switch,
-  Modal,
   Actions,
-  ActionConst,
 } from 'react-native-router-flux';
 
 import Home from './refactor/Home/Home';
 
-import CustomerDetails from './components/customerDetails';
-import CustomerListNewCustomers from './components/customerList/customerListNewCustomers';
-import CustomerListFollowUp from './components/customerList/customerListFollowup';
-import CustomerListEstimateQueue from './components/customerList/customerListEstimateQueue';
-import CustomerListOnsite from './components/customerList/customerListOnsite';
-import CustomerListsurveyinProgress from './components/customerList/customerListSurveyinProgress';
-import CustomerListSurveyComplete from './components/customerList/customerListSurveyComplete';
-import CustomerListMyEstimates from './components/customerList/customerListMyEstimates';
-import CustomerDetailsQueue from './components/customerDetails/customerDetailsQueue';
 import GiftedChatContainer from './components/GiftedChat/GiftedChatContainer';
 import EstimateContainer from './refactor/Estimates/EstimatesContainer';
+import SurveyContainer from './refactor/Survey/SurveyContainer';
 import CustomerListContainer from './refactor/CustomerList/CustomerListContainer';
 import CustomerDetailsContainer from './refactor/CustomerDetails/CustomerDetailsContainer';
 import CustomerListContainerQueue from './refactor/CustomerList/CustomerListContainerQueue';
@@ -35,51 +22,6 @@ const routes = Actions.create(
     <Scene
       key="home"
       component={Home}
-    />
-    <Scene
-      key={'customerDetails'}
-      component={CustomerDetails}
-      passProps
-    />
-    <Scene
-      key={'customerDetailsQueue'}
-      component={CustomerDetailsQueue}
-      passProps
-    />
-    <Scene
-      key={'customerListNewCustomers'}
-      component={CustomerListNewCustomers}
-      passProps
-    />
-    <Scene
-      key={'customerListFollowUp'}
-      component={CustomerListFollowUp}
-      passProps
-    />
-    <Scene
-      key={'customerListOnsite'}
-      component={CustomerListOnsite}
-      passProps
-    />
-    <Scene
-      key={'customerListsurveyinProgress'}
-      component={CustomerListsurveyinProgress}
-      passProps
-    />
-    <Scene
-      key={'customerListsurveyComplete'}
-      component={CustomerListSurveyComplete}
-      passProps
-    />
-    <Scene
-      key={'customerListQueue'}
-      component={CustomerListEstimateQueue}
-      passProps
-    />
-    <Scene
-      key={'customerListMyEstimates'}
-      component={CustomerListMyEstimates}
-      passProps
     />
     <Scene
       key={'giftedChatContainer'}
@@ -136,6 +78,11 @@ const routes = Actions.create(
     <Scene
       key={'searchContainer'}
       component={SearchContainer}
+      passProps
+    />
+    <Scene
+      key={'surveyContainer'}
+      component={SurveyContainer}
       passProps
     />
   </Scene>,
