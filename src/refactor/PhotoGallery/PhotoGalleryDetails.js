@@ -105,10 +105,11 @@ class _PhotoGalleryDetails extends React.Component {
 
   render() {
     return (
-      <Modal>
+      <View>
         <PhotoBrowser
           style={{
             margin: 250,
+            flex: 1
           }}
           mediaList={this.props.data.customer.survey.photos}
           alwaysShowControls
@@ -124,11 +125,12 @@ class _PhotoGalleryDetails extends React.Component {
         />
 
         <PhotoEditorContainer 
+          style={{flex: 1, width: 800}}
           open={this.state.isEditorOpen}
           custID={this.props.data.customer.id}
         />
 
-      </Modal>
+      </View>
     );
   }
 

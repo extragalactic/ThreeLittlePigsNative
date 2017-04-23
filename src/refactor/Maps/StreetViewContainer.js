@@ -1,22 +1,29 @@
 import React from 'react';
-import { WebView, ActivityIndicator, View, Modal } from 'react-native';
+import { WebView, View } from 'react-native';
 import Spinner from 'react-native-spinkit';
+import { width, height } from 'react-native-dimension';
 
-
-const style = {
-	flex: 1, 
+const styles = {
+	view: {
+		flex: 1, 
+		alignItems: 'center', 
+		justifyContent: 'space-between'
+	},
+	webview: {
+		flex: 1, 
+		width: width(100),
+		height: height(100)
+	},
+	spinner: {
+		flex: 1,
+		marginTop: 200, 
+	}
 }
-
-const style2 = {
-  marginTop: 20,
-  maxHeight: 500,
-  width: 600,
-  flex: 1
-};
+const BASE_URL = 'https://tlpm.ca';
 
 class StreetViewContainer extends React.Component {
-	// props.data is the customer ID
 	static propTypes = {
+		// props.data is the customer ID
 		data: React.PropTypes.string.isRequired,
 	}
 	constructor(props){
@@ -24,6 +31,7 @@ class StreetViewContainer extends React.Component {
 		this.state = {
 			isLoaded: false
 		}
+		this.custID = props.data;
 	}
 
 	onLoadComplete = () => {
@@ -32,20 +40,21 @@ class StreetViewContainer extends React.Component {
 		});
 	}
 
-	render() {
+	render() {	
 		return (
-     <View style={{flex:1, alignItems:'center', justifyContent:'space-between'}}>
-			{ !this.state.isLoaded &&
-				<Spinner
-					type={'Wave'} 
-					style={{marginTop:200, flex:1}} 
+     	<View style={styles.view}>
+				{ !this.state.isLoaded &&
+					<Spinner
+						style={styles.spinner} 
+						type={'Wave'} 
+					/>
+				}					 
+				<WebView
+					style={styles.webview}
+					contentInset={{top: 50, left: 0, bottom: 0, right: 0}}
+					source={{uri: BASE_URL + '/streetview/' + this.custID}}
+					onLoad={this.onLoadComplete}
 				/>
-			}					 
-			<WebView
-				style={{flex:1, width:600}}
-				source={{uri: 'https://tlpm.ca/streetview/' + this.props.data}}
-				onLoad={this.onLoadComplete}
-			/>
      </View>
 		);
 	}

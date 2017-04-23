@@ -275,6 +275,7 @@ class _EstimatesContainer extends React.Component {
                   <ScrollView>
                     { generics.map(generic => (
                       <CheckBox
+                        key={generic.prop}
                         title={generic.des}
                         onPress={() => this.setState({ [generic.prop]: !this.state[generic.prop] })}
                         checked={this.state[generic.prop]}
